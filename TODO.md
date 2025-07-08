@@ -9,10 +9,10 @@ This file tracks specific, actionable tasks for the Open Social Datasets project
 *   [X] Establish Repository Structure.
 *   [X] Develop Core Documentation Templates (`dataset_readme_template.md`, `data_dictionary_template.md`, `accessible_guide_template.md`).
 *   [X] Write Initial Content for `README.md`, `CHANGELOG.md`, `ROADMAP.md`, `TODO.md`, `SESSION_LOG_TEMPLATE.md`.
-*   [ ] **Create `AGENTS.md`:** Add initial instructions for AI agent contributions to the root directory.
+*   [X] **Create `AGENTS.md`:** Add initial instructions for AI agent contributions to the root directory. (Done)
 
 ### Initial Dataset Population
-*   **Stats NZ Datasets:**
+*   **Stats NZ Datasets (ON HOLD):**
     *   [ ] Identify and prioritize 2-3 key datasets from Statistics New Zealand (Stats NZ).
     *   [ ] For Dataset 1 (Stats NZ):
         *   [ ] Create directory: `datasets/stats_nz/[dataset_name_1]/`

@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 ### Added
+- Created `AGENTS.md` with initial guidelines for AI agent contributions.
 - **AIHW MyHospitals API Integration (Initial Phase):**
     - Explored MyHospitals API using Swagger definition (`https://myhospitalsapi.aihw.gov.au/swagger/v1/swagger.json`).
     - Created `scripts/shared/aihw_api_fetcher.py` and successfully fetched metadata (measure categories).
