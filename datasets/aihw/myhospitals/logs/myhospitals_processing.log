@@ -4778,3 +4778,959 @@
 2025-07-08 05:22:06,545 - INFO - Successfully saved data to /app/datasets/aihw/myhospitals/data/aihw_myhospitals_MYH-CANCER_20250708_052206.parquet
 2025-07-08 05:22:06,549 - INFO - Full processing for MYH-CANCER completed.
 2025-07-08 05:22:06,550 - INFO - --- AIHW MyHospitals Data Fetching Script Finished ---
+2025-07-08 05:47:20,799 - INFO - --- Starting AIHW MyHospitals Data Fetching Script ---
+2025-07-08 05:47:20,799 - INFO - Performing initial small fetch for category: MYH-LOS
+2025-07-08 05:47:20,799 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 0, 'top': 10}
+2025-07-08 05:47:29,425 - INFO - Successfully fetched data for MYH-LOS, skip=0, top=10.
+2025-07-08 05:47:29,428 - INFO - Raw initial_data_sample content: {
+  "result": {
+    "data": [
+      {
+        "caveat": "NP",
+        "caveat_codes": "X40",
+        "caveat_footnotes": "NP Reported data did not meet the criteria to calculate this indicator.",
+        "data_set_caveat": null,
+        "data_set_caveat_codes": null,
+        "data_set_caveat_footnotes": null,
+        "data_period": "2011\u201312",
+        "data_period_type": "FinancialYear",
+        "data_set_id": 559,
+        "data_set_meta_tag_codes": null,
+        "data_set_meta_tags": null,
+        "data_set_meta_tags_with_type": null,
+        "formatted_peer_value": "",
+        "formatted_value": "NP",
+        "group_number": null,
+        "private": false,
+        "mapped_local_hospital_network": "Justice Health & Forensic Mental Health",
+        "mapped_primary_health_network": "Central and Eastern Sydney",
+        "mapped_state": "NSW",
+        "measure_category_code": "MYH-LOS",
+        "measure_category_name": "MyHospitals Length of stay",
+        "measure_code": "MYH0014",
+        "measure_meta_tag_codes": "BRICK_APCALOS",
+        "measure_meta_tags": "APCALOS",
+        "measure_meta_tags_with_type": "BRICK|APCALOS",
+        "measure_name": "Average length of overnight stays",
+        "peer_group_code": "U",
+        "peer_group_name": "Unpeered",
+        "proxy_reporting_unit_name": null,
+        "raw_lower_value": null,
+        "raw_peer_value": null,
+        "raw_upper_value": null,
+        "raw_value": null,
+        "reported_measure_category_code": "LOS_Condition_Cellulitis",
+        "reported_measure_category_name": "Cellulitis",
+        "reported_measure_category_three_code": null,
+        "reported_measure_category_three_name": null,
+        "reported_measure_category_two_code": null,
+        "reported_measure_category_two_name": null,
+        "reported_measure_category_type_code": "AR-DRG",
+        "reported_measure_category_type_name": "Surgery or procedure",
+        "reported_measure_category_three_type_code": null,
+        "reported_measure_category_three_type_name": null,
+        "reported_measure_category_two_type_code": null,
+        "reported_measure_category_two_type_name": null,
+        "reported_measure_code": "MYH-RM0128",
+        "reported_measure_meta_tag_codes": null,
+        "reported_measure_meta_tags": null,
+        "reported_measure_meta_tags_with_type": null,
+        "reported_measure_name": "Cellulitis",
+        "reporting_end_date": "2012-06-30",
+        "reporting_start_date": "2011-07-01",
+        "reporting_unit_code": "H0013",
+        "reporting_unit_meta_tag_codes": null,
+        "reporting_unit_meta_tags": null,
+        "reporting_unit_meta_tags_with_type": null,
+        "reporting_unit_name": "Justice Health Services",
+        "reporting_unit_type_code": "H",
+        "reporting_unit_type_name": "Hospital",
+        "suppression": "NP",
+        "suppression_codes": "X40"
+      },
+      {
+        "caveat": null,
+        "caveat_codes": null,
+        "caveat_footnotes": null,
+        "data_set_caveat": null,
+        "data_set_caveat_codes": null,
+        "data_set_caveat_footnotes": null,
+        "data_period": "2011\u201312",
+        "data_period_type": "FinancialYear",
+        "data_set_id": 559,
+        "data_set_meta_tag_codes": null,
+        "data_set_meta_tags": null,
+        "data_set_meta_tags_with_type": null,
+        "formatted_peer_value": "2.6 days",
+        "formatted_value": "3.0 days",
+        "group_number": null,
+        "private": false,
+        "mapped_local_hospital_network": "Sydney Children's Hospitals Network",
+        "mapped_primary_health_network": "Western Sydney",
+        "mapped_state": "NSW",
+        "measure_category_code": "MYH-LOS",
+        "measure_category_name": "MyHospitals Length of stay",
+        "measure_code": "MYH0014",
+        "measure_meta_tag_codes": "BRICK_APCALOS",
+        "measure_meta_tags": "APCALOS",
+        "measure_meta_tags_with_type": "BRICK|APCALOS",
+        "measure_name": "Average length of overnight stays",
+        "peer_group_code": "CH",
+        "peer_group_name": "Children's hospitals",
+        "proxy_reporting_unit_name": null,
+        "raw_lower_value": null,
+        "raw_peer_value": 2.6,
+        "raw_upper_value": null,
+        "raw_value": 3.0,
+        "reported_measure_category_code": "LOS_Condition_Cellulitis",
+        "reported_measure_category_name": "Cellulitis",
+        "reported_measure_category_three_code": null,
+        "reported_measure_category_three_name": null,
+        "reported_measure_category_two_code": null,
+        "reported_measure_category_two_name": null,
+        "reported_measure_category_type_code": "AR-DRG",
+        "reported_measure_category_type_name": "Surgery or procedure",
+        "reported_measure_category_three_type_code": null,
+        "reported_measure_category_three_type_name": null,
+        "reported_measure_category_two_type_code": null,
+        "reported_measure_category_two_type_name": null,
+        "reported_measure_code": "MYH-RM0128",
+        "reported_measure_meta_tag_codes": null,
+        "reported_measure_meta_tags": null,
+        "reported_measure_meta_tags_with_type": null,
+        "reported_measure_name": "Cellulitis",
+        "reporting_end_date": "2012-06-30",
+        "reporting_start_date": "2011-07-01",
+        "reporting_unit_code": "H0014",
+        "reporting_unit_meta_tag_codes": null,
+        "reporting_unit_meta_tags": null,
+        "reporting_unit_meta_tags_with_type": null,
+        "reporting_unit_name": "The Children's Hospital at Westmead",
+        "reporting_unit_type_code": "H",
+        "reporting_unit_type_name": "Hospital",
+        "suppression": null,
+        "suppression_codes": null
+      },
+      {
+        "caveat": null,
+        "caveat_codes": null,
+        "caveat_footnotes": null,
+        "data_set_caveat": null,
+        "data_set_caveat_codes": null,
+        "data_set_caveat_footnotes": null,
+        "data_period": "2011\u201312",
+        "data_period_type": "FinancialYear",
+        "data_set_id": 559,
+        "data_set_meta_tag_codes": null,
+        "data_set_meta_tags": null,
+        "data_set_meta_tags_with_type": null,
+        "formatted_peer_value": "2.6 days",
+        "formatted_value": "2.8 days",
+        "group_number": null,
+        "private": false,
+        "mapped_local_hospital_network": "Sydney Children's Hospitals Network",
+        "mapped_primary_health_network": "Central and Eastern Sydney",
+        "mapped_state": "NSW",
+        "measure_category_code": "MYH-LOS",
+        "measure_category_name": "MyHospitals Length of stay",
+        "measure_code": "MYH0014",
+        "measure_meta_tag_codes": "BRICK_APCALOS",
+        "measure_meta_tags": "APCALOS",
+        "measure_meta_tags_with_type": "BRICK|APCALOS",
+        "measure_name": "Average length of overnight stays",
+        "peer_group_code": "CH",
+        "peer_group_name": "Children's hospitals",
+        "proxy_reporting_unit_name": null,
+        "raw_lower_value": null,
+        "raw_peer_value": 2.6,
+        "raw_upper_value": null,
+        "raw_value": 2.8,
+        "reported_measure_category_code": "LOS_Condition_Cellulitis",
+        "reported_measure_category_name": "Cellulitis",
+        "reported_measure_category_three_code": null,
+        "reported_measure_category_three_name": null,
+        "reported_measure_category_two_code": null,
+        "reported_measure_category_two_name": null,
+        "reported_measure_category_type_code": "AR-DRG",
+        "reported_measure_category_type_name": "Surgery or procedure",
+        "reported_measure_category_three_type_code": null,
+        "reported_measure_category_three_type_name": null,
+        "reported_measure_category_two_type_code": null,
+        "reported_measure_category_two_type_name": null,
+        "reported_measure_code": "MYH-RM0128",
+        "reported_measure_meta_tag_codes": null,
+        "reported_measure_meta_tags": null,
+        "reported_measure_meta_tags_with_type": null,
+        "reported_measure_name": "Cellulitis",
+        "reporting_end_date": "2012-06-30",
+        "reporting_start_date": "2011-07-01",
+        "reporting_unit_code": "H0015",
+        "reporting_unit_meta_tag_codes": null,
+        "reporting_unit_meta_tags": null,
+        "reporting_unit_meta_tags_with_type": null,
+        "reporting_unit_name": "Sydney Children's Hospital",
+        "reporting_unit_type_code": "H",
+        "reporting_unit_type_name": "Hospital",
+        "suppression": null,
+        "suppression_codes": null
+      },
+      {
+        "caveat": null,
+        "caveat_codes": null,
+        "caveat_footnotes": null,
+        "data_set_caveat": null,
+        "data_set_caveat_codes": null,
+        "data_set_caveat_footnotes": null,
+        "data_period": "2011\u201312",
+        "data_period_type": "FinancialYear",
+        "data_set_id": 559,
+        "data_set_meta_tag_codes": null,
+        "data_set_meta_tags": null,
+        "data_set_meta_tags_with_type": null,
+        "formatted_peer_value": "3.5 days",
+        "formatted_value": "3.1 days",
+        "group_number": null,
+        "private": false,
+        "mapped_local_hospital_network": "St Vincent's Health Network",
+        "mapped_primary_health_network": "Central and Eastern Sydney",
+        "mapped_state": "NSW",
+        "measure_category_code": "MYH-LOS",
+        "measure_category_name": "MyHospitals Length of stay",
+        "measure_code": "MYH0014",
+        "measure_meta_tag_codes": "BRICK_APCALOS",
+        "measure_meta_tags": "APCALOS",
+        "measure_meta_tags_with_type": "BRICK|APCALOS",
+        "measure_name": "Average length of overnight stays",
+        "peer_group_code": "MJ",
+        "peer_group_name": "Major hospitals",
+        "proxy_reporting_unit_name": null,
+        "raw_lower_value": null,
+        "raw_peer_value": 3.5,
+        "raw_upper_value": null,
+        "raw_value": 3.1,
+        "reported_measure_category_code": "LOS_Condition_Cellulitis",
+        "reported_measure_category_name": "Cellulitis",
+        "reported_measure_category_three_code": null,
+        "reported_measure_category_three_name": null,
+        "reported_measure_category_two_code": null,
+        "reported_measure_category_two_name": null,
+        "reported_measure_category_type_code": "AR-DRG",
+        "reported_measure_category_type_name": "Surgery or procedure",
+        "reported_measure_category_three_type_code": null,
+        "reported_measure_category_three_type_name": null,
+        "reported_measure_category_two_type_code": null,
+        "reported_measure_category_two_type_name": null,
+        "reported_measure_code": "MYH-RM0128",
+        "reported_measure_meta_tag_codes": null,
+        "reported_measure_meta_tags": null,
+        "reported_measure_meta_tags_with_type": null,
+        "reported_measure_name": "Cellulitis",
+        "reporting_end_date": "2012-06-30",
+        "reporting_start_date": "2011-07-01",
+        "reporting_unit_code": "H0017",
+        "reporting_unit_meta_tag_codes": null,
+        "reporting_unit_meta_tags": null,
+        "reporting_unit_meta_tags_with_type": null,
+        "reporting_unit_name": "St Vincent's Hospital [Darlinghurst]",
+        "reporting_unit_type_code": "H",
+        "reporting_unit_type_name": "Hospital",
+        "suppression": null,
+        "suppression_codes": null
+      },
+      {
+        "caveat": "NP",
+        "caveat_codes": "X40",
+        "caveat_footnotes": "NP Reported data did not meet the criteria to calculate this indicator.",
+        "data_set_caveat": null,
+        "data_set_caveat_codes": null,
+        "data_set_caveat_footnotes": null,
+        "data_period": "2011\u201312",
+        "data_period_type": "FinancialYear",
+        "data_set_id": 559,
+        "data_set_meta_tag_codes": null,
+        "data_set_meta_tags": null,
+        "data_set_meta_tags_with_type": null,
+        "formatted_peer_value": "",
+        "formatted_value": "NP",
+        "group_number": null,
+        "private": false,
+        "mapped_local_hospital_network": "Sydney",
+        "mapped_primary_health_network": "Central and Eastern Sydney",
+        "mapped_state": "NSW",
+        "measure_category_code": "MYH-LOS",
+        "measure_category_name": "MyHospitals Length of stay",
+        "measure_code": "MYH0014",
+        "measure_meta_tag_codes": "BRICK_APCALOS",
+        "measure_meta_tags": "APCALOS",
+        "measure_meta_tags_with_type": "BRICK|APCALOS",
+        "measure_name": "Average length of overnight stays",
+        "peer_group_code": "U",
+        "peer_group_name": "Unpeered",
+        "proxy_reporting_unit_name": null,
+        "raw_lower_value": null,
+        "raw_peer_value": null,
+        "raw_upper_value": null,
+        "raw_value": null,
+        "reported_measure_category_code": "LOS_Condition_Cellulitis",
+        "reported_measure_category_name": "Cellulitis",
+        "reported_measure_category_three_code": null,
+        "reported_measure_category_three_name": null,
+        "reported_measure_category_two_code": null,
+        "reported_measure_category_two_name": null,
+        "reported_measure_category_type_code": "AR-DRG",
+        "reported_measure_category_type_name": "Surgery or procedure",
+        "reported_measure_category_three_type_code": null,
+        "reported_measure_category_three_type_name": null,
+        "reported_measure_category_two_type_code": null,
+        "reported_measure_category_two_type_name": null,
+        "reported_measure_code": "MYH-RM0128",
+        "reported_measure_meta_tag_codes": null,
+        "reported_measure_meta_tags": null,
+        "reported_measure_meta_tags_with_type": null,
+        "reported_measure_name": "Cellulitis",
+        "reporting_end_date": "2012-06-30",
+        "reporting_start_date": "2011-07-01",
+        "reporting_unit_code": "H0019",
+        "reporting_unit_meta_tag_codes": null,
+        "reporting_unit_meta_tags": null,
+        "reporting_unit_meta_tags_with_type": null,
+        "reporting_unit_name": "Balmain Hospital",
+        "reporting_unit_type_code": "H",
+        "reporting_unit_type_name": "Hospital",
+        "suppression": "NP",
+        "suppression_codes": "X40"
+      },
+      {
+        "caveat": null,
+        "caveat_codes": null,
+        "caveat_footnotes": null,
+        "data_set_caveat": null,
+        "data_set_caveat_codes": null,
+        "data_set_caveat_footnotes": null,
+        "data_period": "2011\u201312",
+        "data_period_type": "FinancialYear",
+        "data_set_id": 559,
+        "data_set_meta_tag_codes": null,
+        "data_set_meta_tags": null,
+        "data_set_meta_tags_with_type": null,
+        "formatted_peer_value": "3.9 days",
+        "formatted_value": "3.0 days",
+        "group_number": null,
+        "private": false,
+        "mapped_local_hospital_network": "Sydney",
+        "mapped_primary_health_network": "Central and Eastern Sydney",
+        "mapped_state": "NSW",
+        "measure_category_code": "MYH-LOS",
+        "measure_category_name": "MyHospitals Length of stay",
+        "measure_code": "MYH0014",
+        "measure_meta_tag_codes": "BRICK_APCALOS",
+        "measure_meta_tags": "APCALOS",
+        "measure_meta_tags_with_type": "BRICK|APCALOS",
+        "measure_name": "Average length of overnight stays",
+        "peer_group_code": "M",
+        "peer_group_name": "Medium hospitals",
+        "proxy_reporting_unit_name": null,
+        "raw_lower_value": null,
+        "raw_peer_value": 3.9,
+        "raw_upper_value": null,
+        "raw_value": 3.0,
+        "reported_measure_category_code": "LOS_Condition_Cellulitis",
+        "reported_measure_category_name": "Cellulitis",
+        "reported_measure_category_three_code": null,
+        "reported_measure_category_three_name": null,
+        "reported_measure_category_two_code": null,
+        "reported_measure_category_two_name": null,
+        "reported_measure_category_type_code": "AR-DRG",
+        "reported_measure_category_type_name": "Surgery or procedure",
+        "reported_measure_category_three_type_code": null,
+        "reported_measure_category_three_type_name": null,
+        "reported_measure_category_two_type_code": null,
+        "reported_measure_category_two_type_name": null,
+        "reported_measure_code": "MYH-RM0128",
+        "reported_measure_meta_tag_codes": null,
+        "reported_measure_meta_tags": null,
+        "reported_measure_meta_tags_with_type": null,
+        "reported_measure_name": "Cellulitis",
+        "reporting_end_date": "2012-06-30",
+        "reporting_start_date": "2011-07-01",
+        "reporting_unit_code": "H0020",
+        "reporting_unit_meta_tag_codes": null,
+        "reporting_unit_meta_tags": null,
+        "reporting_unit_meta_tags_with_type": null,
+        "reporting_unit_name": "Canterbury Hospital",
+        "reporting_unit_type_code": "H",
+        "reporting_unit_type_name": "Hospital",
+        "suppression": null,
+        "suppression_codes": null
+      },
+      {
+        "caveat": null,
+        "caveat_codes": null,
+        "caveat_footnotes": null,
+        "data_set_caveat": null,
+        "data_set_caveat_codes": null,
+        "data_set_caveat_footnotes": null,
+        "data_period": "2011\u201312",
+        "data_period_type": "FinancialYear",
+        "data_set_id": 559,
+        "data_set_meta_tag_codes": null,
+        "data_set_meta_tags": null,
+        "data_set_meta_tags_with_type": null,
+        "formatted_peer_value": "3.5 days",
+        "formatted_value": "3.4 days",
+        "group_number": null,
+        "private": false,
+        "mapped_local_hospital_network": "Sydney",
+        "mapped_primary_health_network": "Central and Eastern Sydney",
+        "mapped_state": "NSW",
+        "measure_category_code": "MYH-LOS",
+        "measure_category_name": "MyHospitals Length of stay",
+        "measure_code": "MYH0014",
+        "measure_meta_tag_codes": "BRICK_APCALOS",
+        "measure_meta_tags": "APCALOS",
+        "measure_meta_tags_with_type": "BRICK|APCALOS",
+        "measure_name": "Average length of overnight stays",
+        "peer_group_code": "MJ",
+        "peer_group_name": "Major hospitals",
+        "proxy_reporting_unit_name": null,
+        "raw_lower_value": null,
+        "raw_peer_value": 3.5,
+        "raw_upper_value": null,
+        "raw_value": 3.4,
+        "reported_measure_category_code": "LOS_Condition_Cellulitis",
+        "reported_measure_category_name": "Cellulitis",
+        "reported_measure_category_three_code": null,
+        "reported_measure_category_three_name": null,
+        "reported_measure_category_two_code": null,
+        "reported_measure_category_two_name": null,
+        "reported_measure_category_type_code": "AR-DRG",
+        "reported_measure_category_type_name": "Surgery or procedure",
+        "reported_measure_category_three_type_code": null,
+        "reported_measure_category_three_type_name": null,
+        "reported_measure_category_two_type_code": null,
+        "reported_measure_category_two_type_name": null,
+        "reported_measure_code": "MYH-RM0128",
+        "reported_measure_meta_tag_codes": null,
+        "reported_measure_meta_tags": null,
+        "reported_measure_meta_tags_with_type": null,
+        "reported_measure_name": "Cellulitis",
+        "reporting_end_date": "2012-06-30",
+        "reporting_start_date": "2011-07-01",
+        "reporting_unit_code": "H0021",
+        "reporting_unit_meta_tag_codes": null,
+        "reporting_unit_meta_tags": null,
+        "reporting_unit_meta_tags_with_type": null,
+        "reporting_unit_name": "Royal Prince Alfred Hospital",
+        "reporting_unit_type_code": "H",
+        "reporting_unit_type_name": "Hospital",
+        "suppression": null,
+        "suppression_codes": null
+      },
+      {
+        "caveat": null,
+        "caveat_codes": null,
+        "caveat_footnotes": null,
+        "data_set_caveat": null,
+        "data_set_caveat_codes": null,
+        "data_set_caveat_footnotes": null,
+        "data_period": "2011\u201312",
+        "data_period_type": "FinancialYear",
+        "data_set_id": 559,
+        "data_set_meta_tag_codes": null,
+        "data_set_meta_tags": null,
+        "data_set_meta_tags_with_type": null,
+        "formatted_peer_value": "3.5 days",
+        "formatted_value": "3.3 days",
+        "group_number": null,
+        "private": false,
+        "mapped_local_hospital_network": "Sydney",
+        "mapped_primary_health_network": "Central and Eastern Sydney",
+        "mapped_state": "NSW",
+        "measure_category_code": "MYH-LOS",
+        "measure_category_name": "MyHospitals Length of stay",
+        "measure_code": "MYH0014",
+        "measure_meta_tag_codes": "BRICK_APCALOS",
+        "measure_meta_tags": "APCALOS",
+        "measure_meta_tags_with_type": "BRICK|APCALOS",
+        "measure_name": "Average length of overnight stays",
+        "peer_group_code": "MJ",
+        "peer_group_name": "Major hospitals",
+        "proxy_reporting_unit_name": null,
+        "raw_lower_value": null,
+        "raw_peer_value": 3.5,
+        "raw_upper_value": null,
+        "raw_value": 3.3,
+        "reported_measure_category_code": "LOS_Condition_Cellulitis",
+        "reported_measure_category_name": "Cellulitis",
+        "reported_measure_category_three_code": null,
+        "reported_measure_category_three_name": null,
+        "reported_measure_category_two_code": null,
+        "reported_measure_category_two_name": null,
+        "reported_measure_category_type_code": "AR-DRG",
+        "reported_measure_category_type_name": "Surgery or procedure",
+        "reported_measure_category_three_type_code": null,
+        "reported_measure_category_three_type_name": null,
+        "reported_measure_category_two_type_code": null,
+        "reported_measure_category_two_type_name": null,
+        "reported_measure_code": "MYH-RM0128",
+        "reported_measure_meta_tag_codes": null,
+        "reported_measure_meta_tags": null,
+        "reported_measure_meta_tags_with_type": null,
+        "reported_measure_name": "Cellulitis",
+        "reporting_end_date": "2012-06-30",
+        "reporting_start_date": "2011-07-01",
+        "reporting_unit_code": "H0023",
+        "reporting_unit_meta_tag_codes": null,
+        "reporting_unit_meta_tags": null,
+        "reporting_unit_meta_tags_with_type": null,
+        "reporting_unit_name": "Concord Repatriation Hospital",
+        "reporting_unit_type_code": "H",
+        "reporting_unit_type_name": "Hospital",
+        "suppression": null,
+        "suppression_codes": null
+      },
+      {
+        "caveat": null,
+        "caveat_codes": null,
+        "caveat_footnotes": null,
+        "data_set_caveat": null,
+        "data_set_caveat_codes": null,
+        "data_set_caveat_footnotes": null,
+        "data_period": "2011\u201312",
+        "data_period_type": "FinancialYear",
+        "data_set_id": 559,
+        "data_set_meta_tag_codes": null,
+        "data_set_meta_tags": null,
+        "data_set_meta_tags_with_type": null,
+        "formatted_peer_value": "",
+        "formatted_value": "5.2 days",
+        "group_number": null,
+        "private": false,
+        "mapped_local_hospital_network": "South Western Sydney",
+        "mapped_primary_health_network": "South Western Sydney",
+        "mapped_state": "NSW",
+        "measure_category_code": "MYH-LOS",
+        "measure_category_name": "MyHospitals Length of stay",
+        "measure_code": "MYH0014",
+        "measure_meta_tag_codes": "BRICK_APCALOS",
+        "measure_meta_tags": "APCALOS",
+        "measure_meta_tags_with_type": "BRICK|APCALOS",
+        "measure_name": "Average length of overnight stays",
+        "peer_group_code": "U",
+        "peer_group_name": "Unpeered",
+        "proxy_reporting_unit_name": null,
+        "raw_lower_value": null,
+        "raw_peer_value": null,
+        "raw_upper_value": null,
+        "raw_value": 5.2,
+        "reported_measure_category_code": "LOS_Condition_Cellulitis",
+        "reported_measure_category_name": "Cellulitis",
+        "reported_measure_category_three_code": null,
+        "reported_measure_category_three_name": null,
+        "reported_measure_category_two_code": null,
+        "reported_measure_category_two_name": null,
+        "reported_measure_category_type_code": "AR-DRG",
+        "reported_measure_category_type_name": "Surgery or procedure",
+        "reported_measure_category_three_type_code": null,
+        "reported_measure_category_three_type_name": null,
+        "reported_measure_category_two_type_code": null,
+        "reported_measure_category_two_type_name": null,
+        "reported_measure_code": "MYH-RM0128",
+        "reported_measure_meta_tag_codes": null,
+        "reported_measure_meta_tags": null,
+        "reported_measure_meta_tags_with_type": null,
+        "reported_measure_name": "Cellulitis",
+        "reporting_end_date": "2012-06-30",
+        "reporting_start_date": "2011-07-01",
+        "reporting_unit_code": "H0026",
+        "reporting_unit_meta_tag_codes": null,
+        "reporting_unit_meta_tags": null,
+        "reporting_unit_meta_tags_with_type": null,
+        "reporting_unit_name": "Camden Hospital",
+        "reporting_unit_type_code": "H",
+        "reporting_unit_type_name": "Hospital",
+        "suppression": null,
+        "suppression_codes": null
+      },
+      {
+        "caveat": null,
+        "caveat_codes": null,
+        "caveat_footnotes": null,
+        "data_set_caveat": null,
+        "data_set_caveat_codes": null,
+        "data_set_caveat_footnotes": null,
+        "data_period": "2011\u201312",
+        "data_period_type": "FinancialYear",
+        "data_set_id": 559,
+        "data_set_meta_tag_codes": null,
+        "data_set_meta_tags": null,
+        "data_set_meta_tags_with_type": null,
+        "formatted_peer_value": "3.9 days",
+        "formatted_value": "3.5 days",
+        "group_number": null,
+        "private": false,
+        "mapped_local_hospital_network": "South Western Sydney",
+        "mapped_primary_health_network": "South Western Sydney",
+        "mapped_state": "NSW",
+        "measure_category_code": "MYH-LOS",
+        "measure_category_name": "MyHospitals Length of stay",
+        "measure_code": "MYH0014",
+        "measure_meta_tag_codes": "BRICK_APCALOS",
+        "measure_meta_tags": "APCALOS",
+        "measure_meta_tags_with_type": "BRICK|APCALOS",
+        "measure_name": "Average length of overnight stays",
+        "peer_group_code": "M",
+        "peer_group_name": "Medium hospitals",
+        "proxy_reporting_unit_name": null,
+        "raw_lower_value": null,
+        "raw_peer_value": 3.9,
+        "raw_upper_value": null,
+        "raw_value": 3.5,
+        "reported_measure_category_code": "LOS_Condition_Cellulitis",
+        "reported_measure_category_name": "Cellulitis",
+        "reported_measure_category_three_code": null,
+        "reported_measure_category_three_name": null,
+        "reported_measure_category_two_code": null,
+        "reported_measure_category_two_name": null,
+        "reported_measure_category_type_code": "AR-DRG",
+        "reported_measure_category_type_name": "Surgery or procedure",
+        "reported_measure_category_three_type_code": null,
+        "reported_measure_category_three_type_name": null,
+        "reported_measure_category_two_type_code": null,
+        "reported_measure_category_two_type_name": null,
+        "reported_measure_code": "MYH-RM0128",
+        "reported_measure_meta_tag_codes": null,
+        "reported_measure_meta_tags": null,
+        "reported_measure_meta_tags_with_type": null,
+        "reported_measure_name": "Cellulitis",
+        "reporting_end_date": "2012-06-30",
+        "reporting_start_date": "2011-07-01",
+        "reporting_unit_code": "H0027",
+        "reporting_unit_meta_tag_codes": null,
+        "reporting_unit_meta_tags": null,
+        "reporting_unit_meta_tags_with_type": null,
+        "reporting_unit_name": "Fairfield Hospital",
+        "reporting_unit_type_code": "H",
+        "reporting_unit_type_name": "Hospital",
+        "suppression": null,
+        "suppression_codes": null
+      }
+    ],
+    "pagination": {
+      "results_returned": 10,
+      "starting_result_index": 1,
+      "total_results_available": 517697
+    }
+  },
+  "version_information": {
+    "api_version": "1.6.0.0",
+    "data_version": 2025052801,
+    "date_uploaded": "2025-05-28T00:00:00",
+    "requested_time_stamp": "2025-07-08T15:47:29.1851245+10:00"
+  }
+}
+2025-07-08 05:47:29,429 - INFO - Sample data (first 10 items) for MYH-LOS:
+2025-07-08 05:47:29,429 - INFO - First sample item: {
+  "caveat": "NP",
+  "caveat_codes": "X40",
+  "caveat_footnotes": "NP Reported data did not meet the criteria to calculate this indicator.",
+  "data_set_caveat": null,
+  "data_set_caveat_codes": null,
+  "data_set_caveat_footnotes": null,
+  "data_period": "2011\u201312",
+  "data_period_type": "FinancialYear",
+  "data_set_id": 559,
+  "data_set_meta_tag_codes": null,
+  "data_set_meta_tags": null,
+  "data_set_meta_tags_with_type": null,
+  "formatted_peer_value": "",
+  "formatted_value": "NP",
+  "group_number": null,
+  "private": false,
+  "mapped_local_hospital_network": "Justice Health & Forensic Mental Health",
+  "mapped_primary_health_network": "Central and Eastern Sydney",
+  "mapped_state": "NSW",
+  "measure_category_code": "MYH-LOS",
+  "measure_category_name": "MyHospitals Length of stay",
+  "measure_code": "MYH0014",
+  "measure_meta_tag_codes": "BRICK_APCALOS",
+  "measure_meta_tags": "APCALOS",
+  "measure_meta_tags_with_type": "BRICK|APCALOS",
+  "measure_name": "Average length of overnight stays",
+  "peer_group_code": "U",
+  "peer_group_name": "Unpeered",
+  "proxy_reporting_unit_name": null,
+  "raw_lower_value": null,
+  "raw_peer_value": null,
+  "raw_upper_value": null,
+  "raw_value": null,
+  "reported_measure_category_code": "LOS_Condition_Cellulitis",
+  "reported_measure_category_name": "Cellulitis",
+  "reported_measure_category_three_code": null,
+  "reported_measure_category_three_name": null,
+  "reported_measure_category_two_code": null,
+  "reported_measure_category_two_name": null,
+  "reported_measure_category_type_code": "AR-DRG",
+  "reported_measure_category_type_name": "Surgery or procedure",
+  "reported_measure_category_three_type_code": null,
+  "reported_measure_category_three_type_name": null,
+  "reported_measure_category_two_type_code": null,
+  "reported_measure_category_two_type_name": null,
+  "reported_measure_code": "MYH-RM0128",
+  "reported_measure_meta_tag_codes": null,
+  "reported_measure_meta_tags": null,
+  "reported_measure_meta_tags_with_type": null,
+  "reported_measure_name": "Cellulitis",
+  "reporting_end_date": "2012-06-30",
+  "reporting_start_date": "2011-07-01",
+  "reporting_unit_code": "H0013",
+  "reporting_unit_meta_tag_codes": null,
+  "reporting_unit_meta_tags": null,
+  "reporting_unit_meta_tags_with_type": null,
+  "reporting_unit_name": "Justice Health Services",
+  "reporting_unit_type_code": "H",
+  "reporting_unit_type_name": "Hospital",
+  "suppression": "NP",
+  "suppression_codes": "X40"
+}
+2025-07-08 05:47:29,429 - INFO - Pagination info for sample: {'results_returned': 10, 'starting_result_index': 1, 'total_results_available': 517697}
+2025-07-08 05:47:29,429 - INFO -
+--- Starting full data processing for category: MYH-LOS ---
+2025-07-08 05:47:29,429 - INFO - Fetching page 1 (skip=0, top=1000) for MYH-LOS...
+2025-07-08 05:47:29,429 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 0, 'top': 1000}
+2025-07-08 05:47:33,212 - INFO - Successfully fetched data for MYH-LOS, skip=0, top=1000.
+2025-07-08 05:47:33,213 - INFO - Page 1: Fetched 1000 items. Total items so far: 1000.
+2025-07-08 05:47:33,213 - INFO - Fetching page 2 (skip=1000, top=1000) for MYH-LOS...
+2025-07-08 05:47:33,213 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 1000, 'top': 1000}
+2025-07-08 05:47:35,723 - INFO - Successfully fetched data for MYH-LOS, skip=1000, top=1000.
+2025-07-08 05:47:35,723 - INFO - Page 2: Fetched 1000 items. Total items so far: 2000.
+2025-07-08 05:47:35,724 - INFO - Fetching page 3 (skip=2000, top=1000) for MYH-LOS...
+2025-07-08 05:47:35,724 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 2000, 'top': 1000}
+2025-07-08 05:47:38,285 - INFO - Successfully fetched data for MYH-LOS, skip=2000, top=1000.
+2025-07-08 05:47:38,285 - INFO - Page 3: Fetched 1000 items. Total items so far: 3000.
+2025-07-08 05:47:38,286 - INFO - Fetching page 4 (skip=3000, top=1000) for MYH-LOS...
+2025-07-08 05:47:38,286 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 3000, 'top': 1000}
+2025-07-08 05:47:40,856 - INFO - Successfully fetched data for MYH-LOS, skip=3000, top=1000.
+2025-07-08 05:47:40,856 - INFO - Page 4: Fetched 1000 items. Total items so far: 4000.
+2025-07-08 05:47:40,856 - INFO - Fetching page 5 (skip=4000, top=1000) for MYH-LOS...
+2025-07-08 05:47:40,857 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 4000, 'top': 1000}
+2025-07-08 05:47:43,830 - INFO - Successfully fetched data for MYH-LOS, skip=4000, top=1000.
+2025-07-08 05:47:43,830 - INFO - Page 5: Fetched 1000 items. Total items so far: 5000.
+2025-07-08 05:47:43,831 - INFO - Fetching page 6 (skip=5000, top=1000) for MYH-LOS...
+2025-07-08 05:47:43,831 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 5000, 'top': 1000}
+2025-07-08 05:47:46,764 - INFO - Successfully fetched data for MYH-LOS, skip=5000, top=1000.
+2025-07-08 05:47:46,765 - INFO - Page 6: Fetched 1000 items. Total items so far: 6000.
+2025-07-08 05:47:46,765 - INFO - Fetching page 7 (skip=6000, top=1000) for MYH-LOS...
+2025-07-08 05:47:46,765 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 6000, 'top': 1000}
+2025-07-08 05:47:49,809 - INFO - Successfully fetched data for MYH-LOS, skip=6000, top=1000.
+2025-07-08 05:47:49,809 - INFO - Page 7: Fetched 1000 items. Total items so far: 7000.
+2025-07-08 05:47:49,809 - INFO - Fetching page 8 (skip=7000, top=1000) for MYH-LOS...
+2025-07-08 05:47:49,809 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 7000, 'top': 1000}
+2025-07-08 05:47:52,954 - INFO - Successfully fetched data for MYH-LOS, skip=7000, top=1000.
+2025-07-08 05:47:52,954 - INFO - Page 8: Fetched 1000 items. Total items so far: 8000.
+2025-07-08 05:47:52,954 - INFO - Fetching page 9 (skip=8000, top=1000) for MYH-LOS...
+2025-07-08 05:47:52,954 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 8000, 'top': 1000}
+2025-07-08 05:47:56,456 - INFO - Successfully fetched data for MYH-LOS, skip=8000, top=1000.
+2025-07-08 05:47:56,457 - INFO - Page 9: Fetched 1000 items. Total items so far: 9000.
+2025-07-08 05:47:56,457 - INFO - Fetching page 10 (skip=9000, top=1000) for MYH-LOS...
+2025-07-08 05:47:56,457 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 9000, 'top': 1000}
+2025-07-08 05:47:59,919 - INFO - Successfully fetched data for MYH-LOS, skip=9000, top=1000.
+2025-07-08 05:47:59,920 - INFO - Page 10: Fetched 1000 items. Total items so far: 10000.
+2025-07-08 05:47:59,920 - INFO - Fetching page 11 (skip=10000, top=1000) for MYH-LOS...
+2025-07-08 05:47:59,920 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 10000, 'top': 1000}
+2025-07-08 05:48:03,533 - INFO - Successfully fetched data for MYH-LOS, skip=10000, top=1000.
+2025-07-08 05:48:03,533 - INFO - Page 11: Fetched 1000 items. Total items so far: 11000.
+2025-07-08 05:48:03,533 - INFO - Fetching page 12 (skip=11000, top=1000) for MYH-LOS...
+2025-07-08 05:48:03,534 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 11000, 'top': 1000}
+2025-07-08 05:48:06,190 - INFO - Successfully fetched data for MYH-LOS, skip=11000, top=1000.
+2025-07-08 05:48:06,191 - INFO - Page 12: Fetched 1000 items. Total items so far: 12000.
+2025-07-08 05:48:06,191 - INFO - Fetching page 13 (skip=12000, top=1000) for MYH-LOS...
+2025-07-08 05:48:06,191 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 12000, 'top': 1000}
+2025-07-08 05:48:09,972 - INFO - Successfully fetched data for MYH-LOS, skip=12000, top=1000.
+2025-07-08 05:48:09,972 - INFO - Page 13: Fetched 1000 items. Total items so far: 13000.
+2025-07-08 05:48:09,972 - INFO - Fetching page 14 (skip=13000, top=1000) for MYH-LOS...
+2025-07-08 05:48:09,973 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 13000, 'top': 1000}
+2025-07-08 05:48:13,899 - INFO - Successfully fetched data for MYH-LOS, skip=13000, top=1000.
+2025-07-08 05:48:13,900 - INFO - Page 14: Fetched 1000 items. Total items so far: 14000.
+2025-07-08 05:48:13,900 - INFO - Fetching page 15 (skip=14000, top=1000) for MYH-LOS...
+2025-07-08 05:48:13,900 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 14000, 'top': 1000}
+2025-07-08 05:48:18,022 - INFO - Successfully fetched data for MYH-LOS, skip=14000, top=1000.
+2025-07-08 05:48:18,023 - INFO - Page 15: Fetched 1000 items. Total items so far: 15000.
+2025-07-08 05:48:18,023 - INFO - Fetching page 16 (skip=15000, top=1000) for MYH-LOS...
+2025-07-08 05:48:18,023 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 15000, 'top': 1000}
+2025-07-08 05:48:22,949 - INFO - Successfully fetched data for MYH-LOS, skip=15000, top=1000.
+2025-07-08 05:48:22,950 - INFO - Page 16: Fetched 1000 items. Total items so far: 16000.
+2025-07-08 05:48:22,950 - INFO - Fetching page 17 (skip=16000, top=1000) for MYH-LOS...
+2025-07-08 05:48:22,950 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 16000, 'top': 1000}
+2025-07-08 05:48:26,987 - INFO - Successfully fetched data for MYH-LOS, skip=16000, top=1000.
+2025-07-08 05:48:26,988 - INFO - Page 17: Fetched 1000 items. Total items so far: 17000.
+2025-07-08 05:48:26,988 - INFO - Fetching page 18 (skip=17000, top=1000) for MYH-LOS...
+2025-07-08 05:48:26,988 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 17000, 'top': 1000}
+2025-07-08 05:48:31,596 - INFO - Successfully fetched data for MYH-LOS, skip=17000, top=1000.
+2025-07-08 05:48:31,597 - INFO - Page 18: Fetched 1000 items. Total items so far: 18000.
+2025-07-08 05:48:31,597 - INFO - Fetching page 19 (skip=18000, top=1000) for MYH-LOS...
+2025-07-08 05:48:31,597 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 18000, 'top': 1000}
+2025-07-08 05:48:36,129 - INFO - Successfully fetched data for MYH-LOS, skip=18000, top=1000.
+2025-07-08 05:48:36,130 - INFO - Page 19: Fetched 1000 items. Total items so far: 19000.
+2025-07-08 05:48:36,130 - INFO - Fetching page 20 (skip=19000, top=1000) for MYH-LOS...
+2025-07-08 05:48:36,130 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 19000, 'top': 1000}
+2025-07-08 05:48:41,589 - INFO - Successfully fetched data for MYH-LOS, skip=19000, top=1000.
+2025-07-08 05:48:41,589 - INFO - Page 20: Fetched 1000 items. Total items so far: 20000.
+2025-07-08 05:48:41,589 - INFO - Fetching page 21 (skip=20000, top=1000) for MYH-LOS...
+2025-07-08 05:48:41,590 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 20000, 'top': 1000}
+2025-07-08 05:48:47,656 - INFO - Successfully fetched data for MYH-LOS, skip=20000, top=1000.
+2025-07-08 05:48:47,657 - INFO - Page 21: Fetched 1000 items. Total items so far: 21000.
+2025-07-08 05:48:47,657 - INFO - Fetching page 22 (skip=21000, top=1000) for MYH-LOS...
+2025-07-08 05:48:47,657 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 21000, 'top': 1000}
+2025-07-08 05:48:54,012 - INFO - Successfully fetched data for MYH-LOS, skip=21000, top=1000.
+2025-07-08 05:48:54,013 - INFO - Page 22: Fetched 1000 items. Total items so far: 22000.
+2025-07-08 05:48:54,013 - INFO - Fetching page 23 (skip=22000, top=1000) for MYH-LOS...
+2025-07-08 05:48:54,013 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 22000, 'top': 1000}
+2025-07-08 05:49:00,883 - INFO - Successfully fetched data for MYH-LOS, skip=22000, top=1000.
+2025-07-08 05:49:00,884 - INFO - Page 23: Fetched 1000 items. Total items so far: 23000.
+2025-07-08 05:49:00,884 - INFO - Fetching page 24 (skip=23000, top=1000) for MYH-LOS...
+2025-07-08 05:49:00,884 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 23000, 'top': 1000}
+2025-07-08 05:49:06,579 - INFO - Successfully fetched data for MYH-LOS, skip=23000, top=1000.
+2025-07-08 05:49:06,580 - INFO - Page 24: Fetched 1000 items. Total items so far: 24000.
+2025-07-08 05:49:06,580 - INFO - Fetching page 25 (skip=24000, top=1000) for MYH-LOS...
+2025-07-08 05:49:06,580 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 24000, 'top': 1000}
+2025-07-08 05:49:12,779 - INFO - Successfully fetched data for MYH-LOS, skip=24000, top=1000.
+2025-07-08 05:49:12,780 - INFO - Page 25: Fetched 1000 items. Total items so far: 25000.
+2025-07-08 05:49:12,780 - INFO - Fetching page 26 (skip=25000, top=1000) for MYH-LOS...
+2025-07-08 05:49:12,780 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 25000, 'top': 1000}
+2025-07-08 05:49:22,987 - INFO - Successfully fetched data for MYH-LOS, skip=25000, top=1000.
+2025-07-08 05:49:22,988 - INFO - Page 26: Fetched 1000 items. Total items so far: 26000.
+2025-07-08 05:49:22,989 - INFO - Fetching page 27 (skip=26000, top=1000) for MYH-LOS...
+2025-07-08 05:49:22,989 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 26000, 'top': 1000}
+2025-07-08 05:49:32,134 - INFO - Successfully fetched data for MYH-LOS, skip=26000, top=1000.
+2025-07-08 05:49:32,135 - INFO - Page 27: Fetched 1000 items. Total items so far: 27000.
+2025-07-08 05:49:32,135 - INFO - Fetching page 28 (skip=27000, top=1000) for MYH-LOS...
+2025-07-08 05:49:32,135 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 27000, 'top': 1000}
+2025-07-08 05:49:40,728 - INFO - Successfully fetched data for MYH-LOS, skip=27000, top=1000.
+2025-07-08 05:49:40,729 - INFO - Page 28: Fetched 1000 items. Total items so far: 28000.
+2025-07-08 05:49:40,729 - INFO - Fetching page 29 (skip=28000, top=1000) for MYH-LOS...
+2025-07-08 05:49:40,729 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 28000, 'top': 1000}
+2025-07-08 05:49:50,485 - INFO - Successfully fetched data for MYH-LOS, skip=28000, top=1000.
+2025-07-08 05:49:50,486 - INFO - Page 29: Fetched 1000 items. Total items so far: 29000.
+2025-07-08 05:49:50,486 - INFO - Fetching page 30 (skip=29000, top=1000) for MYH-LOS...
+2025-07-08 05:49:50,487 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 29000, 'top': 1000}
+2025-07-08 05:49:59,263 - INFO - Successfully fetched data for MYH-LOS, skip=29000, top=1000.
+2025-07-08 05:49:59,264 - INFO - Page 30: Fetched 1000 items. Total items so far: 30000.
+2025-07-08 05:49:59,264 - INFO - Fetching page 31 (skip=30000, top=1000) for MYH-LOS...
+2025-07-08 05:49:59,264 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 30000, 'top': 1000}
+2025-07-08 05:50:07,881 - INFO - Successfully fetched data for MYH-LOS, skip=30000, top=1000.
+2025-07-08 05:50:07,882 - INFO - Page 31: Fetched 1000 items. Total items so far: 31000.
+2025-07-08 05:50:07,882 - INFO - Fetching page 32 (skip=31000, top=1000) for MYH-LOS...
+2025-07-08 05:50:07,882 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 31000, 'top': 1000}
+2025-07-08 05:50:16,556 - INFO - Successfully fetched data for MYH-LOS, skip=31000, top=1000.
+2025-07-08 05:50:16,557 - INFO - Page 32: Fetched 1000 items. Total items so far: 32000.
+2025-07-08 05:50:16,557 - INFO - Fetching page 33 (skip=32000, top=1000) for MYH-LOS...
+2025-07-08 05:50:16,557 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 32000, 'top': 1000}
+2025-07-08 05:50:28,022 - INFO - Successfully fetched data for MYH-LOS, skip=32000, top=1000.
+2025-07-08 05:50:28,023 - INFO - Page 33: Fetched 1000 items. Total items so far: 33000.
+2025-07-08 05:50:28,023 - INFO - Fetching page 34 (skip=33000, top=1000) for MYH-LOS...
+2025-07-08 05:50:28,023 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 33000, 'top': 1000}
+2025-07-08 05:50:38,614 - INFO - Successfully fetched data for MYH-LOS, skip=33000, top=1000.
+2025-07-08 05:50:38,615 - INFO - Page 34: Fetched 1000 items. Total items so far: 34000.
+2025-07-08 05:50:38,615 - INFO - Fetching page 35 (skip=34000, top=1000) for MYH-LOS...
+2025-07-08 05:50:38,615 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 34000, 'top': 1000}
+2025-07-08 05:50:45,259 - INFO - Successfully fetched data for MYH-LOS, skip=34000, top=1000.
+2025-07-08 05:50:45,260 - INFO - Page 35: Fetched 1000 items. Total items so far: 35000.
+2025-07-08 05:50:45,260 - INFO - Fetching page 36 (skip=35000, top=1000) for MYH-LOS...
+2025-07-08 05:50:45,260 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 35000, 'top': 1000}
+2025-07-08 05:50:50,760 - INFO - Successfully fetched data for MYH-LOS, skip=35000, top=1000.
+2025-07-08 05:50:50,762 - INFO - Page 36: Fetched 1000 items. Total items so far: 36000.
+2025-07-08 05:50:50,762 - INFO - Fetching page 37 (skip=36000, top=1000) for MYH-LOS...
+2025-07-08 05:50:50,762 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 36000, 'top': 1000}
+2025-07-08 05:50:56,663 - INFO - Successfully fetched data for MYH-LOS, skip=36000, top=1000.
+2025-07-08 05:50:56,664 - INFO - Page 37: Fetched 1000 items. Total items so far: 37000.
+2025-07-08 05:50:56,664 - INFO - Fetching page 38 (skip=37000, top=1000) for MYH-LOS...
+2025-07-08 05:50:56,664 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 37000, 'top': 1000}
+2025-07-08 05:51:02,385 - INFO - Successfully fetched data for MYH-LOS, skip=37000, top=1000.
+2025-07-08 05:51:02,386 - INFO - Page 38: Fetched 1000 items. Total items so far: 38000.
+2025-07-08 05:51:02,386 - INFO - Fetching page 39 (skip=38000, top=1000) for MYH-LOS...
+2025-07-08 05:51:02,386 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 38000, 'top': 1000}
+2025-07-08 05:51:08,221 - INFO - Successfully fetched data for MYH-LOS, skip=38000, top=1000.
+2025-07-08 05:51:08,222 - INFO - Page 39: Fetched 1000 items. Total items so far: 39000.
+2025-07-08 05:51:08,222 - INFO - Fetching page 40 (skip=39000, top=1000) for MYH-LOS...
+2025-07-08 05:51:08,222 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 39000, 'top': 1000}
+2025-07-08 05:51:14,342 - INFO - Successfully fetched data for MYH-LOS, skip=39000, top=1000.
+2025-07-08 05:51:14,343 - INFO - Page 40: Fetched 1000 items. Total items so far: 40000.
+2025-07-08 05:51:14,343 - INFO - Fetching page 41 (skip=40000, top=1000) for MYH-LOS...
+2025-07-08 05:51:14,343 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 40000, 'top': 1000}
+2025-07-08 05:51:23,254 - INFO - Successfully fetched data for MYH-LOS, skip=40000, top=1000.
+2025-07-08 05:51:23,255 - INFO - Page 41: Fetched 1000 items. Total items so far: 41000.
+2025-07-08 05:51:23,255 - INFO - Fetching page 42 (skip=41000, top=1000) for MYH-LOS...
+2025-07-08 05:51:23,255 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 41000, 'top': 1000}
+2025-07-08 05:51:30,698 - INFO - Successfully fetched data for MYH-LOS, skip=41000, top=1000.
+2025-07-08 05:51:30,699 - INFO - Page 42: Fetched 1000 items. Total items so far: 42000.
+2025-07-08 05:51:30,699 - INFO - Fetching page 43 (skip=42000, top=1000) for MYH-LOS...
+2025-07-08 05:51:30,699 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 42000, 'top': 1000}
+2025-07-08 05:51:38,054 - INFO - Successfully fetched data for MYH-LOS, skip=42000, top=1000.
+2025-07-08 05:51:38,055 - INFO - Page 43: Fetched 1000 items. Total items so far: 43000.
+2025-07-08 05:51:38,055 - INFO - Fetching page 44 (skip=43000, top=1000) for MYH-LOS...
+2025-07-08 05:51:38,055 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 43000, 'top': 1000}
+2025-07-08 05:51:46,910 - INFO - Successfully fetched data for MYH-LOS, skip=43000, top=1000.
+2025-07-08 05:51:46,911 - INFO - Page 44: Fetched 1000 items. Total items so far: 44000.
+2025-07-08 05:51:46,911 - INFO - Fetching page 45 (skip=44000, top=1000) for MYH-LOS...
+2025-07-08 05:51:46,911 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 44000, 'top': 1000}
+2025-07-08 05:51:58,470 - INFO - Successfully fetched data for MYH-LOS, skip=44000, top=1000.
+2025-07-08 05:51:58,470 - INFO - Page 45: Fetched 1000 items. Total items so far: 45000.
+2025-07-08 05:51:58,470 - INFO - Fetching page 46 (skip=45000, top=1000) for MYH-LOS...
+2025-07-08 05:51:58,470 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 45000, 'top': 1000}
+2025-07-08 05:52:08,036 - INFO - Successfully fetched data for MYH-LOS, skip=45000, top=1000.
+2025-07-08 05:52:08,036 - INFO - Page 46: Fetched 1000 items. Total items so far: 46000.
+2025-07-08 05:52:08,037 - INFO - Fetching page 47 (skip=46000, top=1000) for MYH-LOS...
+2025-07-08 05:52:08,037 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 46000, 'top': 1000}
+2025-07-08 05:52:15,233 - INFO - Successfully fetched data for MYH-LOS, skip=46000, top=1000.
+2025-07-08 05:52:15,233 - INFO - Page 47: Fetched 1000 items. Total items so far: 47000.
+2025-07-08 05:52:15,234 - INFO - Fetching page 48 (skip=47000, top=1000) for MYH-LOS...
+2025-07-08 05:52:15,234 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 47000, 'top': 1000}
+2025-07-08 05:52:24,437 - INFO - Successfully fetched data for MYH-LOS, skip=47000, top=1000.
+2025-07-08 05:52:24,438 - INFO - Page 48: Fetched 1000 items. Total items so far: 48000.
+2025-07-08 05:52:24,438 - INFO - Fetching page 49 (skip=48000, top=1000) for MYH-LOS...
+2025-07-08 05:52:24,438 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 48000, 'top': 1000}
+2025-07-08 05:52:33,289 - INFO - Successfully fetched data for MYH-LOS, skip=48000, top=1000.
+2025-07-08 05:52:33,290 - INFO - Page 49: Fetched 1000 items. Total items so far: 49000.
+2025-07-08 05:52:33,290 - INFO - Fetching page 50 (skip=49000, top=1000) for MYH-LOS...
+2025-07-08 05:52:33,290 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 49000, 'top': 1000}
+2025-07-08 05:52:41,307 - INFO - Successfully fetched data for MYH-LOS, skip=49000, top=1000.
+2025-07-08 05:52:41,308 - INFO - Page 50: Fetched 1000 items. Total items so far: 50000.
+2025-07-08 05:52:41,308 - INFO - Fetching page 51 (skip=50000, top=1000) for MYH-LOS...
+2025-07-08 05:52:41,308 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 50000, 'top': 1000}
+2025-07-08 05:52:49,241 - INFO - Successfully fetched data for MYH-LOS, skip=50000, top=1000.
+2025-07-08 05:52:49,241 - INFO - Page 51: Fetched 1000 items. Total items so far: 51000.
+2025-07-08 05:52:49,241 - INFO - Fetching page 52 (skip=51000, top=1000) for MYH-LOS...
+2025-07-08 05:52:49,242 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 51000, 'top': 1000}
+2025-07-08 05:52:56,369 - INFO - Successfully fetched data for MYH-LOS, skip=51000, top=1000.
+2025-07-08 05:52:56,369 - INFO - Page 52: Fetched 1000 items. Total items so far: 52000.
+2025-07-08 05:52:56,370 - INFO - Fetching page 53 (skip=52000, top=1000) for MYH-LOS...
+2025-07-08 05:52:56,370 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 52000, 'top': 1000}
+2025-07-08 05:53:03,520 - INFO - Successfully fetched data for MYH-LOS, skip=52000, top=1000.
+2025-07-08 05:53:03,521 - INFO - Page 53: Fetched 1000 items. Total items so far: 53000.
+2025-07-08 05:53:03,521 - INFO - Fetching page 54 (skip=53000, top=1000) for MYH-LOS...
+2025-07-08 05:53:03,521 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 53000, 'top': 1000}
+2025-07-08 05:53:10,923 - INFO - Successfully fetched data for MYH-LOS, skip=53000, top=1000.
+2025-07-08 05:53:10,924 - INFO - Page 54: Fetched 1000 items. Total items so far: 54000.
+2025-07-08 05:53:10,924 - INFO - Fetching page 55 (skip=54000, top=1000) for MYH-LOS...
+2025-07-08 05:53:10,924 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 54000, 'top': 1000}
+2025-07-08 05:53:18,662 - INFO - Successfully fetched data for MYH-LOS, skip=54000, top=1000.
+2025-07-08 05:53:18,663 - INFO - Page 55: Fetched 1000 items. Total items so far: 55000.
+2025-07-08 05:53:18,663 - INFO - Fetching page 56 (skip=55000, top=1000) for MYH-LOS...
+2025-07-08 05:53:18,663 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 55000, 'top': 1000}
+2025-07-08 05:53:28,349 - INFO - Successfully fetched data for MYH-LOS, skip=55000, top=1000.
+2025-07-08 05:53:28,350 - INFO - Page 56: Fetched 1000 items. Total items so far: 56000.
+2025-07-08 05:53:28,350 - INFO - Fetching page 57 (skip=56000, top=1000) for MYH-LOS...
+2025-07-08 05:53:28,350 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 56000, 'top': 1000}
+2025-07-08 05:53:36,075 - INFO - Successfully fetched data for MYH-LOS, skip=56000, top=1000.
+2025-07-08 05:53:36,076 - INFO - Page 57: Fetched 1000 items. Total items so far: 57000.
+2025-07-08 05:53:36,076 - INFO - Fetching page 58 (skip=57000, top=1000) for MYH-LOS...
+2025-07-08 05:53:36,076 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 57000, 'top': 1000}
+2025-07-08 05:53:44,384 - INFO - Successfully fetched data for MYH-LOS, skip=57000, top=1000.
+2025-07-08 05:53:44,385 - INFO - Page 58: Fetched 1000 items. Total items so far: 58000.
+2025-07-08 05:53:44,385 - INFO - Fetching page 59 (skip=58000, top=1000) for MYH-LOS...
+2025-07-08 05:53:44,385 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 58000, 'top': 1000}
+2025-07-08 05:53:53,024 - INFO - Successfully fetched data for MYH-LOS, skip=58000, top=1000.
+2025-07-08 05:53:53,025 - INFO - Page 59: Fetched 1000 items. Total items so far: 59000.
+2025-07-08 05:53:53,025 - INFO - Fetching page 60 (skip=59000, top=1000) for MYH-LOS...
+2025-07-08 05:53:53,025 - INFO - Fetching data from: https://myhospitalsapi.aihw.gov.au/api/v1/flat-formatted-data-extract/MYH-LOS with params: {'skip': 59000, 'top': 1000}

@@ -53,7 +53,7 @@ This file tracks specific, actionable tasks for the Open Social Datasets project
         *   [ ] Log session.
 *   **AIHW Datasets:**
     *   [X] Identify and prioritize dataset(s) from the Australian Institute of Health and Welfare (AIHW) (User selected MyHospitals API).
-    *   [X] For Dataset 1 (AIHW - MyHospitals API, `MYH-ED-WAITS` measure category):
+    *   [X] For AIHW MyHospitals - `MYH-ED-WAITS` (ED Waiting Times) measure category:
         *   [X] Create directory structure: `datasets/aihw/myhospitals/` (Done).
         *   [X] Explore API documentation (Swagger spec successfully analyzed).
         *   [X] Perform initial API interaction (Fetched measure categories successfully).
@@ -81,15 +81,23 @@ This file tracks specific, actionable tasks for the Open Social Datasets project
         *   [ ] **Refine `data_dictionary_elective_surgery.md`** based on full dataset analysis if feasible (or sample if full fetch is too long for sandbox).
         *   [ ] Consider adding scripts/notebooks for data validation or example queries for `MYH-ES`.
     *   [X] For AIHW MyHospitals - `MYH-CANCER` (Cancer) measure category:
-        *   [X] Identify next measure category/dataset (`MYH-CANCER` selected by user).
-        *   [X] Adapt/extend `fetch_aihw_myhospitals_data.py` (Confirmed suitability, modified target category).
-        *   [X] **Test data fetch for `MYH-CANCER`** (Completed, all ~2.5k records fetched and saved).
-        *   [X] Create specific documentation (`data_dictionary_cancer.md`, `accessible_guide_cancer.md`).
+        *   [X] Identify next measure category.
+        *   [X] Adapt/extend script.
+        *   [X] Test data fetch (Completed, all ~2.5k records fetched and saved).
+        *   [X] Create specific documentation.
         *   [X] Update overall MyHospitals README.
         *   [ ] **Refine `data_dictionary_cancer.md`** based on full dataset analysis.
-        *   [ ] Consider adding scripts/notebooks for data validation or example queries for `MYH-CANCER`.
+        *   [ ] Consider adding scripts/notebooks for data validation or example queries.
+    *   [X] For AIHW MyHospitals - `MYH-LOS` (Length of Stay) measure category:
+        *   [X] Identify next measure category.
+        *   [X] Adapt/extend script.
+        *   [X] Test data fetch (Completed with 2-page limit, ~2k records fetched, full dataset ~517k).
+        *   [X] Create specific documentation.
+        *   [X] Update overall MyHospitals README.
+        *   [ ] **Refine `data_dictionary_los.md`** based on full dataset analysis if feasible.
+        *   [ ] Consider adding scripts/notebooks for data validation or example queries.
     *   [ ] For further AIHW MyHospitals measure categories:
-        *   [ ] Identify next measure category (e.g., `MYH-HH` Hand Hygiene, `MYH-LOS` Length of Stay).
+        *   [ ] Identify next measure category (e.g., `MYH-HH` Hand Hygiene).
         *   [ ] Repeat process: test fetch, document, update logs.
 
 ### Documentation Refinement

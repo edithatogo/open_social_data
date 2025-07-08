@@ -130,6 +130,28 @@ Integrate data from the AIHW MyHospitals API into the repository. This involves 
 - Updated `datasets/aihw/myhospitals/README.md` to include `MYH-CANCER` dataset and links.
 
 **$(date +"%Y-%m-%d %H:%M:%S") - Step: Update Project Logs (for MYH-CANCER)**
-- Updating this session log, `TODO.md`, and `CHANGELOG.md` for `MYH-CANCER` integration.
+- Updated this session log, `TODO.md`, and `CHANGELOG.md` for `MYH-CANCER` integration.
+
+**$(date +"%Y-%m-%d %H:%M:%S") - Task: Integrate MYH-LOS (Length of Stay) Data**
+
+**Plan Step: Review Script for MYH-LOS**
+- Reviewed `fetch_aihw_myhospitals_data.py`. Confirmed its suitability for `MYH-LOS`.
+
+**Plan Step: Test Data Fetch for MYH-LOS**
+- Modified script to target `MYH-LOS`.
+- Fetched initial sample (`top=10`), revealed `total_results_available: 517697`.
+- Re-introduced a 2-page limit to `process_and_save_data` for testing due to very large dataset size and previous timeout.
+- Re-ran script: Successfully fetched 2 pages (2000 records) for `MYH-LOS` and saved to Parquet (`aihw_myhospitals_MYH-LOS_YYYYMMDD_HHMMSS.parquet`).
+- Removed 2-page test limit from script.
+
+**Plan Step: Populate Documentation for MYH-LOS**
+- Created `datasets/aihw/myhospitals/docs/data_dictionary_los.md`.
+- Created `datasets/aihw/myhospitals/docs/accessible_guide_los.md`.
+
+**Plan Step: Update Overall MyHospitals Documentation**
+- Updated `datasets/aihw/myhospitals/README.md` to include `MYH-LOS` dataset and links.
+
+**$(date +"%Y-%m-%d %H:%M:%S") - Step: Update Project Logs (for MYH-LOS)**
+- Updating this session log, `TODO.md`, and `CHANGELOG.md` for `MYH-LOS` integration.
 
 ---

@@ -31,6 +31,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
         - Tested data fetch for `MYH-CANCER` (successfully fetched all ~2.5k records).
         - Created specific documentation: `docs/data_dictionary_cancer.md`, `docs/accessible_guide_cancer.md`.
         - Updated overall `datasets/aihw/myhospitals/README.md`.
+    - **MYH-LOS (Length of Stay):**
+        - Adapted `fetch_aihw_myhospitals_data.py` for `MYH-LOS`.
+        - Tested data fetch for `MYH-LOS` (fetched 2k sample records, full dataset ~517k).
+        - Created specific documentation: `docs/data_dictionary_los.md`, `docs/accessible_guide_los.md`.
+        - Updated overall `datasets/aihw/myhospitals/README.md`.
 - **ABS Dataset - QBIS (Business Indicators, Australia):**
     - Created directory structure under `datasets/abs/qbis_business_indicators/`.
     - Populated initial `README.md`, `docs/data_dictionary.md`, and `docs/accessible_guide.md` from templates.
