@@ -152,7 +152,7 @@ if __name__ == "__main__":
     # For initial testing, let's fetch a small amount of data for MYH-ED-WAITS
     # We'll call fetch_flat_formatted_data directly for this test.
 
-    test_measure_category = "MYH-ADM" # MyHospitals Admissions
+    test_measure_category = "MYH-ES" # MyHospitals Elective Surgery
     logging.info(f"Performing initial small fetch for category: {test_measure_category}")
 
     # Fetch only the first few items for inspection

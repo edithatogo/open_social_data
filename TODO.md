@@ -72,8 +72,16 @@ This file tracks specific, actionable tasks for the Open Social Datasets project
         *   [X] Update overall MyHospitals README.
         *   [ ] **Refine `data_dictionary_admissions.md`** based on full dataset analysis if feasible (or sample if full fetch is too long for sandbox).
         *   [ ] Consider adding scripts/notebooks for data validation or example queries for `MYH-ADM`.
+    *   [X] For AIHW MyHospitals - `MYH-ES` (Elective Surgery) measure category:
+        *   [X] Identify next measure category/dataset (`MYH-ES` selected by user).
+        *   [X] Adapt/extend `fetch_aihw_myhospitals_data.py` (Confirmed suitability, modified target category).
+        *   [X] **Test data fetch for `MYH-ES`** (Completed with 2-page limit, ~2k records fetched and saved, full dataset ~618k records).
+        *   [X] Create specific documentation (`data_dictionary_elective_surgery.md`, `accessible_guide_elective_surgery.md`).
+        *   [X] Update overall MyHospitals README.
+        *   [ ] **Refine `data_dictionary_elective_surgery.md`** based on full dataset analysis if feasible (or sample if full fetch is too long for sandbox).
+        *   [ ] Consider adding scripts/notebooks for data validation or example queries for `MYH-ES`.
     *   [ ] For further AIHW MyHospitals measure categories:
-        *   [ ] Identify next measure category (e.g., `MYH-ES` Elective Surgery, `MYH-CANCER` Cancer).
+        *   [ ] Identify next measure category (e.g., `MYH-CANCER` Cancer, `MYH-HH` Hand Hygiene).
         *   [ ] Repeat process: test fetch, document, update logs.
 
 ### Documentation Refinement

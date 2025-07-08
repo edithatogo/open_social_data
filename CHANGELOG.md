@@ -21,6 +21,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
         - Tested data fetch for `MYH-ADM` (fetched 5k sample records, full dataset ~112k).
         - Created specific documentation: `docs/data_dictionary_admissions.md`, `docs/accessible_guide_admissions.md`.
         - Updated overall `datasets/aihw/myhospitals/README.md`.
+    - **MYH-ES (Elective Surgery):**
+        - Adapted `fetch_aihw_myhospitals_data.py` for `MYH-ES`.
+        - Tested data fetch for `MYH-ES` (fetched 2k sample records, full dataset ~618k).
+        - Created specific documentation: `docs/data_dictionary_elective_surgery.md`, `docs/accessible_guide_elective_surgery.md`.
+        - Updated overall `datasets/aihw/myhospitals/README.md`.
 - **ABS Dataset - QBIS (Business Indicators, Australia):**
     - Created directory structure under `datasets/abs/qbis_business_indicators/`.
     - Populated initial `README.md`, `docs/data_dictionary.md`, and `docs/accessible_guide.md` from templates.

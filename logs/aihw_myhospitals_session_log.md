@@ -88,6 +88,28 @@ Integrate data from the AIHW MyHospitals API into the repository. This involves 
 - Updated `datasets/aihw/myhospitals/README.md` to include `MYH-ADM` dataset, links to its documentation, and updated general sections.
 
 **$(date +"%Y-%m-%d %H:%M:%S") - Step: Update Project Logs (for MYH-ADM)**
-- Updating this session log, `TODO.md`, and `CHANGELOG.md` for `MYH-ADM` integration.
+- Updated this session log, `TODO.md`, and `CHANGELOG.md` for `MYH-ADM` integration.
+
+**$(date +"%Y-%m-%d %H:%M:%S") - Task: Integrate MYH-ES (Elective Surgery) Data**
+
+**Plan Step: Review Script for MYH-ES**
+- Reviewed `fetch_aihw_myhospitals_data.py`. Confirmed its suitability for `MYH-ES`.
+
+**Plan Step: Test Data Fetch for MYH-ES**
+- Modified script to target `MYH-ES`.
+- Fetched initial sample (`top=10`), revealed `total_results_available: 618643`.
+- Added a 2-page limit to `process_and_save_data` for testing due to large dataset size.
+- Re-ran script: Successfully fetched 2 pages (2000 records) for `MYH-ES` and saved to Parquet (`aihw_myhospitals_MYH-ES_YYYYMMDD_HHMMSS.parquet`).
+- Removed 2-page test limit from script.
+
+**Plan Step: Populate Documentation for MYH-ES**
+- Created `datasets/aihw/myhospitals/docs/data_dictionary_elective_surgery.md`.
+- Created `datasets/aihw/myhospitals/docs/accessible_guide_elective_surgery.md`.
+
+**Plan Step: Update Overall MyHospitals Documentation**
+- Updated `datasets/aihw/myhospitals/README.md` to include `MYH-ES` dataset and links.
+
+**$(date +"%Y-%m-%d %H:%M:%S") - Step: Update Project Logs (for MYH-ES)**
+- Updating this session log, `TODO.md`, and `CHANGELOG.md` for `MYH-ES` integration.
 
 ---
