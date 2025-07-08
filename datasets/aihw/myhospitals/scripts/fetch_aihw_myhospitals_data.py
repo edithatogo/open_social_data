@@ -37,7 +37,15 @@ USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTM
 
 def fetch_flat_formatted_data(measure_category_code, skip=0, top=100):
     """
-    Fetches flat formatted data for a given measure category code with pagination.
+    Fetch flat formatted data for a specified measure category from the AIHW MyHospitals API with pagination.
+    
+    Parameters:
+        measure_category_code (str): The code identifying the measure category to fetch.
+        skip (int): Number of records to skip for pagination.
+        top (int): Maximum number of records to retrieve in this request.
+    
+    Returns:
+        dict or None: The JSON-decoded response from the API if successful, or None if an error occurs.
     """
     url = f"{BASE_URL}/flat-formatted-data-extract/{measure_category_code}"
     headers = {
@@ -70,8 +78,14 @@ def fetch_flat_formatted_data(measure_category_code, skip=0, top=100):
 
 def process_and_save_data(measure_category_code, filename_prefix="aihw_myhospitals"):
     """
-    Fetches all data for a measure category using pagination,
-    processes it into a Pandas DataFrame, and saves it as a Parquet file.
+    Retrieves all available data for a given measure category from the API using pagination, processes it into a Pandas DataFrame, and saves the result as a timestamped Parquet file.
+    
+    Parameters:
+        measure_category_code (str): The code identifying the measure category to fetch.
+        filename_prefix (str, optional): Prefix for the output Parquet filename. Defaults to "aihw_myhospitals".
+    
+    Returns:
+        bool: True if data was successfully fetched and saved (or if no data was found), False if an error occurred during fetching or saving.
     """
     all_data_items = []
     skip = 0
