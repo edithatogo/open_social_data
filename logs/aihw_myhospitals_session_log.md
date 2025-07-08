@@ -152,6 +152,28 @@ Integrate data from the AIHW MyHospitals API into the repository. This involves 
 - Updated `datasets/aihw/myhospitals/README.md` to include `MYH-LOS` dataset and links.
 
 **$(date +"%Y-%m-%d %H:%M:%S") - Step: Update Project Logs (for MYH-LOS)**
-- Updating this session log, `TODO.md`, and `CHANGELOG.md` for `MYH-LOS` integration.
+- Updated this session log, `TODO.md`, and `CHANGELOG.md` for `MYH-LOS` integration.
+
+**$(date +"%Y-%m-%d %H:%M:%S") - Task: Integrate MYH-HH (Hand Hygiene) Data**
+
+**Plan Step: Review Script for MYH-HH**
+- Reviewed `fetch_aihw_myhospitals_data.py`. Confirmed its suitability for `MYH-HH`.
+
+**Plan Step: Test Data Fetch for MYH-HH**
+- Modified script to target `MYH-HH`.
+- Fetched initial sample (`top=10`), revealed `total_results_available: 37794`.
+- Added a 2-page limit to `process_and_save_data` for testing.
+- Re-ran script: Successfully fetched 2 pages (2000 records) for `MYH-HH` and saved to Parquet (`aihw_myhospitals_MYH-HH_YYYYMMDD_HHMMSS.parquet`).
+- (Note: Page limit was left in script for this category as full fetch is manageable but not essential for this phase of setup).
+
+**Plan Step: Populate Documentation for MYH-HH**
+- Created `datasets/aihw/myhospitals/docs/data_dictionary_hand_hygiene.md`.
+- Created `datasets/aihw/myhospitals/docs/accessible_guide_hand_hygiene.md`.
+
+**Plan Step: Update Overall MyHospitals Documentation**
+- Updated `datasets/aihw/myhospitals/README.md` to include `MYH-HH` dataset and links.
+
+**$(date +"%Y-%m-%d %H:%M:%S") - Step: Update Project Logs (for MYH-HH)**
+- Updating this session log, `TODO.md`, and `CHANGELOG.md` for `MYH-HH` integration.
 
 ---

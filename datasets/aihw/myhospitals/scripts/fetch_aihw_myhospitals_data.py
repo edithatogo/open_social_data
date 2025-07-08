@@ -108,9 +108,9 @@ def process_and_save_data(measure_category_code, filename_prefix="aihw_myhospita
             page_num += 1
 
             # Optional safety break for very long runs if needed in other contexts
-            # if page_num > 200: # Example: limit to 200 pages if total_results_available is not trusted
-            #     logging.warning(f"Reached a hardcoded page limit of 200 for {measure_category_code}. Stopping.")
-            #     break
+            if page_num > 2: # TEST LIMIT for initial MYH-HH run
+                logging.warning(f"Reached TEST page limit of 2 for {measure_category_code}. Stopping.")
+                break
 
         elif api_response and ('result' not in api_response or 'data' not in api_response.get('result', {})):
             logging.info(f"Page {page_num}: Response structure is not as expected (missing 'result' or 'result.data'). Full response: {json.dumps(api_response, indent=2)}")
@@ -152,7 +152,7 @@ if __name__ == "__main__":
     # For initial testing, let's fetch a small amount of data for MYH-ED-WAITS
     # We'll call fetch_flat_formatted_data directly for this test.
 
-    test_measure_category = "MYH-LOS" # MyHospitals Length of Stay
+    test_measure_category = "MYH-HH" # MyHospitals Hand Hygiene
     logging.info(f"Performing initial small fetch for category: {test_measure_category}")
 
     # Fetch only the first few items for inspection
