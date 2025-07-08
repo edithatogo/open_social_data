@@ -52,12 +52,22 @@ This file tracks specific, actionable tasks for the Open Social Datasets project
         *   [ ] Add data access details/scripts.
         *   [ ] Log session.
 *   **AIHW Datasets:**
-    *   [ ] Identify and prioritize dataset(s) from the Australian Institute of Health and Welfare (AIHW) (Pending user instruction).
-    *   [ ] For Dataset 1 (AIHW):
-        *   [ ] Create directory structure.
-        *   [ ] Populate documentation (README, Data Dictionary, Accessible Guide).
-        *   [ ] Develop data access/processing scripts.
-        *   [ ] Log session.
+    *   [X] Identify and prioritize dataset(s) from the Australian Institute of Health and Welfare (AIHW) (User selected MyHospitals API).
+    *   [X] For Dataset 1 (AIHW - MyHospitals API, starting with `MYH-ED-WAITS` measure category):
+        *   [X] Create directory structure: `datasets/aihw/myhospitals/` (Done).
+        *   [X] Explore API documentation (Swagger spec successfully analyzed).
+        *   [X] Perform initial API interaction (Fetched measure categories successfully).
+        *   [X] Select specific endpoint for data fetching (`/flat-formatted-data-extract/MYH-ED-WAITS`).
+        *   [X] Develop `fetch_aihw_myhospitals_data.py` script in `datasets/aihw/myhospitals/scripts/` (Initial version for sample fetch and full processing logic for `MYH-ED-WAITS` complete).
+        *   [X] Populate initial documentation for MyHospitals and `MYH-ED-WAITS` (`README.md`, `data_dictionary_ed_waits.md`, `accessible_guide_ed_waits.md`).
+        *   [ ] **Test full run of `fetch_aihw_myhospitals_data.py`** for `MYH-ED-WAITS` to ensure pagination and Parquet saving work correctly for a complete dataset.
+        *   [ ] **Refine `data_dictionary_ed_waits.md`** based on full dataset analysis if needed.
+        *   [ ] Consider adding scripts/notebooks for data validation or example queries for the fetched Parquet file.
+        *   [X] Log session (Ongoing in `logs/aihw_myhospitals_session_log.md`).
+    *   [ ] For further AIHW MyHospitals measure categories or other AIHW datasets:
+        *   [ ] Identify next measure category/dataset.
+        *   [ ] Adapt/extend `fetch_aihw_myhospitals_data.py` or create new scripts as needed.
+        *   [ ] Create specific documentation.
 
 ### Documentation Refinement
 *   [ ] Flesh out `CONTRIBUTING.MD` with detailed guidelines.
