@@ -24,6 +24,7 @@ This repository aims to provide scripts to access and process data from the MyHo
     *   `data/aihw_myhospitals_MYH-ED-WAITS_YYYYMMDD_HHMMSS.parquet`
     *   `data/aihw_myhospitals_MYH-ADM_YYYYMMDD_HHMMSS.parquet`
     *   `data/aihw_myhospitals_MYH-ES_YYYYMMDD_HHMMSS.parquet`
+    *   `data/aihw_myhospitals_MYH-CANCER_YYYYMMDD_HHMMSS.parquet`
 *   **API Base URL:** `https://myhospitalsapi.aihw.gov.au/api/v1/`
 *   **Key API Endpoints Used:**
     *   Metadata: `/measure-categories`, `/measures`, `/reporting-units`, etc.
@@ -47,10 +48,13 @@ This repository aims to provide scripts to access and process data from the MyHo
 *   **Elective Surgery (`MYH-ES`):**
     *   Data Dictionary: [`docs/data_dictionary_elective_surgery.md`](./docs/data_dictionary_elective_surgery.md)
     *   Accessible Guide: [`docs/accessible_guide_elective_surgery.md`](./docs/accessible_guide_elective_surgery.md)
+*   **Cancer (`MYH-CANCER`):**
+    *   Data Dictionary: [`docs/data_dictionary_cancer.md`](./docs/data_dictionary_cancer.md)
+    *   Accessible Guide: [`docs/accessible_guide_cancer.md`](./docs/accessible_guide_cancer.md)
 
-*Key variables common to flat formatted data extracts (like ED Waiting Times, Admissions, Elective Surgery) typically include:*
+*Key variables common to flat formatted data extracts (like ED Waiting Times, Admissions, Elective Surgery, Cancer) typically include:*
 *   `reporting_unit_name`: Name of the hospital.
-*   `measure_name`: Specific performance indicator (e.g., "Percentage of patients who commenced treatment within the recommended time", "Number of admissions to hospital", "Waiting time for elective surgery - 50th percentile").
+*   `measure_name`: Specific performance indicator (e.g., "Percentage of patients who commenced treatment within the recommended time", "Number of admissions to hospital", "Waiting time for elective surgery - 50th percentile", "Number of surgeries for malignant cancer").
 *   `reported_measure_name`: Disaggregation of the measure (e.g., by triage category).
 *   `data_period`: The period the data refers to (e.g., "2022-23").
 *   `formatted_value`: The reported value, often a percentage or time.
@@ -97,7 +101,7 @@ Data is collected by AIHW from various sources, including national health data c
 ## 8. Last Updated in this Repository
 
 *   **Date:** $(date +"%Y-%m-%d")
-*   **Changes Made:** Added "Elective Surgery" (`MYH-ES`) data fetching (sample) and documentation. Updated README to reflect multiple datasets.
+*   **Changes Made:** Added "Cancer" (`MYH-CANCER`) data fetching and documentation. Updated README to reflect multiple datasets.
 
 ---
 

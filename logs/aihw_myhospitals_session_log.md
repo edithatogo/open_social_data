@@ -110,6 +110,26 @@ Integrate data from the AIHW MyHospitals API into the repository. This involves 
 - Updated `datasets/aihw/myhospitals/README.md` to include `MYH-ES` dataset and links.
 
 **$(date +"%Y-%m-%d %H:%M:%S") - Step: Update Project Logs (for MYH-ES)**
-- Updating this session log, `TODO.md`, and `CHANGELOG.md` for `MYH-ES` integration.
+- Updated this session log, `TODO.md`, and `CHANGELOG.md` for `MYH-ES` integration.
+
+**$(date +"%Y-%m-%d %H:%M:%S") - Task: Integrate MYH-CANCER (Cancer) Data**
+
+**Plan Step: Review Script for MYH-CANCER**
+- Reviewed `fetch_aihw_myhospitals_data.py`. Confirmed its suitability for `MYH-CANCER`.
+
+**Plan Step: Test Data Fetch for MYH-CANCER**
+- Modified script to target `MYH-CANCER`.
+- Fetched initial sample (`top=10`), revealed `total_results_available: 2514`.
+- Script successfully fetched all 2514 records for `MYH-CANCER` and saved to Parquet (`aihw_myhospitals_MYH-CANCER_YYYYMMDD_HHMMSS.parquet`). No page limit was needed as the dataset is small.
+
+**Plan Step: Populate Documentation for MYH-CANCER**
+- Created `datasets/aihw/myhospitals/docs/data_dictionary_cancer.md`.
+- Created `datasets/aihw/myhospitals/docs/accessible_guide_cancer.md`.
+
+**Plan Step: Update Overall MyHospitals Documentation**
+- Updated `datasets/aihw/myhospitals/README.md` to include `MYH-CANCER` dataset and links.
+
+**$(date +"%Y-%m-%d %H:%M:%S") - Step: Update Project Logs (for MYH-CANCER)**
+- Updating this session log, `TODO.md`, and `CHANGELOG.md` for `MYH-CANCER` integration.
 
 ---
