@@ -20,7 +20,13 @@ This repository aims to provide scripts to access and process data from the MyHo
 
 *   **Data Format:** The AIHW MyHospitals API provides data primarily in JSON format. Some endpoints also offer CSV or direct XLSX downloads.
 *   **Data Access:** Data is accessed via the MyHospitals API using scripts in this repository.
-*   **Data File(s) (Planned):** Processed data for specific measure categories will be stored in Parquet format, e.g., `data/aihw_myhospitals_ed_waits_YYYYMMDD_HHMMSS.parquet`.
+*   **Data File(s):** Processed data for specific measure categories are stored in Parquet format in the `data/` folder. Examples:
+    *   `data/aihw_myhospitals_MYH-ED-WAITS_YYYYMMDD_HHMMSS.parquet`
+    *   `data/aihw_myhospitals_MYH-ADM_YYYYMMDD_HHMMSS.parquet`
+    *   `data/aihw_myhospitals_MYH-ES_YYYYMMDD_HHMMSS.parquet`
+    *   `data/aihw_myhospitals_MYH-CANCER_YYYYMMDD_HHMMSS.parquet`
+    *   `data/aihw_myhospitals_MYH-LOS_YYYYMMDD_HHMMSS.parquet`
+    *   `data/aihw_myhospitals_MYH-HH_YYYYMMDD_HHMMSS.parquet`
 *   **API Base URL:** `https://myhospitalsapi.aihw.gov.au/api/v1/`
 *   **Key API Endpoints Used:**
     *   Metadata: `/measure-categories`, `/measures`, `/reporting-units`, etc.
@@ -33,14 +39,30 @@ This repository aims to provide scripts to access and process data from the MyHo
 
 ## 3. Key Information & Variables
 
-*Detailed information for each processed dataset will be available in its specific data dictionary and accessible guide. This initial setup focuses on "ED Waiting Times" (`MYH-ED-WAITS`).*
+*Detailed information for each processed dataset will be available in its specific data dictionary and accessible guide. Current datasets include:*
 
-*   **Data Dictionary (ED Waiting Times):** [`docs/data_dictionary_ed_waits.md`](./docs/data_dictionary_ed_waits.md) (To be created/populated based on fetched data)
-*   **Accessible Guide (ED Waiting Times):** [`docs/accessible_guide_ed_waits.md`](./docs/accessible_guide_ed_waits.md) (To be created/populated)
+*   **Emergency Department (ED) Waiting Times (`MYH-ED-WAITS`):**
+    *   Data Dictionary: [`docs/data_dictionary_ed_waits.md`](./docs/data_dictionary_ed_waits.md)
+    *   Accessible Guide: [`docs/accessible_guide_ed_waits.md`](./docs/accessible_guide_ed_waits.md)
+*   **Admissions (`MYH-ADM`):**
+    *   Data Dictionary: [`docs/data_dictionary_admissions.md`](./docs/data_dictionary_admissions.md)
+    *   Accessible Guide: [`docs/accessible_guide_admissions.md`](./docs/accessible_guide_admissions.md)
+*   **Elective Surgery (`MYH-ES`):**
+    *   Data Dictionary: [`docs/data_dictionary_elective_surgery.md`](./docs/data_dictionary_elective_surgery.md)
+    *   Accessible Guide: [`docs/accessible_guide_elective_surgery.md`](./docs/accessible_guide_elective_surgery.md)
+*   **Cancer (`MYH-CANCER`):**
+    *   Data Dictionary: [`docs/data_dictionary_cancer.md`](./docs/data_dictionary_cancer.md)
+    *   Accessible Guide: [`docs/accessible_guide_cancer.md`](./docs/accessible_guide_cancer.md)
+*   **Length of Stay (`MYH-LOS`):**
+    *   Data Dictionary: [`docs/data_dictionary_los.md`](./docs/data_dictionary_los.md)
+    *   Accessible Guide: [`docs/accessible_guide_los.md`](./docs/accessible_guide_los.md)
+*   **Hand Hygiene (`MYH-HH`):**
+    *   Data Dictionary: [`docs/data_dictionary_hand_hygiene.md`](./docs/data_dictionary_hand_hygiene.md)
+    *   Accessible Guide: [`docs/accessible_guide_hand_hygiene.md`](./docs/accessible_guide_hand_hygiene.md)
 
-*Key variables within the "ED Waiting Times" (MYH-ED-WAITS) flat formatted data extract typically include:*
+*Key variables common to flat formatted data extracts (like ED Waiting Times, Admissions, Elective Surgery, Cancer, Length of Stay, Hand Hygiene) typically include:*
 *   `reporting_unit_name`: Name of the hospital.
-*   `measure_name`: Specific performance indicator (e.g., "Percentage of patients who commenced treatment within the recommended time").
+*   `measure_name`: Specific performance indicator (e.g., "Percentage of patients who commenced treatment within the recommended time", "Number of admissions to hospital", "Waiting time for elective surgery - 50th percentile", "Number of surgeries for malignant cancer", "Average length of overnight stays", "Hand hygiene rate").
 *   `reported_measure_name`: Disaggregation of the measure (e.g., by triage category).
 *   `data_period`: The period the data refers to (e.g., "2022-23").
 *   `formatted_value`: The reported value, often a percentage or time.
@@ -87,7 +109,7 @@ Data is collected by AIHW from various sources, including national health data c
 ## 8. Last Updated in this Repository
 
 *   **Date:** $(date +"%Y-%m-%d")
-*   **Changes Made:** Initial setup of README for AIHW MyHospitals data, focusing on ED Waiting Times (`MYH-ED-WAITS`) as the first measure category.
+*   **Changes Made:** Added "Hand Hygiene" (`MYH-HH`) data fetching (sample) and documentation. Updated README to reflect multiple datasets.
 
 ---
 

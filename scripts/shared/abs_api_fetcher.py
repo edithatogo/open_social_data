@@ -3,9 +3,7 @@ import json
 
 def get_abs_dataflows():
     """
-    Fetch and display a list of all available dataflows (datasets) from the Australian Bureau of Statistics (ABS) SDMX-JSON API.
-    
-    Sends a request to the ABS dataflow endpoint, parses the response, and prints each dataflow's ID, agency, version, and English name. Handles network and parsing errors with diagnostic output.
+    Fetches a list of all available dataflows (datasets) from the ABS API.
     """
     # Endpoint to get all dataflows from ABS agency, with referencepartial detail.
     # referencepartial gives us enough detail including the names and IDs.
@@ -65,13 +63,8 @@ def get_abs_dataflows():
 
 def get_abs_datastructure(dataflow_id):
     """
-    Retrieve the Data Structure Definition (DSD) for a specified ABS dataflow ID using the SDMX-JSON API.
-    
-    Parameters:
-        dataflow_id (str): The identifier of the ABS dataflow (e.g., "QBIS").
-    
-    Returns:
-        dict | None: The parsed DSD JSON data if retrieval is successful; otherwise, None if an error occurs.
+    Fetches the Data Structure Definition (DSD) for a given ABS dataflow ID.
+    Example dataflow_id: "QBIS"
     """
     # URL pattern for DSD: https://api.abs.gov.au/datastructure/ABS/{dataflow_id}/latest?detail=full&references=children
     # Using "ABS" as agency and "latest" as version.

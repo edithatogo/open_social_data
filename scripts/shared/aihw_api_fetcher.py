@@ -5,12 +5,7 @@ BASE_URL = "https://myhospitalsapi.aihw.gov.au/api/v1"
 
 def get_aihw_measure_categories():
     """
-    Retrieve measure categories from the AIHW MyHospitals API.
-    
-    Sends a GET request to the `/measure-categories` endpoint and returns the parsed JSON data if successful. Returns `None` if an HTTP error, request exception, or JSON decoding error occurs.
-     
-    Returns:
-        dict or None: Parsed JSON data containing measure categories, or `None` if the request fails.
+    Fetches the list of measure categories from the AIHW MyHospitals API.
     """
     url = f"{BASE_URL}/measure-categories"
     headers = {

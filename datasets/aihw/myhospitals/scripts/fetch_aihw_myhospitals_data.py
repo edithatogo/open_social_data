@@ -37,15 +37,7 @@ USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTM
 
 def fetch_flat_formatted_data(measure_category_code, skip=0, top=100):
     """
-    Fetch flat formatted data for a specified measure category from the AIHW MyHospitals API with pagination.
-    
-    Parameters:
-        measure_category_code (str): The code identifying the measure category to fetch.
-        skip (int): Number of records to skip for pagination.
-        top (int): Maximum number of records to retrieve in this request.
-    
-    Returns:
-        dict or None: The JSON-decoded response from the API if successful, or None if an error occurs.
+    Fetches flat formatted data for a given measure category code with pagination.
     """
     url = f"{BASE_URL}/flat-formatted-data-extract/{measure_category_code}"
     headers = {
@@ -78,14 +70,8 @@ def fetch_flat_formatted_data(measure_category_code, skip=0, top=100):
 
 def process_and_save_data(measure_category_code, filename_prefix="aihw_myhospitals"):
     """
-    Retrieves all available data for a given measure category from the API using pagination, processes it into a Pandas DataFrame, and saves the result as a timestamped Parquet file.
-    
-    Parameters:
-        measure_category_code (str): The code identifying the measure category to fetch.
-        filename_prefix (str, optional): Prefix for the output Parquet filename. Defaults to "aihw_myhospitals".
-    
-    Returns:
-        bool: True if data was successfully fetched and saved (or if no data was found), False if an error occurred during fetching or saving.
+    Fetches all data for a measure category using pagination,
+    processes it into a Pandas DataFrame, and saves it as a Parquet file.
     """
     all_data_items = []
     skip = 0
@@ -121,10 +107,10 @@ def process_and_save_data(measure_category_code, filename_prefix="aihw_myhospita
             skip += top
             page_num += 1
 
-            # Optional safety break
-            # if page_num > 50:
-            #     logging.warning("Reached page limit for testing. Stopping.")
-            #     break
+            # Optional safety break for very long runs if needed in other contexts
+            if page_num > 2: # TEST LIMIT for initial MYH-HH run
+                logging.warning(f"Reached TEST page limit of 2 for {measure_category_code}. Stopping.")
+                break
 
         elif api_response and ('result' not in api_response or 'data' not in api_response.get('result', {})):
             logging.info(f"Page {page_num}: Response structure is not as expected (missing 'result' or 'result.data'). Full response: {json.dumps(api_response, indent=2)}")
@@ -166,7 +152,7 @@ if __name__ == "__main__":
     # For initial testing, let's fetch a small amount of data for MYH-ED-WAITS
     # We'll call fetch_flat_formatted_data directly for this test.
 
-    test_measure_category = "MYH-ED-WAITS" # ED Waiting Times
+    test_measure_category = "MYH-HH" # MyHospitals Hand Hygiene
     logging.info(f"Performing initial small fetch for category: {test_measure_category}")
 
     # Fetch only the first few items for inspection

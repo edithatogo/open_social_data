@@ -7,14 +7,40 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 ### Added
 - Created `AGENTS.md` with initial guidelines for AI agent contributions.
-- **AIHW MyHospitals API Integration (Initial Phase):**
-    - Explored MyHospitals API using Swagger definition (`https://myhospitalsapi.aihw.gov.au/swagger/v1/swagger.json`).
-    - Created `scripts/shared/aihw_api_fetcher.py` and successfully fetched metadata (measure categories).
-    - Selected `/flat-formatted-data-extract/MYH-ED-WAITS` (ED Waiting Times) for initial data implementation.
-    - Created repository structure under `datasets/aihw/myhospitals/`.
-    - Developed `datasets/aihw/myhospitals/scripts/fetch_aihw_myhospitals_data.py` to fetch paginated data for a measure category and save to Parquet. Successfully tested with a sample from `MYH-ED-WAITS`.
-    - Populated initial documentation: `README.md`, `docs/data_dictionary_ed_waits.md`, `docs/accessible_guide_ed_waits.md` for the MyHospitals dataset, focusing on ED Waiting Times.
-    - Created `logs/aihw_myhospitals_session_log.md`.
+- **AIHW MyHospitals API Integration:**
+    - **MYH-ED-WAITS (ED Waiting Times):**
+        - Explored MyHospitals API using Swagger definition.
+        - Created `scripts/shared/aihw_api_fetcher.py` for metadata.
+        - Selected `/flat-formatted-data-extract/MYH-ED-WAITS`.
+        - Created repository structure under `datasets/aihw/myhospitals/`.
+        - Developed and tested `datasets/aihw/myhospitals/scripts/fetch_aihw_myhospitals_data.py`, successfully fetching all ~41k records for `MYH-ED-WAITS` and saving to Parquet.
+        - Populated documentation: `README.md` (overall MyHospitals), `docs/data_dictionary_ed_waits.md`, `docs/accessible_guide_ed_waits.md`.
+        - Created `logs/aihw_myhospitals_session_log.md`.
+    - **MYH-ADM (Admissions):**
+        - Adapted `fetch_aihw_myhospitals_data.py` for `MYH-ADM`.
+        - Tested data fetch for `MYH-ADM` (fetched 5k sample records, full dataset ~112k).
+        - Created specific documentation: `docs/data_dictionary_admissions.md`, `docs/accessible_guide_admissions.md`.
+        - Updated overall `datasets/aihw/myhospitals/README.md`.
+    - **MYH-ES (Elective Surgery):**
+        - Adapted `fetch_aihw_myhospitals_data.py` for `MYH-ES`.
+        - Tested data fetch for `MYH-ES` (fetched 2k sample records, full dataset ~618k).
+        - Created specific documentation: `docs/data_dictionary_elective_surgery.md`, `docs/accessible_guide_elective_surgery.md`.
+        - Updated overall `datasets/aihw/myhospitals/README.md`.
+    - **MYH-CANCER (Cancer):**
+        - Adapted `fetch_aihw_myhospitals_data.py` for `MYH-CANCER`.
+        - Tested data fetch for `MYH-CANCER` (successfully fetched all ~2.5k records).
+        - Created specific documentation: `docs/data_dictionary_cancer.md`, `docs/accessible_guide_cancer.md`.
+        - Updated overall `datasets/aihw/myhospitals/README.md`.
+    - **MYH-LOS (Length of Stay):**
+        - Adapted `fetch_aihw_myhospitals_data.py` for `MYH-LOS`.
+        - Tested data fetch for `MYH-LOS` (fetched 2k sample records, full dataset ~517k).
+        - Created specific documentation: `docs/data_dictionary_los.md`, `docs/accessible_guide_los.md`.
+        - Updated overall `datasets/aihw/myhospitals/README.md`.
+    - **MYH-HH (Hand Hygiene):**
+        - Adapted `fetch_aihw_myhospitals_data.py` for `MYH-HH`.
+        - Tested data fetch for `MYH-HH` (fetched 2k sample records, full dataset ~38k).
+        - Created specific documentation: `docs/data_dictionary_hand_hygiene.md`, `docs/accessible_guide_hand_hygiene.md`.
+        - Updated overall `datasets/aihw/myhospitals/README.md`.
 - **ABS Dataset - QBIS (Business Indicators, Australia):**
     - Created directory structure under `datasets/abs/qbis_business_indicators/`.
     - Populated initial `README.md`, `docs/data_dictionary.md`, and `docs/accessible_guide.md` from templates.

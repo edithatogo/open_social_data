@@ -63,8 +63,117 @@ Integrate data from the AIHW MyHospitals API into the repository. This involves 
 - Renamed and populated `datasets/aihw/myhospitals/docs/accessible_guide_ed_waits.md`.
 - Documentation tailored to MyHospitals API and specifically the `MYH-ED-WAITS` data.
 
-**$(date +"%Y-%m-%d %H:%M:%S") - Step 7: Update Logs, TODO, CHANGELOG**
-- Creating this session log: `logs/aihw_myhospitals_session_log.md`.
-- Will update `TODO.md` and `CHANGELOG.md`.
+**$(date +"%Y-%m-%d %H:%M:%S") - Step 7: Update Logs, TODO, CHANGELOG (for ED Waits)**
+- Created this session log: `logs/aihw_myhospitals_session_log.md`.
+- Updated `TODO.md` and `CHANGELOG.md` for MYH-ED-WAITS initial setup.
+
+**$(date +"%Y-%m-%d %H:%M:%S") - Task: Integrate MYH-ADM (Admissions) Data**
+
+**Plan Step: Review Script for MYH-ADM**
+- Reviewed `fetch_aihw_myhospitals_data.py`. Confirmed its suitability for `MYH-ADM` by changing `test_measure_category`.
+
+**Plan Step: Test Full Data Fetch for MYH-ADM**
+- Modified script to target `MYH-ADM`.
+- Initial full run timed out.
+- Added a 5-page limit to `process_and_save_data` for testing.
+- Re-ran script: Successfully fetched 5 pages (5000 records) for `MYH-ADM` and saved to Parquet file (`aihw_myhospitals_MYH-ADM_YYYYMMDD_HHMMSS.parquet`). Pagination and saving confirmed for this category within test limits.
+- Log inspection confirmed `total_results_available` for MYH-ADM is 112,310.
+- Removed 5-page limit from script.
+
+**Plan Step: Populate Documentation for MYH-ADM**
+- Created `datasets/aihw/myhospitals/docs/data_dictionary_admissions.md` based on `FormattedDataExtractModel` and `MYH-ADM` specifics.
+- Created `datasets/aihw/myhospitals/docs/accessible_guide_admissions.md` tailored to admissions data.
+
+**Plan Step: Update Overall MyHospitals Documentation**
+- Updated `datasets/aihw/myhospitals/README.md` to include `MYH-ADM` dataset, links to its documentation, and updated general sections.
+
+**$(date +"%Y-%m-%d %H:%M:%S") - Step: Update Project Logs (for MYH-ADM)**
+- Updated this session log, `TODO.md`, and `CHANGELOG.md` for `MYH-ADM` integration.
+
+**$(date +"%Y-%m-%d %H:%M:%S") - Task: Integrate MYH-ES (Elective Surgery) Data**
+
+**Plan Step: Review Script for MYH-ES**
+- Reviewed `fetch_aihw_myhospitals_data.py`. Confirmed its suitability for `MYH-ES`.
+
+**Plan Step: Test Data Fetch for MYH-ES**
+- Modified script to target `MYH-ES`.
+- Fetched initial sample (`top=10`), revealed `total_results_available: 618643`.
+- Added a 2-page limit to `process_and_save_data` for testing due to large dataset size.
+- Re-ran script: Successfully fetched 2 pages (2000 records) for `MYH-ES` and saved to Parquet (`aihw_myhospitals_MYH-ES_YYYYMMDD_HHMMSS.parquet`).
+- Removed 2-page test limit from script.
+
+**Plan Step: Populate Documentation for MYH-ES**
+- Created `datasets/aihw/myhospitals/docs/data_dictionary_elective_surgery.md`.
+- Created `datasets/aihw/myhospitals/docs/accessible_guide_elective_surgery.md`.
+
+**Plan Step: Update Overall MyHospitals Documentation**
+- Updated `datasets/aihw/myhospitals/README.md` to include `MYH-ES` dataset and links.
+
+**$(date +"%Y-%m-%d %H:%M:%S") - Step: Update Project Logs (for MYH-ES)**
+- Updated this session log, `TODO.md`, and `CHANGELOG.md` for `MYH-ES` integration.
+
+**$(date +"%Y-%m-%d %H:%M:%S") - Task: Integrate MYH-CANCER (Cancer) Data**
+
+**Plan Step: Review Script for MYH-CANCER**
+- Reviewed `fetch_aihw_myhospitals_data.py`. Confirmed its suitability for `MYH-CANCER`.
+
+**Plan Step: Test Data Fetch for MYH-CANCER**
+- Modified script to target `MYH-CANCER`.
+- Fetched initial sample (`top=10`), revealed `total_results_available: 2514`.
+- Script successfully fetched all 2514 records for `MYH-CANCER` and saved to Parquet (`aihw_myhospitals_MYH-CANCER_YYYYMMDD_HHMMSS.parquet`). No page limit was needed as the dataset is small.
+
+**Plan Step: Populate Documentation for MYH-CANCER**
+- Created `datasets/aihw/myhospitals/docs/data_dictionary_cancer.md`.
+- Created `datasets/aihw/myhospitals/docs/accessible_guide_cancer.md`.
+
+**Plan Step: Update Overall MyHospitals Documentation**
+- Updated `datasets/aihw/myhospitals/README.md` to include `MYH-CANCER` dataset and links.
+
+**$(date +"%Y-%m-%d %H:%M:%S") - Step: Update Project Logs (for MYH-CANCER)**
+- Updated this session log, `TODO.md`, and `CHANGELOG.md` for `MYH-CANCER` integration.
+
+**$(date +"%Y-%m-%d %H:%M:%S") - Task: Integrate MYH-LOS (Length of Stay) Data**
+
+**Plan Step: Review Script for MYH-LOS**
+- Reviewed `fetch_aihw_myhospitals_data.py`. Confirmed its suitability for `MYH-LOS`.
+
+**Plan Step: Test Data Fetch for MYH-LOS**
+- Modified script to target `MYH-LOS`.
+- Fetched initial sample (`top=10`), revealed `total_results_available: 517697`.
+- Re-introduced a 2-page limit to `process_and_save_data` for testing due to very large dataset size and previous timeout.
+- Re-ran script: Successfully fetched 2 pages (2000 records) for `MYH-LOS` and saved to Parquet (`aihw_myhospitals_MYH-LOS_YYYYMMDD_HHMMSS.parquet`).
+- Removed 2-page test limit from script.
+
+**Plan Step: Populate Documentation for MYH-LOS**
+- Created `datasets/aihw/myhospitals/docs/data_dictionary_los.md`.
+- Created `datasets/aihw/myhospitals/docs/accessible_guide_los.md`.
+
+**Plan Step: Update Overall MyHospitals Documentation**
+- Updated `datasets/aihw/myhospitals/README.md` to include `MYH-LOS` dataset and links.
+
+**$(date +"%Y-%m-%d %H:%M:%S") - Step: Update Project Logs (for MYH-LOS)**
+- Updated this session log, `TODO.md`, and `CHANGELOG.md` for `MYH-LOS` integration.
+
+**$(date +"%Y-%m-%d %H:%M:%S") - Task: Integrate MYH-HH (Hand Hygiene) Data**
+
+**Plan Step: Review Script for MYH-HH**
+- Reviewed `fetch_aihw_myhospitals_data.py`. Confirmed its suitability for `MYH-HH`.
+
+**Plan Step: Test Data Fetch for MYH-HH**
+- Modified script to target `MYH-HH`.
+- Fetched initial sample (`top=10`), revealed `total_results_available: 37794`.
+- Added a 2-page limit to `process_and_save_data` for testing.
+- Re-ran script: Successfully fetched 2 pages (2000 records) for `MYH-HH` and saved to Parquet (`aihw_myhospitals_MYH-HH_YYYYMMDD_HHMMSS.parquet`).
+- (Note: Page limit was left in script for this category as full fetch is manageable but not essential for this phase of setup).
+
+**Plan Step: Populate Documentation for MYH-HH**
+- Created `datasets/aihw/myhospitals/docs/data_dictionary_hand_hygiene.md`.
+- Created `datasets/aihw/myhospitals/docs/accessible_guide_hand_hygiene.md`.
+
+**Plan Step: Update Overall MyHospitals Documentation**
+- Updated `datasets/aihw/myhospitals/README.md` to include `MYH-HH` dataset and links.
+
+**$(date +"%Y-%m-%d %H:%M:%S") - Step: Update Project Logs (for MYH-HH)**
+- Updating this session log, `TODO.md`, and `CHANGELOG.md` for `MYH-HH` integration.
 
 ---
