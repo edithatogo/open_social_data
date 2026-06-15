@@ -1,9 +1,84 @@
+﻿//! Data ingestion, schema validation, and Parquet export pipeline.
+//!
+//! Provides [`RawRecord`] and [`RecordBatchBuilder`] for building DataFrames
+//! from raw data, [`validate_schema`] for runtime schema checks, and
+//! [`write_parquet_atomic`] for crash-safe Parquet file writes.
+
+use std::collections::HashMap;
 use std::fs::{self, File};
 use std::path::{Path, PathBuf};
 
 use polars::prelude::*;
 
 use crate::error::{CoreError, Result};
+
+/// A single raw record with named field values.
+#[derive(Debug, Clone, Default)]
+pub struct RawRecord {
+    pub fields: HashMap<String, String>,
+}
+
+impl RawRecord {
+    pub fn new() -> Self {
+        Self::default()
+    }
+
+    pub fn with(mut self, name: impl Into<String>, value: impl Into<String>) -> Self {
+        self.fields.insert(name.into(), value.into());
+        self
+    }
+}
+
+/// Collects RawRecords and builds a Polars DataFrame.
+#[derive(Debug, Clone)]
+pub struct RecordBatchBuilder {
+    records: Vec<RawRecord>,
+    schema_keys: Vec<String>,
+}
+
+impl RecordBatchBuilder {
+    pub fn new() -> Self {
+        Self {
+            records: Vec::new(),
+            schema_keys: Vec::new(),
+        }
+    }
+
+    pub fn push(&mut self, record: RawRecord) {
+        // Track schema keys in insertion order
+        for key in record.fields.keys() {
+            if !self.schema_keys.contains(key) {
+                self.schema_keys.push(key.clone());
+            }
+        }
+        self.records.push(record);
+    }
+
+    pub fn is_empty(&self) -> bool {
+        self.records.is_empty()
+    }
+
+    pub fn len(&self) -> usize {
+        self.records.len()
+    }
+
+    pub fn build(&self) -> Result<DataFrame> {
+        if self.records.is_empty() {
+            return Ok(DataFrame::default());
+        }
+
+        let mut columns = Vec::new();
+        for key in &self.schema_keys {
+            let values: Vec<&str> = self
+                .records
+                .iter()
+                .map(|record| record.fields.get(key).map(String::as_str).unwrap_or(""))
+                .collect();
+            columns.push(Series::new(key.into(), values).into());
+        }
+        DataFrame::new(columns).map_err(|e| CoreError::TransformationError(e.to_string()))
+    }
+}
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct ExpectedColumn {
@@ -71,6 +146,14 @@ pub fn write_parquet_atomic(frame: &DataFrame, output_path: impl AsRef<Path>) ->
     Ok(())
 }
 
+/// Reads a DataFrame from a Parquet file path.
+pub fn read_parquet(path: impl AsRef<Path>) -> Result<DataFrame> {
+    let file = File::open(path.as_ref())?;
+    ParquetReader::new(file)
+        .finish()
+        .map_err(|e| CoreError::TransformationError(e.to_string()))
+}
+
 fn tmp_path_for(output_path: &Path) -> PathBuf {
     let mut name = output_path
         .file_name()
@@ -109,5 +192,59 @@ mod tests {
         ];
 
         assert!(validate_schema(&frame, &expected).is_err());
+    }
+
+    #[test]
+    fn parquet_atomic_write_creates_file() {
+        let frame = DataFrame::new(vec![
+            Series::new("x".into(), &[1_i64, 2, 3]).into(),
+        ]).unwrap();
+
+        let tmp = std::env::temp_dir().join(format!("test_atomic_{}", std::process::id()));
+        let out_path = tmp.join("output.parquet");
+
+        write_parquet_atomic(&frame, &out_path).unwrap();
+        assert!(out_path.exists(), "output file should exist");
+        assert!(!out_path.with_extension("parquet.tmp").exists(), "tmp file should be cleaned up");
+
+        let _ = std::fs::remove_dir_all(&tmp);
+    }
+
+    #[test]
+    fn read_parquet_roundtrip() {
+        let frame = DataFrame::new(vec![
+            Series::new("x".into(), &[1_i64, 2, 3]).into(),
+        ])
+        .unwrap();
+
+        let tmp = std::env::temp_dir().join(format!("test_roundtrip_{}", std::process::id()));
+        std::fs::create_dir_all(&tmp).unwrap();
+        let path = tmp.join("test.parquet");
+
+        write_parquet_atomic(&frame, &path).unwrap();
+        let loaded = read_parquet(&path).unwrap();
+        assert_eq!(loaded.height(), 3);
+        assert_eq!(loaded.width(), 1);
+
+        let _ = std::fs::remove_dir_all(&tmp);
+    }
+
+    #[test]
+    fn record_batch_builder_produces_dataframe() {
+        let mut builder = RecordBatchBuilder::new();
+        builder.push(RawRecord::new().with("id", "1").with("name", "Alice"));
+        builder.push(RawRecord::new().with("id", "2").with("name", "Bob"));
+
+        let df = builder.build().unwrap();
+        assert_eq!(df.height(), 2);
+        assert_eq!(df.width(), 2);
+    }
+
+    #[test]
+    fn record_batch_builder_empty() {
+        let builder = RecordBatchBuilder::new();
+        assert!(builder.is_empty());
+        let df = builder.build().unwrap();
+        assert_eq!(df.height(), 0);
     }
 }

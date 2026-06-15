@@ -128,7 +128,7 @@ mod tests {
         }
 
         async fn list_datasets(&self) -> Result<Catalog> {
-            Err(CoreError::ApiError("listing failed".to_string()))
+            Err(CoreError::Internal("listing failed".to_string()))
         }
 
         async fn fetch_dataset_with_options(
@@ -136,7 +136,7 @@ mod tests {
             _dataset_id: &str,
             _options: FetchOptions,
         ) -> Result<FetchResult> {
-            Err(CoreError::ApiError("fetch failed".to_string()))
+            Err(CoreError::Internal("fetch failed".to_string()))
         }
     }
 

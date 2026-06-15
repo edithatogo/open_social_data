@@ -1,3 +1,8 @@
+﻿//! Australian Bureau of Statistics (ABS) SDMX API provider.
+//!
+//! Fetches dataflow listings and dataset records from the ABS SDMX-JSON
+//! API. Supports conditional requests via ETag/Last-Modified headers.
+
 use async_trait::async_trait;
 use polars::prelude::*;
 use reqwest::StatusCode;

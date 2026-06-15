@@ -1,3 +1,5 @@
+﻿//! Provider implementations for national statistics agencies.
+
 pub mod abs;
 pub mod stats_nz;
 #[cfg(test)]

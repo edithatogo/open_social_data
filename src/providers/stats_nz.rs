@@ -1,3 +1,9 @@
+﻿//! Statistics New Zealand (Stats NZ) OData API provider.
+//!
+//! Fetches entity set listings and dataset records from the Stats NZ
+//! OData v1 endpoint. Supports conditional requests via ETag/Last-Modified
+//! headers.
+
 use async_trait::async_trait;
 use polars::prelude::*;
 use reqwest::StatusCode;

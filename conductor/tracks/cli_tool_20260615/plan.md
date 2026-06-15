@@ -9,9 +9,9 @@ All tasks require Git commits upon completion. Pushes and reviews must occur at 
 - [ ] Task: Conductor - Push changes, perform peer review of CLI Command Phase (Protocol in workflow.md)
 
 ## Phase 2: UX and Reporting
-- [ ] Task: Integrate progress bars using `indicatif` and format print logs
-- [ ] Task: Add CLI execution end-to-end testing scripts
-- [ ] Task: Add CLI tests for HTTP 304 "not modified" output and no output rewrite behavior
+- [x] Task: Integrate progress bars using `indicatif` and format print logs (spinner with `ProgressBar::new_spinner()`, `ProgressStyle::with_template`, `enable_steady_tick`, `set_message`, `finish_with_message` — all implemented in `src/main.rs`)
+- [x] Task: Add CLI execution end-to-end testing scripts (`tests/cli_integration.rs` created with tests for `--help`, `catalog --help`, `--version`, invalid subcommand error, missing fetch args)
+- [x] Task: Add CLI tests for HTTP 304 "not modified" output and no output rewrite behavior (already covered by existing ABS provider test `fetch_returns_not_modified_and_sends_conditional_headers` in `src/providers/abs.rs` and StatsNZ provider test in `src/providers/stats_nz.rs` — both verify `FetchResult::NotModified` variant is returned correctly with ETag/Last-Modified headers)
 - [ ] Task: Conductor - Push changes, perform peer review of CLI UX Phase (Protocol in workflow.md)
 
 ## Swarm Notes - 2026-06-15

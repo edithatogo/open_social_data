@@ -9,8 +9,8 @@ All tasks require Git commits upon completion. Pushes and reviews must occur at 
 
 ## Phase 2: Delta Updates
 - [x] Task: Set up metadata schema tracking last fetched data ranges and HTTP timestamp checks
-- [ ] Task: Implement dynamic range requests and incremental appending into target Parquet files
-- [ ] Task: Add test suites verifying incremental loads and invalid schema assertions
+- [x] Task: Implement dynamic range requests and incremental appending into target Parquet files
+- [x] Task: Add test suites verifying incremental loads and invalid schema assertions
 - [ ] Task: Conductor - Push changes, perform peer review of Delta Phase (Protocol in workflow.md)
 
 ## Swarm Notes - 2026-06-15
@@ -22,3 +22,7 @@ All tasks require Git commits upon completion. Pushes and reviews must occur at 
 - Added quality status persistence into cached dataset metadata.
 - Added cached ETag/Last-Modified fields and conditional request header helpers.
 - Added provider conditional fetch options and HTTP 304 Not Modified handling through explicit `FetchResult::NotModified` so CLI fetches preserve existing output files.
+- Added `DeltaUpdater` struct in `quality.rs` with `append_to_parquet` and `append_with_schema_check` methods for incremental Parquet appending.
+- Added `read_parquet` function in `pipeline.rs` for reading Parquet files via Polars.
+- Added comprehensive tests for DeltaUpdater: fresh-file write, append-to-existing, multi-batch preservation, schema-mismatch rejection, and empty-data handling.
+- Added `read_parquet_roundtrip` test in `pipeline.rs` to verify write-then-read consistency.

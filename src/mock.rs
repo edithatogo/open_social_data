@@ -1,3 +1,8 @@
+﻿//! Mock provider for testing.
+//!
+//! Implements [`DatasetProvider`] with synthetic data, useful for
+//! integration tests and development without live API endpoints.
+
 use crate::error::{CoreError, Result};
 use crate::models::{Catalog, DatasetMetadata, ProviderMetadata};
 use crate::traits::{DatasetProvider, FetchOptions, FetchResult};

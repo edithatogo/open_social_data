@@ -1,3 +1,9 @@
+﻿//! Connection hardening, retry logic, and panic safety.
+//!
+//! Provides [`RetryPolicy`] for exponential backoff, [`CircuitBreaker`] for
+//! fault isolation, [`build_http_client`] for pre-configured HTTP clients,
+//! and [`run_provider_safely`] for panic-safe provider execution.
+
 use std::future::Future;
 use std::sync::{Arc, Mutex};
 use std::time::Duration;
@@ -161,6 +167,34 @@ impl ConditionalRequestMetadata {
     }
 }
 
+use std::panic::AssertUnwindSafe;
+use tokio::sync::oneshot;
+
+/// Runs a provider future with panic isolation.
+pub async fn run_provider_safely<F, T>(future: F) -> Result<T>
+where
+    F: Future<Output = Result<T>> + Send + 'static,
+    T: Send + 'static,
+{
+    let (tx, rx) = oneshot::channel();
+    tokio::spawn(async move {
+        let result = std::panic::catch_unwind(AssertUnwindSafe(async { future.await }))
+            .map_err(|panic| {
+                let msg = if let Some(s) = panic.downcast_ref::<&str>() {
+                    s.to_string()
+                } else if let Some(s) = panic.downcast_ref::<String>() {
+                    s.clone()
+                } else {
+                    "provider panicked".to_string()
+                };
+                CoreError::Internal(msg)
+            });
+        let _ = tx.send(result.unwrap_or_else(|e| Err(e)));
+    });
+    rx.await
+        .map_err(|_| CoreError::Internal("provider task cancelled".to_string()))?
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -204,5 +238,18 @@ mod tests {
             headers.get(IF_MODIFIED_SINCE).unwrap(),
             "Wed, 21 Oct 2015 07:28:00 GMT"
         );
+    }
+
+    #[tokio::test]
+    async fn run_provider_safely_catches_panic() {
+        // Panic with &str
+        let result = run_provider_safely(async {
+            panic!("crash and burn");
+        }).await;
+        assert!(result.is_err());
+
+        // Non-panicking future returns Ok
+        let result = run_provider_safely(async { Ok::<_, crate::error::CoreError>(42_i32) }).await;
+        assert_eq!(result.unwrap(), 42);
     }
 }

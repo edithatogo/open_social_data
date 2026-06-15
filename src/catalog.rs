@@ -1,3 +1,9 @@
+﻿//! JSON-backed local dataset catalog.
+//!
+//! Tracks metadata about fetched datasets including ETags, quality status,
+//! output paths, and modification timestamps. Supports atomic saves and
+//! search operations.
+
 use std::collections::BTreeMap;
 use std::fs::{self, File};
 use std::io::{BufReader, BufWriter};

@@ -1,3 +1,8 @@
+//! Domain-specific error types.
+//!
+//! Uses [`thiserror`] to derive [`std::error::Error`]
+//! implementations for all error variants returned by library operations.
+
 use thiserror::Error;
 
 #[derive(Error, Debug)]

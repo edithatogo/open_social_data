@@ -1,3 +1,8 @@
+//! Dynamic provider registry.
+//!
+//! Allows registering and looking up [DatasetProvider] implementations
+//! by name, supporting a plugin-style architecture.
+
 use std::collections::BTreeMap;
 use std::sync::Arc;
 
