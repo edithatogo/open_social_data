@@ -12,7 +12,7 @@ pub struct CatalogSyncReport {
     pub synced_records: usize,
     pub synced_providers: Vec<String>,
     pub errors: Vec<CatalogSyncError>,
-    pub partial_success_persisted: bool,
+    pub partial_success: bool,
 }
 
 impl CatalogSyncReport {
@@ -33,8 +33,9 @@ pub async fn sync_catalog_from_registry(
     catalog: &mut LocalCatalog,
     registry: &ProviderRegistry,
     provider_filter: Option<&str>,
-    timestamp: String,
+    timestamp: impl Into<String>,
 ) -> CatalogSyncReport {
+    let timestamp = timestamp.into();
     let provider_names = match provider_filter {
         Some(provider) => vec![provider.to_string()],
         None => registry
@@ -79,7 +80,7 @@ pub async fn sync_catalog_from_registry(
         }
     }
 
-    report.partial_success_persisted = report.synced_records > 0 && report.has_errors();
+    report.partial_success = report.synced_records > 0 && report.has_errors();
     report
 }
 
@@ -99,7 +100,7 @@ mod tests {
             ProviderMetadata {
                 id: "z-failing".to_string(),
                 name: "Failing provider".to_string(),
-                description: "Provider fixture that fails dataset listing".to_string(),
+                description: Some("Provider fixture that fails dataset listing".to_string()),
             }
         }
 
@@ -126,9 +127,7 @@ mod tests {
         registry.register(MockProvider);
         let mut catalog = LocalCatalog::default();
 
-        let report =
-            sync_catalog_from_registry(&mut catalog, &registry, Some("mock"), "123".to_string())
-                .await;
+        let report = sync_catalog_from_registry(&mut catalog, &registry, Some("mock"), "123").await;
 
         assert_eq!(report.synced_records, 2);
         assert_eq!(report.synced_providers, vec!["mock"]);
@@ -148,12 +147,11 @@ mod tests {
         let mut catalog = LocalCatalog::default();
 
         let report =
-            sync_catalog_from_registry(&mut catalog, &registry, Some("missing"), "123".to_string())
-                .await;
+            sync_catalog_from_registry(&mut catalog, &registry, Some("missing"), "123").await;
 
         assert_eq!(report.synced_records, 0);
         assert_eq!(report.errors.len(), 1);
-        assert!(!report.partial_success_persisted);
+        assert!(!report.partial_success);
         assert!(catalog.is_empty());
     }
 
@@ -164,13 +162,12 @@ mod tests {
         registry.register(FailingProvider);
         let mut catalog = LocalCatalog::default();
 
-        let report =
-            sync_catalog_from_registry(&mut catalog, &registry, None, "123".to_string()).await;
+        let report = sync_catalog_from_registry(&mut catalog, &registry, None, "123").await;
 
         assert_eq!(report.synced_records, 2);
         assert_eq!(report.synced_providers, vec!["mock"]);
         assert_eq!(report.errors.len(), 1);
-        assert!(report.partial_success_persisted);
+        assert!(report.partial_success);
         assert_eq!(catalog.len(), 2);
     }
 }
