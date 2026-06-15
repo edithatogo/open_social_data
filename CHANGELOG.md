@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
     - Added fetch-result catalog merge behavior so fetches do not clear source URLs or provider catalog sync metadata.
     - Added conditional fetch options, provider HTTP 304 handling, and no-rewrite behavior when cached outputs are not modified.
     - Refined provider fetch results into explicit `FetchResult::Fetched` and `FetchResult::NotModified` variants.
+    - Added dependency-free mocked HTTP source tests for ABS and Stats NZ conditional request headers and HTTP 304 handling.
     - Added dependency-light catalog list/search APIs and CLI subcommands over the JSON cache.
     - Added `catalog sync` to sync provider dataset metadata into the JSON-backed local catalog without overwriting existing fetch output or quality fields.
     - Extracted catalog sync into reusable registry/path helpers and `CatalogSyncReport` library support with mock-provider source tests for metadata upserts, missing-provider errors, saved partial provider syncs, and explicit partial-success reporting.

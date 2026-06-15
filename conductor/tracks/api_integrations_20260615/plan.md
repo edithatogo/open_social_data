@@ -19,3 +19,4 @@ All tasks require Git commits upon completion. Pushes and reviews must occur at 
 - Live HTTP integration tests remain open until the local Rust toolchain can link build scripts.
 - Provider fetches now apply cached `If-None-Match` / `If-Modified-Since` validators through `FetchOptions`, capture response `ETag` / `Last-Modified`, return `FetchResult::NotModified` for HTTP 304, and return `FetchResult::Fetched` for frame-bearing fetches.
 - Refined `FetchResult` into explicit `Fetched` and `NotModified` variants to avoid inconsistent frame/not-modified states, with compatibility helpers for validators and frame extraction.
+- Added dependency-free mocked HTTP source tests for ABS and Stats NZ conditional headers and HTTP 304 `FetchResult::NotModified` behavior.

@@ -172,6 +172,8 @@ fn provider_payload_frame(
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::hardening::ConditionalRequestMetadata;
+    use crate::providers::test_support::complete_request;
 
     #[test]
     fn builds_stats_nz_urls() {
@@ -183,6 +185,46 @@ mod tests {
         assert_eq!(
             provider.dataset_url("/Population"),
             "https://example.test/opendata/v1/Population"
+        );
+    }
+
+    #[tokio::test]
+    async fn fetch_returns_not_modified_and_sends_conditional_headers() {
+        let response = concat!(
+            "HTTP/1.1 304 Not Modified\r\n",
+            "ETag: \"stats-etag\"\r\n",
+            "Last-Modified: Wed, 21 Oct 2015 07:28:00 GMT\r\n",
+            "Content-Length: 0\r\n",
+            "\r\n",
+        );
+        let completed = complete_request(response, |base_url| async move {
+            let provider = StatsNzProvider::new(base_url);
+            provider
+                .fetch_dataset_with_options(
+                    "/Population",
+                    FetchOptions::new(ConditionalRequestMetadata::new(
+                        Some("\"cached-etag\"".to_string()),
+                        Some("Tue, 20 Oct 2015 07:28:00 GMT".to_string()),
+                    )),
+                )
+                .await
+        })
+        .await;
+
+        let result = completed.output.unwrap();
+
+        assert!(result.is_not_modified());
+        assert_eq!(result.etag(), Some("\"stats-etag\""));
+        assert_eq!(
+            result.last_modified(),
+            Some("Wed, 21 Oct 2015 07:28:00 GMT")
+        );
+        assert!(completed.request.starts_with("GET /Population "));
+        assert!(completed.request.contains("if-none-match: \"cached-etag\""));
+        assert!(
+            completed
+                .request
+                .contains("if-modified-since: Tue, 20 Oct 2015 07:28:00 GMT")
         );
     }
 }

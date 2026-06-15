@@ -20,7 +20,7 @@ This file tracks specific, actionable tasks for the Open Social Datasets project
 *   [X] Wire cached ETag/Last-Modified metadata into provider fetches.
 *   [X] Handle HTTP 304 Not Modified in CLI fetch without rewriting outputs.
 *   [X] Refactor provider fetch results into explicit fetched/not-modified variants.
-*   [ ] Add mocked tests for provider HTTP 304 handling once local Cargo linking is working.
+*   [X] Add source-level mocked tests for provider HTTP 304 handling; run them once local Cargo linking is working.
 *   [X] Add source-level mocked tests for `catalog sync` provider metadata upserts.
 *   [ ] Run mocked `catalog sync` tests once local Cargo linking is working.
 
