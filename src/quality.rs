@@ -134,7 +134,7 @@ impl QualityReport {
 
 pub fn validate_quality(
     frame: &DataFrame,
-    assertions: &[`QualityAssertion`],
+    assertions: &[QualityAssertion],
 ) -> Result<QualityReport> {
     let mut issues = Vec::new();
 
