@@ -6,7 +6,7 @@ use colored::Colorize;
 use indicatif::{ProgressBar, ProgressStyle};
 use open_social_data_core::{
     CachedDataset, FetchOptions, FetchResult, LocalCatalog, ProviderRegistry, QualityStatus,
-    provider_payload_assertions, sync_catalog_from_registry, validate_quality,
+    provider_payload_assertions, sync_catalog_path_from_registry, validate_quality,
     write_parquet_atomic,
 };
 
@@ -204,9 +204,8 @@ async fn run_catalog_command(
             print_catalog_rows(catalog.search(&query, provider.as_deref()));
         }
         CatalogCommand::Sync { path, provider } => {
-            let mut catalog = LocalCatalog::load(&path)?;
-            let report = sync_catalog_from_registry(
-                &mut catalog,
+            let report = sync_catalog_path_from_registry(
+                &path,
                 registry,
                 provider.as_deref(),
                 unix_timestamp_string(),
@@ -215,7 +214,6 @@ async fn run_catalog_command(
             for provider_name in &report.synced_providers {
                 println!("{} synced {}", "ok".green(), provider_name);
             }
-            catalog.save_atomic(&path)?;
             println!(
                 "synced {} dataset metadata record(s)",
                 report.synced_records

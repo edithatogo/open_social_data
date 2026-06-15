@@ -20,7 +20,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
     - Refined provider fetch results into explicit `FetchResult::Fetched` and `FetchResult::NotModified` variants.
     - Added dependency-light catalog list/search APIs and CLI subcommands over the JSON cache.
     - Added `catalog sync` to sync provider dataset metadata into the JSON-backed local catalog without overwriting existing fetch output or quality fields.
-    - Extracted catalog sync into reusable `sync_catalog_from_registry` and `CatalogSyncReport` library support with mock-provider source tests for metadata upserts, missing-provider errors, and explicit partial-success reporting.
+    - Extracted catalog sync into reusable registry/path helpers and `CatalogSyncReport` library support with mock-provider source tests for metadata upserts, missing-provider errors, saved partial provider syncs, and explicit partial-success reporting.
     - Added retry, circuit-breaker, and hardened HTTP client primitives for provider calls.
     - Added a `clap`-based `open-social-data-cli` with `list`, `status`, and `fetch` subcommands plus basic console progress/status formatting.
     - Added a `catalog` CLI subcommand and fetch-side local catalog updates.

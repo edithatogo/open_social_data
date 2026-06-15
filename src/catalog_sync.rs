@@ -1,4 +1,7 @@
+use std::path::Path;
+
 use crate::catalog::{CachedDataset, LocalCatalog};
+use crate::error::Result;
 use crate::registry::ProviderRegistry;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -84,13 +87,29 @@ pub async fn sync_catalog_from_registry(
     report
 }
 
+pub async fn sync_catalog_path_from_registry(
+    path: impl AsRef<Path>,
+    registry: &ProviderRegistry,
+    provider_filter: Option<&str>,
+    timestamp: impl Into<String>,
+) -> Result<CatalogSyncReport> {
+    let path = path.as_ref();
+    let mut catalog = LocalCatalog::load(path)?;
+    let report =
+        sync_catalog_from_registry(&mut catalog, registry, provider_filter, timestamp).await;
+    catalog.save_atomic(path)?;
+    Ok(report)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::error::{CoreError, Result};
+    use crate::error::CoreError;
     use crate::mock::MockProvider;
     use crate::models::{Catalog, ProviderMetadata};
     use crate::traits::{DatasetProvider, FetchOptions, FetchResult};
+    use std::path::PathBuf;
+    use std::time::{SystemTime, UNIX_EPOCH};
 
     struct FailingProvider;
 
@@ -169,5 +188,34 @@ mod tests {
         assert_eq!(report.errors.len(), 1);
         assert!(report.partial_success);
         assert_eq!(catalog.len(), 2);
+    }
+
+    #[tokio::test]
+    async fn path_sync_saves_partial_success_before_returning_report() {
+        let mut registry = ProviderRegistry::new();
+        registry.register(MockProvider);
+        registry.register(FailingProvider);
+        let path = unique_catalog_path("partial-success");
+
+        let report = sync_catalog_path_from_registry(&path, &registry, None, "123")
+            .await
+            .unwrap();
+        let saved = LocalCatalog::load(&path).unwrap();
+        let _ = std::fs::remove_file(&path);
+
+        assert!(report.partial_success);
+        assert_eq!(saved.len(), 2);
+        assert!(saved.get("mock", "test-dataset-1").is_some());
+    }
+
+    fn unique_catalog_path(name: &str) -> PathBuf {
+        let unique = SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .map(|duration| duration.as_nanos())
+            .unwrap_or_default();
+        std::env::temp_dir().join(format!(
+            "open-social-data-{name}-{}-{unique}.json",
+            std::process::id()
+        ))
     }
 }
