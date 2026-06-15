@@ -220,6 +220,9 @@ async fn run_catalog_command(
                 "synced {} dataset metadata record(s)",
                 report.synced_records
             );
+            if report.partial_success_persisted {
+                println!("partial sync results were saved to {}", path.display());
+            }
             if report.has_errors() {
                 for error in &report.errors {
                     println!("{} {}: {}", "error".red(), error.provider, error.message);

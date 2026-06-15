@@ -32,3 +32,4 @@ All tasks require Git commits upon completion. Pushes and reviews must occur at 
 - Fetch-side catalog updates now reuse cached ETag/Last-Modified metadata and record not-modified events without rewriting outputs.
 - Not-modified catalog updates are now driven by explicit `FetchResult::NotModified` responses.
 - Extracted catalog sync into a reusable library helper with a sync report and mock-provider source tests.
+- Catalog sync reports now explicitly flag when partial provider successes were persisted despite provider errors.
