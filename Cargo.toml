@@ -1,0 +1,21 @@
+[package]
+name = "open_social_data_core"
+version = "0.1.0"
+edition = "2024"
+
+[[bin]]
+name = "open-social-data-cli"
+path = "src/main.rs"
+
+[dependencies]
+anyhow = "1.0.100"
+async-trait = "0.1.89"
+clap = { version = "4.5.53", features = ["derive"] }
+colored = "3.0.0"
+indicatif = "0.18.3"
+polars = { version = "0.54.4", features = ["lazy", "parquet"] }
+reqwest = { version = "0.13.4", features = ["json"] }
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.150"
+thiserror = "2.0.18"
+tokio = { version = "1.52.3", features = ["full"] }

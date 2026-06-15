@@ -1,0 +1,8 @@
+{
+  "track_id": "api_integrations_20260615",
+  "type": "feature",
+  "status": "in_progress",
+  "created_at": "2026-06-15T17:55:50Z",
+  "updated_at": "2026-06-15T20:45:00Z",
+  "description": "Implement agency API providers (ABS, Stats NZ)"
+}

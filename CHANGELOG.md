@@ -6,6 +6,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 ### Added
+- **Rust data engine swarm slice:**
+    - Added ABS and Stats NZ provider modules with provider metadata, endpoint URL builders, async HTTP status handling, and conservative dataset payload fetch summaries.
+    - Added a provider registry for loading active providers from the CLI and library code.
+    - Added a Polars pipeline module with schema validation and atomic Parquet write support.
+    - Added data-quality assertions for non-null checks, numeric ranges, and allowed string values.
+    - Extended quality assertions with uniqueness and null-limit checks plus atomic JSON quality report persistence.
+    - Added a fetch-side quality gate for provider payload summary frames before Parquet writes.
+    - Added a JSON-backed local catalog/cache with atomic persistence for fetched dataset metadata, quality status, quality report paths, and conditional-fetch metadata fields.
+    - Added provider source URL propagation into synced catalog entries and conditional request header helpers for cached ETag/Last-Modified values.
+    - Added fetch-result catalog merge behavior so fetches do not clear source URLs or provider catalog sync metadata.
+    - Added conditional fetch options, provider HTTP 304 handling, and no-rewrite behavior when cached outputs are not modified.
+    - Refined provider fetch results into explicit `FetchResult::Fetched` and `FetchResult::NotModified` variants.
+    - Added dependency-light catalog list/search APIs and CLI subcommands over the JSON cache.
+    - Added `catalog sync` to sync provider dataset metadata into the JSON-backed local catalog without overwriting existing fetch output or quality fields.
+    - Extracted catalog sync into reusable `sync_catalog_from_registry` and `CatalogSyncReport` library support with mock-provider source tests for metadata upserts and missing-provider errors.
+    - Added retry, circuit-breaker, and hardened HTTP client primitives for provider calls.
+    - Added a `clap`-based `open-social-data-cli` with `list`, `status`, and `fetch` subcommands plus basic console progress/status formatting.
+    - Added a `catalog` CLI subcommand and fetch-side local catalog updates.
+    - Updated Conductor track plans to reflect the implemented swarm slice and the remaining local toolchain validation blocker.
 - Created `AGENTS.md` with initial guidelines for AI agent contributions.
 - **AIHW MyHospitals API Integration:**
     - **MYH-ED-WAITS (ED Waiting Times):**

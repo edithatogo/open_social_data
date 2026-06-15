@@ -32,6 +32,25 @@ This repository aims to be a central hub for curated links to datasets, their co
 *   **CONTRIBUTING.md**: Guidelines on how to contribute to this project (to be developed further).
 *   **SESSION_LOG_TEMPLATE.md**: A template for documenting data work sessions.
 
+## Rust Data Engine Preview
+
+This repository now includes an early Rust data engine and CLI scaffold for provider-backed data fetches, quality checks, Parquet export, and local catalog metadata.
+
+Common commands:
+
+```bash
+cargo run --bin open-social-data-cli -- list
+cargo run --bin open-social-data-cli -- list --provider abs
+cargo run --bin open-social-data-cli -- status
+cargo run --bin open-social-data-cli -- fetch abs QBIS --output datasets/abs/qbis_business_indicators/data/qbis.parquet --quality-report .open-social-data/qbis-quality.json
+cargo run --bin open-social-data-cli -- catalog sync
+cargo run --bin open-social-data-cli -- catalog sync --provider abs
+cargo run --bin open-social-data-cli -- catalog list
+cargo run --bin open-social-data-cli -- catalog search qbis
+```
+
+Local runtime metadata is written under `.open-social-data/` by default. The current catalog is JSON-backed so it can work without native SQLite or DuckDB dependencies while the Windows MSVC/SDK linker setup is unresolved. Catalog entries preserve provider source URLs, quality report paths, ETag values, and Last-Modified values. Fetches reuse cached ETag and Last-Modified metadata and preserve existing outputs when a provider returns `304 Not Modified`.
+
 ## How to Contribute
 
 We welcome contributions! Please see `CONTRIBUTING.md` for more details (once fully developed). In general, contributions can include:

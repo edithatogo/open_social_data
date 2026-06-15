@@ -1,0 +1,30 @@
+# Antigravity Swarm Configuration
+# --------------------------------
+version: 1
+
+# Spawn backend: auto | tmux | thread
+backend: auto
+
+# Execution engine: cline | codex | gemini | qwen
+engine: cline
+
+# Default model for agents
+default_model: deepseek-v4-flash
+
+# Maximum parallel agents
+max_parallel: 5
+
+# Mailbox polling interval (milliseconds)
+poll_interval_ms: 1000
+
+# Permission mode: auto | ask | deny
+permission_mode: auto
+
+# Audit trail
+audit_enabled: true
+
+# TUI refresh rate (frames per second)
+tui_refresh_rate: 10
+
+# Context compaction threshold (lines before compacting)
+compaction_threshold: 50

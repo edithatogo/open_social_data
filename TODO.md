@@ -10,6 +10,19 @@ This file tracks specific, actionable tasks for the Open Social Datasets project
 *   [X] Develop Core Documentation Templates (`dataset_readme_template.md`, `data_dictionary_template.md`, `accessible_guide_template.md`).
 *   [X] Write Initial Content for `README.md`, `CHANGELOG.md`, `ROADMAP.md`, `TODO.md`, `SESSION_LOG_TEMPLATE.md`.
 *   [X] **Create `AGENTS.md`:** Add initial instructions for AI agent contributions to the root directory. (Done)
+*   [X] Add Rust data engine scaffold with provider trait, ABS/Stats NZ providers, CLI, quality checks, Parquet export, and JSON-backed local catalog.
+*   [X] Add dependency-light `catalog sync` CLI/local metadata sync using provider dataset listings, JSON catalog upserts, and a reusable library helper.
+*   [X] Extract catalog sync into a library helper with mock-provider coverage.
+*   [ ] Resolve local Windows Rust/MSVC linker setup so `cargo check`, `cargo clippy`, and tests can run end-to-end.
+*   [ ] Add SQLite or DuckDB-backed catalog once native linking is working.
+*   [ ] Replace provider payload-summary fetches with row-level ABS SDMX and Stats NZ OData parsing.
+*   [X] Add cached ETag/Last-Modified metadata fields and conditional request header helpers.
+*   [X] Wire cached ETag/Last-Modified metadata into provider fetches.
+*   [X] Handle HTTP 304 Not Modified in CLI fetch without rewriting outputs.
+*   [X] Refactor provider fetch results into explicit fetched/not-modified variants.
+*   [ ] Add mocked tests for provider HTTP 304 handling once local Cargo linking is working.
+*   [X] Add source-level mocked tests for `catalog sync` provider metadata upserts.
+*   [ ] Run mocked `catalog sync` tests once local Cargo linking is working.
 
 ### Initial Dataset Population
 *   **Stats NZ Datasets (ON HOLD):**
