@@ -168,7 +168,6 @@ impl ConditionalRequestMetadata {
 }
 
 use std::panic::AssertUnwindSafe;
-use tokio::sync::oneshot;
 
 /// Runs a provider future with panic isolation.
 pub async fn run_provider_safely<F, T>(future: F) -> Result<T>
@@ -176,23 +175,25 @@ where
     F: Future<Output = Result<T>> + Send + 'static,
     T: Send + 'static,
 {
-    let (tx, rx) = oneshot::channel();
-    tokio::spawn(async move {
-        let result = std::panic::catch_unwind(AssertUnwindSafe(async { future.await }))
-            .map_err(|panic| {
-                let msg = if let Some(s) = panic.downcast_ref::<&str>() {
-                    s.to_string()
-                } else if let Some(s) = panic.downcast_ref::<String>() {
-                    s.clone()
-                } else {
-                    "provider panicked".to_string()
-                };
-                CoreError::Internal(msg)
-            });
-        let _ = tx.send(result.unwrap_or_else(|e| Err(e)));
+    let handle = tokio::runtime::Handle::current();
+    let join = tokio::task::spawn_blocking(move || {
+        std::panic::catch_unwind(AssertUnwindSafe(|| handle.block_on(future)))
     });
-    rx.await
-        .map_err(|_| CoreError::Internal("provider task cancelled".to_string()))?
+
+    match join.await {
+        Ok(Ok(result)) => result,
+        Ok(Err(panic)) => {
+            let msg = if let Some(s) = panic.downcast_ref::<&str>() {
+                s.to_string()
+            } else if let Some(s) = panic.downcast_ref::<String>() {
+                s.clone()
+            } else {
+                "provider panicked".to_string()
+            };
+            Err(CoreError::Internal(msg))
+        }
+        Err(error) => Err(CoreError::Internal(format!("provider task cancelled: {error}"))),
+    }
 }
 
 #[cfg(test)]

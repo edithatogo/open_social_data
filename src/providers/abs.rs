@@ -197,7 +197,7 @@ fn provider_payload_frame(
     let provider = Series::new("provider".into(), &[provider]);
     let dataset_id = Series::new("dataset_id".into(), &[dataset_id]);
     let payload_bytes = Series::new("payload_bytes".into(), &[payload_bytes as u64]);
-    DataFrame::new(vec![
+    DataFrame::new(1, vec![
         provider.into(),
         dataset_id.into(),
         payload_bytes.into(),

@@ -55,7 +55,7 @@ impl DatasetProvider for MockProvider {
             "test-dataset-1" => {
                 let s0 = Series::new("id".into(), &[1, 2, 3]);
                 let s1 = Series::new("name".into(), &["A", "B", "C"]);
-                let df = DataFrame::new(vec![s0.into(), s1.into()])
+                let df = DataFrame::new(3, vec![s0.into(), s1.into()])
                     .map_err(|e| CoreError::Internal(e.to_string()))?;
                 Ok(FetchResult::from_frame(df))
             }

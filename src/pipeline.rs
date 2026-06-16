@@ -76,7 +76,8 @@ impl RecordBatchBuilder {
                 .collect();
             columns.push(Series::new(key.into(), values).into());
         }
-        DataFrame::new(columns).map_err(|e| CoreError::TransformationError(e.to_string()))
+        DataFrame::new(self.records.len(), columns)
+            .map_err(|e| CoreError::TransformationError(e.to_string()))
     }
 }
 
@@ -185,7 +186,7 @@ mod tests {
 
     #[test]
     fn rejects_missing_column() {
-        let frame = DataFrame::new(vec![Series::new("id".into(), &[1_i64]).into()]).unwrap();
+        let frame = DataFrame::new(1, vec![Series::new("id".into(), &[1_i64]).into()]).unwrap();
         let expected = vec![
             ExpectedColumn::new("id", DataType::Int64),
             ExpectedColumn::new("name", DataType::String),

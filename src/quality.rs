@@ -201,6 +201,7 @@ pub fn validate_quality(
                 let below_min = min
                     .map(|min| {
                         values
+                            .clone()
                             .into_iter()
                             .flatten()
                             .filter(|value| *value < min)
@@ -210,6 +211,7 @@ pub fn validate_quality(
                 let above_max = max
                     .map(|max| {
                         values
+                            .clone()
                             .into_iter()
                             .flatten()
                             .filter(|value| *value > max)
@@ -237,6 +239,7 @@ pub fn validate_quality(
                     .map_err(|error| {
                         CoreError::QualityError(format!("{column} is not a string column: {error}"))
                     })?
+                    .clone()
                     .into_iter()
                     .flatten()
                     .filter(|value| !allowed.contains(value))
@@ -354,7 +357,7 @@ mod tests {
 
     #[test]
     fn passes_valid_assertions() {
-        let frame = DataFrame::new(vec![
+        let frame = DataFrame::new(3, vec![
             Series::new("value".into(), &[1_i64, 2, 3]).into(),
             Series::new("state".into(), &["ok", "warn", "ok"]).into(),
         ])
