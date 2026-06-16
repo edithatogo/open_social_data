@@ -45,11 +45,14 @@ cargo run --bin open-social-data-cli -- status
 cargo run --bin open-social-data-cli -- fetch abs QBIS --output datasets/abs/qbis_business_indicators/data/qbis.parquet --quality-report .open-social-data/qbis-quality.json
 cargo run --bin open-social-data-cli -- catalog sync
 cargo run --bin open-social-data-cli -- catalog sync --provider abs
+cargo run --bin open-social-data-cli -- catalog sync --sqlite .open-social-data/catalog.sqlite
 cargo run --bin open-social-data-cli -- catalog list
+cargo run --bin open-social-data-cli -- catalog list --sqlite .open-social-data/catalog.sqlite
 cargo run --bin open-social-data-cli -- catalog search qbis
+cargo run --bin open-social-data-cli -- catalog search qbis --sqlite .open-social-data/catalog.sqlite
 ```
 
-Local runtime metadata is written under `.open-social-data/` by default. The current catalog is JSON-backed so it can work without native SQLite or DuckDB dependencies. Catalog entries preserve provider source URLs, quality report paths, ETag values, and Last-Modified values. Fetches reuse cached ETag and Last-Modified metadata and preserve existing outputs when a provider returns `304 Not Modified`.
+Local runtime metadata is written under `.open-social-data/` by default. The default CLI catalog path is JSON-backed for simple file exchange, and `catalog list/search/sync --sqlite <path>` uses an embedded SQLite catalog for queryable local metadata storage. Catalog entries preserve provider source URLs, quality report paths, ETag values, and Last-Modified values. Fetches reuse cached ETag and Last-Modified metadata and preserve existing outputs when a provider returns `304 Not Modified`.
 
 On this Windows workspace, run Rust validation with a target directory outside OneDrive to avoid damaged inherited ACLs on the repository `target/` directory:
 

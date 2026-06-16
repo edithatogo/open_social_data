@@ -3,6 +3,7 @@ use std::path::Path;
 use crate::catalog::{CachedDataset, LocalCatalog};
 use crate::error::Result;
 use crate::registry::ProviderRegistry;
+use crate::sqlite_catalog::SqliteCatalog;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct CatalogSyncError {
@@ -98,6 +99,20 @@ pub async fn sync_catalog_path_from_registry(
     let report =
         sync_catalog_from_registry(&mut catalog, registry, provider_filter, timestamp).await;
     catalog.save_atomic(path)?;
+    Ok(report)
+}
+
+pub async fn sync_sqlite_catalog_path_from_registry(
+    path: impl AsRef<Path>,
+    registry: &ProviderRegistry,
+    provider_filter: Option<&str>,
+    timestamp: impl Into<String>,
+) -> Result<CatalogSyncReport> {
+    let mut sqlite_catalog = SqliteCatalog::open(path)?;
+    let mut catalog = sqlite_catalog.load()?;
+    let report =
+        sync_catalog_from_registry(&mut catalog, registry, provider_filter, timestamp).await;
+    sqlite_catalog.save_catalog(&catalog)?;
     Ok(report)
 }
 
@@ -208,6 +223,24 @@ mod tests {
         assert!(saved.get("mock", "test-dataset-1").is_some());
     }
 
+    #[tokio::test]
+    async fn sqlite_path_sync_saves_partial_success_before_returning_report() {
+        let mut registry = ProviderRegistry::new();
+        registry.register(MockProvider);
+        registry.register(FailingProvider);
+        let path = unique_sqlite_catalog_path("partial-success");
+
+        let report = sync_sqlite_catalog_path_from_registry(&path, &registry, None, "123")
+            .await
+            .unwrap();
+        let saved = SqliteCatalog::open(&path).unwrap().load().unwrap();
+        let _ = std::fs::remove_file(&path);
+
+        assert!(report.partial_success);
+        assert_eq!(saved.len(), 2);
+        assert!(saved.get("mock", "test-dataset-1").is_some());
+    }
+
     fn unique_catalog_path(name: &str) -> PathBuf {
         let unique = SystemTime::now()
             .duration_since(UNIX_EPOCH)
@@ -215,6 +248,17 @@ mod tests {
             .unwrap_or_default();
         std::env::temp_dir().join(format!(
             "open-social-data-{name}-{}-{unique}.json",
+            std::process::id()
+        ))
+    }
+
+    fn unique_sqlite_catalog_path(name: &str) -> PathBuf {
+        let unique = SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .map(|duration| duration.as_nanos())
+            .unwrap_or_default();
+        std::env::temp_dir().join(format!(
+            "open-social-data-{name}-{}-{unique}.sqlite",
             std::process::id()
         ))
     }

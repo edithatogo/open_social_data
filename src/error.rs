@@ -16,6 +16,9 @@ pub enum CoreError {
     #[error("Serialization/Deserialization failed: {0}")]
     SerdeError(#[from] serde_json::Error),
 
+    #[error("SQLite catalog operation failed: {0}")]
+    Sqlite(#[from] rusqlite::Error),
+
     #[error("Data transformation failed: {0}")]
     TransformationError(String),
 

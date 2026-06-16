@@ -6,8 +6,8 @@ use colored::Colorize;
 use indicatif::{ProgressBar, ProgressStyle};
 use open_social_data_core::{
     CachedDataset, FetchOptions, FetchResult, LocalCatalog, ProviderRegistry, QualityStatus,
-    provider_payload_assertions, sync_catalog_path_from_registry, validate_quality,
-    write_parquet_atomic,
+    SqliteCatalog, provider_payload_assertions, sync_catalog_path_from_registry,
+    sync_sqlite_catalog_path_from_registry, validate_quality, write_parquet_atomic,
 };
 
 #[derive(Debug, Parser)]
@@ -47,6 +47,8 @@ enum CatalogCommand {
     List {
         #[arg(short, long, default_value = ".open-social-data/catalog.json")]
         path: PathBuf,
+        #[arg(long)]
+        sqlite: Option<PathBuf>,
         #[arg(short, long)]
         provider: Option<String>,
     },
@@ -54,12 +56,16 @@ enum CatalogCommand {
         query: String,
         #[arg(short, long, default_value = ".open-social-data/catalog.json")]
         path: PathBuf,
+        #[arg(long)]
+        sqlite: Option<PathBuf>,
         #[arg(short, long)]
         provider: Option<String>,
     },
     Sync {
         #[arg(short, long, default_value = ".open-social-data/catalog.json")]
         path: PathBuf,
+        #[arg(long)]
+        sqlite: Option<PathBuf>,
         #[arg(short, long)]
         provider: Option<String>,
     },
@@ -192,26 +198,56 @@ async fn run_catalog_command(
     registry: &ProviderRegistry,
 ) -> anyhow::Result<()> {
     match command {
-        CatalogCommand::List { path, provider } => {
-            let catalog = LocalCatalog::load(&path)?;
-            print_catalog_rows(catalog.list(provider.as_deref()));
+        CatalogCommand::List {
+            path,
+            sqlite,
+            provider,
+        } => {
+            if let Some(sqlite_path) = sqlite {
+                let catalog = SqliteCatalog::open(&sqlite_path)?;
+                print_catalog_rows(catalog.list(provider.as_deref())?.iter());
+            } else {
+                let catalog = LocalCatalog::load(&path)?;
+                print_catalog_rows(catalog.list(provider.as_deref()));
+            }
         }
         CatalogCommand::Search {
             query,
             path,
+            sqlite,
             provider,
         } => {
-            let catalog = LocalCatalog::load(&path)?;
-            print_catalog_rows(catalog.search(&query, provider.as_deref()));
+            if let Some(sqlite_path) = sqlite {
+                let catalog = SqliteCatalog::open(&sqlite_path)?;
+                print_catalog_rows(catalog.search(&query, provider.as_deref())?.iter());
+            } else {
+                let catalog = LocalCatalog::load(&path)?;
+                print_catalog_rows(catalog.search(&query, provider.as_deref()));
+            }
         }
-        CatalogCommand::Sync { path, provider } => {
-            let report = sync_catalog_path_from_registry(
-                &path,
-                registry,
-                provider.as_deref(),
-                unix_timestamp_string(),
-            )
-            .await?;
+        CatalogCommand::Sync {
+            path,
+            sqlite,
+            provider,
+        } => {
+            let output_path = sqlite.as_ref().unwrap_or(&path);
+            let report = if let Some(sqlite_path) = sqlite.as_ref() {
+                sync_sqlite_catalog_path_from_registry(
+                    sqlite_path,
+                    registry,
+                    provider.as_deref(),
+                    unix_timestamp_string(),
+                )
+                .await?
+            } else {
+                sync_catalog_path_from_registry(
+                    &path,
+                    registry,
+                    provider.as_deref(),
+                    unix_timestamp_string(),
+                )
+                .await?
+            };
             for provider_name in &report.synced_providers {
                 println!("{} synced {}", "ok".green(), provider_name);
             }
@@ -220,7 +256,10 @@ async fn run_catalog_command(
                 report.synced_records
             );
             if report.partial_success {
-                println!("partial sync results were saved to {}", path.display());
+                println!(
+                    "partial sync results were saved to {}",
+                    output_path.display()
+                );
             }
             if report.has_errors() {
                 for error in &report.errors {
@@ -236,7 +275,8 @@ async fn run_catalog_command(
     Ok(())
 }
 
-fn print_catalog_rows(rows: Vec<&CachedDataset>) {
+fn print_catalog_rows<'a>(rows: impl IntoIterator<Item = &'a CachedDataset>) {
+    let rows = rows.into_iter().collect::<Vec<_>>();
     if rows.is_empty() {
         println!("catalog is empty");
         return;

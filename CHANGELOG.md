@@ -24,6 +24,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
     - Added dependency-light catalog list/search APIs and CLI subcommands over the JSON cache.
     - Added `catalog sync` to sync provider dataset metadata into the JSON-backed local catalog without overwriting existing fetch output or quality fields.
     - Extracted catalog sync into reusable registry/path helpers and `CatalogSyncReport` library support with mock-provider source tests for metadata upserts, missing-provider errors, saved partial provider syncs, and explicit partial-success reporting.
+    - Added a SQLite-backed catalog using bundled `rusqlite`, with library load/save/upsert/search helpers and CLI `catalog list/search/sync --sqlite` support.
     - Added retry, circuit-breaker, and hardened HTTP client primitives for provider calls.
     - Added a `clap`-based `open-social-data-cli` with `list`, `status`, and `fetch` subcommands plus basic console progress/status formatting.
     - Added a `catalog` CLI subcommand and fetch-side local catalog updates.

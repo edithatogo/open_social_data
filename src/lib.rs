@@ -15,6 +15,7 @@
 //! - **`providers`**: Concrete provider implementations (ABS, Stats NZ).
 //! - **`registry`**: Dynamic provider registry for plugin-style loading.
 //! - **`catalog`**: JSON-backed local catalog for tracking fetched datasets.
+//! - **`sqlite_catalog`**: SQLite-backed local catalog storage.
 //! - **`catalog_sync`**: Syncing remote provider catalogs into the local catalog.
 //! - **`pipeline`**: DataFrame ingestion, schema validation, and atomic Parquet export.
 //! - **`quality`**: Data quality assertions and validation reports.
@@ -31,6 +32,7 @@ pub mod pipeline;
 pub mod providers;
 pub mod quality;
 pub mod registry;
+pub mod sqlite_catalog;
 pub mod traits;
 
 // Re-export core types for convenience
@@ -44,4 +46,5 @@ pub use pipeline::*;
 pub use providers::*;
 pub use quality::*;
 pub use registry::*;
+pub use sqlite_catalog::*;
 pub use traits::*;

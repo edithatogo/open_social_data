@@ -47,7 +47,7 @@ This file tracks all major tracks for the project. Each track has its own detail
 - Cargo.toml metadata (license, keywords, repository, description)
 - GitHub Actions CI workflow (check, fmt, clippy, test, release)
 
-## [~] Track 8: Local metadata caching and SQLite/DuckDB cataloging
+## [x] Track 8: Local metadata caching and SQLite/DuckDB cataloging
 *Link: [./conductor/tracks/local_cache_20260615/](./conductor/tracks/local_cache_20260615/)*
 - [x] JSON-backed local catalog with atomic saves, search, and sync
-- [ ] SQLite/DuckDB integration — blocked on Windows SDK/MSVC linker repair
+- [x] SQLite-backed catalog with CLI list/search/sync support
