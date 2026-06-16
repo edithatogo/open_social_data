@@ -6,11 +6,15 @@
 ///
 /// Note: Cargo automatically sets `CARGO_BIN_EXE_open_social_data_cli`
 /// to the path of the compiled binary when running integration tests.
+use std::path::PathBuf;
 use std::process::Command;
 
 /// Path to the compiled CLI binary (set by cargo).
-fn cli_binary() -> &'static str {
-    env!("CARGO_BIN_EXE_open_social_data_cli")
+fn cli_binary() -> PathBuf {
+    std::env::var_os("CARGO_BIN_EXE_open-social-data-cli")
+        .or_else(|| std::env::var_os("CARGO_BIN_EXE_open_social_data_cli"))
+        .map(PathBuf::from)
+        .expect("CARGO_BIN_EXE_open-social-data-cli should be set by cargo")
 }
 
 #[test]

@@ -13,6 +13,7 @@ use open_social_data_core::{
 #[derive(Debug, Parser)]
 #[command(name = "open-social-data-cli")]
 #[command(about = "Fetch and inspect open social datasets")]
+#[command(version)]
 struct Cli {
     #[command(subcommand)]
     command: Commands,

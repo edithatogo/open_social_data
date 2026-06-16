@@ -246,7 +246,7 @@ mod tests {
     #[tokio::test]
     async fn run_provider_safely_catches_panic() {
         // Panic with &str
-        let result = run_provider_safely(async {
+        let result = run_provider_safely::<_, ()>(async {
             panic!("crash and burn");
         })
         .await;

@@ -17,3 +17,4 @@ All tasks require Git commits upon completion. Pushes and reviews must occur at 
 - Wired ABS and Stats NZ providers to the hardened client constructor.
 - Panic catch boundaries remain open; async panic capture needs careful implementation and source-level review.
 - Phase 1 Task 2: Added `run_provider_safely` to `src/hardening.rs` — an async function that wraps a provider future with `tokio::spawn` + `std::panic::catch_unwind`, converting panics to `CoreError::Internal`. Includes a `#[tokio::test]` that validates both `&str` and `String` panic message extraction, plus a happy-path success case.
+- The `run_provider_safely` panic test now has an explicit unit output type and passes under the Windows GNU temp-target validation path.

@@ -81,6 +81,12 @@ impl RecordBatchBuilder {
     }
 }
 
+impl Default for RecordBatchBuilder {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct ExpectedColumn {
     pub name: String,
@@ -170,10 +176,13 @@ mod tests {
 
     #[test]
     fn validates_exact_schema() {
-        let frame = DataFrame::new(vec![
-            Series::new("id".into(), &[1_i64, 2]).into(),
-            Series::new("name".into(), &["A", "B"]).into(),
-        ])
+        let frame = DataFrame::new(
+            2,
+            vec![
+                Series::new("id".into(), &[1_i64, 2]).into(),
+                Series::new("name".into(), &["A", "B"]).into(),
+            ],
+        )
         .unwrap();
 
         let expected = vec![
@@ -197,7 +206,8 @@ mod tests {
 
     #[test]
     fn parquet_atomic_write_creates_file() {
-        let frame = DataFrame::new(vec![Series::new("x".into(), &[1_i64, 2, 3]).into()]).unwrap();
+        let frame =
+            DataFrame::new(3, vec![Series::new("x".into(), &[1_i64, 2, 3]).into()]).unwrap();
 
         let tmp = std::env::temp_dir().join(format!("test_atomic_{}", std::process::id()));
         let out_path = tmp.join("output.parquet");
@@ -214,7 +224,8 @@ mod tests {
 
     #[test]
     fn read_parquet_roundtrip() {
-        let frame = DataFrame::new(vec![Series::new("x".into(), &[1_i64, 2, 3]).into()]).unwrap();
+        let frame =
+            DataFrame::new(3, vec![Series::new("x".into(), &[1_i64, 2, 3]).into()]).unwrap();
 
         let tmp = std::env::temp_dir().join(format!("test_roundtrip_{}", std::process::id()));
         std::fs::create_dir_all(&tmp).unwrap();

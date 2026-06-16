@@ -17,3 +17,4 @@ All tasks require Git commits upon completion. Pushes and reviews must occur at 
 - Runtime tests are authored for schema validation; Parquet integrity tests remain open behind the linker/toolchain blocker.
 - Phase 1 Task 1: Added `RawRecord` struct with builder pattern (`with()` chaining), `RecordBatchBuilder` that collects records in insertion order and produces a Polars `DataFrame` via `build()`. Uses `HashMap<String, String>` for flexible field storage.
 - Phase 2 Task 2: Added `parquet_atomic_write_creates_file` test that verifies the output file exists after write and the `.tmp` file is cleaned up, plus `record_batch_builder_produces_dataframe` and `record_batch_builder_empty` tests for the new builder.
+- Polars 0.54 test frames now use `DataFrame::new(height, columns)`, and `RecordBatchBuilder` implements `Default`; pipeline and Parquet roundtrip tests pass under the Windows GNU temp-target validation path.

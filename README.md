@@ -49,7 +49,18 @@ cargo run --bin open-social-data-cli -- catalog list
 cargo run --bin open-social-data-cli -- catalog search qbis
 ```
 
-Local runtime metadata is written under `.open-social-data/` by default. The current catalog is JSON-backed so it can work without native SQLite or DuckDB dependencies while the Windows MSVC/SDK linker setup is unresolved. Catalog entries preserve provider source URLs, quality report paths, ETag values, and Last-Modified values. Fetches reuse cached ETag and Last-Modified metadata and preserve existing outputs when a provider returns `304 Not Modified`.
+Local runtime metadata is written under `.open-social-data/` by default. The current catalog is JSON-backed so it can work without native SQLite or DuckDB dependencies. Catalog entries preserve provider source URLs, quality report paths, ETag values, and Last-Modified values. Fetches reuse cached ETag and Last-Modified metadata and preserve existing outputs when a provider returns `304 Not Modified`.
+
+On this Windows workspace, run Rust validation with a target directory outside OneDrive to avoid damaged inherited ACLs on the repository `target/` directory:
+
+```cmd
+set CARGO_TARGET_DIR=C:\tmp\open_social_data_target2
+cargo check --all-targets
+cargo test
+cargo clippy --all-targets -- -D warnings
+```
+
+The repo includes a GNU-target Cargo linker setting so the active `stable-x86_64-pc-windows-gnu` toolchain uses `gcc` instead of accidentally resolving Git for Windows' `link.exe`.
 
 ## How to Contribute
 

@@ -17,8 +17,8 @@ All tasks require Git commits upon completion. Pushes and reviews must occur at 
 ## Phase 2: Metadata Search Interface
 - [x] Task: Implement CLI search commands and programmatic metadata queries
 - [x] Task: Write source-level tests validating catalog syncer logic
-- [ ] Task: Write tests validating local search reliability after Windows SDK/MSVC linker repair
-- [ ] Task: Run catalog syncer and local search tests after Windows SDK/MSVC linker repair
+- [x] Task: Write tests validating local search reliability under the Windows GNU toolchain
+- [x] Task: Run catalog syncer and local search tests using `CARGO_TARGET_DIR=C:\tmp\open_social_data_target2`
 - [ ] Task: Conductor - Push changes, perform peer review of Search Phase (Protocol in workflow.md)
 
 ## Swarm Notes - 2026-06-15
@@ -34,3 +34,4 @@ All tasks require Git commits upon completion. Pushes and reviews must occur at 
 - Extracted catalog sync into a reusable library helper with a sync report and mock-provider source tests.
 - Catalog sync reports now explicitly flag partial provider success when some providers sync before later provider errors; the CLI reports saved partial results after the catalog write succeeds.
 - Added a path-level catalog sync helper that load-sync-saves atomically and source-tests partial provider sync records on disk.
+- Windows GNU validation now uses repo-local `gcc` linker config plus `CARGO_TARGET_DIR=C:\tmp\open_social_data_target2` to avoid Git `link.exe` and OneDrive target ACL issues.
