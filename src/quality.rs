@@ -1,4 +1,4 @@
-﻿//! Data quality assertions and validation reports.
+//! Data quality assertions and validation reports.
 //!
 //! Defines [`QualityAssertion`] variants (non-null, unique, range, etc.),
 //! runs them over DataFrames via [`validate_quality`], and persists
@@ -199,24 +199,10 @@ pub fn validate_quality(
                 })?;
 
                 let below_min = min
-                    .map(|min| {
-                        values
-                            .clone()
-                            .into_iter()
-                            .flatten()
-                            .filter(|value| *value < min)
-                            .count()
-                    })
+                    .map(|min| values.iter().flatten().filter(|value| *value < min).count())
                     .unwrap_or(0);
                 let above_max = max
-                    .map(|max| {
-                        values
-                            .clone()
-                            .into_iter()
-                            .flatten()
-                            .filter(|value| *value > max)
-                            .count()
-                    })
+                    .map(|max| values.iter().flatten().filter(|value| *value > max).count())
                     .unwrap_or(0);
 
                 if below_min > 0 || above_max > 0 {
@@ -239,8 +225,7 @@ pub fn validate_quality(
                     .map_err(|error| {
                         CoreError::QualityError(format!("{column} is not a string column: {error}"))
                     })?
-                    .clone()
-                    .into_iter()
+                    .iter()
                     .flatten()
                     .filter(|value| !allowed.contains(value))
                     .count();
@@ -357,10 +342,13 @@ mod tests {
 
     #[test]
     fn passes_valid_assertions() {
-        let frame = DataFrame::new(3, vec![
-            Series::new("value".into(), &[1_i64, 2, 3]).into(),
-            Series::new("state".into(), &["ok", "warn", "ok"]).into(),
-        ])
+        let frame = DataFrame::new(
+            3,
+            vec![
+                Series::new("value".into(), &[1_i64, 2, 3]).into(),
+                Series::new("state".into(), &["ok", "warn", "ok"]).into(),
+            ],
+        )
         .unwrap();
 
         let report = validate_quality(
@@ -380,7 +368,7 @@ mod tests {
     #[test]
     fn reports_range_failures() {
         let frame =
-            DataFrame::new(vec![Series::new("value".into(), &[1_i64, 9, 12]).into()]).unwrap();
+            DataFrame::new(3, vec![Series::new("value".into(), &[1_i64, 9, 12]).into()]).unwrap();
 
         let report = validate_quality(
             &frame,
@@ -399,7 +387,7 @@ mod tests {
     #[test]
     fn reports_uniqueness_failures() {
         let frame =
-            DataFrame::new(vec![Series::new("id".into(), &["a", "b", "a"]).into()]).unwrap();
+            DataFrame::new(3, vec![Series::new("id".into(), &["a", "b", "a"]).into()]).unwrap();
 
         let report = validate_quality(&frame, &[QualityAssertion::unique("id")]).unwrap();
 
@@ -413,7 +401,7 @@ mod tests {
 
     #[test]
     fn delta_updater_writes_new_file_when_no_existing() {
-        let frame = DataFrame::new(vec![Series::new("x".into(), &[1_i64, 2]).into()]).unwrap();
+        let frame = DataFrame::new(2, vec![Series::new("x".into(), &[1_i64, 2]).into()]).unwrap();
 
         let tmp = std::env::temp_dir().join(format!("delta_new_{}", std::process::id()));
         std::fs::create_dir_all(&tmp).unwrap();
@@ -432,8 +420,8 @@ mod tests {
 
     #[test]
     fn delta_updater_appends_to_existing() {
-        let frame1 = DataFrame::new(vec![Series::new("x".into(), &[1_i64, 2]).into()]).unwrap();
-        let frame2 = DataFrame::new(vec![Series::new("x".into(), &[3_i64, 4]).into()]).unwrap();
+        let frame1 = DataFrame::new(2, vec![Series::new("x".into(), &[1_i64, 2]).into()]).unwrap();
+        let frame2 = DataFrame::new(2, vec![Series::new("x".into(), &[3_i64, 4]).into()]).unwrap();
 
         let tmp = std::env::temp_dir().join(format!("delta_append_{}", std::process::id()));
         std::fs::create_dir_all(&tmp).unwrap();
@@ -450,20 +438,29 @@ mod tests {
 
     #[test]
     fn delta_updater_preserves_data_across_multiple_appends() {
-        let batch1 = DataFrame::new(vec![
-            Series::new("id".into(), &[1_i64, 2]).into(),
-            Series::new("val".into(), &[10_i64, 20]).into(),
-        ])
+        let batch1 = DataFrame::new(
+            2,
+            vec![
+                Series::new("id".into(), &[1_i64, 2]).into(),
+                Series::new("val".into(), &[10_i64, 20]).into(),
+            ],
+        )
         .unwrap();
-        let batch2 = DataFrame::new(vec![
-            Series::new("id".into(), &[3_i64]).into(),
-            Series::new("val".into(), &[30_i64]).into(),
-        ])
+        let batch2 = DataFrame::new(
+            1,
+            vec![
+                Series::new("id".into(), &[3_i64]).into(),
+                Series::new("val".into(), &[30_i64]).into(),
+            ],
+        )
         .unwrap();
-        let batch3 = DataFrame::new(vec![
-            Series::new("id".into(), &[4_i64, 5]).into(),
-            Series::new("val".into(), &[40_i64, 50]).into(),
-        ])
+        let batch3 = DataFrame::new(
+            2,
+            vec![
+                Series::new("id".into(), &[4_i64, 5]).into(),
+                Series::new("val".into(), &[40_i64, 50]).into(),
+            ],
+        )
         .unwrap();
 
         let tmp = std::env::temp_dir().join(format!("delta_multi_{}", std::process::id()));
@@ -475,7 +472,11 @@ mod tests {
         DeltaUpdater::append_to_parquet(&batch3, &out, &out).unwrap();
 
         let loaded = crate::pipeline::read_parquet(&out).unwrap();
-        assert_eq!(loaded.height(), 5, "three appends should produce 5 rows total");
+        assert_eq!(
+            loaded.height(),
+            5,
+            "three appends should produce 5 rows total"
+        );
 
         // Verify column is intact
         let ids: Vec<i64> = loaded
@@ -483,27 +484,37 @@ mod tests {
             .unwrap()
             .i64()
             .unwrap()
-            .into_iter()
+            .iter()
             .map(|v| v.unwrap())
             .collect();
-        assert_eq!(ids, vec![1, 2, 3, 4, 5], "ids should be sequentially preserved");
+        assert_eq!(
+            ids,
+            vec![1, 2, 3, 4, 5],
+            "ids should be sequentially preserved"
+        );
 
         let _ = std::fs::remove_dir_all(&tmp);
     }
 
     #[test]
     fn delta_updater_schema_check_rejects_mismatch() {
-        let ok_frame = DataFrame::new(vec![
-            Series::new("id".into(), &[1_i64]).into(),
-            Series::new("name".into(), &["A"]).into(),
-        ])
+        let ok_frame = DataFrame::new(
+            1,
+            vec![
+                Series::new("id".into(), &[1_i64]).into(),
+                Series::new("name".into(), &["A"]).into(),
+            ],
+        )
         .unwrap();
 
-        let bad_frame = DataFrame::new(vec![
-            Series::new("id".into(), &[2_i64]).into(),
-            // missing "name" column, has "x" instead
-            Series::new("x".into(), &["B"]).into(),
-        ])
+        let bad_frame = DataFrame::new(
+            1,
+            vec![
+                Series::new("id".into(), &[2_i64]).into(),
+                // missing "name" column, has "x" instead
+                Series::new("x".into(), &["B"]).into(),
+            ],
+        )
         .unwrap();
 
         let schema = &[
@@ -520,20 +531,14 @@ mod tests {
 
         // Second append with mismatched schema should fail
         let result = DeltaUpdater::append_with_schema_check(&bad_frame, schema, &out, &out);
-        assert!(
-            result.is_err(),
-            "schema mismatch should produce an error"
-        );
+        assert!(result.is_err(), "schema mismatch should produce an error");
 
         let _ = std::fs::remove_dir_all(&tmp);
     }
 
     #[test]
     fn delta_updater_empty_new_data_produces_empty_file() {
-        let empty = DataFrame::new(vec![
-            Series::new("x".into(), &[] as &[i64]).into(),
-        ])
-        .unwrap();
+        let empty = DataFrame::new(0, vec![Series::new("x".into(), &[] as &[i64]).into()]).unwrap();
 
         let tmp = std::env::temp_dir().join(format!("delta_empty_{}", std::process::id()));
         std::fs::create_dir_all(&tmp).unwrap();

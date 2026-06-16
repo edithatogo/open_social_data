@@ -210,7 +210,7 @@ async fn run_catalog_command(
                 provider.as_deref(),
                 unix_timestamp_string(),
             )
-            .await;
+            .await?;
             for provider_name in &report.synced_providers {
                 println!("{} synced {}", "ok".green(), provider_name);
             }

@@ -6,7 +6,6 @@
 ///
 /// Note: Cargo automatically sets `CARGO_BIN_EXE_open_social_data_cli`
 /// to the path of the compiled binary when running integration tests.
-
 use std::process::Command;
 
 /// Path to the compiled CLI binary (set by cargo).
@@ -82,10 +81,7 @@ fn cli_version_prints_without_error() {
         .expect("failed to run CLI with --version");
     assert!(output.status.success());
     let stdout = String::from_utf8_lossy(&output.stdout);
-    assert!(
-        !stdout.is_empty(),
-        "expected non-empty version output"
-    );
+    assert!(!stdout.is_empty(), "expected non-empty version output");
 }
 
 #[test]

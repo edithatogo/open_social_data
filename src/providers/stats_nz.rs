@@ -1,4 +1,4 @@
-﻿//! Statistics New Zealand (Stats NZ) OData API provider.
+//! Statistics New Zealand (Stats NZ) OData API provider.
 //!
 //! Fetches entity set listings and dataset records from the Stats NZ
 //! OData v1 endpoint. Supports conditional requests via ETag/Last-Modified
@@ -167,11 +167,10 @@ fn provider_payload_frame(
     let provider = Series::new("provider".into(), &[provider]);
     let dataset_id = Series::new("dataset_id".into(), &[dataset_id]);
     let payload_bytes = Series::new("payload_bytes".into(), &[payload_bytes as u64]);
-    DataFrame::new(1, vec![
-        provider.into(),
-        dataset_id.into(),
-        payload_bytes.into(),
-    ])
+    DataFrame::new(
+        1,
+        vec![provider.into(), dataset_id.into(), payload_bytes.into()],
+    )
     .map_err(|error| CoreError::TransformationError(error.to_string()))
 }
 

@@ -1,4 +1,4 @@
-﻿//! Connection hardening, retry logic, and panic safety.
+//! Connection hardening, retry logic, and panic safety.
 //!
 //! Provides [`RetryPolicy`] for exponential backoff, [`CircuitBreaker`] for
 //! fault isolation, [`build_http_client`] for pre-configured HTTP clients,
@@ -192,7 +192,9 @@ where
             };
             Err(CoreError::Internal(msg))
         }
-        Err(error) => Err(CoreError::Internal(format!("provider task cancelled: {error}"))),
+        Err(error) => Err(CoreError::Internal(format!(
+            "provider task cancelled: {error}"
+        ))),
     }
 }
 
@@ -246,7 +248,8 @@ mod tests {
         // Panic with &str
         let result = run_provider_safely(async {
             panic!("crash and burn");
-        }).await;
+        })
+        .await;
         assert!(result.is_err());
 
         // Non-panicking future returns Ok

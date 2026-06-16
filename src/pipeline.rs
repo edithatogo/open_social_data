@@ -1,4 +1,4 @@
-﻿//! Data ingestion, schema validation, and Parquet export pipeline.
+//! Data ingestion, schema validation, and Parquet export pipeline.
 //!
 //! Provides [`RawRecord`] and [`RecordBatchBuilder`] for building DataFrames
 //! from raw data, [`validate_schema`] for runtime schema checks, and
@@ -197,26 +197,24 @@ mod tests {
 
     #[test]
     fn parquet_atomic_write_creates_file() {
-        let frame = DataFrame::new(vec![
-            Series::new("x".into(), &[1_i64, 2, 3]).into(),
-        ]).unwrap();
+        let frame = DataFrame::new(vec![Series::new("x".into(), &[1_i64, 2, 3]).into()]).unwrap();
 
         let tmp = std::env::temp_dir().join(format!("test_atomic_{}", std::process::id()));
         let out_path = tmp.join("output.parquet");
 
         write_parquet_atomic(&frame, &out_path).unwrap();
         assert!(out_path.exists(), "output file should exist");
-        assert!(!out_path.with_extension("parquet.tmp").exists(), "tmp file should be cleaned up");
+        assert!(
+            !out_path.with_extension("parquet.tmp").exists(),
+            "tmp file should be cleaned up"
+        );
 
         let _ = std::fs::remove_dir_all(&tmp);
     }
 
     #[test]
     fn read_parquet_roundtrip() {
-        let frame = DataFrame::new(vec![
-            Series::new("x".into(), &[1_i64, 2, 3]).into(),
-        ])
-        .unwrap();
+        let frame = DataFrame::new(vec![Series::new("x".into(), &[1_i64, 2, 3]).into()]).unwrap();
 
         let tmp = std::env::temp_dir().join(format!("test_roundtrip_{}", std::process::id()));
         std::fs::create_dir_all(&tmp).unwrap();
