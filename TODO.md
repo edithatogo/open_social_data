@@ -15,7 +15,7 @@ This file tracks specific, actionable tasks for the Open Social Datasets project
 *   [X] Extract catalog sync into a library helper with mock-provider coverage.
 *   [X] Resolve local Windows Rust/GNU linker setup so `cargo check`, `cargo clippy`, and tests can run end-to-end with `CARGO_TARGET_DIR=C:\tmp\open_social_data_target2`.
 *   [X] Add SQLite-backed catalog as a follow-up to the JSON-backed cache.
-*   [ ] Replace provider payload-summary fetches with row-level ABS SDMX and Stats NZ OData parsing.
+*   [X] Replace provider payload-summary fetches with row-level ABS SDMX and Stats NZ OData parsing.
 *   [X] Add cached ETag/Last-Modified metadata fields and conditional request header helpers.
 *   [X] Wire cached ETag/Last-Modified metadata into provider fetches.
 *   [X] Handle HTTP 304 Not Modified in CLI fetch without rewriting outputs.

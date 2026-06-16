@@ -273,8 +273,6 @@ pub fn provider_payload_assertions() -> Vec<QualityAssertion> {
     vec![
         QualityAssertion::non_null("provider"),
         QualityAssertion::non_null("dataset_id"),
-        QualityAssertion::non_null("payload_bytes"),
-        QualityAssertion::numeric_range("payload_bytes", Some(0.0), None),
     ]
 }
 

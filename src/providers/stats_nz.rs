@@ -9,10 +9,12 @@ use polars::prelude::*;
 use reqwest::StatusCode;
 use reqwest::header::{ACCEPT, ETAG, HeaderMap, HeaderValue, LAST_MODIFIED, USER_AGENT};
 use serde::Deserialize;
+use serde_json::{Map, Value};
 
 use crate::error::{CoreError, Result};
 use crate::hardening::build_http_client;
 use crate::models::{Catalog, DatasetMetadata, ProviderMetadata};
+use crate::pipeline::{RawRecord, RecordBatchBuilder};
 use crate::traits::{DatasetProvider, FetchOptions, FetchResult};
 
 const DEFAULT_BASE_URL: &str = "https://api.stats.govt.nz/opendata/v1";
@@ -138,12 +140,21 @@ impl DatasetProvider for StatsNzProvider {
                 url,
             });
         }
-        let payload = response.bytes().await?;
-        Ok(FetchResult::fetched(
-            provider_payload_frame("stats_nz", dataset_id, payload.len())?,
-            etag,
-            last_modified,
-        ))
+        let payload: Value = response.json().await?;
+        let mut frame = odata_json_to_frame(dataset_id, &payload)?;
+        let mut next_link = odata_next_link(&payload);
+        while let Some(url) = next_link {
+            let page = self.get_json::<Value>(url).await?;
+            let page_frame = odata_json_to_frame(dataset_id, &page)?;
+            frame = frame.vstack(&page_frame).map_err(|error| {
+                CoreError::TransformationError(format!(
+                    "failed to append Stats NZ OData page: {error}"
+                ))
+            })?;
+            next_link = odata_next_link(&page);
+        }
+
+        Ok(FetchResult::fetched(frame, etag, last_modified))
     }
 }
 
@@ -159,19 +170,52 @@ struct ODataEntitySet {
     title: Option<String>,
 }
 
-fn provider_payload_frame(
-    provider: &str,
-    dataset_id: &str,
-    payload_bytes: usize,
-) -> Result<DataFrame> {
-    let provider = Series::new("provider".into(), &[provider]);
-    let dataset_id = Series::new("dataset_id".into(), &[dataset_id]);
-    let payload_bytes = Series::new("payload_bytes".into(), &[payload_bytes as u64]);
-    DataFrame::new(
-        1,
-        vec![provider.into(), dataset_id.into(), payload_bytes.into()],
-    )
-    .map_err(|error| CoreError::TransformationError(error.to_string()))
+fn odata_json_to_frame(dataset_id: &str, payload: &Value) -> Result<DataFrame> {
+    let rows = payload
+        .get("value")
+        .and_then(Value::as_array)
+        .ok_or_else(|| {
+            CoreError::TransformationError("Stats NZ OData JSON missing value rows".to_string())
+        })?;
+    let mut builder = RecordBatchBuilder::new();
+    for row in rows {
+        let object = row.as_object().ok_or_else(|| {
+            CoreError::TransformationError("Stats NZ OData row is not an object".to_string())
+        })?;
+        builder.push(odata_row_to_record(dataset_id, object));
+    }
+    builder.build()
+}
+
+fn odata_row_to_record(dataset_id: &str, object: &Map<String, Value>) -> RawRecord {
+    let mut record = RawRecord::new()
+        .with("provider", "stats_nz")
+        .with("dataset_id", dataset_id);
+    for (key, value) in object {
+        if key.starts_with('@') {
+            continue;
+        }
+        record = record.with(key, value_to_cell(value));
+    }
+    record
+}
+
+fn odata_next_link(payload: &Value) -> Option<String> {
+    payload
+        .get("@odata.nextLink")
+        .or_else(|| payload.get("odata.nextLink"))
+        .and_then(Value::as_str)
+        .map(str::to_owned)
+}
+
+fn value_to_cell(value: &Value) -> String {
+    match value {
+        Value::Null => String::new(),
+        Value::Bool(value) => value.to_string(),
+        Value::Number(value) => value.to_string(),
+        Value::String(value) => value.clone(),
+        Value::Array(_) | Value::Object(_) => value.to_string(),
+    }
 }
 
 #[cfg(test)]
@@ -231,5 +275,60 @@ mod tests {
                 .request
                 .contains("if-modified-since: Tue, 20 Oct 2015 07:28:00 GMT")
         );
+    }
+
+    #[tokio::test]
+    async fn fetch_parses_odata_value_rows() {
+        let body = serde_json::json!({
+            "value": [
+                {
+                    "Period": "2024",
+                    "Region": "Auckland",
+                    "Value": 123.4,
+                    "@odata.etag": "row-etag"
+                },
+                {
+                    "Period": "2025",
+                    "Region": "Wellington",
+                    "Value": 130.0
+                }
+            ]
+        });
+        let response = format!(
+            "HTTP/1.1 200 OK\r\nContent-Type: application/json\r\nETag: \"stats-data\"\r\nContent-Length: {}\r\n\r\n{}",
+            body.to_string().len(),
+            body
+        );
+        let completed = complete_request(
+            Box::leak(response.into_boxed_str()),
+            |base_url| async move {
+                let provider = StatsNzProvider::new(base_url);
+                provider
+                    .fetch_dataset_with_options("/Population", FetchOptions::default())
+                    .await
+            },
+        )
+        .await;
+
+        let frame = completed.output.unwrap().into_frame().unwrap();
+
+        assert_eq!(frame.height(), 2);
+        assert_eq!(
+            frame.column("provider").unwrap().str().unwrap().get(0),
+            Some("stats_nz")
+        );
+        assert_eq!(
+            frame.column("dataset_id").unwrap().str().unwrap().get(0),
+            Some("/Population")
+        );
+        assert_eq!(
+            frame.column("Region").unwrap().str().unwrap().get(1),
+            Some("Wellington")
+        );
+        assert_eq!(
+            frame.column("Value").unwrap().str().unwrap().get(0),
+            Some("123.4")
+        );
+        assert!(frame.column("@odata.etag").is_err());
     }
 }

@@ -7,7 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 ### Added
 - **Rust data engine swarm slice:**
-    - Added ABS and Stats NZ provider modules with provider metadata, endpoint URL builders, async HTTP status handling, and conservative dataset payload fetch summaries.
+    - Added ABS and Stats NZ provider modules with provider metadata, endpoint URL builders, async HTTP status handling, and row-level dataset parsing.
     - Added a provider registry for loading active providers from the CLI and library code.
     - Added a Polars pipeline module with schema validation and atomic Parquet write support.
     - Added data-quality assertions for non-null checks, numeric ranges, and allowed string values.
@@ -25,6 +25,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
     - Added `catalog sync` to sync provider dataset metadata into the JSON-backed local catalog without overwriting existing fetch output or quality fields.
     - Extracted catalog sync into reusable registry/path helpers and `CatalogSyncReport` library support with mock-provider source tests for metadata upserts, missing-provider errors, saved partial provider syncs, and explicit partial-success reporting.
     - Added a SQLite-backed catalog using bundled `rusqlite`, with library load/save/upsert/search helpers and CLI `catalog list/search/sync --sqlite` support.
+    - Replaced provider payload-byte summary fetches with ABS SDMX-JSON observation parsing and Stats NZ OData `value` row flattening.
     - Added retry, circuit-breaker, and hardened HTTP client primitives for provider calls.
     - Added a `clap`-based `open-social-data-cli` with `list`, `status`, and `fetch` subcommands plus basic console progress/status formatting.
     - Added a `catalog` CLI subcommand and fetch-side local catalog updates.

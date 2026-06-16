@@ -45,8 +45,9 @@ impl RecordBatchBuilder {
     }
 
     pub fn push(&mut self, record: RawRecord) {
-        // Track schema keys in insertion order
-        for key in record.fields.keys() {
+        let mut keys = record.fields.keys().collect::<Vec<_>>();
+        keys.sort();
+        for key in keys {
             if !self.schema_keys.contains(key) {
                 self.schema_keys.push(key.clone());
             }

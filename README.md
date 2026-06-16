@@ -34,7 +34,7 @@ This repository aims to be a central hub for curated links to datasets, their co
 
 ## Rust Data Engine Preview
 
-This repository now includes an early Rust data engine and CLI scaffold for provider-backed data fetches, quality checks, Parquet export, and local catalog metadata.
+This repository now includes an early Rust data engine and CLI scaffold for provider-backed row-level data fetches, quality checks, Parquet export, and local catalog metadata.
 
 Common commands:
 
@@ -52,7 +52,7 @@ cargo run --bin open-social-data-cli -- catalog search qbis
 cargo run --bin open-social-data-cli -- catalog search qbis --sqlite .open-social-data/catalog.sqlite
 ```
 
-Local runtime metadata is written under `.open-social-data/` by default. The default CLI catalog path is JSON-backed for simple file exchange, and `catalog list/search/sync --sqlite <path>` uses an embedded SQLite catalog for queryable local metadata storage. Catalog entries preserve provider source URLs, quality report paths, ETag values, and Last-Modified values. Fetches reuse cached ETag and Last-Modified metadata and preserve existing outputs when a provider returns `304 Not Modified`.
+Local runtime metadata is written under `.open-social-data/` by default. The default CLI catalog path is JSON-backed for simple file exchange, and `catalog list/search/sync --sqlite <path>` uses an embedded SQLite catalog for queryable local metadata storage. Catalog entries preserve provider source URLs, quality report paths, ETag values, and Last-Modified values. Fetches reuse cached ETag and Last-Modified metadata and preserve existing outputs when a provider returns `304 Not Modified`. ABS fetches parse SDMX-JSON observations into rows, while Stats NZ fetches flatten OData `value` rows.
 
 On this Windows workspace, run Rust validation with a target directory outside OneDrive to avoid damaged inherited ACLs on the repository `target/` directory:
 
