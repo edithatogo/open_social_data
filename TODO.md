@@ -122,8 +122,8 @@ This file tracks specific, actionable tasks for the Open Social Datasets project
         *   [ ] Repeat process: test fetch, document, update logs.
 
 ### Documentation Refinement
-*   [ ] Flesh out `CONTRIBUTING.MD` with detailed guidelines.
-*   [ ] Develop `CODE_OF_CONDUCT.MD`.
+*   [X] Flesh out `CONTRIBUTING.MD` with detailed guidelines.
+*   [X] Develop `CODE_OF_CONDUCT.MD`.
 
 ## Future Tasks (To be detailed from Roadmap - Phase 2 & 3)
 *   [ ] Expand Dataset Coverage (Stats NZ, ABS, other sources).

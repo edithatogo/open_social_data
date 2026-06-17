@@ -30,6 +30,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
     - Added a `clap`-based `open-social-data-cli` with `list`, `status`, and `fetch` subcommands plus basic console progress/status formatting.
     - Added a `catalog` CLI subcommand and fetch-side local catalog updates.
     - Updated Conductor track plans to reflect the implemented swarm slice and the remaining local toolchain validation blocker.
+- Expanded `CONTRIBUTING.md` with dataset, scripting, Rust, documentation, licensing, and review guidelines.
+- Replaced the `CODE_OF_CONDUCT.md` placeholder with project-specific community and data responsibility expectations.
 - Created `AGENTS.md` with initial guidelines for AI agent contributions.
 - **AIHW MyHospitals API Integration:**
     - **MYH-ED-WAITS (ED Waiting Times):**
