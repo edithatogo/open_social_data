@@ -34,6 +34,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Replaced the `CODE_OF_CONDUCT.md` placeholder with project-specific community and data responsibility expectations.
 - Added Stats NZ dataset packs for Population Estimates, Consumers Price Index, and Labour Market Statistics with ADE endpoint-driven fetch wrappers.
 - Added ABS dataset packs for Consumer Price Index, Labour Force, and National Accounts with CLI-backed fetch wrappers.
+- Updated the roadmap into short-, medium-, and long-term horizons and added Conductor Tracks 9-11 to drive them to completion.
 - Created `AGENTS.md` with initial guidelines for AI agent contributions.
 - **AIHW MyHospitals API Integration:**
     - **MYH-ED-WAITS (ED Waiting Times):**

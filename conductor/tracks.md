@@ -51,3 +51,21 @@ This file tracks all major tracks for the project. Each track has its own detail
 *Link: [./conductor/tracks/local_cache_20260615/](./conductor/tracks/local_cache_20260615/)*
 - [x] JSON-backed local catalog with atomic saves, search, and sync
 - [x] SQLite-backed catalog with CLI list/search/sync support
+
+## [ ] Track 9: Short-term completion and source validation
+*Link: [./conductor/tracks/short_term_completion_20260618/](./conductor/tracks/short_term_completion_20260618/)*
+- Align status files after Phase 1 completion
+- Close or defer stale QBIS/API blockers
+- Add release-readiness validation for current dataset packs
+
+## [ ] Track 10: Medium-term dataset expansion and examples
+*Link: [./conductor/tracks/medium_term_expansion_20260618/](./conductor/tracks/medium_term_expansion_20260618/)*
+- Expand source and dataset coverage
+- Add general guides and runnable examples
+- Improve source metadata and codelist capture
+
+## [ ] Track 11: Long-term sustainability and advanced access
+*Link: [./conductor/tracks/long_term_sustainability_20260618/](./conductor/tracks/long_term_sustainability_20260618/)*
+- Establish maintenance and contribution operations
+- Prototype dashboards or cross-dataset access tools
+- Define release, provenance, and archival practices

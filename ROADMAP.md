@@ -1,60 +1,97 @@
 # Project Roadmap
 
-This document outlines the planned features and development milestones for the Open Social Datasets project. The project aims to evolve into a comprehensive resource for accessible social data.
+This roadmap converts the Open Social Datasets project from a completed foundation into a staged delivery plan. It is organized by time horizon and backed by Conductor tracks so each horizon can be implemented, reviewed, and closed.
 
-## Phase 1: Foundation & Initial Datasets (Est. Next 3-6 Months)
+## Current Position
 
-*   **[COMPLETED] Define Project Philosophy and Goals:** Articulate the core mission, principles, and target audience.
-*   **[COMPLETED] Establish Repository Structure:** Design and create the directory layout and core meta-files.
-*   **[COMPLETED] Develop Core Documentation Templates:** Create templates for dataset READMEs, data dictionaries, and accessible guides.
-*   **[COMPLETED] Write Initial Content for Meta-Files:** Populate `README.md`, `CHANGELOG.md`, `ROADMAP.md`, `TODO.md`.
-*   **[IN PROGRESS] Create `AGENTS.md`:** Add initial instructions for AI agent contributions.
-*   **Goal: Incorporate Initial Datasets (Stats NZ & ABS)**
-    *   Identify and prioritize 2-3 key datasets from Statistics New Zealand (Stats NZ).
-    *   Identify and prioritize 2-3 key datasets from the Australian Bureau of Statistics (ABS).
-    *   For each dataset:
-        *   Create its directory structure.
-        *   Populate `README.md` using the template.
-        *   Develop a comprehensive `data_dictionary.md`.
-        *   Write an `accessible_guide.md`.
-        *   Provide clear instructions/scripts for data access.
-*   **Goal: Refine Contribution Guidelines**
-    *   Flesh out `CONTRIBUTING.MD` with detailed instructions for adding new datasets, improving documentation, and suggesting changes.
-    *   Develop `CODE_OF_CONDUCT.MD`.
+Phase 1 foundation work is complete:
 
-## Phase 2: Expansion & Enhancement (Est. Next 6-12 Months)
+* Repository structure, templates, contribution guidance, and code of conduct are in place.
+* Rust data engine core, providers, Parquet pipeline, quality checks, CLI, local JSON/SQLite catalog, and hardening tracks are complete.
+* Initial dataset packs now exist for Stats NZ, ABS, and AIHW MyHospitals.
+* Validation has been proven locally with Windows GNU Rust tooling and Python checks for the AIHW Parquet extracts.
 
-*   **Goal: Expand Dataset Coverage**
-    *   Continue adding more relevant datasets from Stats NZ and ABS.
-    *   Research and begin incorporating datasets from other open social data sources (e.g., other government agencies, international organizations relevant to the primary regions).
-*   **Goal: Develop General User Guides**
-    *   Create guides in `docs/guides/` on topics like:
-        *   "Understanding Social Statistics Concepts"
-        *   "How to Interpret Common Visualizations of Social Data"
-        *   "Ethical Considerations When Using Social Data"
-*   **Goal: Introduce Basic Data Access/Analysis Examples**
-    *   For selected popular datasets, provide simple example scripts (e.g., Python notebooks, R scripts) demonstrating:
-        *   Fetching data from APIs.
-        *   Basic data cleaning or transformation.
-        *   Simple analysis or visualization.
-*   **Goal: Community Building**
-    *   Actively solicit community feedback on existing datasets and desired additions.
-    *   Promote the repository to potential users and contributors.
-
-## Phase 3: Maturity & Sustainability (Est. 12+ Months)
-
-*   **Goal: Become a Go-To Resource**
-    *   Aim for comprehensive coverage of key open social datasets for the target regions.
-    *   Ensure all documentation is high-quality, up-to-date, and user-friendly.
-*   **Goal: Foster an Active Community**
-    *   Establish a clear process for community contributions, reviews, and updates.
-    *   Potentially host discussions or workshops.
-*   **Goal: Explore Advanced Features (Subject to resources and community interest)**
-    *   Interactive data visualizations for key datasets.
-    *   Simple dashboarding tools.
-    *   APIs or tools to facilitate easier cross-dataset analysis.
-*   **Goal: Long-Term Maintenance**
-    *   Establish a process for regularly checking data source links, updating datasets, and refreshing documentation.
+Open work is now grouped into short-, medium-, and long-term tracks.
 
 ---
-*This roadmap is a living document and will be updated as the project progresses.*
+
+## Short-Term Roadmap: Stabilize and Complete the Current Foundation
+
+**Conductor Track:** [Track 9: Short-term completion and source validation](./conductor/tracks/short_term_completion_20260618/)
+
+**Goal:** Turn the current repository into a polished, reproducible first release candidate.
+
+### Outcomes
+
+* Refresh stale roadmap/TODO references and align all status files.
+* Finish or explicitly retire the older ABS QBIS on-hold tasks.
+* Validate dataset-pack scripts without live credentials where possible.
+* Add smoke tests for dataset wrapper scripts and documented commands.
+* Build a release-readiness checklist covering Rust, Python, documentation, and data artefacts.
+
+### Done When
+
+* `TODO.md`, `ROADMAP.md`, `CHANGELOG.md`, and Conductor tracks agree on what is complete and what is deferred.
+* Every dataset pack has README, data dictionary, accessible guide, access script, and session log or documented reason for omission.
+* Local validation commands are documented and pass without requiring live agency credentials.
+* Known external blockers, such as ABS DNS/API endpoint access, are recorded as explicit follow-up items rather than loose TODOs.
+
+---
+
+## Medium-Term Roadmap: Expand Coverage and Examples
+
+**Conductor Track:** [Track 10: Medium-term dataset expansion and examples](./conductor/tracks/medium_term_expansion_20260618/)
+
+**Goal:** Broaden dataset coverage and give users clear examples for analysis and reuse.
+
+### Outcomes
+
+* Add more Stats NZ and ABS dataset packs using the established structure.
+* Add at least one additional source agency beyond Stats NZ, ABS, and AIHW.
+* Create general user guides for social statistics concepts, visual interpretation, and ethical use.
+* Add runnable Python and R examples for selected popular datasets.
+* Improve source metadata capture, including codelists, units, update cadence, licences, caveats, and official methodology links.
+
+### Done When
+
+* The repository has enough dataset breadth to support common population, labour, cost-of-living, health, and macroeconomic workflows.
+* Example scripts or notebooks can read local Parquet data and produce simple summary tables or charts.
+* Guides explain how to interpret common social statistics without assuming advanced statistical training.
+* New dataset packs follow the same documentation and validation standard as the initial packs.
+
+---
+
+## Long-Term Roadmap: Sustainability, Community, and Advanced Tools
+
+**Conductor Track:** [Track 11: Long-term sustainability and advanced access](./conductor/tracks/long_term_sustainability_20260618/)
+
+**Goal:** Make the project maintainable as a public resource rather than a one-off repository.
+
+### Outcomes
+
+* Establish recurring source-link and dataset freshness checks.
+* Define review, ownership, and contribution workflows for community maintainers.
+* Add optional dashboards or interactive visualizations for selected high-value datasets.
+* Explore cross-dataset analysis tooling, including consistent geography, time, and indicator metadata.
+* Prepare release, archival, and provenance practices for long-term trust.
+
+### Done When
+
+* Maintenance checks can identify broken links, stale scripts, and outdated documentation.
+* Contributors have a clear path from issue to dataset proposal to reviewed merge.
+* At least one advanced access or visualization prototype exists and is documented.
+* The repository has a documented long-term maintenance cadence and release process.
+
+---
+
+## Roadmap Principles
+
+* Prefer source-backed documentation over unsupported summaries.
+* Keep machine-readable metadata and human-readable guides aligned.
+* Treat caveats, suppression, provisional status, and licences as first-class data.
+* Make small, reviewed tracks rather than broad unbounded work items.
+* Document blockers honestly and keep local validation separate from live agency availability.
+
+---
+
+*This roadmap is a living document and should be updated whenever a Conductor track is completed, deferred, or superseded.*
