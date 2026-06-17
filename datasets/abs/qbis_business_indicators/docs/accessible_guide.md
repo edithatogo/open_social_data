@@ -3,7 +3,7 @@
 **Understanding Australian Business Performance in Plain Language**
 
 **Source:** Australian Bureau of Statistics (ABS) - Quarterly Business Indicators Survey
-**Guide Updated:** $(date +"%Y-%m-%d")
+**Guide Updated:** 2026-06-18
 
 ---
 

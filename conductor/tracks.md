@@ -52,11 +52,11 @@ This file tracks all major tracks for the project. Each track has its own detail
 - [x] JSON-backed local catalog with atomic saves, search, and sync
 - [x] SQLite-backed catalog with CLI list/search/sync support
 
-## [ ] Track 9: Short-term completion and source validation
+## [x] Track 9: Short-term completion and source validation
 *Link: [./conductor/tracks/short_term_completion_20260618/](./conductor/tracks/short_term_completion_20260618/)*
-- Align status files after Phase 1 completion
-- Close or defer stale QBIS/API blockers
-- Add release-readiness validation for current dataset packs
+- [x] Align status files after Phase 1 completion
+- [x] Close or defer stale QBIS/API blockers
+- [x] Add release-readiness validation for current dataset packs
 
 ## [ ] Track 10: Medium-term dataset expansion and examples
 *Link: [./conductor/tracks/medium_term_expansion_20260618/](./conductor/tracks/medium_term_expansion_20260618/)*

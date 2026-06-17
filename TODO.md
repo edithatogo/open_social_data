@@ -37,13 +37,12 @@ This file tracks specific, actionable tasks for the Open Social Datasets project
         *   [X] Populate `README.md` from template (Initial version done)
         *   [X] Develop `data_dictionary.md` (Initial version done, pending DSD confirmation)
         *   [X] Write `accessible_guide.md` (Initial version done)
-        *   [ ] **Develop `fetch_qbis_data.py` script in `datasets/abs/qbis_business_indicators/scripts/` (ON HOLD - Network Issues):**
-            *   [ ] Implement function to fetch data from `https://api.abs.gov.au/data/QBIS`.
-            *   [ ] Handle potential API query parameters (filters for dimensions like industry, region, specific indicators, date range).
-            *   [ ] Parse SDMX-JSON data into a Pandas DataFrame.
-            *   [ ] Save DataFrame to Parquet format in `datasets/abs/qbis_business_indicators/data/`.
-            *   [ ] Add error handling and logging.
-        *   [ ] **Verify/Update QBIS `data_dictionary.md`** once live DSD/data is accessible (ON HOLD).
+        *   [X] **Develop QBIS fetch wrapper in `datasets/abs/qbis_business_indicators/scripts/`:**
+            *   [X] Route `QBIS` through the shared Rust CLI-backed ABS fetcher.
+            *   [X] Parse SDMX-JSON rows through the Rust ABS provider path.
+            *   [X] Save Parquet output in `datasets/abs/qbis_business_indicators/data/` and optional quality report in `logs/`.
+            *   [X] Add error handling and logging through the shared wrapper/CLI path.
+        *   [ ] **Verify/Update QBIS `data_dictionary.md`** once live DSD/data is accessible; local wrapper and mocked SDMX parsing are complete, but exact codelists still require live ABS endpoint confirmation.
         *   [X] **Resolve Network Access Issues** for `api.abs.gov.au` if possible, or note workarounds (Issue noted, resolution out of scope for agent).
         *   [X] Log session (Ongoing in `abs_dataset_session_log.md`).
     *   [X] Add Consumer Price Index dataset pack with README, data dictionary, accessible guide, CLI fetch wrapper, and session log.
@@ -111,7 +110,7 @@ This file tracks specific, actionable tasks for the Open Social Datasets project
 *   [X] Develop `CODE_OF_CONDUCT.MD`.
 
 ## Future Tasks (To be detailed from Roadmap - Phase 2 & 3)
-*   [ ] Complete Track 9: Short-term completion and source validation.
+*   [X] Complete Track 9: Short-term completion and source validation.
 *   [ ] Complete Track 10: Medium-term dataset expansion and examples.
 *   [ ] Complete Track 11: Long-term sustainability and advanced access.
 *   [ ] Expand Dataset Coverage (Stats NZ, ABS, other sources) through Track 10.

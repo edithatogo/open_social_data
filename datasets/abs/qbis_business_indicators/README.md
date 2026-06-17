@@ -3,7 +3,7 @@
 **Source:** Australian Bureau of Statistics (ABS)
 **Original Source Link:** [https://www.abs.gov.au/statistics/economy/business-indicators/business-indicators-australia](https://www.abs.gov.au/statistics/economy/business-indicators/business-indicators-australia) (General landing page)
 **API Documentation:** [https://www.abs.gov.au/statistics/understanding-statistics/statistical-data-and-metadata-standards/abs-data-api-user-guide](https://www.abs.gov.au/statistics/understanding-statistics/statistical-data-and-metadata-standards/abs-data-api-user-guide)
-**Date Accessed/Processed:** $(date +"%Y-%m-%d") (Note: Live data not yet fetched, DSD access pending)
+**Date Accessed/Processed:** 2026-06-18 (local wrapper added; live data/DSD confirmation depends on ABS endpoint availability)
 
 ---
 
@@ -18,11 +18,11 @@ The dataflow identifier for the ABS API is `QBIS`.
 ## 2. Data Structure & Access
 
 *   **Data Format:** The ABS API provides data in SDMX-JSON format. This repository aims to process this into Parquet files.
-*   **Data Access:** Data will be fetched using scripts in this repository.
+*   **Data Access:** Data is fetched through the repository Rust CLI via the dataset wrapper.
 *   **Data File(s):** Processed data will be stored in `data/qbis_business_indicators.parquet` (planned). Raw API responses might be temporarily stored in `data/raw/`.
 *   **API Endpoint (for data):** `https://api.abs.gov.au/data/QBIS`
 *   **API Endpoint (for Data Structure Definition - DSD):** `https://api.abs.gov.au/datastructure/ABS/QBIS/latest?detail=full&references=children`
-*   **Scripts for Access:** `scripts/shared/abs_api_fetcher.py` (for general API interaction, including DSD) and `scripts/fetch_qbis_data.py` (to be created for specific data fetching and processing).
+*   **Scripts for Access:** `scripts/fetch_qbis_business_indicators.py`, which calls `scripts/shared/abs_cli_fetch.py` with ABS dataflow `QBIS`.
 
 ---
 
@@ -30,8 +30,8 @@ The dataflow identifier for the ABS API is `QBIS`.
 
 *Detailed information is available in the data dictionary and accessible guide.*
 
-*   **Data Dictionary:** [`docs/data_dictionary.md`](./docs/data_dictionary.md) (Explains variables, types, and meanings - currently a template, will be populated post-data-access)
-*   **Accessible Guide:** [`docs/accessible_guide.md`](./docs/accessible_guide.md) (Explains the dataset in plain language - currently a template)
+*   **Data Dictionary:** [`docs/data_dictionary.md`](./docs/data_dictionary.md) (Explains expected variables, types, and meanings; exact codelists require live DSD confirmation)
+*   **Accessible Guide:** [`docs/accessible_guide.md`](./docs/accessible_guide.md) (Explains the dataset in plain language)
 
 *Expected Key Variables (based on ABS descriptions, subject to confirmation via DSD):*
 *   **Indicators:** Company Gross Operating Profits, Wages and Salaries, Sales of Goods and Services, Inventories.
@@ -50,8 +50,8 @@ The data is compiled from the ABS Quarterly Business Indicators Survey (QBIS). T
 
 ## 5. Known Issues, Limitations, or Caveats
 
-*   **Network Access:** Current development environment has intermittent issues accessing `api.abs.gov.au`, hindering live DSD and data fetching.
-*   **DSD Details:** The exact structure (dimensions, codes, attributes) is based on general ABS API knowledge and website information, pending successful DSD retrieval.
+*   **Network Access:** Live access to `api.abs.gov.au` has been intermittent in this workspace. Local release validation checks wrapper/script integrity and mocked SDMX row parsing, while live DSD/data confirmation should be retried when the ABS endpoint is reachable.
+*   **DSD Details:** The exact structure (dimensions, codes, attributes) is based on general ABS API knowledge and website information, pending successful live DSD retrieval.
 *   Data is subject to revisions by the ABS.
 *   Users should refer to ABS publications for detailed analysis, interpretations, and any specific caveats related to data collection periods or events (e.g., COVID-19 impacts).
 *   The scope is generally the private sector; refer to ABS documentation for specifics on industry inclusions/exclusions.
@@ -78,8 +78,8 @@ The data is compiled from the ABS Quarterly Business Indicators Survey (QBIS). T
 
 ## 8. Last Updated in this Repository
 
-*   **Date:** $(date +"%Y-%m-%d")
-*   **Changes Made:** Initial population of README for QBIS dataset. Structure created.
+*   **Date:** 2026-06-18
+*   **Changes Made:** Added CLI-backed fetch wrapper, session log, and release-readiness status notes.
 
 ---
 

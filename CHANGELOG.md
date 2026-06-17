@@ -35,6 +35,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Added Stats NZ dataset packs for Population Estimates, Consumers Price Index, and Labour Market Statistics with ADE endpoint-driven fetch wrappers.
 - Added ABS dataset packs for Consumer Price Index, Labour Force, and National Accounts with CLI-backed fetch wrappers.
 - Updated the roadmap into short-, medium-, and long-term horizons and added Conductor Tracks 9-11 to drive them to completion.
+- Completed Track 9 short-term release readiness with dataset-pack validation, a QBIS CLI-backed fetch wrapper, release checklist, and local validation evidence.
 - Created `AGENTS.md` with initial guidelines for AI agent contributions.
 - **AIHW MyHospitals API Integration:**
     - **MYH-ED-WAITS (ED Waiting Times):**

@@ -1,15 +1,15 @@
 # Data Dictionary for Business Indicators, Australia (QBIS)
 
 **Dataset Source:** Australian Bureau of Statistics (ABS) - Quarterly Business Indicators Survey
-**Date of Dictionary Creation/Update:** $(date +"%Y-%m-%d") (Initial version, pending DSD confirmation)
+**Date of Dictionary Creation/Update:** 2026-06-18 (local wrapper added; exact codelists pending live DSD confirmation)
 
 ---
 
 ## 1. Introduction
 
-This data dictionary describes the variables within the "Business Indicators, Australia" (`QBIS`) dataset, as processed and stored in this repository (planned format: Parquet). The data originates from the Australian Bureau of Statistics (ABS) API.
+This data dictionary describes the variables within the "Business Indicators, Australia" (`QBIS`) dataset, as processed and stored in this repository as Parquet. The data originates from the Australian Bureau of Statistics (ABS) API.
 
-The purpose of this document is to help users understand the structure, content, and meaning of each variable. Due to current limitations in accessing the live Data Structure Definition (DSD) from the ABS API, this dictionary is based on general knowledge of the dataset from ABS publications and common SDMX patterns. **It will be updated once direct DSD inspection is possible.**
+The purpose of this document is to help users understand the structure, content, and meaning of each variable. The repository has a CLI-backed QBIS fetch wrapper and mocked SDMX row-level parsing tests. Due to intermittent access to the live ABS endpoint from this workspace, exact codelists and attributes remain based on ABS publications and common SDMX patterns until direct DSD inspection is possible.
 
 ---
 
