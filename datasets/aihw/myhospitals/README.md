@@ -34,6 +34,8 @@ This repository aims to provide scripts to access and process data from the MyHo
 *   **Scripts for Access:**
     *   `scripts/shared/aihw_api_fetcher.py` (for general API metadata interaction)
     *   `scripts/fetch_aihw_myhospitals_data.py` (for fetching and processing specific MyHospitals data)
+    *   `scripts/validate_myhospitals_data.py` (for local Parquet validation)
+    *   `scripts/example_queries.py` (for small local example queries)
 
 ---
 
@@ -69,6 +71,8 @@ This repository aims to provide scripts to access and process data from the MyHo
 *   `raw_value`: The numerical value.
 *   Various geographical and peer group classifications.
 
+See also [`docs/data_dictionary_common_flat_extract.md`](./docs/data_dictionary_common_flat_extract.md) for common fields shared across MyHospitals flat extract categories.
+
 ---
 
 ## 4. Methodology & Collection
@@ -81,7 +85,7 @@ Data is collected by AIHW from various sources, including national health data c
 
 ## 5. Known Issues, Limitations, or Caveats
 
-*   The API uses pagination for flat data extracts (max 1000 records per request). Scripts must handle this.
+*   The API uses pagination for flat data extracts (max 1000 records per request). The fetch script handles pagination and supports `--max-pages` for sample runs.
 *   Data definitions and collection methods can change over time; users should consult AIHW documentation for specific interpretation.
 *   Caveats and suppression rules apply to some data points, as indicated in the API response.
 *   Data is typically for hospitals and may not cover all healthcare services.
@@ -108,8 +112,8 @@ Data is collected by AIHW from various sources, including national health data c
 
 ## 8. Last Updated in this Repository
 
-*   **Date:** $(date +"%Y-%m-%d")
-*   **Changes Made:** Added "Hand Hygiene" (`MYH-HH`) data fetching (sample) and documentation. Updated README to reflect multiple datasets.
+*   **Date:** 2026-06-18
+*   **Changes Made:** Added validation/example scripts, common flat-extract data dictionary notes, and updated fetch script guidance.
 
 ---
 

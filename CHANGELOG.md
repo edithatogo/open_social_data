@@ -32,6 +32,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
     - Updated Conductor track plans to reflect the implemented swarm slice and the remaining local toolchain validation blocker.
 - Expanded `CONTRIBUTING.md` with dataset, scripting, Rust, documentation, licensing, and review guidelines.
 - Replaced the `CODE_OF_CONDUCT.md` placeholder with project-specific community and data responsibility expectations.
+- Added Stats NZ dataset packs for Population Estimates, Consumers Price Index, and Labour Market Statistics with ADE endpoint-driven fetch wrappers.
+- Added ABS dataset packs for Consumer Price Index, Labour Force, and National Accounts with CLI-backed fetch wrappers.
 - Created `AGENTS.md` with initial guidelines for AI agent contributions.
 - **AIHW MyHospitals API Integration:**
     - **MYH-ED-WAITS (ED Waiting Times):**
@@ -67,6 +69,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
         - Tested data fetch for `MYH-HH` (fetched 2k sample records, full dataset ~38k).
         - Created specific documentation: `docs/data_dictionary_hand_hygiene.md`, `docs/accessible_guide_hand_hygiene.md`.
         - Updated overall `datasets/aihw/myhospitals/README.md`.
+    - Added a common flat-extract data dictionary note, local Parquet validation script, example query script, and repo-relative configurable fetch script.
 - **ABS Dataset - QBIS (Business Indicators, Australia):**
     - Created directory structure under `datasets/abs/qbis_business_indicators/`.
     - Populated initial `README.md`, `docs/data_dictionary.md`, and `docs/accessible_guide.md` from templates.
