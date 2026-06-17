@@ -43,10 +43,21 @@ jobs:
       - uses: actions-rust-lang/setup-rust-toolchain@v1
       - run: cargo test
 
+  maintenance:
+    name: Maintenance
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m pip install -r requirements.txt
+      - run: python scripts/maintenance_check.py
+
   build-release:
     name: Build Release
     if: startsWith(github.ref, 'refs/tags/v')
-    needs: [check, fmt, clippy, test]
+    needs: [check, fmt, clippy, test, maintenance]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

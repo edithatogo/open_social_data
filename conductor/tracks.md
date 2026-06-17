@@ -64,8 +64,8 @@ This file tracks all major tracks for the project. Each track has its own detail
 - Add general guides and runnable examples
 - Improve source metadata and codelist capture
 
-## [ ] Track 11: Long-term sustainability and advanced access
+## [x] Track 11: Long-term sustainability and advanced access
 *Link: [./conductor/tracks/long_term_sustainability_20260618/](./conductor/tracks/long_term_sustainability_20260618/)*
-- Establish maintenance and contribution operations
-- Prototype dashboards or cross-dataset access tools
-- Define release, provenance, and archival practices
+- [x] Establish maintenance and contribution operations
+- [x] Prototype dashboards or cross-dataset access tools
+- [x] Define release, provenance, and archival practices

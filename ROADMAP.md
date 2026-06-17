@@ -77,10 +77,10 @@ Open work is now grouped into short-, medium-, and long-term tracks.
 
 ### Done When
 
-* Maintenance checks can identify broken links, stale scripts, and outdated documentation.
-* Contributors have a clear path from issue to dataset proposal to reviewed merge.
-* At least one advanced access or visualization prototype exists and is documented.
-* The repository has a documented long-term maintenance cadence and release process.
+* [Done] Maintenance checks can identify broken links, stale scripts, and outdated documentation.
+* [Done] Contributors have a clear path from issue to dataset proposal to reviewed merge.
+* [Done] At least one advanced access or visualization prototype exists and is documented.
+* [Done] The repository has a documented long-term maintenance cadence and release process.
 
 ---
 

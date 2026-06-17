@@ -4,7 +4,7 @@
 **Original Source Link:** MyHospitals Website [https://www.aihw.gov.au/myhospitals](https://www.aihw.gov.au/myhospitals)
 **API Documentation:** [https://myhospitalsapi.aihw.gov.au/index.html](https://myhospitalsapi.aihw.gov.au/index.html)
 **API Swagger Spec:** [https://myhospitalsapi.aihw.gov.au/swagger/v1/swagger.json](https://myhospitalsapi.aihw.gov.au/swagger/v1/swagger.json)
-**Date Accessed/Processed:** $(date +"%Y-%m-%d") (Initial exploration and script development)
+**Date Accessed/Processed:** 2025-07-08 (initial exploration and script development); refreshed 2026-06-18 for validation and maintenance docs.
 
 ---
 
@@ -119,7 +119,7 @@ Data is collected by AIHW from various sources, including national health data c
 
 ## 9. Contact / Questions
 
-*   For questions about the data in this repository: [Link to repository issues page or maintainer contact]
+*   For questions about the data in this repository: open an issue using the repository's GitHub issue templates.
 *   For questions about the original data: Australian Institute of Health and Welfare - [https://www.aihw.gov.au/contact-us](https://www.aihw.gov.au/contact-us)
 
 ---

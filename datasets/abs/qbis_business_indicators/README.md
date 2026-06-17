@@ -68,7 +68,7 @@ The data is compiled from the ABS Quarterly Business Indicators Survey (QBIS). T
 ## 7. Citation
 
 **Please cite the original source (example):**
-> Australian Bureau of Statistics. (Year). *Business Indicators, Australia* (Catalogue No. 5676.0 if referring to historical context, or by title for current). Canberra: ABS. Retrieved from [ABS website URL]
+> Australian Bureau of Statistics. (Year). *Business Indicators, Australia*. Canberra: ABS. Retrieved from https://www.abs.gov.au/statistics/economy/business-indicators/business-indicators-australia
 
 *Replace (Year) and specific URL as appropriate. Check the ABS website for their preferred citation format.*
 
@@ -85,7 +85,7 @@ The data is compiled from the ABS Quarterly Business Indicators Survey (QBIS). T
 
 ## 9. Contact / Questions
 
-*   For questions about the data in this repository: [Link to repository issues page or maintainer contact]
+*   For questions about the data in this repository: open an issue using the repository's GitHub issue templates.
 *   For questions about the original data: Australian Bureau of Statistics - [https://www.abs.gov.au/about/contact-us](https://www.abs.gov.au/about/contact-us)
 
 ---

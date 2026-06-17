@@ -36,6 +36,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Added ABS dataset packs for Consumer Price Index, Labour Force, and National Accounts with CLI-backed fetch wrappers.
 - Updated the roadmap into short-, medium-, and long-term horizons and added Conductor Tracks 9-11 to drive them to completion.
 - Completed Track 9 short-term release readiness with dataset-pack validation, a QBIS CLI-backed fetch wrapper, release checklist, and local validation evidence.
+- Completed Track 11 long-term sustainability with maintenance checks, issue templates, contributor workflow, provenance and archival guidance, release process documentation, CI maintenance wiring, and an AIHW MyHospitals static dashboard prototype.
 - Created `AGENTS.md` with initial guidelines for AI agent contributions.
 - **AIHW MyHospitals API Integration:**
     - **MYH-ED-WAITS (ED Waiting Times):**
@@ -78,20 +79,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
     - Added `abs_api_fetcher.py` to `scripts/shared/` for common ABS API interactions (DSD fetching).
     - Updated `abs_dataset_session_log.md` with progress.
     - Updated `TODO.md` with specific tasks for QBIS data fetching and processing.
-    - *Note: DSD and data fetching for ABS QBIS are ON HOLD due to persistent network resolution issues for `api.abs.gov.au` in the environment. Awaiting instructions for AIHW dataset.*
+    - *Historical note: original live DSD and data fetching was blocked by network resolution issues for `api.abs.gov.au`; the current QBIS pack now has a CLI-backed wrapper and the remaining live DSD confirmation is tracked explicitly.*
 
 ### Changed
 - Moved `abs_api_fetcher.py` (formerly `list_abs_datasets.py`) to `scripts/shared/` and updated its DSD fetching capabilities.
-- Marked ABS QBIS data fetching tasks in `TODO.md` as ON HOLD.
+- Replaced stale ABS QBIS on-hold wording with dated wrapper and live-confirmation status.
 
-## [Previous Date - from template, replace with actual date of these changes if known] - Initial Setup
+## [2025-07-08] - Initial Setup
 ### Added
 - Initial project philosophy, goals, and repository structure established.
 - Core documentation templates (`dataset_readme_template.md`, `data_dictionary_template.md`, `accessible_guide_template.md`) created.
 - Initial content for `README.md` (main), `CHANGELOG.md`, `ROADMAP.md`, `TODO.md` and `SESSION_LOG_TEMPLATE.md` written.
 - Placeholders for `CONTRIBUTING.md` and `CODE_OF_CONDUCT.md` created.
 
-## [YYYY-MM-DD] - Project Initiation
+## [2025-07-08] - Project Initiation
 ### Added
 - Repository created.
 - Basic placeholder files for `README.md`, `LICENSE`.

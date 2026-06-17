@@ -1,0 +1,31 @@
+name: Broken source link
+description: Report a source page, API endpoint, or methodology link that no longer works.
+title: "Broken source link: "
+labels: ["maintenance", "source-link"]
+body:
+  - type: input
+    id: dataset
+    attributes:
+      label: Dataset or file
+      description: Which dataset pack or documentation file contains the link?
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Broken URL
+      description: Paste the exact URL.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Error or evidence
+      description: Include HTTP status, browser message, or command output.
+    validations:
+      required: true
+  - type: textarea
+    id: replacement
+    attributes:
+      label: Suggested replacement
+      description: If known, provide the current official source URL.

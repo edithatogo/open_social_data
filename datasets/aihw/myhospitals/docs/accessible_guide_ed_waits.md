@@ -3,7 +3,7 @@
 **Understanding ED Waiting Times in Plain Language**
 
 **Source:** Australian Institute of Health and Welfare (AIHW) - MyHospitals (`MYH-ED-WAITS` measure category)
-**Guide Updated:** $(date +"%Y-%m-%d")
+**Guide Updated:** 2025-07-08; reviewed 2026-06-18.
 
 ---
 

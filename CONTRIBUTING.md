@@ -39,6 +39,8 @@ For a new dataset, include:
 
 When live access is blocked, document the blocker honestly and still add useful source links, expected schema notes, and reproducible commands.
 
+For new dataset proposals, use the GitHub dataset proposal issue template first. For ongoing maintenance, follow `docs/contributor_workflow.md` so ownership, review, deferral, and supersession decisions are recorded consistently.
+
 ## Script Guidelines
 
 Python scripts should:
@@ -91,9 +93,19 @@ Before requesting review:
 * The changed files are scoped to the task.
 * Dataset source links and licences are included.
 * Scripts run from the repository checkout without machine-specific paths.
+* `python scripts\maintenance_check.py` passes, or any failure is documented as an external blocker.
 * Tests or validation commands have been run where relevant.
 * `TODO.md` and `CHANGELOG.md` are updated for completed work or meaningful changes.
 * No secrets or large unintended data files are staged.
+
+## Maintenance and Releases
+
+Maintenance checks and release practice are documented in:
+
+* `docs/maintenance.md`
+* `docs/release_process.md`
+* `docs/provenance_archival_policy.md`
+* `docs/advanced_access.md`
 
 ## Reporting Issues
 

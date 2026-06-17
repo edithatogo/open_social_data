@@ -1,0 +1,29 @@
+name: Dataset refresh request
+description: Request an update to an existing dataset pack.
+title: "Dataset refresh: "
+labels: ["dataset-refresh"]
+body:
+  - type: input
+    id: dataset
+    attributes:
+      label: Dataset pack
+      description: Example: datasets/aihw/myhospitals
+    validations:
+      required: true
+  - type: input
+    id: source_version
+    attributes:
+      label: Source release or date
+      description: Identify the official source release, publication date, or API update date.
+  - type: textarea
+    id: changes
+    attributes:
+      label: What changed?
+      description: Describe new periods, schema changes, caveats, methodology updates, or licensing changes.
+    validations:
+      required: true
+  - type: textarea
+    id: validation
+    attributes:
+      label: Validation notes
+      description: Include commands run or expected validation commands.

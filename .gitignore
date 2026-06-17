@@ -1,2 +1,4 @@
 /target
 .open-social-data/
+__pycache__/
+*.pyc

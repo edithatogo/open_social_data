@@ -1,7 +1,7 @@
 # Data Dictionary for MyHospitals - Cancer Data (MYH-CANCER)
 
 **Dataset Source:** Australian Institute of Health and Welfare (AIHW) - MyHospitals API (`/flat-formatted-data-extract/MYH-CANCER`)
-**Date of Dictionary Creation/Update:** $(date +"%Y-%m-%d")
+**Date of Dictionary Creation/Update:** 2025-07-08; reviewed 2026-06-18.
 
 ---
 

@@ -112,13 +112,13 @@ This file tracks specific, actionable tasks for the Open Social Datasets project
 ## Future Tasks (To be detailed from Roadmap - Phase 2 & 3)
 *   [X] Complete Track 9: Short-term completion and source validation.
 *   [ ] Complete Track 10: Medium-term dataset expansion and examples.
-*   [ ] Complete Track 11: Long-term sustainability and advanced access.
+*   [X] Complete Track 11: Long-term sustainability and advanced access.
 *   [ ] Expand Dataset Coverage (Stats NZ, ABS, other sources) through Track 10.
 *   [ ] Develop General User Guides (`docs/guides/`) through Track 10.
 *   [ ] Introduce Basic Data Access/Analysis Examples through Track 10.
-*   [ ] Community Building Initiatives through Track 11.
-*   [ ] Explore Advanced Features (Visualizations, Dashboards) through Track 11.
-*   [ ] Long-Term Maintenance Planning through Track 11.
+*   [X] Community Building Initiatives through Track 11.
+*   [X] Explore Advanced Features (Visualizations, Dashboards) through Track 11.
+*   [X] Long-Term Maintenance Planning through Track 11.
 
 ---
 *This TODO list will be updated regularly. Check the `ROADMAP.md` for broader project phases.*

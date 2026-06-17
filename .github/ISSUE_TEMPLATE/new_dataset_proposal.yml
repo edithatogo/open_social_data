@@ -1,0 +1,48 @@
+name: New dataset proposal
+description: Propose a new dataset pack for the repository.
+title: "Dataset proposal: "
+labels: ["dataset-proposal"]
+body:
+  - type: input
+    id: source
+    attributes:
+      label: Source agency
+      description: Name the official source agency or data custodian.
+    validations:
+      required: true
+  - type: input
+    id: dataset
+    attributes:
+      label: Dataset name
+      description: Official dataset or publication name.
+    validations:
+      required: true
+  - type: input
+    id: source_url
+    attributes:
+      label: Official source URL
+    validations:
+      required: true
+  - type: dropdown
+    id: access
+    attributes:
+      label: Access method
+      options:
+        - API
+        - Download file
+        - Web table
+        - Other
+  - type: textarea
+    id: value
+    attributes:
+      label: Why should this be included?
+      description: Explain the social value, likely users, and important caveats.
+    validations:
+      required: true
+  - type: textarea
+    id: licence
+    attributes:
+      label: Licence and redistribution notes
+      description: Link to source terms and note whether data can be redistributed.
+    validations:
+      required: true
