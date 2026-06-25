@@ -35,5 +35,5 @@ All tasks require Git commits upon completion. Pushes and reviews should occur a
 - [x] Task: Run Rust CLI example commands against available local data when local build/link resources permit.
 - [x] Task: Update `TODO.md`, `CHANGELOG.md`, and `ROADMAP.md`.
 - [x] Task: Complete Rust CLI run/test validation when local disk permits.
-- [x] Task: Commit the medium-term expansion slice.
+- [x] Task: Commit the medium-term expansion slice. (`21538e2`)
 - [x] Task: Conductor - Review track completion and mark status accordingly.

@@ -70,3 +70,5 @@ Results:
 * `git diff --check` - passed.
 
 The prior AWS-LC build/link blocker is resolved for this workspace by the native Windows TLS dependency path. Full local Rust validation now passes with a target directory outside OneDrive.
+
+Implementation commit: `21538e2`.

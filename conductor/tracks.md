@@ -58,13 +58,13 @@ This file tracks all major tracks for the project. Each track has its own detail
 - [x] Close or defer stale QBIS/API blockers
 - [x] Add release-readiness validation for current dataset packs
 
-## [x] Track 10: Medium-term dataset expansion and examples
+## [x] Track 10: Medium-term dataset expansion and examples (`21538e2`)
 *Link: [./conductor/tracks/medium_term_expansion_20260618/](./conductor/tracks/medium_term_expansion_20260618/)*
 - [x] Expand source and dataset coverage
 - [x] Add general guides and Rust CLI example commands
 - [x] Improve source metadata and codelist capture
 - [x] Complete Rust CLI run/test validation and review
-- [x] Commit the medium-term expansion slice
+- [x] Commit the medium-term expansion slice (`21538e2`)
 
 ## [x] Track 11: Long-term sustainability and advanced access
 *Link: [./conductor/tracks/long_term_sustainability_20260618/](./conductor/tracks/long_term_sustainability_20260618/)*
