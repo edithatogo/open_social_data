@@ -4,10 +4,10 @@ All tasks require validation evidence before completion. Commits should be split
 
 ## Phase 1: Dependency Automation
 
-- [ ] Add renovate.json for Cargo, GitHub Actions, npm/docs tooling, and lockfile maintenance.
-- [ ] Configure dependency dashboard and grouped patch/minor updates.
-- [ ] Keep major Rust data-stack upgrades manual.
-- [ ] Document Renovate triage expectations in maintainer docs.
+- [x] Add renovate.json for Cargo, GitHub Actions, npm/docs tooling, and lockfile maintenance.
+- [x] Configure dependency dashboard and grouped patch/minor updates.
+- [x] Keep major Rust data-stack upgrades manual.
+- [x] Document Renovate triage expectations in maintainer docs.
 
 ## Phase 2: Astro 7 and Starlight Documentation
 
