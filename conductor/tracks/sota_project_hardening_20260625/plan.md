@@ -34,13 +34,13 @@ All tasks require validation evidence before completion. Commits should be split
 
 ## Phase 5: CI, Security, and Release Hardening
 
-- [ ] Add or document cargo nextest.
-- [ ] Add cargo audit or equivalent advisory checks.
-- [ ] Add cargo deny license/source policy checks.
-- [ ] Add cargo llvm-cov or equivalent coverage reporting.
-- [ ] Add docs build validation.
-- [ ] Add release dry-run checks and no-live-publish guardrails.
-- [ ] Add SBOM/provenance guidance or generation scripts.
+- [x] Add or document cargo nextest.
+- [x] Add cargo audit or equivalent advisory checks.
+- [x] Add cargo deny license/source policy checks.
+- [x] Add cargo llvm-cov or equivalent coverage reporting.
+- [x] Add docs build validation.
+- [x] Add release dry-run checks and no-live-publish guardrails.
+- [x] Add SBOM/provenance guidance or generation scripts.
 
 ## Phase 6: Parser Robustness and Performance
 
