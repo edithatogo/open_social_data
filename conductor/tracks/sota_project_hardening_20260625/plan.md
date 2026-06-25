@@ -19,11 +19,11 @@ All tasks require validation evidence before completion. Commits should be split
 
 ## Phase 3: Rust Dependency Feature Review
 
-- [ ] Review reqwest compression and streaming support.
-- [ ] Review Polars lazy, time/date, CSV/JSON IO, and SQL support.
-- [ ] Review rusqlite catalog backup, JSON, limits, tracing, or extension support.
-- [ ] Review CLI completions, man pages, and structured reference generation.
-- [ ] Record accepted and rejected feature decisions with rationale.
+- [x] Review reqwest compression and streaming support.
+- [x] Review Polars lazy, time/date, CSV/JSON IO, and SQL support.
+- [x] Review rusqlite catalog backup, JSON, limits, tracing, or extension support.
+- [x] Review CLI completions, man pages, and structured reference generation.
+- [x] Record accepted and rejected feature decisions with rationale.
 
 ## Phase 4: CLI Polish and Generated Reference
 
