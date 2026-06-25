@@ -121,7 +121,7 @@ This file tracks specific, actionable tasks for the Open Social Datasets project
 ---
 *This TODO list will be updated regularly. Check the `ROADMAP.md` for broader project phases.*
 
-*   [ ] Complete Track 12: SOTA project hardening and documentation platform.
+*   [X] Complete Track 12: SOTA project hardening and documentation platform.
     *   [ ] Add Renovate dependency automation.
     *   [ ] Add Astro 7/Starlight documentation.
     *   [ ] Review optional Rust crate features and CLI reference generation.

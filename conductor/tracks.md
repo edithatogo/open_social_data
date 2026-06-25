@@ -72,8 +72,8 @@ This file tracks all major tracks for the project. Each track has its own detail
 - [x] Prototype dashboards or cross-dataset access tools
 - [x] Define release, provenance, and archival practices
 
-## [ ] Track 12: SOTA project hardening and documentation platform
-*Link: [./conductor/tracks/sota_project_hardening_20260625/](./conductor/tracks/sota_project_hardening_20260625/)*
+## [x] Track 12: SOTA project hardening and documentation platform (archived)
+*Link: [./conductor/tracks/archived/sota_project_hardening_20260625/](./conductor/tracks/archived/sota_project_hardening_20260625/)*
 - [ ] Add conservative Renovate dependency automation
 - [ ] Scaffold Astro 7/Starlight documentation
 - [ ] Review optional Rust crate features and CLI reference generation

@@ -103,4 +103,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Basic placeholder files for `README.md`, `LICENSE`.
 
 ### Added - Track 12
-- Opened Conductor Track 12 for SOTA project hardening, dependency automation, Astro 7/Starlight documentation, optional Rust feature review, CLI reference generation, CI/security/release gates, and parser robustness/performance tooling.
+- Opened and completed Conductor Track 12 for SOTA project hardening: Renovate automation, Astro 7/Starlight docs, Rust feature review, CLI completions/man-page, CI/security/release gates, parser benchmarks/fixtures.
