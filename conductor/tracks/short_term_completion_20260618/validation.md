@@ -11,6 +11,7 @@ python datasets\aihw\myhospitals\scripts\validate_myhospitals_data.py
 python datasets\aihw\myhospitals\scripts\example_queries.py --limit 5
 set CARGO_TARGET_DIR=C:\tmp\open_social_data_target2
 cargo check --all-targets
+set CARGO_PROFILE_TEST_DEBUG=0
 cargo test
 cargo clippy --all-targets -- -D warnings
 git diff --check
@@ -27,11 +28,11 @@ Results:
   * `MYH-ES`: 2,000 rows, 61 columns.
   * `MYH-HH`: 2,000 rows, 61 columns.
 * `python datasets\aihw\myhospitals\scripts\example_queries.py --limit 5` - passed and printed five current admission rows.
-* `set CARGO_TARGET_DIR=%TEMP%\open_social_data_target_track9&& cargo check --all-targets` - passed.
-* `set CARGO_TARGET_DIR=%TEMP%\open_social_data_target_track9&& cargo clippy --all-targets -- -D warnings` - passed.
-* `set CARGO_TARGET_DIR=%TEMP%\open_social_data_target_track9_test&& set CARGO_PROFILE_TEST_DEBUG=0&& cargo test` - passed; 45 library unit tests, 5 CLI integration tests, and doc-tests completed with no failures.
+* `set CARGO_TARGET_DIR=C:\tmp\open_social_data_target2&& cargo check --all-targets` - passed.
+* `set CARGO_TARGET_DIR=C:\tmp\open_social_data_target2&& cargo clippy --all-targets -- -D warnings` - passed.
+* `set CARGO_TARGET_DIR=C:\tmp\open_social_data_target2&& set CARGO_PROFILE_TEST_DEBUG=0&& cargo test` - passed after clearing stale build-cache disk pressure; 45 library unit tests, 5 CLI integration tests, and doc-tests completed with no failures.
 
 Notes:
 
-* `C:\tmp\open_social_data_target2` and a repo-local target dir were blocked by ACLs in this managed environment. `%TEMP%` worked for Rust validation.
-* The first full-debug `cargo test` attempt reached final linking but failed with `No space left on device`. Re-running with `CARGO_PROFILE_TEST_DEBUG=0` passed.
+* `C:\tmp\open_social_data_target2` works for local Rust validation in this managed environment and avoids repository `target/` ACL inheritance problems.
+* Full-debug `cargo test` builds can exhaust constrained Windows disks. Use `CARGO_PROFILE_TEST_DEBUG=0` for the release-readiness test gate.

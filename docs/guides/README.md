@@ -3,7 +3,9 @@
 This directory contains guides for working with Open Social Data outputs.
 
 - [Reading Parquet in Python](reading-parquet-in-python.md)
-- [Reading Parquet in R](reading-parquet-in-r.md)
+- [Understanding Social Statistics Concepts](understanding-social-statistics-concepts.md)
+- [Interpreting Common Visualizations](interpreting-common-visualizations.md)
+- [Ethical Use of Social Data](ethical-use-of-social-data.md)
 
 ## Maintainer Guides
 

@@ -42,7 +42,7 @@ This file tracks specific, actionable tasks for the Open Social Datasets project
             *   [X] Parse SDMX-JSON rows through the Rust ABS provider path.
             *   [X] Save Parquet output in `datasets/abs/qbis_business_indicators/data/` and optional quality report in `logs/`.
             *   [X] Add error handling and logging through the shared wrapper/CLI path.
-        *   [ ] **Verify/Update QBIS `data_dictionary.md`** once live DSD/data is accessible; local wrapper and mocked SDMX parsing are complete, but exact codelists still require live ABS endpoint confirmation.
+        *   [ ] **Verify/Update QBIS `data_dictionary.md`** once live DSD/data is accessible; local wrapper and mocked SDMX parsing are complete, but exact codelists still require live ABS endpoint confirmation. Latest local check on 2026-06-23 still could not resolve `api.abs.gov.au`.
         *   [X] **Resolve Network Access Issues** for `api.abs.gov.au` if possible, or note workarounds (Issue noted, resolution out of scope for agent).
         *   [X] Log session (Ongoing in `abs_dataset_session_log.md`).
     *   [X] Add Consumer Price Index dataset pack with README, data dictionary, accessible guide, CLI fetch wrapper, and session log.
@@ -111,11 +111,11 @@ This file tracks specific, actionable tasks for the Open Social Datasets project
 
 ## Future Tasks (To be detailed from Roadmap - Phase 2 & 3)
 *   [X] Complete Track 9: Short-term completion and source validation.
-*   [ ] Complete Track 10: Medium-term dataset expansion and examples.
+*   [X] Complete Track 10: Medium-term dataset expansion and examples.
 *   [X] Complete Track 11: Long-term sustainability and advanced access.
-*   [ ] Expand Dataset Coverage (Stats NZ, ABS, other sources) through Track 10.
-*   [ ] Develop General User Guides (`docs/guides/`) through Track 10.
-*   [ ] Introduce Basic Data Access/Analysis Examples through Track 10.
+*   [X] Expand Dataset Coverage (Stats NZ, ABS, other sources) through Track 10.
+*   [X] Develop General User Guides (`docs/guides/`) through Track 10.
+*   [X] Introduce Basic Data Access/Analysis Examples through Track 10.
 *   [X] Community Building Initiatives through Track 11.
 *   [X] Explore Advanced Features (Visualizations, Dashboards) through Track 11.
 *   [X] Long-Term Maintenance Planning through Track 11.

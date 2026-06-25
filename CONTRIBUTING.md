@@ -64,11 +64,12 @@ Before submitting Rust changes, run:
 set CARGO_TARGET_DIR=C:\tmp\open_social_data_target2
 cargo fmt --check
 cargo check --all-targets
+set CARGO_PROFILE_TEST_DEBUG=0
 cargo test
 cargo clippy --all-targets -- -D warnings
 ```
 
-On this Windows workspace, the `C:\tmp` target directory avoids OneDrive `target/` ACL issues.
+On this Windows workspace, the `C:\tmp` target directory avoids OneDrive `target/` ACL issues. `CARGO_PROFILE_TEST_DEBUG=0` keeps test builds small enough for constrained local disks.
 
 ## Documentation Guidelines
 

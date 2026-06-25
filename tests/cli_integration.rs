@@ -9,7 +9,7 @@
 use std::path::PathBuf;
 use std::process::Command;
 
-/// Path to the compiled CLI binary (set by cargo).
+/// Path to the compiled CLI binary (set by Cargo for the hyphenated bin target).
 fn cli_binary() -> PathBuf {
     std::env::var_os("CARGO_BIN_EXE_open-social-data-cli")
         .or_else(|| std::env::var_os("CARGO_BIN_EXE_open_social_data_cli"))
@@ -48,6 +48,14 @@ fn cli_help_prints_without_error() {
         stdout.contains("catalog"),
         "expected 'catalog' in help output, got: {stdout}{stderr}"
     );
+    assert!(
+        stdout.contains("validate"),
+        "expected 'validate' in help output, got: {stdout}{stderr}"
+    );
+    assert!(
+        stdout.contains("examples"),
+        "expected 'examples' in help output, got: {stdout}{stderr}"
+    );
 }
 
 #[test]
@@ -74,6 +82,48 @@ fn cli_help_subcommand_prints_without_error() {
     assert!(
         stdout.contains("sync"),
         "expected 'sync' in catalog help output, got: {stdout}"
+    );
+}
+
+#[test]
+fn cli_validate_help_prints_without_error() {
+    let output = Command::new(cli_binary())
+        .arg("validate")
+        .arg("--help")
+        .output()
+        .expect("failed to run CLI with validate --help");
+    assert!(output.status.success());
+    let stdout = String::from_utf8_lossy(&output.stdout);
+    assert!(
+        stdout.contains("dataset-packs"),
+        "expected 'dataset-packs' in validate help output, got: {stdout}"
+    );
+    assert!(
+        stdout.contains("source-metadata"),
+        "expected 'source-metadata' in validate help output, got: {stdout}"
+    );
+    assert!(
+        stdout.contains("medium-term"),
+        "expected 'medium-term' in validate help output, got: {stdout}"
+    );
+}
+
+#[test]
+fn cli_examples_help_prints_without_error() {
+    let output = Command::new(cli_binary())
+        .arg("examples")
+        .arg("--help")
+        .output()
+        .expect("failed to run CLI with examples --help");
+    assert!(output.status.success());
+    let stdout = String::from_utf8_lossy(&output.stdout);
+    assert!(
+        stdout.contains("myhospitals-summary"),
+        "expected 'myhospitals-summary' in examples help output, got: {stdout}"
+    );
+    assert!(
+        stdout.contains("source-metadata-inventory"),
+        "expected 'source-metadata-inventory' in examples help output, got: {stdout}"
     );
 }
 

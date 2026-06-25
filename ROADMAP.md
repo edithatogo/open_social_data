@@ -49,15 +49,17 @@ Open work is now grouped into short-, medium-, and long-term tracks.
 * Add more Stats NZ and ABS dataset packs using the established structure.
 * Add at least one additional source agency beyond Stats NZ, ABS, and AIHW.
 * Create general user guides for social statistics concepts, visual interpretation, and ethical use.
-* Add runnable Python and R examples for selected popular datasets.
+* Add Rust CLI examples for selected popular datasets and source metadata. Python helper scripts remain maintainer evidence; R examples are retired from the validated capability set.
 * Improve source metadata capture, including codelists, units, update cadence, licences, caveats, and official methodology links.
 
 ### Done When
 
-* The repository has enough dataset breadth to support common population, labour, cost-of-living, health, and macroeconomic workflows.
-* Example scripts or notebooks can read local Parquet data and produce simple summary tables or charts.
-* Guides explain how to interpret common social statistics without assuming advanced statistical training.
-* New dataset packs follow the same documentation and validation standard as the initial packs.
+* [Done] The repository has enough dataset breadth to support common population, labour, cost-of-living, health, and macroeconomic workflows.
+* [Done] Rust CLI example commands can read local Parquet data and produce simple summary tables.
+* [Done] Guides explain how to interpret common social statistics without assuming advanced statistical training.
+* [Done] New dataset packs follow the same documentation and validation standard as the initial packs.
+
+Implementation status: Track 10 dataset, guide, example, metadata, Rust CLI validation, review, and commit work is complete.
 
 ---
 

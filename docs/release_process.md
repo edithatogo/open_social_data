@@ -17,13 +17,17 @@ Dataset source updates can be noted in release notes without implying the reposi
 
 Before tagging:
 
+On Windows, set `CARGO_TARGET_DIR`, `CARGO_BUILD_JOBS`, and `CARGO_PROFILE_DEV_DEBUG` as shown in `docs/technical/release_readiness_checklist.md` before the Rust CLI gates.
+
 1. Run `python scripts\maintenance_check.py`.
-2. Run `python scripts\validate_dataset_packs.py`.
-3. Run the AIHW local validation/example commands when local Parquet extracts are included.
-4. Run Rust checks from `docs/technical/release_readiness_checklist.md`.
-5. Confirm `CHANGELOG.md` describes notable additions, changes, blockers, and validation exceptions.
-6. Confirm source licences and caveats are documented for changed dataset packs.
-7. Confirm no unintended generated caches, large files, credentials, or local catalog files are staged.
+2. Run `cargo run --bin open-social-data-cli -- validate dataset-packs`.
+3. Run `cargo run --bin open-social-data-cli -- validate source-metadata`.
+4. Run `cargo run --bin open-social-data-cli -- validate medium-term --run-examples`.
+5. Run the AIHW local data validator when local Parquet extracts are included.
+6. Run Rust checks from `docs/technical/release_readiness_checklist.md`.
+7. Confirm `CHANGELOG.md` describes notable additions, changes, blockers, and validation exceptions.
+8. Confirm source licences and caveats are documented for changed dataset packs.
+9. Confirm no unintended generated caches, large files, credentials, or local catalog files are staged.
 
 ## Release Notes
 

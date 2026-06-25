@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import logging
+import os
 import subprocess
 from pathlib import Path
 
@@ -17,6 +18,11 @@ def main() -> None:
         type=Path,
         default=None,
         help="Optional JSON quality report path",
+    )
+    parser.add_argument(
+        "--cargo-target-dir",
+        default=None,
+        help="Optional Cargo target directory override, useful for Windows/OneDrive workspaces.",
     )
     args = parser.parse_args()
 
@@ -37,8 +43,11 @@ def main() -> None:
     if args.quality_report:
         args.quality_report.parent.mkdir(parents=True, exist_ok=True)
         command.extend(["--quality-report", str(args.quality_report)])
+    env = os.environ.copy()
+    if args.cargo_target_dir:
+        env["CARGO_TARGET_DIR"] = args.cargo_target_dir
     logging.info("Running %s", " ".join(command))
-    subprocess.run(command, check=True)
+    subprocess.run(command, check=True, env=env)
 
 
 if __name__ == "__main__":

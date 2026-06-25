@@ -1,10 +1,10 @@
-﻿# Plan: Documentation and Tool Registry Publication
+# Plan: Documentation and Tool Registry Publication
 
 All tasks require Git commits upon completion. Pushes and reviews must occur at the end of each phase.
 
 ## Phase 1: Code Documentation & Accessible Guides
 - [x] Task: Complete Rust standard `cargo doc` annotations and verify output builds locally
-- [x] Task: Author user-facing accessible markdown guides on reading Parquet in external tools (Python/R)
+- [x] Task: Author user-facing accessible markdown guides on reading Parquet in external tools (Python, with R later retired)
 - [ ] Task: Conductor - Push changes, perform peer review of Documentation Phase (Protocol in workflow.md)
 
 ## Phase 2: Registry Publishing Configuration
@@ -34,7 +34,7 @@ All tasks require Git commits upon completion. Pushes and reviews must occur at 
 
 ### Phase 1 Task 2 - User Guides
 - Created `docs/guides/reading-parquet-in-python.md` - guide for pandas and polars users
-- Created `docs/guides/reading-parquet-in-r.md` - guide for arrow and duckdb users
+- Retired `docs/guides/reading-parquet-in-r.md` after consolidating examples under the Rust CLI
 - Created `docs/guides/README.md` - index linking to both guides
 
 ### Phase 2 Task 1 - Cargo.toml Metadata

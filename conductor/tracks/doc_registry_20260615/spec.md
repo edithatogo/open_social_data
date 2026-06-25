@@ -5,7 +5,7 @@ Document the API and binary commands, finalize markdown guides for end-users, se
 
 ## 2. Requirements
 - **Rust Documentation:** Generate API-level docs via `cargo doc`. Add inline examples.
-- **Accessible Guides:** Create end-user guides detailing CLI invocation and how to load output Parquet files in Python or R.
+- **Accessible Guides:** Create end-user guides detailing CLI invocation and how to load output Parquet files in Python or Rust CLI.
 - **crates.io Publishing:** Configure metadata, licenses, readme links, and categories in `Cargo.toml`. Dry-run publish checks.
 - **CI Release Automation:** Define GitHub Actions to build binaries on release tags.
 

@@ -1,4 +1,5 @@
-use std::path::PathBuf;
+use std::fs;
+use std::path::{Path, PathBuf};
 
 use anyhow::Context;
 use clap::{Parser, Subcommand};
@@ -6,9 +7,10 @@ use colored::Colorize;
 use indicatif::{ProgressBar, ProgressStyle};
 use open_social_data_core::{
     CachedDataset, FetchOptions, FetchResult, LocalCatalog, ProviderRegistry, QualityStatus,
-    SqliteCatalog, provider_payload_assertions, sync_catalog_path_from_registry,
+    SqliteCatalog, provider_payload_assertions, read_parquet, sync_catalog_path_from_registry,
     sync_sqlite_catalog_path_from_registry, validate_quality, write_parquet_atomic,
 };
+use serde_json::Value;
 
 #[derive(Debug, Parser)]
 #[command(name = "open-social-data-cli")]
@@ -29,6 +31,14 @@ enum Commands {
         #[command(subcommand)]
         command: CatalogCommand,
     },
+    Validate {
+        #[command(subcommand)]
+        command: ValidateCommand,
+    },
+    Examples {
+        #[command(subcommand)]
+        command: ExampleCommand,
+    },
     Status,
     Fetch {
         provider: String,
@@ -39,6 +49,38 @@ enum Commands {
         catalog: PathBuf,
         #[arg(long)]
         quality_report: Option<PathBuf>,
+    },
+}
+
+#[derive(Debug, Subcommand)]
+enum ValidateCommand {
+    DatasetPacks {
+        #[arg(long, default_value = "datasets")]
+        root: PathBuf,
+    },
+    SourceMetadata {
+        #[arg(long, default_value = "datasets")]
+        root: PathBuf,
+        #[arg(long)]
+        require_all: bool,
+    },
+    MediumTerm {
+        #[arg(long)]
+        run_examples: bool,
+    },
+}
+
+#[derive(Debug, Subcommand)]
+enum ExampleCommand {
+    MyhospitalsSummary {
+        #[arg(long, default_value = "datasets/aihw/myhospitals/data")]
+        data_dir: PathBuf,
+        #[arg(long, default_value_t = 10)]
+        limit: usize,
+    },
+    SourceMetadataInventory {
+        #[arg(long, default_value = "datasets")]
+        root: PathBuf,
     },
 }
 
@@ -91,6 +133,8 @@ async fn main() -> anyhow::Result<()> {
             }
         }
         Commands::Catalog { command } => run_catalog_command(command, &registry).await?,
+        Commands::Validate { command } => run_validate_command(command)?,
+        Commands::Examples { command } => run_example_command(command)?,
         Commands::Status => {
             for name in registry.names() {
                 let provider = registry.get(name)?;
@@ -193,6 +237,347 @@ async fn main() -> anyhow::Result<()> {
     Ok(())
 }
 
+fn run_validate_command(command: ValidateCommand) -> anyhow::Result<()> {
+    match command {
+        ValidateCommand::DatasetPacks { root } => {
+            validate_dataset_packs(&root)?;
+        }
+        ValidateCommand::SourceMetadata { root, require_all } => {
+            validate_source_metadata(&root, require_all)?;
+        }
+        ValidateCommand::MediumTerm { run_examples } => {
+            validate_medium_term(run_examples)?;
+        }
+    }
+    Ok(())
+}
+
+fn run_example_command(command: ExampleCommand) -> anyhow::Result<()> {
+    match command {
+        ExampleCommand::MyhospitalsSummary { data_dir, limit } => {
+            print_myhospitals_summary(&data_dir, limit)?;
+        }
+        ExampleCommand::SourceMetadataInventory { root } => {
+            print_source_metadata_inventory(&root)?;
+        }
+    }
+    Ok(())
+}
+
+const REQUIRED_PACK_SOURCES: &[&str] = &["abs", "stats_nz", "aihw", "moh"];
+
+fn dataset_dirs(root: &Path) -> anyhow::Result<Vec<PathBuf>> {
+    let mut dirs = Vec::new();
+    if !root.is_dir() {
+        anyhow::bail!("dataset root does not exist: {}", root.display());
+    }
+    for source in fs::read_dir(root)? {
+        let source = source?.path();
+        if !source.is_dir() {
+            continue;
+        }
+        for dataset in fs::read_dir(source)? {
+            let dataset = dataset?.path();
+            if dataset.is_dir()
+                && dataset
+                    .file_name()
+                    .and_then(|name| name.to_str())
+                    .is_some_and(|name| !name.starts_with('.'))
+            {
+                dirs.push(dataset);
+            }
+        }
+    }
+    dirs.sort();
+    Ok(dirs)
+}
+
+fn dataset_pack_dirs(root: &Path) -> anyhow::Result<Vec<PathBuf>> {
+    let mut dirs = Vec::new();
+    if !root.is_dir() {
+        anyhow::bail!("dataset root does not exist: {}", root.display());
+    }
+    for source in REQUIRED_PACK_SOURCES {
+        let source_dir = root.join(source);
+        if !source_dir.exists() {
+            continue;
+        }
+        for dataset in fs::read_dir(source_dir)? {
+            let dataset = dataset?.path();
+            if dataset.is_dir()
+                && dataset
+                    .file_name()
+                    .and_then(|name| name.to_str())
+                    .is_some_and(|name| !name.starts_with('.'))
+            {
+                dirs.push(dataset);
+            }
+        }
+    }
+    dirs.sort();
+    Ok(dirs)
+}
+
+fn has_child_matching(dir: &Path, predicate: impl Fn(&Path) -> bool) -> bool {
+    fs::read_dir(dir)
+        .ok()
+        .into_iter()
+        .flat_map(|entries| entries.filter_map(Result::ok))
+        .map(|entry| entry.path())
+        .any(|path| predicate(&path))
+}
+
+fn dataset_has_pack_shape(path: &Path) -> bool {
+    let docs = path.join("docs");
+    let scripts = path.join("scripts");
+    path.join("README.md").is_file()
+        && path.join("SESSION_LOG.md").is_file()
+        && docs.is_dir()
+        && has_child_matching(&docs, |path| {
+            path.file_name()
+                .and_then(|name| name.to_str())
+                .is_some_and(|name| name.starts_with("data_dictionary") && name.ends_with(".md"))
+        })
+        && has_child_matching(&docs, |path| {
+            path.file_name()
+                .and_then(|name| name.to_str())
+                .is_some_and(|name| name.starts_with("accessible_guide") && name.ends_with(".md"))
+        })
+        && scripts.is_dir()
+        && has_child_matching(&scripts, |path| {
+            path.extension()
+                .and_then(|ext| ext.to_str())
+                .is_some_and(|ext| ext == "py")
+        })
+}
+
+fn validate_dataset_packs(root: &Path) -> anyhow::Result<usize> {
+    let mut failed = false;
+    let mut count = 0;
+    for dataset in dataset_pack_dirs(root)? {
+        count += 1;
+        if dataset_has_pack_shape(&dataset) {
+            println!("{} {}", "OK".green(), dataset.display());
+        } else {
+            failed = true;
+            println!(
+                "{} {}: missing README, SESSION_LOG, docs, or script",
+                "FAIL".red(),
+                dataset.display()
+            );
+        }
+    }
+    if failed {
+        anyhow::bail!("dataset pack validation failed");
+    }
+    Ok(count)
+}
+
+fn validate_source_metadata(root: &Path, require_all: bool) -> anyhow::Result<usize> {
+    let required = [
+        "source_agency",
+        "source_title",
+        "source_url",
+        "access_method",
+        "licence",
+        "update_cadence",
+        "methodology_url",
+        "units",
+        "codelists",
+        "caveats",
+        "official_metadata_status",
+    ];
+    let mut failed = false;
+    let mut checked = 0;
+    for dataset in dataset_dirs(root)? {
+        let path = dataset.join("source_metadata.json");
+        if !path.is_file() && !require_all {
+            continue;
+        }
+        checked += 1;
+        if !path.is_file() {
+            failed = true;
+            println!(
+                "{} {}: missing source_metadata.json",
+                "FAIL".red(),
+                dataset.display()
+            );
+            continue;
+        }
+        let value: Value = match serde_json::from_str(&fs::read_to_string(&path)?) {
+            Ok(value) => value,
+            Err(error) => {
+                failed = true;
+                println!(
+                    "{} {}: invalid JSON: {}",
+                    "FAIL".red(),
+                    dataset.display(),
+                    error
+                );
+                continue;
+            }
+        };
+        let missing = required
+            .iter()
+            .filter(|field| value.get(**field).is_none())
+            .copied()
+            .collect::<Vec<_>>();
+        let bad_lists = ["units", "codelists", "caveats"]
+            .iter()
+            .filter(|field| {
+                value
+                    .get(**field)
+                    .is_some_and(|item| item.as_array().is_none_or(|items| items.is_empty()))
+            })
+            .copied()
+            .collect::<Vec<_>>();
+        if missing.is_empty() && bad_lists.is_empty() {
+            println!("{} {}", "OK".green(), dataset.display());
+        } else {
+            failed = true;
+            println!(
+                "{} {}: missing fields [{}], empty list fields [{}]",
+                "FAIL".red(),
+                dataset.display(),
+                missing.join(", "),
+                bad_lists.join(", ")
+            );
+        }
+    }
+    if checked == 0 {
+        anyhow::bail!("no source_metadata.json files found");
+    }
+    if failed {
+        anyhow::bail!("source metadata validation failed");
+    }
+    Ok(checked)
+}
+fn validate_medium_term(run_examples: bool) -> anyhow::Result<()> {
+    let datasets = Path::new("datasets");
+    let packs = dataset_dirs(datasets)?
+        .into_iter()
+        .filter(|path| dataset_has_pack_shape(path))
+        .collect::<Vec<_>>();
+    let has_new_source = packs.iter().any(|path| {
+        path.parent()
+            .and_then(|parent| parent.file_name())
+            .and_then(|name| name.to_str())
+            .is_some_and(|source| !matches!(source, "abs" | "stats_nz" | "aihw"))
+    });
+    let required_guides = [
+        "docs/guides/understanding-social-statistics-concepts.md",
+        "docs/guides/interpreting-common-visualizations.md",
+        "docs/guides/ethical-use-of-social-data.md",
+    ];
+    let metadata_packs = dataset_dirs(datasets)?
+        .into_iter()
+        .filter(|path| path.join("source_metadata.json").is_file())
+        .count();
+    if !Path::new("conductor/tracks/medium_term_expansion_20260618/dataset_candidates.md").is_file()
+    {
+        anyhow::bail!("missing medium-term dataset candidate backlog");
+    }
+    if packs.len() < 11 {
+        anyhow::bail!(
+            "expected at least 11 shaped dataset packs, found {}",
+            packs.len()
+        );
+    }
+    if !has_new_source {
+        anyhow::bail!("expected at least one non-ABS/Stats NZ/AIHW dataset pack");
+    }
+    for guide in required_guides {
+        if !Path::new(guide).is_file() {
+            anyhow::bail!("missing guide {guide}");
+        }
+    }
+    if metadata_packs < 3 {
+        anyhow::bail!(
+            "expected at least three source metadata files, found {}",
+            metadata_packs
+        );
+    }
+    validate_source_metadata(datasets, false)?;
+    if run_examples {
+        print_myhospitals_summary(Path::new("datasets/aihw/myhospitals/data"), 5)?;
+        print_source_metadata_inventory(datasets)?;
+    }
+    println!("{} medium-term roadmap artefacts", "OK".green());
+    Ok(())
+}
+
+fn print_myhospitals_summary(data_dir: &Path, limit: usize) -> anyhow::Result<()> {
+    let mut rows = Vec::new();
+    for entry in
+        fs::read_dir(data_dir).with_context(|| format!("reading {}", data_dir.display()))?
+    {
+        let path = entry?.path();
+        if path
+            .extension()
+            .and_then(|ext| ext.to_str())
+            .is_none_or(|ext| ext != "parquet")
+        {
+            continue;
+        }
+        let frame = read_parquet(&path)?;
+        rows.push((
+            path.file_name()
+                .and_then(|name| name.to_str())
+                .unwrap_or("unknown")
+                .to_string(),
+            frame.height(),
+            frame.width(),
+        ));
+    }
+    if rows.is_empty() {
+        anyhow::bail!("no Parquet files found in {}", data_dir.display());
+    }
+    rows.sort_by(|left, right| left.0.cmp(&right.0));
+    println!("file\trows\tcolumns");
+    for (file, row_count, column_count) in rows.into_iter().take(limit) {
+        println!("{file}\t{row_count}\t{column_count}");
+    }
+    Ok(())
+}
+
+fn print_source_metadata_inventory(root: &Path) -> anyhow::Result<()> {
+    println!("dataset\tsource_agency\tupdate_cadence\tunits\tcodelists");
+    let mut printed = 0;
+    for dataset in dataset_dirs(root)? {
+        let path = dataset.join("source_metadata.json");
+        if !path.is_file() {
+            continue;
+        }
+        let value: Value = serde_json::from_str(&fs::read_to_string(&path)?)?;
+        let units = value
+            .get("units")
+            .and_then(Value::as_array)
+            .map_or(0, Vec::len);
+        let codelists = value
+            .get("codelists")
+            .and_then(Value::as_array)
+            .map_or(0, Vec::len);
+        println!(
+            "{}\t{}\t{}\t{}\t{}",
+            dataset.strip_prefix(root).unwrap_or(&dataset).display(),
+            value
+                .get("source_agency")
+                .and_then(Value::as_str)
+                .unwrap_or(""),
+            value
+                .get("update_cadence")
+                .and_then(Value::as_str)
+                .unwrap_or(""),
+            units,
+            codelists
+        );
+        printed += 1;
+    }
+    if printed == 0 {
+        anyhow::bail!("no source_metadata.json files found");
+    }
+    Ok(())
+}
 async fn run_catalog_command(
     command: CatalogCommand,
     registry: &ProviderRegistry,

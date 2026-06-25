@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-REQUIRED_SOURCES = ("abs", "stats_nz", "aihw")
+REQUIRED_SOURCES = ("abs", "stats_nz", "aihw", "moh")
 
 
 def dataset_dirs(dataset_root: Path) -> list[Path]:

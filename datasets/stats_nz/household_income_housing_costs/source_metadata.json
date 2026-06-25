@@ -1,0 +1,17 @@
+{
+  "source_agency": "Stats NZ",
+  "source_title": "Household income and housing-cost statistics",
+  "source_url": "https://www.stats.govt.nz/information-releases/household-income-and-housing-cost-statistics-year-ended-june-2025/",
+  "access_method": "Aotearoa Data Explorer endpoint or release table download",
+  "licence": "Stats NZ source licence or reuse terms on the dataset page",
+  "update_cadence": "Annual",
+  "methodology_url": "https://www.stats.govt.nz/methods/about-the-transition-from-the-household-economic-survey-to-the-household-income-and-living-survey/",
+  "units": ["NZD", "percent", "count", "ratio"],
+  "codelists": ["period", "geography", "household_type", "tenure", "income_concept"],
+  "caveats": [
+    "Survey estimates can have sampling error.",
+    "Income concepts are not interchangeable.",
+    "Small subgroup estimates require careful interpretation."
+  ],
+  "official_metadata_status": "source release verified; ADE endpoint and exact codelists pending live refresh"
+}

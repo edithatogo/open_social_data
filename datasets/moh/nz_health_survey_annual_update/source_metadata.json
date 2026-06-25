@@ -1,0 +1,17 @@
+{
+  "source_agency": "New Zealand Ministry of Health",
+  "source_title": "Annual Update of Key Results: New Zealand Health Survey",
+  "source_url": "https://www.health.govt.nz/publications/annual-update-of-key-results-202425-new-zealand-health-survey",
+  "access_method": "Annual Data Explorer CSV export",
+  "licence": "Creative Commons Attribution 4.0 International, subject to source page terms",
+  "update_cadence": "Annual",
+  "methodology_url": "https://www.health.govt.nz/publications/annual-update-of-key-results-202425-new-zealand-health-survey",
+  "units": ["percent", "count", "rate", "mean"],
+  "codelists": ["survey_year", "indicator", "age_group", "sex_or_gender", "ethnicity", "deprivation", "disability_status", "health_region"],
+  "caveats": [
+    "Survey estimates have uncertainty and confidence intervals.",
+    "Some values can be suppressed or flagged for reliability.",
+    "Interactive explorer exports may vary by selected indicator and breakdown."
+  ],
+  "official_metadata_status": "publication and CSV availability verified; exact export schema captured at refresh time"
+}

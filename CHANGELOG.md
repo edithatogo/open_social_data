@@ -36,6 +36,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Added ABS dataset packs for Consumer Price Index, Labour Force, and National Accounts with CLI-backed fetch wrappers.
 - Updated the roadmap into short-, medium-, and long-term horizons and added Conductor Tracks 9-11 to drive them to completion.
 - Completed Track 9 short-term release readiness with dataset-pack validation, a QBIS CLI-backed fetch wrapper, release checklist, and local validation evidence.
+- Implemented Track 10 medium-term expansion with new Stats NZ household income/housing-costs, ABS Average Weekly Earnings, and Ministry of Health New Zealand Health Survey dataset packs; added source metadata validation, general social-data guides, runnable examples, and a medium-term roadmap validator.
+- Added Rust CLI `validate` and `examples` subcommands for dataset-pack checks, source metadata checks, medium-term artefact checks, local MyHospitals summaries, and source metadata inventory output.
+- Retired the R example capability and consolidated validated user-facing examples under the Rust CLI.
+- Switched the Rust HTTP client dependency to native Windows TLS for local builds, removing the AWS-LC C build path from the active dependency graph.
+- Validated the Rust CLI medium-term gates locally: dataset packs, source metadata, medium-term examples, standalone examples, focused CLI integration tests, and the full Rust test suite now pass with `CARGO_TARGET_DIR` outside OneDrive.
 - Completed Track 11 long-term sustainability with maintenance checks, issue templates, contributor workflow, provenance and archival guidance, release process documentation, CI maintenance wiring, and an AIHW MyHospitals static dashboard prototype.
 - Created `AGENTS.md` with initial guidelines for AI agent contributions.
 - **AIHW MyHospitals API Integration:**

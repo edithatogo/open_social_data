@@ -1,0 +1,7 @@
+Expected shape for `cargo run --bin open-social-data-cli -- examples myhospitals-summary --limit 5`:
+
+* One row per local MyHospitals Parquet extract, up to the requested limit.
+* Columns: `file`, `rows`, `columns`.
+* At least five rows when the committed/local sample extracts are present.
+
+Exact row order and counts can change when local Parquet extracts are refreshed.

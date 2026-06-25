@@ -1,0 +1,17 @@
+{
+  "source_agency": "Australian Bureau of Statistics",
+  "source_title": "Average Weekly Earnings, Australia",
+  "source_url": "https://www.abs.gov.au/statistics/application-programming-interfaces-apis/indicator-api",
+  "access_method": "ABS API through repository ABS provider",
+  "licence": "ABS source licence or reuse terms on the dataset page",
+  "update_cadence": "Biannual, subject to ABS release calendar",
+  "methodology_url": "https://www.abs.gov.au/statistics/labour/earnings-and-working-conditions/average-weekly-earnings-australia",
+  "units": ["AUD", "percent", "index"],
+  "codelists": ["time_period", "measure", "sex", "state_or_territory", "sector", "unit"],
+  "caveats": [
+    "Average earnings are not median earnings.",
+    "Different earnings measures have different populations and scopes.",
+    "Exact codelists require live DSD confirmation."
+  ],
+  "official_metadata_status": "source coverage verified; dataflow and DSD pending live refresh"
+}

@@ -20,8 +20,9 @@ If no owner is assigned, maintainers should treat the pack as community-maintain
 3. Create the dataset pack using repository templates.
 4. Add or update scripts and validation notes.
 5. Run `python scripts\maintenance_check.py` and relevant dataset checks.
-6. Update `TODO.md`, `CHANGELOG.md`, and roadmap/Conductor status if the work closes a tracked item.
-7. Request review from a maintainer or dataset owner.
+6. Run the Rust CLI validation commands that match the change, such as `cargo run --bin open-social-data-cli -- validate dataset-packs`, `cargo run --bin open-social-data-cli -- validate source-metadata`, and `cargo run --bin open-social-data-cli -- validate medium-term --run-examples`.
+7. Update `TODO.md`, `CHANGELOG.md`, and roadmap/Conductor status if the work closes a tracked item.
+8. Request review from a maintainer or dataset owner.
 
 ## Review Criteria
 

@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 import argparse
+import ast
 import re
-import subprocess
 import sys
 import urllib.error
 import urllib.request
@@ -35,7 +35,8 @@ class CheckResult:
 def dataset_dirs() -> list[Path]:
     return [
         path
-        for source in ("abs", "stats_nz", "aihw")
+        for source in sorted(DATASET_ROOT.iterdir())
+        if source.is_dir()
         for path in sorted((DATASET_ROOT / source).glob("*"))
         if path.is_dir()
     ]
@@ -88,7 +89,7 @@ def check_placeholders() -> list[CheckResult]:
         ROOT / "SESSION_LOG_TEMPLATE.md",
     }
     for path in markdown_files():
-        if path in allowed:
+        if path in allowed or ROOT / "conductor" / "templates" in path.parents:
             continue
         text = path.read_text(encoding="utf-8", errors="replace")
         matches = sorted(set(match.group(0) for match in PLACEHOLDER_RE.finditer(text)))
@@ -158,17 +159,26 @@ def check_live_urls(timeout: float) -> list[CheckResult]:
     return results
 
 
-def run_command(name: str, command: list[str]) -> CheckResult:
-    completed = subprocess.run(
-        command,
-        cwd=ROOT,
-        text=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-    )
-    detail = completed.stdout.strip().splitlines()
-    summary = detail[-1] if detail else "no output"
-    return CheckResult(name, completed.returncode == 0, summary)
+def python_files_for_syntax_check() -> list[Path]:
+    files: list[Path] = []
+    for root in (ROOT / "scripts", ROOT / "datasets"):
+        if root.exists():
+            files.extend(path for path in root.rglob("*.py") if "__pycache__" not in path.parts)
+    return sorted(files)
+
+
+def check_python_syntax() -> CheckResult:
+    files = python_files_for_syntax_check()
+    failures: list[str] = []
+    for path in files:
+        try:
+            ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+        except SyntaxError as error:
+            rel = path.relative_to(ROOT)
+            failures.append(f"{rel}:{error.lineno}: {error.msg}")
+    if failures:
+        return CheckResult("python AST syntax scripts datasets", False, "; ".join(failures[:5]))
+    return CheckResult("python AST syntax scripts datasets", True, f"{len(files)} file(s) parsed")
 
 
 def emit(results: list[CheckResult]) -> int:
@@ -191,7 +201,7 @@ def main() -> None:
         results.extend(check_dataset_pack(dataset))
     results.extend(check_url_presence())
     results.extend(check_placeholders())
-    results.append(run_command("python compileall scripts datasets", [sys.executable, "-m", "compileall", "-q", "scripts", "datasets"]))
+    results.append(check_python_syntax())
     if args.live:
         results.extend(check_live_urls(args.timeout))
 

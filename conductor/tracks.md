@@ -43,7 +43,7 @@ This file tracks all major tracks for the project. Each track has its own detail
 ## [x] Track 7: Documentation and tool registry publication
 *Link: [./conductor/tracks/doc_registry_20260615/](./conductor/tracks/doc_registry_20260615/)*
 - Module-level rustdoc on all source files
-- User guides for reading Parquet in Python and R
+- General data-access guides; validated examples via Rust CLI
 - Cargo.toml metadata (license, keywords, repository, description)
 - GitHub Actions CI workflow (check, fmt, clippy, test, release)
 
@@ -58,11 +58,13 @@ This file tracks all major tracks for the project. Each track has its own detail
 - [x] Close or defer stale QBIS/API blockers
 - [x] Add release-readiness validation for current dataset packs
 
-## [ ] Track 10: Medium-term dataset expansion and examples
+## [x] Track 10: Medium-term dataset expansion and examples
 *Link: [./conductor/tracks/medium_term_expansion_20260618/](./conductor/tracks/medium_term_expansion_20260618/)*
-- Expand source and dataset coverage
-- Add general guides and runnable examples
-- Improve source metadata and codelist capture
+- [x] Expand source and dataset coverage
+- [x] Add general guides and Rust CLI example commands
+- [x] Improve source metadata and codelist capture
+- [x] Complete Rust CLI run/test validation and review
+- [x] Commit the medium-term expansion slice
 
 ## [x] Track 11: Long-term sustainability and advanced access
 *Link: [./conductor/tracks/long_term_sustainability_20260618/](./conductor/tracks/long_term_sustainability_20260618/)*
