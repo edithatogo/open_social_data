@@ -1,8 +1,0 @@
-{
-  "track_id": "rust_core_20260615",
-  "type": "feature",
-  "status": "new",
-  "created_at": "2026-06-15T17:54:30Z",
-  "updated_at": "2026-06-15T17:54:30Z",
-  "description": "Scaffold Rust data engine core and define DatasetProvider trait"
-}

@@ -1,0 +1,13 @@
+{
+  "track_id": "api_integrations_20260615",
+  "type": "feature",
+  "status": "archived",
+  "created_at": "2026-06-15T17:55:50Z",
+  "updated_at": "2026-06-25",
+  "description": "Implement agency API providers (ABS, Stats NZ)",
+  "archived_review": {
+    "reviewed_at": "2026-06-25",
+    "reviewer": "conductor-review-specialist",
+    "findings": "All track deliverables verified complete. AbsProvider (src/providers/abs.rs) implements DatasetProvider with SDMX-JSON API calls, URL building, ETag/Last-Modified conditional requests, pagination, and comprehensive unit tests. StatsNzProvider (src/providers/stats_nz.rs) implements DatasetProvider with OData v1 API calls, OData JSON value parsing, conditional requests, and unit tests. ProviderRegistry (src/registry.rs) registers both providers with with_defaults() and passes provider lookup tests. Git log shows 7 relevant commits including upgrade-provider-row-parsing, test-provider-304-coverage, and feat: mature open social data pipeline. No live HTTP endpoint checks were performed (marked as non-blocking external follow-up in swarm notes). Track archived clean."
+  }
+}

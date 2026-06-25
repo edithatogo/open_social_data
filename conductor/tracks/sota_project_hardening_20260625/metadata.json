@@ -1,0 +1,8 @@
+{
+  "track_id": "sota_project_hardening_20260625",
+  "type": "roadmap",
+  "status": "planned",
+  "created_at": "2026-06-25T00:00:00Z",
+  "updated_at": "2026-06-25T00:00:00Z",
+  "description": "SOTA project hardening, dependency automation, Astro documentation, and advanced Rust data CLI tooling"
+}

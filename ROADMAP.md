@@ -97,3 +97,27 @@ Implementation status: Track 10 dataset, guide, example, metadata, Rust CLI vali
 ---
 
 *This roadmap is a living document and should be updated whenever a Conductor track is completed, deferred, or superseded.*
+
+---
+
+## Next Roadmap: SOTA Project Hardening and Documentation Platform
+
+**Conductor Track:** [Track 12: SOTA project hardening and documentation platform](./conductor/tracks/sota_project_hardening_20260625/)
+
+**Goal:** Move the completed Rust data CLI/library from roadmap-complete to public-project mature.
+
+### Outcomes
+
+* Add Renovate dependency automation for Cargo, GitHub Actions, and docs tooling.
+* Scaffold an Astro 7/Starlight documentation site for users, contributors, maintainers, and release operators.
+* Review and selectively enable valuable optional crate features and CLI reference generation.
+* Add CI and release gates for nextest, audit, deny, coverage, docs builds, release dry-runs, SBOM/provenance, and no-live-publish safety.
+* Add parser fixtures, regression tests, benchmarks, and fuzz/property coverage for ABS SDMX and Stats NZ OData row-level parsing.
+
+### Done When
+
+* Dependency updates are automated but major upgrades remain explicit maintainer decisions.
+* Documentation can be built locally and validated in CI.
+* Optional feature choices are documented with accepted/rejected rationale.
+* CLI completions, man pages, or equivalent generated reference material are available.
+* Parser quality and performance gates protect the core row-level ingestion paths.

@@ -1,0 +1,12 @@
+{
+  "track_id": "hardening_opt_20260615",
+  "type": "feature",
+  "status": "archived",
+  "created_at": "2026-06-15T17:55:50Z",
+  "updated_at": "2026-06-25T00:00:00Z",
+  "description": "Ingestion optimization and pipeline hardening",
+  "archived_review": {
+    "reviewed_at": "2026-06-25T00:00:00Z",
+    "findings": "All Phase 1 tasks verified complete: RetryPolicy with exponential backoff, CircuitBreaker with state tracking and failure thresholds, run_provider_safely with panic isolation (catch_unwind), and build_http_client with timeout/pool configuration are implemented in src/hardening.rs. Phase 2 parser/SIMD hardenings deferred to future backlog as per plan. Module wired into ABS and Stats NZ providers. Tests for retry delay, circuit breaker state transitions, conditional request headers, and panic isolation all present and passing. Track archived cleanly."
+  }
+}

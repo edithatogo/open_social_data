@@ -1,0 +1,12 @@
+{
+  "track_id": "medium_term_expansion_20260618",
+  "type": "roadmap",
+  "status": "archived",
+  "created_at": "2026-06-18T00:00:00Z",
+  "updated_at": "2026-06-25",
+  "description": "Medium-term dataset expansion and examples",
+  "archived_review": {
+    "reviewed_at": "2026-06-25",
+    "findings": "Track 10 complete: 3 new dataset packs implemented (ABS Average Weekly Earnings, MoH NZ Health Survey, Stats NZ Household Income), 4 general user guides created, Rust CLI examples added and validated, 9 dataset candidates identified. Commit 21538e2 verified. All 19 tasks across 5 phases complete. Ready for archive."
+  }
+}

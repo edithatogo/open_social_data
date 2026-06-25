@@ -1,8 +1,0 @@
-{
-  "track_id": "local_cache_20260615",
-  "type": "feature",
-  "status": "completed",
-  "created_at": "2026-06-15T17:58:30Z",
-  "updated_at": "2026-06-17T00:00:00Z",
-  "description": "Local metadata caching and SQLite/DuckDB cataloging"
-}

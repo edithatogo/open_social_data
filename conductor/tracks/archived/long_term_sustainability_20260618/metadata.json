@@ -1,0 +1,12 @@
+{
+  "track_id": "long_term_sustainability_20260618",
+  "type": "roadmap",
+  "status": "archived",
+  "created_at": "2026-06-18T00:00:00Z",
+  "updated_at": "2026-06-25",
+  "description": "Long-term sustainability and advanced access",
+  "archived_review": {
+    "reviewed_at": "2026-06-25",
+    "findings": "Track 11 complete: maintenance operations defined with scripts and cadence, contribution/ownership workflow documented with issue templates, release/provenance/archival policies established, dashboard prototype created and cross-dataset metadata assessed. Commit 5709fdb verified. All 20 tasks across 5 phases complete. Ready for archive."
+  }
+}
