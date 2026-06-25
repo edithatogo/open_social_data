@@ -1,0 +1,18 @@
+{
+  "artifact": "example-artifact",
+  "version": "0.1.0",
+  "owner": "owning-repo-or-maintainer",
+  "status": "draft",
+  "registries": [
+    {
+      "name": "GitHub Releases",
+      "status": "optional",
+      "notes": "Replace this fixture row with the real registry decision."
+    }
+  ],
+  "evidence": [
+    "path/to/local-validation-evidence.md"
+  ],
+  "blockers": [],
+  "notes": "Fixture only; do not claim readiness until evidence paths are real."
+}
