@@ -27,10 +27,10 @@ All tasks require validation evidence before completion. Commits should be split
 
 ## Phase 4: CLI Polish and Generated Reference
 
-- [ ] Add shell completion generation.
-- [ ] Add man-page generation or equivalent CLI reference output.
-- [ ] Add machine-readable CLI help/reference export if useful for docs.
-- [ ] Add tests for generated CLI metadata where feasible.
+- [x] Add shell completion generation.
+- [x] Add man-page generation or equivalent CLI reference output.
+- [x] Add machine-readable CLI help/reference export if useful for docs.
+- [x] Add tests for generated CLI metadata where feasible.
 
 ## Phase 5: CI, Security, and Release Hardening
 

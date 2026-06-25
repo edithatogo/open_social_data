@@ -17,7 +17,9 @@ path = "src/main.rs"
 [dependencies]
 anyhow = "1.0.100"
 async-trait = "0.1.89"
-clap = { version = "4.5.53", features = ["derive"] }
+clap = { version = "4.5.53", features = ["derive", "unstable-doc"] }
+clap_complete = "4.5.53"
+clap-markdown = "0.1.5"
 colored = "3.0.0"
 indicatif = "0.18.3"
 polars = { version = "0.54", features = ["parquet", "lazy", "dtype-time", "dtype-date"] }

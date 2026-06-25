@@ -2,7 +2,10 @@ use std::fs;
 use std::path::{Path, PathBuf};
 
 use anyhow::Context;
-use clap::{Parser, Subcommand};
+use clap::{CommandFactory, Parser, Subcommand};
+use clap::error::ErrorKind;
+use clap_markdown;
+use clap_complete::{Generator, Shell};
 use colored::Colorize;
 use indicatif::{ProgressBar, ProgressStyle};
 use open_social_data_core::{
@@ -23,23 +26,29 @@ struct Cli {
 
 #[derive(Debug, Subcommand)]
 enum Commands {
+    /// List available providers and their datasets
     List {
         #[arg(short, long)]
         provider: Option<String>,
     },
+    /// Manage the local dataset catalog
     Catalog {
         #[command(subcommand)]
         command: CatalogCommand,
     },
+    /// Validate dataset packs, metadata, and examples
     Validate {
         #[command(subcommand)]
         command: ValidateCommand,
     },
+    /// Run example commands against local data
     Examples {
         #[command(subcommand)]
         command: ExampleCommand,
     },
+    /// Show CLI and catalog status
     Status,
+    /// Fetch a dataset from a provider
     Fetch {
         provider: String,
         dataset_id: String,
@@ -49,6 +58,11 @@ enum Commands {
         catalog: PathBuf,
         #[arg(long)]
         quality_report: Option<PathBuf>,
+    },
+    /// Generate shell completions or man pages
+    Generate {
+        #[command(subcommand)]
+        command: GenerateCommand,
     },
 }
 
@@ -113,6 +127,21 @@ enum CatalogCommand {
     },
 }
 
+#[derive(Debug, Subcommand)]
+enum GenerateCommand {
+    /// Generate shell completion scripts
+    Completions {
+        /// Shell type (bash, zsh, fish, powershell, elvish)
+        shell: Shell,
+    },
+    /// Generate CLI man page (markdown)
+    ManPage {
+        /// Output directory for the man page
+        #[arg(short, long, default_value = ".")]
+        output: PathBuf,
+    },
+}
+
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
     let cli = Cli::parse();
@@ -132,6 +161,7 @@ async fn main() -> anyhow::Result<()> {
                 }
             }
         }
+        Commands::Generate { command } => run_generate_command(command)?,
         Commands::Catalog { command } => run_catalog_command(command, &registry).await?,
         Commands::Validate { command } => run_validate_command(command)?,
         Commands::Examples { command } => run_example_command(command)?,
@@ -651,10 +681,30 @@ async fn run_catalog_command(
                     println!("{} {}: {}", "error".red(), error.provider, error.message);
                 }
                 anyhow::bail!(
-                    "catalog sync completed with errors: {}",
+"catalog sync completed with errors: {}",
                     report.error_summary()
                 );
             }
+        }
+        }
+    Ok(())
+}
+
+fn run_generate_command(command: GenerateCommand) -> anyhow::Result<()> {
+    match command {
+        GenerateCommand::Completions { shell } => {
+            let mut cmd = Cli::command();
+            let bin_name = cmd.get_name().to_string();
+            clap_complete::generate(shell, &mut cmd, bin_name, &mut std::io::stdout());
+        }
+        GenerateCommand::ManPage { output } => {
+            let cmd = Cli::command();
+            let man = clap_markdown::help_markdown(&cmd);
+            let output_path = output.join(format!("{}.md", cmd.get_name()));
+            fs::write(&output_path, man).with_context(|| {
+                format!("failed to write man page to {}", output_path.display())
+            })?;
+            println!("{} man page written to {}", "ok".green(), output_path.display());
         }
     }
     Ok(())
