@@ -1,0 +1,25 @@
+{
+  "value": [
+    {
+      "Measure": "Population",
+      "Region": "Auckland",
+      "TimePeriod": "2024",
+      "Value": 1234567,
+      "Unit": "Count"
+    },
+    {
+      "Measure": "Population",
+      "Region": "Wellington",
+      "TimePeriod": "2024",
+      "Value": 543210,
+      "Unit": "Count"
+    },
+    {
+      "Measure": "Population",
+      "Region": "Canterbury",
+      "TimePeriod": "2024",
+      "Value": 678901,
+      "Unit": "Count"
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+#[test]
+fn abs_sdmx_fixture_parses_four_observations() {
+    let json = load_fixture("abs_sdmx_response.json");
+    let records = parse_abs_sdmx_fixture(&json);
+    assert_eq!(records.len(), 4);
+    let mut builder = RecordBatchBuilder::new();
+    for record in records {
+        builder.push(record);
+    }
+    let frame = builder.build().expect("should build DataFrame");
+    assert_eq!(frame.width(), 4);
+    assert_eq!(frame.height(), 4);
+    let measure_col = frame.column("MEASURE").unwrap().str().unwrap();
+    let value_col = frame.column("OBS_VALUE").unwrap().str().unwrap();
+    assert_eq!(measure_col.get(0), Some("SALES"));
+    assert_eq!(value_col.get(0), Some("12.5"));
+    assert_eq!(measure_col.get(2), Some("PROFIT"));
+    assert_eq!(value_col.get(2), Some("20.0"));
+}
+
+#[test]
+fn abs_sdmx_fixture_contains_expected_columns() {
+    let json = load_fixture("abs_sdmx_response.json");
+    let records = parse_abs_sdmx_fixture(&json);
+    let mut builder = RecordBatchBuilder::new();
+    for record in records {
+        builder.push(record);
+    }
+    let frame = builder.build().expect("valid DataFrame");
+    let col_names: Vec<&str> = frame.get_column_names().iter().map(|s| s.as_str()).collect();
+    assert!(col_names.contains(&"MEASURE"));
+    assert!(col_names.contains(&"REGION"));
+    assert!(col_names.contains(&"TIME_PERIOD"));
+    assert!(col_names.contains(&"OBS_VALUE"));
+}
+
+fn parse_stats_nz_odata_fixture(json_text: &str) -> Vec<RawRecord> {
+    let parsed: serde_json::Value =
+        serde_json::from_str(json_text).expect("fixture should be valid JSON");
+    let mut records = Vec::new();
+    if let Some(values) = parsed["value"].as_array() {
+        for entry in values {
+            let mut record = RawRecord::new();
+            if let Some(obj) = entry.as_object() {
+                for (key, value) in obj {
+                    let str_val = match value {
+                        serde_json::Value::String(s) => s.clone(),
+                        serde_json::Value::Number(n) => n.to_string(),
+                        serde_json::Value::Bool(b) => b.to_string(),
+                        _ => value.to_string(),
+                    };
+                    record = record.with(key.clone(), str_val);
+                }
+            }
+            records.push(record);
+        }
+    }
+    records
+}
+
+#[test]
+fn stats_nz_odata_fixture_parses_three_records() {
+    let json = load_fixture("stats_nz_odata_response.json");
+    let records = parse_stats_nz_odata_fixture(&json);
+    assert_eq!(records.len(), 3);
+    let mut builder = RecordBatchBuilder::new();
+    for record in records {
+        builder.push(record);
+    }
+    let frame = builder.build().expect("valid DataFrame");
+    let col_names: Vec<&str> = frame.get_column_names().iter().map(|s| s.as_str()).collect();
+    for expected in &["Measure", "Region", "TimePeriod", "Value", "Unit"] {
+        assert!(col_names.contains(expected));
+    }
+    let region_col = frame.column("Region").unwrap().str().unwrap();
+    assert_eq!(region_col.get(0), Some("Auckland"));
+    assert_eq!(region_col.get(1), Some("Wellington"));
+    assert_eq!(region_col.get(2), Some("Canterbury"));
+}
+
+#[test]
+fn stats_nz_odata_fixture_values_are_numeric() {
+    let json = load_fixture("stats_nz_odata_response.json");
+    let records = parse_stats_nz_odata_fixture(&json);
+    let mut builder = RecordBatchBuilder::new();
+    for record in records {
+        builder.push(record);
+    }
+    let frame = builder.build().expect("valid DataFrame");
+    let value_col = frame.column("Value").unwrap();
+    for i in 0..value_col.len() {
+        let val = value_col.str().unwrap().get(i).unwrap();
+        assert!(
+            val.parse::<f64>().is_ok() || val.parse::<i64>().is_ok(),
+            "Value '{}' should be numeric",
+            val
+        );
+    }
+}

@@ -1,0 +1,50 @@
+{
+  "data": {
+    "dataSets": [
+      {
+        "series": {
+          "0:0": {
+            "observations": {
+              "0": [12.5],
+              "1": [13.0]
+            }
+          },
+          "1:0": {
+            "observations": {
+              "0": [20.0],
+              "1": [19.5]
+            }
+          }
+        }
+      }
+    ],
+    "structure": {
+      "dimensions": {
+        "series": [
+          {
+            "id": "MEASURE",
+            "values": [
+              { "id": "SALES" },
+              { "id": "PROFIT" }
+            ]
+          },
+          {
+            "id": "REGION",
+            "values": [
+              { "id": "AUS" }
+            ]
+          }
+        ],
+        "observation": [
+          {
+            "id": "TIME_PERIOD",
+            "values": [
+              { "id": "2024-Q1" },
+              { "id": "2024-Q2" }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

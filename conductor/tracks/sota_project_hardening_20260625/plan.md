@@ -44,11 +44,11 @@ All tasks require validation evidence before completion. Commits should be split
 
 ## Phase 6: Parser Robustness and Performance
 
-- [ ] Add compact ABS SDMX and Stats NZ OData fixture payloads.
-- [ ] Add snapshot or regression tests for parsed row output.
-- [ ] Add parser benchmarks for representative fixture sizes.
-- [ ] Add property or fuzz coverage where it provides meaningful parser safety.
-- [ ] Document fixture sourcing, minimisation, and licence constraints.
+- [x] Add compact ABS SDMX and Stats NZ OData fixture payloads.
+- [x] Add snapshot or regression tests for parsed row output.
+- [x] Add parser benchmarks for representative fixture sizes.
+- [x] Add property or fuzz coverage where it provides meaningful parser safety.
+- [x] Document fixture sourcing, minimisation, and licence constraints.
 
 ## Phase 7: Review and Close
 
