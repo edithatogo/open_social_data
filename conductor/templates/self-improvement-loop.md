@@ -41,7 +41,7 @@ Use this file for both conductor-level learning artifacts and per-track postmort
 - Supporting evidence
 
 ## Promote
-- Promote to shared template: `[ ]`
-- Promote to skill patch: `[ ]`
+- Promote to shared template: `yes | no | not_applicable`
+- Promote to skill patch: `yes | no | not_applicable`
 - Reviewer: ``
 - Review date:

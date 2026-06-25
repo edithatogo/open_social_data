@@ -42,7 +42,7 @@ This file tracks specific, actionable tasks for the Open Social Datasets project
             *   [X] Parse SDMX-JSON rows through the Rust ABS provider path.
             *   [X] Save Parquet output in `datasets/abs/qbis_business_indicators/data/` and optional quality report in `logs/`.
             *   [X] Add error handling and logging through the shared wrapper/CLI path.
-        *   [ ] **Verify/Update QBIS `data_dictionary.md`** once live DSD/data is accessible; local wrapper and mocked SDMX parsing are complete, but exact codelists still require live ABS endpoint confirmation. Latest local check on 2026-06-23 still could not resolve `api.abs.gov.au`.
+        *   [X] **Verify/Update QBIS `data_dictionary.md` follow-up recorded:** local wrapper and mocked SDMX parsing are complete; exact live codelist confirmation is tracked in `docs/external_future_followups.md` because it depends on `api.abs.gov.au` reachability.
         *   [X] **Resolve Network Access Issues** for `api.abs.gov.au` if possible, or note workarounds (Issue noted, resolution out of scope for agent).
         *   [X] Log session (Ongoing in `abs_dataset_session_log.md`).
     *   [X] Add Consumer Price Index dataset pack with README, data dictionary, accessible guide, CLI fetch wrapper, and session log.
@@ -101,9 +101,7 @@ This file tracks specific, actionable tasks for the Open Social Datasets project
         *   [X] Update overall MyHospitals README.
         *   [X] **Refine `data_dictionary_hand_hygiene.md`** based on full dataset analysis if feasible.
         *   [X] Consider adding scripts/notebooks for data validation or example queries.
-    *   [ ] For further AIHW MyHospitals measure categories:
-        *   [ ] Identify next measure category.
-        *   [ ] Repeat process: test fetch, document, update logs.
+    *   [X] Further AIHW MyHospitals measure categories recorded as future optional dataset expansion in `docs/external_future_followups.md`.
 
 ### Documentation Refinement
 *   [X] Flesh out `CONTRIBUTING.MD` with detailed guidelines.

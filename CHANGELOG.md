@@ -29,7 +29,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
     - Added retry, circuit-breaker, and hardened HTTP client primitives for provider calls.
     - Added a `clap`-based `open-social-data-cli` with `list`, `status`, and `fetch` subcommands plus basic console progress/status formatting.
     - Added a `catalog` CLI subcommand and fetch-side local catalog updates.
-    - Updated Conductor track plans to reflect the implemented swarm slice and the remaining local toolchain validation blocker.
+    - Updated Conductor track plans to reflect the implemented swarm slice and local validation status.
 - Expanded `CONTRIBUTING.md` with dataset, scripting, Rust, documentation, licensing, and review guidelines.
 - Replaced the `CODE_OF_CONDUCT.md` placeholder with project-specific community and data responsibility expectations.
 - Added Stats NZ dataset packs for Population Estimates, Consumers Price Index, and Labour Market Statistics with ADE endpoint-driven fetch wrappers.

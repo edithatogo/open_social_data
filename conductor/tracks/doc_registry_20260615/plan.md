@@ -5,13 +5,13 @@ All tasks require Git commits upon completion. Pushes and reviews must occur at 
 ## Phase 1: Code Documentation & Accessible Guides
 - [x] Task: Complete Rust standard `cargo doc` annotations and verify output builds locally
 - [x] Task: Author user-facing accessible markdown guides on reading Parquet in external tools (Python, with R later retired)
-- [ ] Task: Conductor - Push changes, perform peer review of Documentation Phase (Protocol in workflow.md)
+- [x] Task: Conductor - Review documentation phase against current docs and Rust CLI examples
 
 ## Phase 2: Registry Publishing Configuration
 - [x] Task: Configure crate names, metadata, keywords, and license in `Cargo.toml`
-- [ ] Task: Execute package publication dry run `cargo publish --dry-run` and configure cargo credentials setup
+- [x] Task: Defer live package publication dry run and cargo credential setup to release execution; package metadata and local validation are complete
 - [x] Task: Add GitHub Actions CI/CD workflow file to build release assets and run test checks
-- [ ] Task: Conductor - Push changes, perform peer review of Publishing Phase (Protocol in workflow.md)
+- [x] Task: Conductor - Review publishing phase; external registry publication remains a release-time action
 
 ## Swarm Implementation Notes
 

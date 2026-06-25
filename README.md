@@ -71,7 +71,7 @@ cargo clippy --all-targets -- -D warnings
 
 The repo includes a GNU-target Cargo linker setting so the active `stable-x86_64-pc-windows-gnu` toolchain uses `gcc` instead of accidentally resolving Git for Windows' `link.exe`.
 
-Release-readiness checks for the current dataset packs are documented in `docs/technical/release_readiness_checklist.md`.
+Release-readiness checks for the current dataset packs are documented in `docs/technical/release_readiness_checklist.md`. External source and future expansion follow-ups that are not roadmap blockers are tracked in `docs/external_future_followups.md`.
 
 ## Current Dataset Coverage
 

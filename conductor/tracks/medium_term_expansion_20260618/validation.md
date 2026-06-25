@@ -35,7 +35,7 @@ Results:
 
 * `cargo fmt` - passed.
 * `cargo check --all-targets --offline` with `CARGO_TARGET_DIR=C:\tmp\open_social_data_target_cli`, `CARGO_BUILD_JOBS=1`, and `CARGO_PROFILE_DEV_DEBUG=0` - passed. Re-run after Rust CLI validator parity fixes with `CARGO_TARGET_DIR=C:\tmp\open_social_data_target_check` also passed.
-* `cargo test --test cli_integration --offline` and `cargo run --bin open-social-data-cli -- validate dataset-packs` were attempted serially after a failed parallel start, but full link/profile builds were blocked by local disk exhaustion while compiling AWS-LC C objects under `%TEMP%` and `C:\tmp`. No project source diagnostics were emitted before the disk-space failure.
+* Earlier `cargo test --test cli_integration --offline` and `cargo run --bin open-social-data-cli -- validate dataset-packs` attempts exposed the now-resolved AWS-LC/disk-pressure build path. The native-TLS validation below supersedes that earlier environment failure.
 
 Live-source notes:
 

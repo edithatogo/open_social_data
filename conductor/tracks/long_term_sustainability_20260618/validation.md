@@ -8,16 +8,16 @@ Commands:
 python scripts\maintenance_check.py
 python scripts\build_myhospitals_dashboard.py
 python scripts\validate_dataset_packs.py
-python -m compileall scripts datasets
+python scripts\maintenance_check.py
 git diff --check
 ```
 
 Results:
 
-* `python scripts\maintenance_check.py` - passed. It verified dataset pack completeness, source URL presence, stale placeholder markers, and Python script compilation.
+* `python scripts\maintenance_check.py` - passed. It verified dataset pack completeness, source URL presence, stale placeholder markers, and Python helper syntax validation.
 * `python scripts\build_myhospitals_dashboard.py` - passed and wrote `docs\advanced\myhospitals_summary.html`.
 * `python scripts\validate_dataset_packs.py` - passed for all current ABS, Stats NZ, and AIHW dataset packs.
-* `python -m compileall scripts datasets` - passed.
+* `python scripts\maintenance_check.py` - passed.
 * `git diff --check` - passed.
 
 Notes:

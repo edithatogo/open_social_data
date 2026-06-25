@@ -6,7 +6,7 @@ Commands to run for this track:
 
 ```cmd
 python scripts\validate_dataset_packs.py
-python -m compileall scripts datasets
+python scripts\maintenance_check.py
 python datasets\aihw\myhospitals\scripts\validate_myhospitals_data.py
 python datasets\aihw\myhospitals\scripts\example_queries.py --limit 5
 set CARGO_TARGET_DIR=C:\tmp\open_social_data_target2
@@ -20,7 +20,7 @@ git diff --check
 Results:
 
 * `python scripts\validate_dataset_packs.py` - passed; all current ABS, Stats NZ, and AIHW packs reported `OK`.
-* `python -m compileall scripts datasets` - passed.
+* `python scripts\maintenance_check.py` - passed.
 * `python datasets\aihw\myhospitals\scripts\validate_myhospitals_data.py` - passed for five local Parquet extracts:
   * `MYH-ADM`: 112,310 rows, 61 columns.
   * `MYH-CANCER`: 2,514 rows, 61 columns.

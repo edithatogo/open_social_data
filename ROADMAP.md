@@ -11,7 +11,7 @@ Phase 1 foundation work is complete:
 * Initial dataset packs now exist for Stats NZ, ABS, and AIHW MyHospitals.
 * Validation has been proven locally with Windows GNU Rust tooling and Python checks for the AIHW Parquet extracts.
 
-Open work is now grouped into short-, medium-, and long-term tracks.
+The short-, medium-, and long-term tracks are implemented locally. Remaining source-refresh and optional expansion items are tracked separately as external/future follow-ups.
 
 ---
 
