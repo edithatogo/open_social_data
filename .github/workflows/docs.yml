@@ -1,0 +1,43 @@
+name: Docs
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs-site/**'
+      - 'docs/**'
+      - 'conductor/**'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'docs-site/**'
+      - 'docs/**'
+      - 'conductor/**'
+
+jobs:
+  check:
+    name: Docs Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: docs-site/package-lock.json
+      - run: npm ci --prefix docs-site
+      - run: npm run docs:check --prefix docs-site
+
+  build:
+    name: Docs Build
+    needs: check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: docs-site/package-lock.json
+      - run: npm ci --prefix docs-site
+      - run: npm run docs:build --prefix docs-site

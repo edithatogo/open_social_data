@@ -13,7 +13,9 @@ export default defineConfig({
       title: 'Open Social Data',
       description: 'Legal NZ documentation portal for Open Social Data.',
       sidebar: [
-        { label: 'Start', items: ['index', 'docs-tooling-audit'] },
+        { label: 'Start', items: ['index', 'getting-started', 'docs-tooling-audit'] },
+        { label: 'Reference', items: ['cli-reference', 'providers', 'dataset-packs', 'catalog', 'validation'] },
+        { label: 'Project', items: ['roadmap-status', 'release', 'provenance-archival'] },
       ],
     }),
   ],

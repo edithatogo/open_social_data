@@ -11,11 +11,11 @@ All tasks require validation evidence before completion. Commits should be split
 
 ## Phase 2: Astro 7 and Starlight Documentation
 
-- [ ] Scaffold an Astro 7/Starlight docs site.
-- [ ] Add installation, quickstart, and CLI command reference pages.
-- [ ] Add provider authoring, dataset pack, catalog, validation, and roadmap-status pages.
-- [ ] Add release, provenance, and archival docs pages from existing guidance.
-- [ ] Add a local docs build command and CI/docs validation gate.
+- [x] Scaffold an Astro 7/Starlight docs site.
+- [x] Add installation, quickstart, and CLI command reference pages.
+- [x] Add provider authoring, dataset pack, catalog, validation, and roadmap-status pages.
+- [x] Add release, provenance, and archival docs pages from existing guidance.
+- [x] Add a local docs build command and CI/docs validation gate.
 
 ## Phase 3: Rust Dependency Feature Review
 
