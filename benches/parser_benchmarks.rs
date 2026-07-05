@@ -1,4 +1,5 @@
-use criterion::{black_box, criterion_group, criterion_main, Criterion};
+use criterion::{Criterion, criterion_group, criterion_main};
+use std::hint::black_box;
 
 // Re-use the fixture-loading and parser functions from the regression tests.
 // In a real benchmark setup these would live in a shared module.
@@ -12,8 +13,7 @@ fn load_fixture(name: &str) -> String {
 }
 
 fn parse_abs_sdmx(json_text: &str) -> usize {
-    let parsed: serde_json::Value =
-        serde_json::from_str(json_text).expect("valid JSON");
+    let parsed: serde_json::Value = serde_json::from_str(json_text).expect("valid JSON");
     let data = &parsed["data"];
     let structure = &data["structure"];
     let dimensions = &structure["dimensions"];
@@ -55,8 +55,7 @@ fn parse_abs_sdmx(json_text: &str) -> usize {
 }
 
 fn parse_stats_nz_odata(json_text: &str) -> usize {
-    let parsed: serde_json::Value =
-        serde_json::from_str(json_text).expect("valid JSON");
+    let parsed: serde_json::Value = serde_json::from_str(json_text).expect("valid JSON");
     if let Some(values) = parsed["value"].as_array() {
         values.len()
     } else {

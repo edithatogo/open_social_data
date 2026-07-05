@@ -12,7 +12,7 @@
 //!   [`FetchResult`]/[`FetchOptions`] types.
 //! - **`models`**: Standard data structures for provider/dataset metadata.
 //! - **`error`**: Domain-specific error types via [`thiserror`].
-//! - **`providers`**: Concrete provider implementations (ABS, Stats NZ).
+//! - **`providers`**: Concrete provider implementations (ABS, DigitalNZ, Stats NZ).
 //! - **`registry`**: Dynamic provider registry for plugin-style loading.
 //! - **`catalog`**: JSON-backed local catalog for tracking fetched datasets.
 //! - **`sqlite_catalog`**: SQLite-backed local catalog storage.

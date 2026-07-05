@@ -7,6 +7,7 @@
 use crate::error::Result;
 use crate::hardening::ConditionalRequestMetadata;
 use crate::models::{Catalog, ProviderMetadata};
+use crate::quality::QualityAssertion;
 use async_trait::async_trait;
 use polars::prelude::DataFrame;
 
@@ -135,4 +136,9 @@ pub trait DatasetProvider: Send + Sync {
         dataset_id: &str,
         _options: FetchOptions,
     ) -> Result<FetchResult>;
+
+    /// Returns provider-specific quality assertions for normalized payloads.
+    fn quality_assertions(&self) -> Vec<QualityAssertion> {
+        Vec::new()
+    }
 }

@@ -21,55 +21,62 @@
 
 ## Phase 1: Boundary and Contract
 
-- [ ] Task: Confirm the integration boundary between `dnz` and `open_social_data`.
+- [x] Task: Confirm the integration boundary between `dnz` and `open_social_data`.
     - [x] Document `dnz` responsibilities: ad hoc search, facets, Gazette export, cache, MCP, Python/Rust package surfaces.
-    - [ ] Document `open_social_data` responsibilities: curated provider fetches, catalog entries, quality reports, and Parquet outputs.
-    - [ ] Decide whether to depend on `dnz-core` directly or ingest `dnz` JSONL/manifest outputs first.
-- [ ] Task: Define the DigitalNZ provider contract.
-    - [ ] Add curated dataset ID definitions for `nz_gazette` and a small fixture-backed search dataset.
+    - [x] Document `open_social_data` responsibilities: curated provider fetches, catalog entries, quality reports, and Parquet outputs.
+    - [x] Decide whether to depend on `dnz-core` directly or ingest `dnz` JSONL/manifest outputs first.
+- [x] Task: Define the DigitalNZ provider contract.
+    - [x] Add curated dataset ID definitions for `nz_gazette` and a small fixture-backed search dataset.
     - [x] Define authentication and cache configuration behavior.
-    - [ ] Define output columns and provenance fields.
+    - [x] Define output columns and provenance fields.
 
 ## Phase 2: Provider Implementation
 
-- [ ] Task: Add a `digitalnz` provider module.
-    - [ ] Implement `DatasetProvider::metadata`.
-    - [ ] Implement `ping` without leaking credentials.
-    - [ ] Implement `list_datasets` for curated datasets.
-    - [ ] Implement `fetch_dataset_with_options` for fixture-backed and live-capable fetches.
-- [ ] Task: Register the provider.
-    - [ ] Add `DigitalNzProvider` to `ProviderRegistry::with_defaults`.
-    - [ ] Add unit tests for registration and provider lookup.
+- [x] Task: Add a `digitalnz` provider module.
+    - [x] Implement `DatasetProvider::metadata`.
+    - [x] Implement `ping` without leaking credentials.
+    - [x] Implement `list_datasets` for curated datasets.
+    - [x] Implement `fetch_dataset_with_options` for fixture-backed and live-capable fetches.
+- [x] Task: Register the provider.
+    - [x] Add `DigitalNzProvider` to `ProviderRegistry::with_defaults`.
+    - [x] Add unit tests for registration and provider lookup.
 
 ## Phase 3: Gazette Dataset Workflow
 
-- [ ] Task: Normalize New Zealand Gazette records into the open social data shape.
-    - [ ] Map DNZ record fields into stable DataFrame columns.
-    - [ ] Preserve source URLs, content partner, collection/category, dates, and provider-specific extra metadata.
-    - [ ] Add quality assertions for required Gazette fields.
-- [ ] Task: Add catalog and fixture coverage.
-    - [ ] Add hermetic fixture data for Gazette/search responses.
-    - [ ] Add tests for catalog sync/list/search behavior with `digitalnz`.
+- [x] Task: Normalize New Zealand Gazette records into the open social data shape.
+    - [x] Map DNZ record fields into stable DataFrame columns.
+    - [x] Preserve source URLs, content partner, collection/category, dates, and provider-specific extra metadata.
+    - [x] Add quality assertions for required Gazette fields.
+- [x] Task: Add catalog and fixture coverage.
+    - [x] Add hermetic fixture data for Gazette/search responses.
+    - [x] Add tests for catalog sync/list/search behavior with `digitalnz`.
 
 ## Phase 4: CLI and Documentation Alignment
 
-- [ ] Task: Add user-facing docs for command mapping.
-    - [ ] Explain `dnz search` versus `open-social-data-cli fetch digitalnz ...`.
-    - [ ] Explain `dnz gazette-export` versus curated `digitalnz nz_gazette` fetches.
+- [x] Task: Add user-facing docs for command mapping.
+    - [x] Explain `dnz search` versus `open-social-data-cli fetch digitalnz ...`.
+    - [x] Explain `dnz gazette-export` versus curated `digitalnz nz_gazette` fetches.
     - [x] Document required environment variables and cache behavior.
-- [ ] Task: Add CLI reference/examples.
-    - [ ] Add example fetch commands.
-    - [ ] Add catalog sync/list/search examples for DigitalNZ datasets.
-    - [ ] Add troubleshooting notes for missing `DIGITALNZ_API_KEY`.
+- [x] Task: Add CLI reference/examples.
+    - [x] Add example fetch commands.
+    - [x] Add catalog sync/list/search examples for DigitalNZ datasets.
+    - [x] Add troubleshooting notes for missing `DIGITALNZ_API_KEY`.
 
 ## Phase 5: Validation and Release Readiness
 
-- [ ] Task: Run local validation.
-    - [ ] Run `cargo fmt --check`.
-    - [ ] Run `cargo check`.
-    - [ ] Run `cargo clippy -- -D warnings`.
-    - [ ] Run unit and CLI integration tests.
-- [ ] Task: Verify GitHub issue and Conductor alignment.
+- [x] Task: Run local validation.
+    - [x] Run `cargo fmt --check`.
+    - [x] Run `cargo check`.
+    - [x] Run `cargo clippy -- -D warnings`.
+    - [x] Run unit and CLI integration tests.
+- [x] Task: Verify GitHub issue and Conductor alignment.
     - [x] Ensure GitHub issues link back to this track.
     - [x] Update this plan with implementation evidence and commit SHAs.
-    - [ ] Prepare follow-up work for wider DNZ dataset coverage after `nz_gazette`.
+    - [x] Prepare follow-up work for wider DNZ dataset coverage after `nz_gazette`.
+
+## Implementation Evidence
+
+- Commit: `01920d5` (`feat: add DigitalNZ curated provider`)
+- Validation: `cargo +stable-x86_64-pc-windows-gnu check --all-targets`
+- Validation: `cargo +stable-x86_64-pc-windows-gnu test --all-targets`
+- Validation: `cargo +stable-x86_64-pc-windows-gnu clippy --all-targets -- -D warnings`

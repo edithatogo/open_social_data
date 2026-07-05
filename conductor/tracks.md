@@ -81,8 +81,8 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-## [ ] Track 13: DigitalNZ provider and DNZ CLI capability alignment
+## [x] Track 13: DigitalNZ provider and DNZ CLI capability alignment
 *Link: [./conductor/tracks/digitalnz_provider_20260705/](./conductor/tracks/digitalnz_provider_20260705/)*
-- [ ] Add a `digitalnz` provider that reuses or ingests DNZ capabilities for curated dataset fetches.
-- [ ] Support New Zealand Gazette as the first curated DigitalNZ-backed dataset.
-- [ ] Document when to use standalone `dnz` versus `open-social-data-cli fetch digitalnz ...`.
+- [x] Add a `digitalnz` provider that reuses or ingests DNZ capabilities for curated dataset fetches.
+- [x] Support New Zealand Gazette as the first curated DigitalNZ-backed dataset.
+- [x] Document when to use standalone `dnz` versus `open-social-data-cli fetch digitalnz ...`.

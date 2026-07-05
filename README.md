@@ -41,8 +41,10 @@ Common commands:
 ```bash
 cargo run --bin open-social-data-cli -- list
 cargo run --bin open-social-data-cli -- list --provider abs
+cargo run --bin open-social-data-cli -- list --provider digitalnz
 cargo run --bin open-social-data-cli -- status
 cargo run --bin open-social-data-cli -- fetch abs QBIS --output datasets/abs/qbis_business_indicators/data/qbis.parquet --quality-report .open-social-data/qbis-quality.json
+cargo run --bin open-social-data-cli -- fetch digitalnz nz_gazette --output datasets/digitalnz/nz_gazette.parquet
 cargo run --bin open-social-data-cli -- catalog sync
 cargo run --bin open-social-data-cli -- catalog sync --provider abs
 cargo run --bin open-social-data-cli -- catalog sync --sqlite .open-social-data/catalog.sqlite

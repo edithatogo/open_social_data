@@ -1,0 +1,33 @@
+{
+  "search": {
+    "result_count": 2,
+    "results": [
+      {
+        "id": "gaz-1",
+        "title": "Gazette Notice 1",
+        "description": "Gazette notice one",
+        "collection": ["New Zealand Gazette"],
+        "content_partner": ["National Library of New Zealand"],
+        "category": ["Text"],
+        "date": ["2024-01-02"],
+        "display_url": "https://digitalnz.org/records/gaz-1",
+        "source_url": "https://gazette.govt.nz/notice/1",
+        "syndication_date": "2024-01-03",
+        "license": "CC-BY"
+      },
+      {
+        "id": "gaz-2",
+        "title": "Gazette Notice 2",
+        "description": "Gazette notice two",
+        "collection": ["New Zealand Gazette"],
+        "content_partner": ["National Library of New Zealand"],
+        "category": ["Text"],
+        "date": ["2024-01-05"],
+        "display_url": "https://digitalnz.org/records/gaz-2",
+        "source_url": "https://gazette.govt.nz/notice/2",
+        "syndication_date": "2024-01-06",
+        "usage": "Open access"
+      }
+    ]
+  }
+}
