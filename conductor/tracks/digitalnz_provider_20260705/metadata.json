@@ -1,0 +1,8 @@
+{
+  "track_id": "digitalnz_provider_20260705",
+  "type": "feature",
+  "status": "new",
+  "created_at": "2026-07-05T00:00:00+10:00",
+  "updated_at": "2026-07-05T00:00:00+10:00",
+  "description": "Add an open_social_data DigitalNZ provider that incorporates DNZ CLI capabilities for curated dataset workflows without replacing the standalone dnz CLI."
+}

@@ -78,3 +78,11 @@ This file tracks all major tracks for the project. Each track has its own detail
 - [ ] Scaffold Astro 7/Starlight documentation
 - [ ] Review optional Rust crate features and CLI reference generation
 - [ ] Add CI, security, coverage, parser benchmark/fuzz, SBOM, and release dry-run gates
+
+---
+
+## [ ] Track 13: DigitalNZ provider and DNZ CLI capability alignment
+*Link: [./conductor/tracks/digitalnz_provider_20260705/](./conductor/tracks/digitalnz_provider_20260705/)*
+- [ ] Add a `digitalnz` provider that reuses or ingests DNZ capabilities for curated dataset fetches.
+- [ ] Support New Zealand Gazette as the first curated DigitalNZ-backed dataset.
+- [ ] Document when to use standalone `dnz` versus `open-social-data-cli fetch digitalnz ...`.
