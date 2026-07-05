@@ -5,6 +5,7 @@
 - Provider core: https://github.com/edithatogo/open_social_data/issues/5
 - New Zealand Gazette dataset: https://github.com/edithatogo/open_social_data/issues/4
 - CLI and documentation alignment: https://github.com/edithatogo/open_social_data/issues/3
+- Upstream DNZ compatibility contract: https://github.com/edithatogo/dnz/issues/3
 
 ## Phase 1: Boundary and Contract
 
