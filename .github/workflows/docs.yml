@@ -24,7 +24,7 @@ jobs:
         with:
           node-version: '22'
       - run: npm install --prefix docs-site --ignore-scripts
-      - run: npm run docs:check --prefix docs-site
+      - run: npm run check --prefix docs-site
 
   build:
     name: Docs Build
@@ -36,4 +36,4 @@ jobs:
         with:
           node-version: '22'
       - run: npm install --prefix docs-site --ignore-scripts
-      - run: npm run docs:build --prefix docs-site
+      - run: npm run build --prefix docs-site
