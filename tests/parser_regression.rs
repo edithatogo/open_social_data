@@ -60,17 +60,12 @@ fn parse_abs_sdmx_fixture(json_text: &str) -> Vec<RawRecord> {
                         .collect();
                     let mut dim_values = Vec::new();
                     for (dim_idx, &val_idx) in indices.iter().enumerate() {
-                        if dim_idx < series_labels.len()
-                            && val_idx < series_labels[dim_idx].len()
-                        {
+                        if dim_idx < series_labels.len() && val_idx < series_labels[dim_idx].len() {
                             let dim_id = series_dims[dim_idx]["id"]
                                 .as_str()
                                 .unwrap_or("dim")
                                 .to_string();
-                            dim_values.push((
-                                dim_id,
-                                series_labels[dim_idx][val_idx].clone(),
-                            ));
+                            dim_values.push((dim_id, series_labels[dim_idx][val_idx].clone()));
                         }
                     }
                     if let Some(observations) = series["observations"].as_object() {
@@ -84,28 +79,20 @@ fn parse_abs_sdmx_fixture(json_text: &str) -> Vec<RawRecord> {
                                 record = record.with(d.clone(), v.clone());
                             }
                             for (dim_idx, &val_idx) in obs_indices.iter().enumerate() {
-                                if dim_idx < obs_labels.len()
-                                    && val_idx < obs_labels[dim_idx].len()
+                                if dim_idx < obs_labels.len() && val_idx < obs_labels[dim_idx].len()
                                 {
                                     let obs_dim_id = obs_dims[dim_idx]["id"]
                                         .as_str()
                                         .unwrap_or("obs_dim")
                                         .to_string();
-                                    record = record.with(
-                                        obs_dim_id,
-                                        obs_labels[dim_idx][val_idx].clone(),
-                                    );
+                                    record = record
+                                        .with(obs_dim_id, obs_labels[dim_idx][val_idx].clone());
                                 }
                             }
-                            if let Some(val) = obs_value
-                                .as_array()
-                                .and_then(|a| a.first())
-                            {
+                            if let Some(val) = obs_value.as_array().and_then(|a| a.first()) {
                                 record = record.with(
                                     "OBS_VALUE".to_string(),
-                                    val.as_f64()
-                                        .map(|v| v.to_string())
-                                        .unwrap_or_default(),
+                                    val.as_f64().map(|v| v.to_string()).unwrap_or_default(),
                                 );
                             }
                             records.push(record);
@@ -134,7 +121,7 @@ fn abs_sdmx_fixture_parses_four_observations() {
     assert_eq!(measure_col.get(0), Some("SALES"));
     assert_eq!(value_col.get(0), Some("12.5"));
     assert_eq!(measure_col.get(2), Some("PROFIT"));
-    assert_eq!(value_col.get(2), Some("20.0"));
+    assert_eq!(value_col.get(2), Some("20"));
 }
 
 #[test]
@@ -146,7 +133,11 @@ fn abs_sdmx_fixture_contains_expected_columns() {
         builder.push(record);
     }
     let frame = builder.build().expect("valid DataFrame");
-    let col_names: Vec<&str> = frame.get_column_names().iter().map(|s| s.as_str()).collect();
+    let col_names: Vec<&str> = frame
+        .get_column_names()
+        .iter()
+        .map(|s| s.as_str())
+        .collect();
     assert!(col_names.contains(&"MEASURE"));
     assert!(col_names.contains(&"REGION"));
     assert!(col_names.contains(&"TIME_PERIOD"));
@@ -187,7 +178,11 @@ fn stats_nz_odata_fixture_parses_three_records() {
         builder.push(record);
     }
     let frame = builder.build().expect("valid DataFrame");
-    let col_names: Vec<&str> = frame.get_column_names().iter().map(|s| s.as_str()).collect();
+    let col_names: Vec<&str> = frame
+        .get_column_names()
+        .iter()
+        .map(|s| s.as_str())
+        .collect();
     for expected in &["Measure", "Region", "TimePeriod", "Value", "Unit"] {
         assert!(col_names.contains(expected));
     }

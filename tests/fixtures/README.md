@@ -10,6 +10,8 @@ by the upstream APIs.
 | File | Source API | Purpose |
 |---|---|---|
 | `abs_sdmx_response.json` | [ABS SDMX-JSON API](https://api.abs.gov.au/) | ABS SDMX-JSON data response (v1.0.0) |
+| `digitalnz_nz_gazette_response.json` | [DigitalNZ records API](https://api.digitalnz.org/v3/records.json) | Curated New Zealand Gazette search response for provider tests |
+| `digitalnz_search_fixture_response.json` | [DigitalNZ records API](https://api.digitalnz.org/v3/records.json) | General DigitalNZ search fixture response for provider validation |
 | `stats_nz_odata_response.json` | [Stats NZ OData v1 API](https://api.stats.govt.nz/opendata/v1) | Stats NZ OData JSON entity set response |
 
 ## ABS SDMX-JSON (`abs_sdmx_response.json`)
@@ -30,6 +32,22 @@ by the upstream APIs.
   - `value` array with 3 records.
   - Fields: `Measure`, `Region`, `TimePeriod`, `Value`, `Unit`.
 - Values are arbitrary and do not represent any real Stats NZ release.
+
+## DigitalNZ Gazette (`digitalnz_nz_gazette_response.json`)
+
+- Format: DigitalNZ search response JSON returned by `GET /v3/records.json`.
+- Structure mirrors the `nz_gazette` provider dataset contract:
+  - `result_count` with two Gazette records.
+  - Fields include `collection`, `content_partner`, `category`, `date`, `display_url`, `source_url`, and `syndication_date`.
+  - Extra provider fields such as `license` and `usage` are preserved in the provider's `extra_fields_json` column.
+
+## DigitalNZ Search Fixture (`digitalnz_search_fixture_response.json`)
+
+- Format: DigitalNZ search response JSON returned by `GET /v3/records.json`.
+- Structure mirrors the provider validation dataset contract:
+  - Two curated search records.
+  - Fields include `collection`, `content_partner`, `category`, `creator`, `date`, `display_url`, `source_url`, and `syndication_date`.
+  - Extra provider fields are preserved in the provider's `extra_fields_json` column.
 
 ## Creation and minimisation
 

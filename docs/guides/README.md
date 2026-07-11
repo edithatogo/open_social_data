@@ -6,6 +6,8 @@ This directory contains guides for working with Open Social Data outputs.
 - [Understanding Social Statistics Concepts](understanding-social-statistics-concepts.md)
 - [Interpreting Common Visualizations](interpreting-common-visualizations.md)
 - [Ethical Use of Social Data](ethical-use-of-social-data.md)
+- [DigitalNZ Provider and DNZ CLI Alignment](digitalnz-provider-alignment.md)
+- [Data.gov.au Provider](data-gov-au-provider.md)
 
 ## Maintainer Guides
 

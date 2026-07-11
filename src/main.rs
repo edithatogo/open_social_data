@@ -3,9 +3,7 @@ use std::path::{Path, PathBuf};
 
 use anyhow::Context;
 use clap::{CommandFactory, Parser, Subcommand};
-use clap::error::ErrorKind;
-use clap_markdown;
-use clap_complete::{Generator, Shell};
+use clap_complete::Shell;
 use colored::Colorize;
 use indicatif::{ProgressBar, ProgressStyle};
 use open_social_data_core::{
@@ -230,7 +228,9 @@ async fn main() -> anyhow::Result<()> {
                 }
             };
             let row_count = frame.height();
-            let report = validate_quality(&frame, &provider_payload_assertions())?;
+            let mut assertions = provider_payload_assertions();
+            assertions.extend(provider.quality_assertions());
+            let report = validate_quality(&frame, &assertions)?;
             let quality_status = if report.is_valid() {
                 QualityStatus::Passed
             } else {
@@ -681,12 +681,12 @@ async fn run_catalog_command(
                     println!("{} {}: {}", "error".red(), error.provider, error.message);
                 }
                 anyhow::bail!(
-"catalog sync completed with errors: {}",
+                    "catalog sync completed with errors: {}",
                     report.error_summary()
                 );
             }
         }
-        }
+    }
     Ok(())
 }
 
@@ -699,12 +699,16 @@ fn run_generate_command(command: GenerateCommand) -> anyhow::Result<()> {
         }
         GenerateCommand::ManPage { output } => {
             let cmd = Cli::command();
-            let man = clap_markdown::help_markdown(&cmd);
+            let man = clap_markdown::help_markdown::<Cli>();
             let output_path = output.join(format!("{}.md", cmd.get_name()));
             fs::write(&output_path, man).with_context(|| {
                 format!("failed to write man page to {}", output_path.display())
             })?;
-            println!("{} man page written to {}", "ok".green(), output_path.display());
+            println!(
+                "{} man page written to {}",
+                "ok".green(),
+                output_path.display()
+            );
         }
     }
     Ok(())

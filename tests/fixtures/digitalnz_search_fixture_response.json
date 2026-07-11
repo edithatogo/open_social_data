@@ -1,0 +1,35 @@
+{
+  "search": {
+    "result_count": 2,
+    "results": [
+      {
+        "id": "search-1",
+        "title": "Kauri record",
+        "description": "A search fixture record for provider validation",
+        "collection": ["Auckland Libraries"],
+        "content_partner": ["Auckland Libraries"],
+        "category": ["Images"],
+        "creator": ["Example Creator"],
+        "date": ["1900"],
+        "display_url": "https://digitalnz.org/records/search-1",
+        "source_url": "https://example.test/search-1",
+        "syndication_date": "2024-02-01",
+        "license": "CC0"
+      },
+      {
+        "id": "search-2",
+        "title": "Kauri record 2",
+        "description": "Another search fixture record",
+        "collection": ["Te Papa"],
+        "content_partner": ["Te Papa"],
+        "category": ["Text"],
+        "creator": ["Example Creator 2"],
+        "date": ["1901"],
+        "display_url": "https://digitalnz.org/records/search-2",
+        "source_url": "https://example.test/search-2",
+        "syndication_date": "2024-02-02",
+        "usage": "Open"
+      }
+    ]
+  }
+}
