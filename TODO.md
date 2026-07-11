@@ -108,6 +108,7 @@ This file tracks specific, actionable tasks for the Open Social Datasets project
 *   [X] Develop `CODE_OF_CONDUCT.MD`.
 
 ## Future Tasks (To be detailed from Roadmap - Phase 2 & 3)
+*   [X] Add the Data.gov.au CKAN provider for official aggregate FOI statistics.
 *   [X] Complete Track 9: Short-term completion and source validation.
 *   [X] Complete Track 10: Medium-term dataset expansion and examples.
 *   [X] Complete Track 11: Long-term sustainability and advanced access.

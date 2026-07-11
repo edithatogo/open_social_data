@@ -7,7 +7,7 @@ use std::collections::BTreeMap;
 use std::sync::Arc;
 
 use crate::error::{CoreError, Result};
-use crate::providers::{AbsProvider, DigitalNzProvider, StatsNzProvider};
+use crate::providers::{AbsProvider, DataGovAuProvider, DigitalNzProvider, StatsNzProvider};
 use crate::traits::DatasetProvider;
 
 pub type SharedProvider = Arc<dyn DatasetProvider>;
@@ -25,6 +25,7 @@ impl ProviderRegistry {
     pub fn with_defaults() -> Self {
         let mut registry = Self::new();
         registry.register(AbsProvider::default());
+        registry.register(DataGovAuProvider::default());
         registry.register(DigitalNzProvider::default());
         registry.register(StatsNzProvider::default());
         registry
@@ -68,5 +69,11 @@ mod tests {
     fn defaults_include_digitalnz() {
         let registry = ProviderRegistry::with_defaults();
         assert!(registry.get("digitalnz").is_ok());
+    }
+
+    #[test]
+    fn defaults_include_data_gov_au() {
+        let registry = ProviderRegistry::with_defaults();
+        assert!(registry.get("data_gov_au").is_ok());
     }
 }

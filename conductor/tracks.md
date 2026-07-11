@@ -86,3 +86,10 @@ This file tracks all major tracks for the project. Each track has its own detail
 - [x] Add a `digitalnz` provider that reuses or ingests DNZ capabilities for curated dataset fetches.
 - [x] Support New Zealand Gazette as the first curated DigitalNZ-backed dataset.
 - [x] Document when to use standalone `dnz` versus `open-social-data-cli fetch digitalnz ...`.
+
+## [~] Track 14: Data.gov.au provider
+*Link: [./conductor/tracks/data_gov_au_provider_20260711/](./conductor/tracks/data_gov_au_provider_20260711/)*
+- [x] Add a CKAN-backed `data_gov_au` provider for official aggregate FOI statistics.
+- [x] Discover and fetch the current CSV resource from package metadata.
+- [x] Register the provider and document CLI usage.
+- [ ] Complete Cargo quality gates after the local linker is repaired.

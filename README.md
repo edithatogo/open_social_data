@@ -42,6 +42,7 @@ Common commands:
 cargo run --bin open-social-data-cli -- list
 cargo run --bin open-social-data-cli -- list --provider abs
 cargo run --bin open-social-data-cli -- list --provider digitalnz
+cargo run --bin open-social-data-cli -- list --provider data_gov_au
 cargo run --bin open-social-data-cli -- status
 cargo run --bin open-social-data-cli -- fetch abs QBIS --output datasets/abs/qbis_business_indicators/data/qbis.parquet --quality-report .open-social-data/qbis-quality.json
 cargo run --bin open-social-data-cli -- fetch digitalnz nz_gazette --output datasets/digitalnz/nz_gazette.parquet
@@ -59,7 +60,7 @@ cargo run --bin open-social-data-cli -- examples myhospitals-summary --limit 5
 cargo run --bin open-social-data-cli -- examples source-metadata-inventory
 ```
 
-Local runtime metadata is written under `.open-social-data/` by default. The default CLI catalog path is JSON-backed for simple file exchange, and `catalog list/search/sync --sqlite <path>` uses an embedded SQLite catalog for queryable local metadata storage. Catalog entries preserve provider source URLs, quality report paths, ETag values, and Last-Modified values. Fetches reuse cached ETag and Last-Modified metadata and preserve existing outputs when a provider returns `304 Not Modified`. ABS fetches parse SDMX-JSON observations into rows, while Stats NZ fetches flatten OData `value` rows. The Rust CLI is the supported user-facing entry point for release validation and local examples; Python scripts remain as maintainer helpers and dataset wrappers, and R examples are retired from the validated capability set.
+Local runtime metadata is written under `.open-social-data/` by default. The default CLI catalog path is JSON-backed for simple file exchange, and `catalog list/search/sync --sqlite <path>` uses an embedded SQLite catalog for queryable local metadata storage. Catalog entries preserve provider source URLs, quality report paths, ETag values, and Last-Modified values. Fetches reuse cached ETag and Last-Modified metadata and preserve existing outputs when a provider returns `304 Not Modified`. ABS fetches parse SDMX-JSON observations into rows, Stats NZ fetches flatten OData `value` rows, and the Data.gov.au provider consumes the public CKAN metadata API plus the current OAIC FOI-statistics CSV resource. The Rust CLI is the supported user-facing entry point for release validation and local examples; Python scripts remain as maintainer helpers and dataset wrappers, and R examples are retired from the validated capability set.
 
 On this Windows workspace, run Rust validation with a target directory outside OneDrive to avoid damaged inherited ACLs on the repository `target/` directory:
 
