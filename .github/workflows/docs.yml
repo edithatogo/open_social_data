@@ -23,9 +23,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: 'npm'
-          cache-dependency-path: docs-site/package-lock.json
-      - run: npm ci --prefix docs-site
+      - run: npm install --prefix docs-site --ignore-scripts
       - run: npm run docs:check --prefix docs-site
 
   build:
@@ -37,7 +35,5 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: 'npm'
-          cache-dependency-path: docs-site/package-lock.json
-      - run: npm ci --prefix docs-site
+      - run: npm install --prefix docs-site --ignore-scripts
       - run: npm run docs:build --prefix docs-site
