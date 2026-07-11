@@ -7,8 +7,6 @@ export default defineConfig({
   site: 'https://edithatogo.github.io',
   base: '/open_social_data/',
   integrations: [
-    mdx(),
-    sitemap(),
     starlight({
       title: 'Open Social Data',
       description: 'Legal NZ documentation portal for Open Social Data.',
@@ -18,5 +16,7 @@ export default defineConfig({
         { label: 'Project', items: ['roadmap-status', 'release', 'provenance-archival'] },
       ],
     }),
+    mdx(),
+    sitemap(),
   ],
 });
