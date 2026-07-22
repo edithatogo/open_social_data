@@ -19,16 +19,20 @@ use crate::traits::{DatasetProvider, FetchOptions, FetchResult};
 
 const DEFAULT_BASE_URL: &str = "https://api.stats.govt.nz/opendata/v1";
 const USER_AGENT_VALUE: &str = "open-social-data/0.1";
+const API_KEY_HEADER: &str = "Ocp-Apim-Subscription-Key";
 
 #[derive(Clone)]
 pub struct StatsNzProvider {
     client: reqwest::Client,
     base_url: String,
+    api_key: Option<String>,
 }
 
 impl Default for StatsNzProvider {
     fn default() -> Self {
-        Self::new(DEFAULT_BASE_URL)
+        Self::new(
+            std::env::var("STATS_NZ_BASE_URL").unwrap_or_else(|_| DEFAULT_BASE_URL.to_string()),
+        )
     }
 }
 
@@ -38,7 +42,16 @@ impl StatsNzProvider {
         Self {
             client,
             base_url: base_url.into().trim_end_matches('/').to_string(),
+            api_key: std::env::var("STATS_NZ_API_KEY")
+                .ok()
+                .filter(|value| !value.is_empty()),
         }
+    }
+
+    pub fn new_with_api_key(base_url: impl Into<String>, api_key: Option<String>) -> Self {
+        let mut provider = Self::new(base_url);
+        provider.api_key = api_key.filter(|value| !value.is_empty());
+        provider
     }
 
     pub fn service_document_url(&self) -> String {
@@ -49,11 +62,17 @@ impl StatsNzProvider {
         format!("{}/{}", self.base_url, dataset_id.trim_start_matches('/'))
     }
 
-    fn headers() -> HeaderMap {
+    fn headers(&self) -> Result<HeaderMap> {
         let mut headers = HeaderMap::new();
         headers.insert(ACCEPT, HeaderValue::from_static("application/json"));
         headers.insert(USER_AGENT, HeaderValue::from_static(USER_AGENT_VALUE));
-        headers
+        if let Some(api_key) = &self.api_key {
+            let value = HeaderValue::from_str(api_key).map_err(|error| {
+                CoreError::Internal(format!("invalid STATS_NZ_API_KEY: {error}"))
+            })?;
+            headers.insert(API_KEY_HEADER, value);
+        }
+        Ok(headers)
     }
 
     async fn get_json<T>(&self, url: String) -> Result<T>
@@ -63,7 +82,7 @@ impl StatsNzProvider {
         let response = self
             .client
             .get(&url)
-            .headers(Self::headers())
+            .headers(self.headers()?)
             .send()
             .await?;
         let status = response.status();
@@ -118,7 +137,7 @@ impl DatasetProvider for StatsNzProvider {
         options: FetchOptions,
     ) -> Result<FetchResult> {
         let url = self.dataset_url(dataset_id);
-        let mut headers = Self::headers();
+        let mut headers = self.headers()?;
         headers.extend(options.conditional.to_headers()?);
         let response = self.client.get(&url).headers(headers).send().await?;
         let status = response.status();
@@ -234,6 +253,18 @@ mod tests {
         assert_eq!(
             provider.dataset_url("/Population"),
             "https://example.test/opendata/v1/Population"
+        );
+    }
+
+    #[test]
+    fn builds_authenticated_stats_nz_headers() {
+        let provider = StatsNzProvider::new_with_api_key(
+            "https://example.test/opendata/v1",
+            Some("test-key".to_string()),
+        );
+        assert_eq!(
+            provider.headers().unwrap().get(API_KEY_HEADER).unwrap(),
+            "test-key"
         );
     }
 
