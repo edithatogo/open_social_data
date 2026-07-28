@@ -6,7 +6,7 @@
 
 use std::collections::HashMap;
 use std::fs::{self, File};
-use std::path::{Path, PathBuf};
+use std::path::Path;
 
 use polars::prelude::*;
 
@@ -135,7 +135,7 @@ pub fn write_parquet_atomic(frame: &DataFrame, output_path: impl AsRef<Path>) ->
         fs::create_dir_all(parent)?;
     }
 
-    let tmp_path = tmp_path_for(output_path);
+    let tmp_path = crate::utils::tmp_path_for(output_path, "output.parquet");
     if tmp_path.exists() {
         fs::remove_file(&tmp_path)?;
     }
@@ -160,15 +160,6 @@ pub fn read_parquet(path: impl AsRef<Path>) -> Result<DataFrame> {
     ParquetReader::new(file)
         .finish()
         .map_err(|e| CoreError::TransformationError(e.to_string()))
-}
-
-fn tmp_path_for(output_path: &Path) -> PathBuf {
-    let mut name = output_path
-        .file_name()
-        .map(|file_name| file_name.to_os_string())
-        .unwrap_or_else(|| "output.parquet".into());
-    name.push(".tmp");
-    output_path.with_file_name(name)
 }
 
 #[cfg(test)]
