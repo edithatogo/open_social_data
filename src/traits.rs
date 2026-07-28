@@ -142,3 +142,25 @@ pub trait DatasetProvider: Send + Sync {
         Vec::new()
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn fetch_options_new_initializes_conditional_metadata() {
+        let metadata = ConditionalRequestMetadata::new(
+            Some("\"12345\"".to_string()),
+            Some("Wed, 21 Oct 2015 07:28:00 GMT".to_string()),
+        );
+        let options = FetchOptions::new(metadata.clone());
+        assert_eq!(options.conditional, metadata);
+    }
+
+    #[test]
+    fn fetch_options_new_with_empty_metadata() {
+        let metadata = ConditionalRequestMetadata::default();
+        let options = FetchOptions::new(metadata.clone());
+        assert_eq!(options.conditional, metadata);
+    }
+}
