@@ -142,3 +142,139 @@ pub trait DatasetProvider: Send + Sync {
         Vec::new()
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use polars::prelude::*;
+
+    fn sample_dataframe() -> DataFrame {
+        DataFrame::new(3, vec![Series::new("a".into(), &[1, 2, 3]).into()]).unwrap()
+    }
+
+    #[test]
+    fn test_fetch_result_from_frame() {
+        let df = sample_dataframe();
+        let result = FetchResult::from_frame(df.clone());
+
+        match result {
+            FetchResult::Fetched {
+                frame,
+                etag,
+                last_modified,
+            } => {
+                assert_eq!(frame, df);
+                assert_eq!(etag, None);
+                assert_eq!(last_modified, None);
+            }
+            _ => panic!("Expected Fetched variant"),
+        }
+    }
+
+    #[test]
+    fn test_fetch_result_fetched() {
+        let df = sample_dataframe();
+        let result = FetchResult::fetched(
+            df.clone(),
+            Some("etag123".to_string()),
+            Some("Wed, 21 Oct 2015 07:28:00 GMT".to_string()),
+        );
+
+        match result {
+            FetchResult::Fetched {
+                frame,
+                etag,
+                last_modified,
+            } => {
+                assert_eq!(frame, df);
+                assert_eq!(etag.as_deref(), Some("etag123"));
+                assert_eq!(
+                    last_modified.as_deref(),
+                    Some("Wed, 21 Oct 2015 07:28:00 GMT")
+                );
+            }
+            _ => panic!("Expected Fetched variant"),
+        }
+    }
+
+    #[test]
+    fn test_fetch_result_not_modified() {
+        let result = FetchResult::not_modified(
+            Some("etag123".to_string()),
+            Some("Wed, 21 Oct 2015 07:28:00 GMT".to_string()),
+        );
+
+        assert!(result.is_not_modified());
+
+        match result {
+            FetchResult::NotModified {
+                etag,
+                last_modified,
+            } => {
+                assert_eq!(etag.as_deref(), Some("etag123"));
+                assert_eq!(
+                    last_modified.as_deref(),
+                    Some("Wed, 21 Oct 2015 07:28:00 GMT")
+                );
+            }
+            _ => panic!("Expected NotModified variant"),
+        }
+    }
+
+    #[test]
+    fn test_fetch_result_is_not_modified() {
+        let df = sample_dataframe();
+        let fetched = FetchResult::from_frame(df);
+        assert!(!fetched.is_not_modified());
+
+        let not_modified = FetchResult::not_modified(None, None);
+        assert!(not_modified.is_not_modified());
+    }
+
+    #[test]
+    fn test_fetch_result_etag() {
+        let df = sample_dataframe();
+
+        let fetched_with_etag = FetchResult::fetched(df.clone(), Some("etag1".to_string()), None);
+        assert_eq!(fetched_with_etag.etag(), Some("etag1"));
+
+        let fetched_no_etag = FetchResult::from_frame(df);
+        assert_eq!(fetched_no_etag.etag(), None);
+
+        let not_modified_with_etag = FetchResult::not_modified(Some("etag2".to_string()), None);
+        assert_eq!(not_modified_with_etag.etag(), Some("etag2"));
+
+        let not_modified_no_etag = FetchResult::not_modified(None, None);
+        assert_eq!(not_modified_no_etag.etag(), None);
+    }
+
+    #[test]
+    fn test_fetch_result_last_modified() {
+        let df = sample_dataframe();
+        let date_str = "Wed, 21 Oct 2015 07:28:00 GMT";
+
+        let fetched_with_date = FetchResult::fetched(df.clone(), None, Some(date_str.to_string()));
+        assert_eq!(fetched_with_date.last_modified(), Some(date_str));
+
+        let fetched_no_date = FetchResult::from_frame(df);
+        assert_eq!(fetched_no_date.last_modified(), None);
+
+        let not_modified_with_date = FetchResult::not_modified(None, Some(date_str.to_string()));
+        assert_eq!(not_modified_with_date.last_modified(), Some(date_str));
+
+        let not_modified_no_date = FetchResult::not_modified(None, None);
+        assert_eq!(not_modified_no_date.last_modified(), None);
+    }
+
+    #[test]
+    fn test_fetch_result_into_frame() {
+        let df = sample_dataframe();
+        let expected_df = df.clone();
+
+        let fetched = FetchResult::from_frame(df);
+        assert_eq!(fetched.into_frame(), Some(expected_df));
+
+        let not_modified = FetchResult::not_modified(None, None);
+        assert_eq!(not_modified.into_frame(), None);
+    }
+}
