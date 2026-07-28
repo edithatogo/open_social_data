@@ -224,6 +224,25 @@ mod tests {
     }
 
     #[test]
+    fn parquet_atomic_write_creates_parent_directory() {
+        let frame =
+            DataFrame::new(3, vec![Series::new("x".into(), &[1_i64, 2, 3]).into()]).unwrap();
+
+        let tmp = std::env::temp_dir().join(format!("test_atomic_nested_{}", std::process::id()));
+        // Create a path with a nested subdirectory that doesn't exist yet
+        let out_path = tmp.join("nested_dir").join("output.parquet");
+
+        write_parquet_atomic(&frame, &out_path).unwrap();
+        assert!(out_path.exists(), "output file should exist in nested directory");
+        assert!(
+            out_path.parent().unwrap().exists(),
+            "parent directory should have been created"
+        );
+
+        let _ = std::fs::remove_dir_all(&tmp);
+    }
+
+    #[test]
     fn read_parquet_roundtrip() {
         let frame =
             DataFrame::new(3, vec![Series::new("x".into(), &[1_i64, 2, 3]).into()]).unwrap();
