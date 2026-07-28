@@ -8,7 +8,7 @@
 use std::collections::HashSet;
 use std::fs::{self, File};
 use std::io::BufWriter;
-use std::path::{Path, PathBuf};
+use std::path::Path;
 
 use polars::prelude::*;
 use serde::{Deserialize, Serialize};
@@ -116,7 +116,7 @@ impl QualityReport {
             fs::create_dir_all(parent)?;
         }
 
-        let tmp_path = tmp_path_for(path);
+        let tmp_path = crate::tmp_path_for(path, "quality-report.json");
         if tmp_path.exists() {
             fs::remove_file(&tmp_path)?;
         }
@@ -258,15 +258,6 @@ fn unique_stringified_count(series: &Column) -> Result<usize> {
         }
     }
     Ok(values.len())
-}
-
-fn tmp_path_for(path: &Path) -> PathBuf {
-    let mut name = path
-        .file_name()
-        .map(|file_name| file_name.to_os_string())
-        .unwrap_or_else(|| "quality-report.json".into());
-    name.push(".tmp");
-    path.with_file_name(name)
 }
 
 pub fn provider_payload_assertions() -> Vec<QualityAssertion> {
