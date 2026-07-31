@@ -1,4 +1,4 @@
-﻿//! JSON-backed local dataset catalog.
+//! JSON-backed local dataset catalog.
 //!
 //! Tracks metadata about fetched datasets including ETags, quality status,
 //! output paths, and modification timestamps. Supports atomic saves and
@@ -8,6 +8,7 @@ use std::collections::BTreeMap;
 use std::fs::{self, File};
 use std::io::{BufReader, BufWriter};
 use std::path::{Path, PathBuf};
+use tempfile::NamedTempFile;
 
 use serde::{Deserialize, Serialize};
 
@@ -108,18 +109,15 @@ impl LocalCatalog {
             fs::create_dir_all(parent)?;
         }
 
-        let tmp_path = tmp_path_for(path);
-        if tmp_path.exists() {
-            fs::remove_file(&tmp_path)?;
-        }
-
-        let writer = BufWriter::new(File::create(&tmp_path)?);
+        let mut temp = if let Some(parent) = path.parent() {
+            NamedTempFile::new_in(parent)?
+        } else {
+            NamedTempFile::new()?
+        };
+        let writer = BufWriter::new(&mut temp);
         serde_json::to_writer_pretty(writer, self)?;
 
-        if path.exists() {
-            fs::remove_file(path)?;
-        }
-        fs::rename(tmp_path, path)?;
+        temp.persist(path).map_err(std::io::Error::other)?;
         Ok(())
     }
 
@@ -252,15 +250,6 @@ impl CachedDataset {
 
 pub fn dataset_key(provider: &str, dataset_id: &str) -> String {
     format!("{}:{}", provider.trim(), dataset_id.trim())
-}
-
-fn tmp_path_for(path: &Path) -> PathBuf {
-    let mut name = path
-        .file_name()
-        .map(|file_name| file_name.to_os_string())
-        .unwrap_or_else(|| "catalog.json".into());
-    name.push(".tmp");
-    path.with_file_name(name)
 }
 
 #[cfg(test)]
