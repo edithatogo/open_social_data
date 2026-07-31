@@ -296,6 +296,14 @@ fn run_example_command(command: ExampleCommand) -> anyhow::Result<()> {
 
 const REQUIRED_PACK_SOURCES: &[&str] = &["abs", "stats_nz", "aihw", "moh"];
 
+fn is_valid_dataset_dir(path: &Path) -> bool {
+    path.is_dir()
+        && path
+            .file_name()
+            .and_then(|name| name.to_str())
+            .is_some_and(|name| !name.starts_with('.'))
+}
+
 fn dataset_dirs(root: &Path) -> anyhow::Result<Vec<PathBuf>> {
     let mut dirs = Vec::new();
     if !root.is_dir() {
@@ -308,12 +316,7 @@ fn dataset_dirs(root: &Path) -> anyhow::Result<Vec<PathBuf>> {
         }
         for dataset in fs::read_dir(source)? {
             let dataset = dataset?.path();
-            if dataset.is_dir()
-                && dataset
-                    .file_name()
-                    .and_then(|name| name.to_str())
-                    .is_some_and(|name| !name.starts_with('.'))
-            {
+            if is_valid_dataset_dir(&dataset) {
                 dirs.push(dataset);
             }
         }
@@ -334,12 +337,7 @@ fn dataset_pack_dirs(root: &Path) -> anyhow::Result<Vec<PathBuf>> {
         }
         for dataset in fs::read_dir(source_dir)? {
             let dataset = dataset?.path();
-            if dataset.is_dir()
-                && dataset
-                    .file_name()
-                    .and_then(|name| name.to_str())
-                    .is_some_and(|name| !name.starts_with('.'))
-            {
+            if is_valid_dataset_dir(&dataset) {
                 dirs.push(dataset);
             }
         }
