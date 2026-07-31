@@ -6,7 +6,7 @@
 
 use std::collections::HashMap;
 use std::fs::{self, File};
-use std::path::{Path, PathBuf};
+use std::path::Path;
 
 use polars::prelude::*;
 
@@ -131,26 +131,24 @@ pub fn validate_schema(frame: &DataFrame, expected: &[ExpectedColumn]) -> Result
 
 pub fn write_parquet_atomic(frame: &DataFrame, output_path: impl AsRef<Path>) -> Result<()> {
     let output_path = output_path.as_ref();
-    if let Some(parent) = output_path.parent() {
-        fs::create_dir_all(parent)?;
-    }
+    let parent = output_path.parent().unwrap_or_else(|| Path::new(""));
+    let parent_dir = if parent.as_os_str().is_empty() {
+        Path::new(".")
+    } else {
+        parent
+    };
+    fs::create_dir_all(parent_dir)?;
 
-    let tmp_path = tmp_path_for(output_path);
-    if tmp_path.exists() {
-        fs::remove_file(&tmp_path)?;
-    }
+    let mut temp_file = tempfile::Builder::new()
+        .prefix(".tmp")
+        .tempfile_in(parent_dir)?;
 
-    let mut file = File::create(&tmp_path)?;
-    let mut frame = frame.clone();
-    ParquetWriter::new(&mut file)
-        .finish(&mut frame)
+    let mut frame_clone = frame.clone();
+    ParquetWriter::new(&mut temp_file)
+        .finish(&mut frame_clone)
         .map_err(|error| CoreError::TransformationError(error.to_string()))?;
-    drop(file);
 
-    if output_path.exists() {
-        fs::remove_file(output_path)?;
-    }
-    fs::rename(&tmp_path, output_path)?;
+    temp_file.persist(output_path).map_err(|e| e.error)?;
     Ok(())
 }
 
@@ -160,15 +158,6 @@ pub fn read_parquet(path: impl AsRef<Path>) -> Result<DataFrame> {
     ParquetReader::new(file)
         .finish()
         .map_err(|e| CoreError::TransformationError(e.to_string()))
-}
-
-fn tmp_path_for(output_path: &Path) -> PathBuf {
-    let mut name = output_path
-        .file_name()
-        .map(|file_name| file_name.to_os_string())
-        .unwrap_or_else(|| "output.parquet".into());
-    name.push(".tmp");
-    output_path.with_file_name(name)
 }
 
 #[cfg(test)]
