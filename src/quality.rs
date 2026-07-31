@@ -6,9 +6,9 @@
 //! incremental delta updates to existing Parquet datasets.
 
 use std::collections::HashSet;
-use std::fs::{self, File};
+use std::fs;
 use std::io::BufWriter;
-use std::path::{Path, PathBuf};
+use std::path::Path;
 
 use polars::prelude::*;
 use serde::{Deserialize, Serialize};
@@ -112,22 +112,24 @@ impl QualityReport {
 
     pub fn save_atomic(&self, path: impl AsRef<Path>) -> Result<()> {
         let path = path.as_ref();
-        if let Some(parent) = path.parent() {
-            fs::create_dir_all(parent)?;
+        let parent = path.parent().unwrap_or_else(|| Path::new(""));
+        let parent_dir = if parent.as_os_str().is_empty() {
+            Path::new(".")
+        } else {
+            parent
+        };
+        fs::create_dir_all(parent_dir)?;
+
+        let mut temp_file = tempfile::Builder::new()
+            .prefix(".tmp")
+            .tempfile_in(parent_dir)?;
+
+        {
+            let writer = BufWriter::new(&mut temp_file);
+            serde_json::to_writer_pretty(writer, self)?;
         }
 
-        let tmp_path = tmp_path_for(path);
-        if tmp_path.exists() {
-            fs::remove_file(&tmp_path)?;
-        }
-
-        let writer = BufWriter::new(File::create(&tmp_path)?);
-        serde_json::to_writer_pretty(writer, self)?;
-
-        if path.exists() {
-            fs::remove_file(path)?;
-        }
-        fs::rename(tmp_path, path)?;
+        temp_file.persist(path).map_err(|e| e.error)?;
         Ok(())
     }
 }
@@ -258,15 +260,6 @@ fn unique_stringified_count(series: &Column) -> Result<usize> {
         }
     }
     Ok(values.len())
-}
-
-fn tmp_path_for(path: &Path) -> PathBuf {
-    let mut name = path
-        .file_name()
-        .map(|file_name| file_name.to_os_string())
-        .unwrap_or_else(|| "quality-report.json".into());
-    name.push(".tmp");
-    path.with_file_name(name)
 }
 
 pub fn provider_payload_assertions() -> Vec<QualityAssertion> {
