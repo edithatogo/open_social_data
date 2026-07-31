@@ -176,6 +176,33 @@ mod tests {
     use super::*;
 
     #[test]
+    fn rejects_type_mismatch() {
+        let frame = DataFrame::new(
+            1,
+            vec![
+                Series::new("id".into(), &[1_i64]).into(),
+                Series::new("name".into(), &[1_i64]).into(),
+            ],
+        )
+        .unwrap();
+
+        let expected = vec![
+            ExpectedColumn::new("id", DataType::Int64),
+            ExpectedColumn::new("name", DataType::String),
+        ];
+
+        let result = validate_schema(&frame, &expected);
+        assert!(result.is_err());
+
+        if let Err(CoreError::TransformationError(msg)) = result {
+            assert!(msg.contains("has type"));
+            assert!(msg.contains("expected"));
+        } else {
+            panic!("Expected TransformationError with a specific message");
+        }
+    }
+
+    #[test]
     fn validates_exact_schema() {
         let frame = DataFrame::new(
             2,
