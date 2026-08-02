@@ -10,11 +10,11 @@
 
 - [x] Add a manually dispatched GitHub Actions acquisition workflow.
 - [x] Add a source-specific Hugging Face dataset card and protected-secret boundary.
-- [ ] Execute the full hosted capture and verify all 57,575 feature IDs and checksums.
-- [ ] Upload the packet and receipt to immutable Hugging Face revisions.
+- [x] Execute the full hosted capture and verify all 57,575 feature IDs and checksums.
+- [x] Upload the packet and receipt to immutable Hugging Face revisions.
 
 ## Phase 3: Downstream evidence
 
-- [ ] Record the GitHub run, Hugging Face revisions and manifest SHA-256 in this index.
-- [ ] Update open_social_data issue 35 and the affected RIOPA Conductor evidence indexes.
+- [x] Record the GitHub run, Hugging Face revisions and manifest SHA-256 in this index.
+- [x] Update open_social_data issue 35 and the affected RIOPA Conductor evidence indexes.
 - [ ] Run agent-panel qualification and archive this track without broadening its claims.
