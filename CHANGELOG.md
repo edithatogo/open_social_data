@@ -10,6 +10,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   hermetic contract tests, and a manually dispatched GitHub Actions workflow
   that publishes checksummed packets and hosted receipts to the RIOPA public
   data archive on Hugging Face.
+- Captured all 57,575 Meshblock 2026 features with stable pre/post inventories,
+  published the immutable packet and GitHub-bound receipt at revisions
+  `3f2dc0a4d95a4fcb495551098d58fc5bce9c9202` and
+  `34c093646f884d7b57447231d6605e83739bb302`, and verified the manifest plus
+  boundary-page digests by hosted readback.
 - **Rust data engine swarm slice:**
     - Added ABS and Stats NZ provider modules with provider metadata, endpoint URL builders, async HTTP status handling, and row-level dataset parsing.
     - Added a provider registry for loading active providers from the CLI and library code.
