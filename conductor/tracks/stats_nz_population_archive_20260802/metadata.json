@@ -3,7 +3,7 @@
   "type": "data",
   "status": "active",
   "created_at": "2026-08-02T13:56:00Z",
-  "updated_at": "2026-08-02T13:56:00Z",
+  "updated_at": "2026-08-02T14:02:55Z",
   "description": "Acquire and preserve an exact-edition public Stats NZ subnational population workbook through GitHub Actions and Hugging Face.",
   "github_issue": "https://github.com/edithatogo/open_social_data/issues/42",
   "owner_repository": "edithatogo/open_social_data",

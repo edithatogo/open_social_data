@@ -10,6 +10,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   population estimates: At 30 June 2025 (provisional)* workbook, including
   frozen SHA-256/size checks, XLSX structure and edition validation, GitHub
   Actions routing, public archive documentation and Conductor Track 16.
+- Published the exact 97,990-byte population workbook through GitHub Actions run
+  `30751233863`, verified packet revision
+  `4f94d300c0bea6b64972b4b67044990f7e591716` and bound it to receipt revision
+  `bbe8136e4cac6052b7fb4ed5ac054822487d7aad` by hosted readback.
 - Added a fail-closed Stats NZ Meshblock 2026 ArcGIS archive packet builder,
   hermetic contract tests, and a manually dispatched GitHub Actions workflow
   that publishes checksummed packets and hosted receipts to the RIOPA public
