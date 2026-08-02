@@ -79,6 +79,35 @@ class ArcGisArchiveTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 archive.validate_service_url(invalid)
 
+    def test_redirect_destination_is_fail_closed(self) -> None:
+        for valid in (
+            "https://www.arcgis.com/example?f=json",
+            "https://services2.arcgis.com/example/query",
+        ):
+            self.assertEqual(archive.validate_response_url(valid), valid)
+        for invalid in (
+            "http://services2.arcgis.com/example/query",
+            "https://example.com/query",
+            "https://services2.arcgis.com.evil.example/query",
+            "https://user:secret@services2.arcgis.com/query",
+        ):
+            with self.assertRaises(ValueError):
+                archive.validate_response_url(invalid)
+
+        response = mock.MagicMock()
+        response.__enter__.return_value = response
+        response.geturl.return_value = "https://example.com/redirected"
+        response.status = 200
+        response.headers.items.return_value = []
+        with (
+            mock.patch.object(archive.urllib.request, "urlopen", return_value=response),
+            self.assertRaisesRegex(ValueError, "approved ArcGIS HTTPS host"),
+        ):
+            archive.request_bytes(
+                "https://services2.arcgis.com/example/query", timeout=1
+            )
+        response.read.assert_not_called()
+
     def test_gzip_output_is_deterministic(self) -> None:
         payload = b'{"feature":1}\n'
         first = archive.deterministic_gzip(payload)

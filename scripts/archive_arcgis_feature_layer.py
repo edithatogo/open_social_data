@@ -52,6 +52,21 @@ def validate_service_url(value: str) -> str:
     return url
 
 
+def validate_response_url(value: str) -> str:
+    parsed = urllib.parse.urlparse(value)
+    hostname = (parsed.hostname or "").lower()
+    if (
+        parsed.scheme != "https"
+        or not any(hostname.endswith(suffix) for suffix in ALLOWED_HOST_SUFFIXES)
+        or parsed.username
+        or parsed.password
+        or parsed.port
+        or parsed.fragment
+    ):
+        raise ValueError("response URL must remain on an approved ArcGIS HTTPS host")
+    return value
+
+
 def request_bytes(
     url: str,
     *,
@@ -76,12 +91,13 @@ def request_bytes(
     for attempt in range(1, attempts + 1):
         try:
             with urllib.request.urlopen(request, timeout=timeout) as response:
+                response_url = validate_response_url(response.geturl())
                 body = response.read()
                 headers = {
                     name.lower(): value for name, value in response.headers.items()
                 }
                 receipt = {
-                    "url": response.geturl(),
+                    "url": response_url,
                     "method": request.get_method(),
                     "status": response.status,
                     "retrieved_at": utc_now(),
