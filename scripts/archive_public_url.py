@@ -58,7 +58,14 @@ def main() -> int:
         "archive_status": archive_status,
     }
     (args.output / "manifest.json").write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    (args.output / "checksums.sha256").write_text(f"{digest}  payload\n" if body else "", encoding="utf-8")
+    if body:
+        checksum_line = f"{digest}  payload\n"
+    else:
+        disposition = args.output / "disposition.json"
+        disposition.write_text(json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        disposition_digest = hashlib.sha256(disposition.read_bytes()).hexdigest()
+        checksum_line = f"{disposition_digest}  disposition.json\n"
+    (args.output / "checksums.sha256").write_text(checksum_line, encoding="utf-8")
     return 0
 
 
