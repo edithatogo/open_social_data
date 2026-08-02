@@ -8,6 +8,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 ROOT = Path(__file__).resolve().parents[1]
 SPEC = importlib.util.spec_from_file_location(
@@ -19,6 +20,30 @@ SPEC.loader.exec_module(archive)
 
 
 class ArcGisArchiveTests(unittest.TestCase):
+    def test_page_requests_use_form_encoded_post(self) -> None:
+        response = mock.MagicMock()
+        response.__enter__.return_value = response
+        response.read.return_value = b'{"features":[]}'
+        response.geturl.return_value = "https://services2.arcgis.com/example/query"
+        response.status = 200
+        response.headers.items.return_value = []
+        with mock.patch.object(
+            archive.urllib.request, "urlopen", return_value=response
+        ) as opened:
+            body, receipt = archive.request_bytes(
+                "https://services2.arcgis.com/example/query",
+                timeout=1,
+                form={"objectIds": "10001,10002", "f": "json"},
+            )
+        request = opened.call_args.args[0]
+        self.assertEqual(request.get_method(), "POST")
+        self.assertEqual(request.data, b"objectIds=10001%2C10002&f=json")
+        self.assertEqual(body, b'{"features":[]}')
+        self.assertEqual(receipt["method"], "POST")
+        self.assertEqual(
+            receipt["request_body_sha256"], archive.sha256_bytes(request.data)
+        )
+
     def test_service_url_is_fail_closed(self) -> None:
         valid = "https://services2.arcgis.com/example/ArcGIS/rest/services/Test/FeatureServer/0"
         self.assertEqual(archive.validate_service_url(valid), valid)
