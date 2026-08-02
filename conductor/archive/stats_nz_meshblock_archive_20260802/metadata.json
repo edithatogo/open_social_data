@@ -13,6 +13,7 @@
     "reviewed_revision": "ebce8699c166c45d237f3078d5ee1c9e9931bc27",
     "remediation_revision": "ee9bda0",
     "qualification_revision": "c2b0b4b",
+    "archive_revision": "0a651b2",
     "panel": [
       "archive-integrity",
       "source-provenance-security",

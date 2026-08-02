@@ -1,5 +1,7 @@
 # Track: Stats NZ Meshblock 2026 hosted archive
 
+Status: archived after agent-panel qualification on 2026-08-03 (`0a651b2`).
+
 - [Specification](./spec.md)
 - [Implementation plan](./plan.md)
 - [Metadata](./metadata.json)

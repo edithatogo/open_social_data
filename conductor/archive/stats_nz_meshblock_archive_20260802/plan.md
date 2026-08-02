@@ -18,7 +18,7 @@
 - [x] Record the GitHub run, Hugging Face revisions and manifest SHA-256 in this index (`c07f401`).
 - [x] Update open_social_data issue 35 and the affected RIOPA Conductor evidence indexes (`c07f401`; downstream `5d2ca1a`).
 - [x] Run three-member agent-panel qualification without broadening the track's claims ([qualification report](./qualification-report.md), `c2b0b4b`).
-- [x] Archive the validated track and preserve registry continuity.
+- [x] Archive the validated track and preserve registry continuity (`0a651b2`).
 
 ## Review fixes
 
