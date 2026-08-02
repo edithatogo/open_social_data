@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 ### Added
+- Added a fail-closed Stats NZ Meshblock 2026 ArcGIS archive packet builder,
+  hermetic contract tests, and a manually dispatched GitHub Actions workflow
+  that publishes checksummed packets and hosted receipts to the RIOPA public
+  data archive on Hugging Face.
 - **Rust data engine swarm slice:**
     - Added ABS and Stats NZ provider modules with provider metadata, endpoint URL builders, async HTTP status handling, and row-level dataset parsing.
     - Added a provider registry for loading active providers from the CLI and library code.
