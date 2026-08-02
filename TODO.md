@@ -28,6 +28,7 @@ This file tracks specific, actionable tasks for the Open Social Datasets project
 *   **Stats NZ Datasets:**
     *   [X] Implement the Stats NZ Meshblock 2026 archive contract and hosted publication workflow.
     *   [X] Complete the full GitHub Actions capture, verify the Hugging Face revisions, and record downstream RIOPA evidence.
+    *   [ ] Archive the exact Stats NZ subnational population estimates at 30 June 2025 provisional workbook through GitHub Actions and verify its Hugging Face receipt.
     *   [X] Identify and prioritize 2-3 key datasets from Statistics New Zealand (Stats NZ).
     *   [X] Add Population Estimates dataset pack with README, data dictionary, accessible guide, ADE fetch wrapper, and session log.
     *   [X] Add Consumers Price Index dataset pack with README, data dictionary, accessible guide, ADE fetch wrapper, and session log.

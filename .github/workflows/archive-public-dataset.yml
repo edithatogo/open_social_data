@@ -10,6 +10,7 @@ on:
         type: choice
         options:
           - stats-nz-meshblock-2026
+          - stats-nz-subnational-population-2025
       max_features:
         description: Zero captures the full frozen inventory; a positive value creates a bounded sample
         required: true
@@ -44,10 +45,24 @@ jobs:
           uv run --no-project python -m unittest discover
           -s tests -p 'test_archive*.py'
       - name: Capture the approved source packet
-        run: >-
-          uv run --no-project python scripts/archive_arcgis_feature_layer.py
-          --output "$RUNNER_TEMP/hf-dataset"
-          --max-features "${{ inputs.max_features }}"
+        shell: bash
+        run: |
+          case "${{ inputs.source }}" in
+            stats-nz-meshblock-2026)
+              uv run --no-project python scripts/archive_arcgis_feature_layer.py \
+                --output "$RUNNER_TEMP/hf-dataset" \
+                --max-features "${{ inputs.max_features }}"
+              ;;
+            stats-nz-subnational-population-2025)
+              test "${{ inputs.max_features }}" = "0"
+              uv run --no-project python scripts/archive_stats_nz_population.py \
+                --output "$RUNNER_TEMP/hf-dataset"
+              ;;
+            *)
+              echo "Unapproved source: ${{ inputs.source }}" >&2
+              exit 1
+              ;;
+          esac
       - name: Add the governed dataset card
         run: cp publication/huggingface/riopa-public-data-archive/README.md "$RUNNER_TEMP/hf-dataset/README.md"
       - name: Verify packet checksums
