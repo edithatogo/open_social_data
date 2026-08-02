@@ -58,16 +58,15 @@ jobs:
           sha256sum --check checksums.sha256
       - name: Upload immutable packet to Hugging Face
         run: >-
-          uvx --from huggingface_hub==1.15.0 hf upload
-          "$HF_DATASET_REPO"
-          "$RUNNER_TEMP/hf-dataset"
-          .
-          --type dataset
-          --commit-message "Archive ${{ inputs.source }} from GitHub run $GITHUB_RUN_ID"
+          uv run --no-project --with huggingface_hub==1.15.0
+          python scripts/publish_hf_archive.py upload-folder
+          --repo "$HF_DATASET_REPO"
+          --folder "$RUNNER_TEMP/hf-dataset"
+          --message "Archive ${{ inputs.source }} from GitHub run $GITHUB_RUN_ID"
       - name: Resolve packet revision
         id: packet
         run: |
-          revision="$(uvx --from huggingface_hub==1.15.0 hf datasets info "$HF_DATASET_REPO" | uv run --no-project python -c 'import json,sys; print(json.load(sys.stdin)["sha"])')"
+          revision="$(uv run --no-project --with huggingface_hub==1.15.0 python scripts/publish_hf_archive.py info --repo "$HF_DATASET_REPO")"
           manifest="$(find "$RUNNER_TEMP/hf-dataset/snapshots" -name manifest.json -print -quit)"
           {
             echo "revision=$revision"
@@ -83,15 +82,15 @@ jobs:
           --output "$RUNNER_TEMP/receipt.json"
       - name: Upload hosted receipt
         run: >-
-          uvx --from huggingface_hub==1.15.0 hf upload
-          "$HF_DATASET_REPO"
-          "$RUNNER_TEMP/receipt.json"
-          "receipts/github/$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT.json"
-          --type dataset
-          --commit-message "Bind GitHub archive run $GITHUB_RUN_ID"
+          uv run --no-project --with huggingface_hub==1.15.0
+          python scripts/publish_hf_archive.py upload-file
+          --repo "$HF_DATASET_REPO"
+          --file "$RUNNER_TEMP/receipt.json"
+          --path "receipts/github/$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT.json"
+          --message "Bind GitHub archive run $GITHUB_RUN_ID"
       - name: Record hosted evidence summary
         run: |
-          final_revision="$(uvx --from huggingface_hub==1.15.0 hf datasets info "$HF_DATASET_REPO" | uv run --no-project python -c 'import json,sys; print(json.load(sys.stdin)["sha"])')"
+          final_revision="$(uv run --no-project --with huggingface_hub==1.15.0 python scripts/publish_hf_archive.py info --repo "$HF_DATASET_REPO")"
           {
             echo "## Public dataset archive"
             echo "- Dataset: https://huggingface.co/datasets/$HF_DATASET_REPO"
