@@ -11,6 +11,8 @@ on:
         options:
           - stats-nz-meshblock-2026
           - stats-nz-subnational-population-2025
+          - metro-christchurch-static-gtfs
+          - auckland-transport-static-gtfs
       max_features:
         description: Zero captures the full frozen inventory; a positive value creates a bounded sample
         required: true
@@ -58,6 +60,22 @@ jobs:
               test "${{ inputs.max_features }}" = "0"
               uv run --no-project python scripts/archive_stats_nz_population.py \
                 --output "$RUNNER_TEMP/hf-dataset"
+                ;;
+            metro-christchurch-static-gtfs)
+              test "${{ inputs.max_features }}" = "0"
+              uv run --no-project python scripts/archive_public_url.py \
+                --source-id metro-christchurch-static-gtfs \
+                --url https://apis.metroinfo.co.nz/rti/gtfs/v1/gtfs.zip \
+                --terms-url https://www.ecan.govt.nz/your-region/your-environment/our-responsibilities/transport/public-transport/public-transport-data/ \
+                --output "$RUNNER_TEMP/hf-dataset/snapshots/metro-christchurch-static-gtfs"
+              ;;
+            auckland-transport-static-gtfs)
+              test "${{ inputs.max_features }}" = "0"
+              uv run --no-project python scripts/archive_public_url.py \
+                --source-id auckland-transport-static-gtfs \
+                --url https://at.govt.nz/media/1985/gtfs.zip \
+                --terms-url https://at.govt.nz/about-us/at-data-sources/general-transit-feed-specification \
+                --output "$RUNNER_TEMP/hf-dataset/snapshots/auckland-transport-static-gtfs"
               ;;
             *)
               echo "Unapproved source: ${{ inputs.source }}" >&2
