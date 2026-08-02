@@ -99,3 +99,9 @@ This file tracks all major tracks for the project. Each track has its own detail
 - [x] Implement fail-closed ArcGIS capture and hermetic contract tests.
 - [x] Add GitHub Actions and Hugging Face publication contracts.
 - [ ] Execute and verify the full hosted packet, receipt and downstream evidence.
+
+## [~] Track 16: Stats NZ population exact-edition hosted archive
+*Link: [./conductor/tracks/stats_nz_population_archive_20260802/](./conductor/tracks/stats_nz_population_archive_20260802/)*
+- [x] Freeze the public 30 June 2025 provisional workbook identity and SHA-256.
+- [ ] Implement and merge the fail-closed GitHub Actions acquisition route.
+- [ ] Publish and verify the immutable Hugging Face packet and hosted receipt.

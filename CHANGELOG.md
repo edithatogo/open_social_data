@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 ### Added
+- Added a fail-closed exact-file archive route for the Stats NZ *Subnational
+  population estimates: At 30 June 2025 (provisional)* workbook, including
+  frozen SHA-256/size checks, XLSX structure and edition validation, GitHub
+  Actions routing, public archive documentation and Conductor Track 16.
 - Added a fail-closed Stats NZ Meshblock 2026 ArcGIS archive packet builder,
   hermetic contract tests, and a manually dispatched GitHub Actions workflow
   that publishes checksummed packets and hosted receipts to the RIOPA public

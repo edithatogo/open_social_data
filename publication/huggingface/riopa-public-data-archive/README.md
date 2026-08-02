@@ -18,7 +18,7 @@ packets acquired by the `edithatogo/open_social_data` GitHub Actions workflow.
 Every packet keeps source metadata, raw paged responses, retrieval receipts,
 completeness checks, SHA-256 checksums and explicit non-claims together.
 
-## Current source packet
+## Source packets
 
 `stats-nz-meshblock-2026` is the definitive Stats NZ meshblock boundary edition
 as at 1 January 2026, obtained from the public ArcGIS Feature Service. The source
@@ -30,13 +30,25 @@ attribution to Stats NZ Tatauranga Aotearoa.
 - Licence: <https://creativecommons.org/licenses/by/4.0/>
 - Attribution: Stats NZ Tatauranga Aotearoa
 
+`stats-nz-subnational-population-2025` preserves the exact provisional Stats NZ
+workbook published for the 30 June 2025 edition. It contains estimated resident
+population tables for regional councils, territorial authorities and Auckland
+local-board areas, including reference dates from 2023 through 2025.
+
+- Release: <https://www.stats.govt.nz/information-releases/subnational-population-estimates-at-30-june-2025/>
+- Exact workbook: <https://www.stats.govt.nz/assets/Uploads/Subnational-population-estimates/Subnational-population-estimates-At-30-June-2025/Download-data/subnational-population-estimates-at-30-june-2025-provisional.xlsx>
+- Source SHA-256: `001e8a896cfb50f5ed17836dc815b235e3bcca55ee91c9869a2afaeb054b50a6`
+- Licence: <https://creativecommons.org/licenses/by/4.0/>
+- Attribution: Stats NZ Tatauranga Aotearoa
+
 ## Integrity and use
 
 Use a named Hugging Face commit revision and the packet's `manifest.json`.
 Verify `checksums.sha256` before use. Mutable `latest.json` is discovery-only and
 must not be used as an analytical or citation identity.
 
-This archive does not contain population observations and makes no completeness,
-legal-status, accessibility, facility, causal or operational claim beyond the
-named source edition and captured bytes. The source's documented non-digitised
-meshblocks and liability statement remain applicable.
+The Meshblock packet contains no population observations. The population packet
+preserves a provisional publication without revising or finalising its estimates.
+Neither packet makes completeness, legal-status, accessibility, facility, causal
+or operational claims beyond its named source edition and captured bytes. The
+source limitations and liability statements remain applicable.
