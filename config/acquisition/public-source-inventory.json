@@ -46,6 +46,17 @@
       "non_claim": "OSM assertions are source-specific observations, not an authoritative or complete retailer register."
     },
     {
+      "id": "osm-new-zealand-food-service",
+      "issue": 36,
+      "authority": "OpenStreetMap contributors / OpenDataSoft mirror",
+      "landing_page": "https://c0mm0.com/entry/food-services-new-zealand-osm-data/",
+      "payload_url": "https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/osm-new-zealand-food-service/exports/json",
+      "service_status": "candidate",
+      "archive_status": "not-archived",
+      "rights_status": "ODbL-terms-and-attribution-receipt-required",
+      "non_claim": "The mirror is an observed OSM-derived assertion set, not an authoritative or complete retailer register."
+    },
+    {
       "id": "auckland-food-premises-register",
       "issue": 36,
       "authority": "Auckland Council",

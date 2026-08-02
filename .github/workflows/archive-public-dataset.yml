@@ -13,6 +13,7 @@ on:
           - stats-nz-subnational-population-2025
           - metro-christchurch-static-gtfs
           - auckland-transport-static-gtfs
+          - osm-new-zealand-food-service
       max_features:
         description: Zero captures the full frozen inventory; a positive value creates a bounded sample
         required: true
@@ -76,6 +77,14 @@ jobs:
                 --url https://at.govt.nz/media/1985/gtfs.zip \
                 --terms-url https://at.govt.nz/about-us/at-data-sources/general-transit-feed-specification \
                 --output "$RUNNER_TEMP/hf-dataset/snapshots/auckland-transport-static-gtfs"
+              ;;
+            osm-new-zealand-food-service)
+              test "${{ inputs.max_features }}" = "0"
+              uv run --no-project python scripts/archive_public_url.py \
+                --source-id osm-new-zealand-food-service \
+                --url 'https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/osm-new-zealand-food-service/exports/json' \
+                --terms-url https://c0mm0.com/entry/food-services-new-zealand-osm-data/ \
+                --output "$RUNNER_TEMP/hf-dataset/snapshots/osm-new-zealand-food-service"
               ;;
             *)
               echo "Unapproved source: ${{ inputs.source }}" >&2
