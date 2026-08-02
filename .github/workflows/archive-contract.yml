@@ -1,0 +1,39 @@
+name: Archive contract tests
+
+on:
+  pull_request:
+    paths:
+      - "scripts/archive_arcgis_feature_layer.py"
+      - "scripts/write_hf_archive_receipt.py"
+      - "tests/test_archive_arcgis_feature_layer.py"
+      - ".github/workflows/archive-*.yml"
+  push:
+    branches: [main]
+    paths:
+      - "scripts/archive_arcgis_feature_layer.py"
+      - "scripts/write_hf_archive_receipt.py"
+      - "tests/test_archive_arcgis_feature_layer.py"
+      - ".github/workflows/archive-*.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          python-version: "3.13"
+          version: "0.11.16"
+      - name: Run archive contract tests
+        run: >-
+          uv run --no-project python -m unittest discover
+          -s tests -p 'test_archive*.py'
+      - name: Parse archive scripts
+        run: >-
+          uv run --no-project python -m py_compile
+          scripts/archive_arcgis_feature_layer.py
+          scripts/write_hf_archive_receipt.py

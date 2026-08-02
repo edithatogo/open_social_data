@@ -1,0 +1,112 @@
+name: Archive public dataset to Hugging Face
+
+on:
+  workflow_dispatch:
+    inputs:
+      source:
+        description: Approved public source packet
+        required: true
+        default: stats-nz-meshblock-2026
+        type: choice
+        options:
+          - stats-nz-meshblock-2026
+      max_features:
+        description: Zero captures the full frozen inventory; a positive value creates a bounded sample
+        required: true
+        default: "0"
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: public-dataset-archive-${{ inputs.source }}
+  cancel-in-progress: false
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    environment: public-data-archive
+    env:
+      HF_DATASET_REPO: edithatogo/riopa-public-data-archive
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          python-version: "3.13"
+          version: "0.11.16"
+      - name: Verify publication credential is configured
+        run: test -n "$HF_TOKEN"
+      - name: Run archive contract tests
+        run: >-
+          uv run --no-project python -m unittest discover
+          -s tests -p 'test_archive*.py'
+      - name: Capture the approved source packet
+        run: >-
+          uv run --no-project python scripts/archive_arcgis_feature_layer.py
+          --output "$RUNNER_TEMP/hf-dataset"
+          --max-features "${{ inputs.max_features }}"
+      - name: Add the governed dataset card
+        run: cp publication/huggingface/riopa-public-data-archive/README.md "$RUNNER_TEMP/hf-dataset/README.md"
+      - name: Verify packet checksums
+        run: |
+          manifest="$(find "$RUNNER_TEMP/hf-dataset/snapshots" -name manifest.json -print -quit)"
+          manifest_dir="${manifest%/*}"
+          cd "$manifest_dir"
+          sha256sum --check checksums.sha256
+      - name: Upload immutable packet to Hugging Face
+        run: >-
+          uvx --from huggingface_hub==1.15.0 hf upload
+          "$HF_DATASET_REPO"
+          "$RUNNER_TEMP/hf-dataset"
+          .
+          --type dataset
+          --commit-message "Archive ${{ inputs.source }} from GitHub run $GITHUB_RUN_ID"
+      - name: Resolve packet revision
+        id: packet
+        run: |
+          revision="$(uvx --from huggingface_hub==1.15.0 hf datasets info "$HF_DATASET_REPO" | uv run --no-project python -c 'import json,sys; print(json.load(sys.stdin)["sha"])')"
+          manifest="$(find "$RUNNER_TEMP/hf-dataset/snapshots" -name manifest.json -print -quit)"
+          {
+            echo "revision=$revision"
+            echo "manifest=$manifest"
+            echo "checksums=${manifest%/*}/checksums.sha256"
+          } >> "$GITHUB_OUTPUT"
+      - name: Bind hosted revision to GitHub execution
+        run: >-
+          uv run --no-project python scripts/write_hf_archive_receipt.py
+          --dataset "$HF_DATASET_REPO"
+          --revision "${{ steps.packet.outputs.revision }}"
+          --manifest "${{ steps.packet.outputs.manifest }}"
+          --output "$RUNNER_TEMP/receipt.json"
+      - name: Upload hosted receipt
+        run: >-
+          uvx --from huggingface_hub==1.15.0 hf upload
+          "$HF_DATASET_REPO"
+          "$RUNNER_TEMP/receipt.json"
+          "receipts/github/$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT.json"
+          --type dataset
+          --commit-message "Bind GitHub archive run $GITHUB_RUN_ID"
+      - name: Record hosted evidence summary
+        run: |
+          final_revision="$(uvx --from huggingface_hub==1.15.0 hf datasets info "$HF_DATASET_REPO" | uv run --no-project python -c 'import json,sys; print(json.load(sys.stdin)["sha"])')"
+          {
+            echo "## Public dataset archive"
+            echo "- Dataset: https://huggingface.co/datasets/$HF_DATASET_REPO"
+            echo "- Packet revision: ${{ steps.packet.outputs.revision }}"
+            echo "- Receipt revision: $final_revision"
+            echo "- Source: ${{ inputs.source }}"
+            echo "- Maximum features: ${{ inputs.max_features }}"
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Retain bounded workflow evidence
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: public-dataset-archive-evidence-${{ github.run_id }}
+          path: |
+            ${{ steps.packet.outputs.manifest }}
+            ${{ steps.packet.outputs.checksums }}
+            ${{ runner.temp }}/receipt.json
+          if-no-files-found: error
+          retention-days: 90
