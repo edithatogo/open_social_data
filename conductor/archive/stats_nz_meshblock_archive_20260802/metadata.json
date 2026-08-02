@@ -1,0 +1,26 @@
+{
+  "track_id": "stats_nz_meshblock_archive_20260802",
+  "type": "data",
+  "status": "archived",
+  "created_at": "2026-08-02T12:55:46Z",
+  "updated_at": "2026-08-02T14:18:00Z",
+  "description": "Acquire and preserve the exact public Stats NZ Meshblock 2026 ArcGIS layer through GitHub Actions and Hugging Face.",
+  "github_issue": "https://github.com/edithatogo/open_social_data/issues/35",
+  "owner_repository": "edithatogo/open_social_data",
+  "publication_target": "https://huggingface.co/datasets/edithatogo/riopa-public-data-archive",
+  "archived_review": {
+    "review_date": "2026-08-03",
+    "reviewed_revision": "ebce8699c166c45d237f3078d5ee1c9e9931bc27",
+    "remediation_revision": "ee9bda0",
+    "qualification_revision": "c2b0b4b",
+    "panel": [
+      "archive-integrity",
+      "source-provenance-security",
+      "conductor-lifecycle"
+    ],
+    "verdict": "pass",
+    "critical_findings": 0,
+    "high_findings": 0,
+    "report": "qualification-report.md"
+  }
+}

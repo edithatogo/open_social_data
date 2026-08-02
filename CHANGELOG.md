@@ -23,6 +23,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   `3f2dc0a4d95a4fcb495551098d58fc5bce9c9202` and
   `34c093646f884d7b57447231d6605e83739bb302`, and verified the manifest plus
   boundary-page digests by hosted readback.
+- Qualified the complete Meshblock packet through a three-member agent panel,
+  applied redirect and publication-secret hardening, and archived Conductor
+  Track 15 with no unresolved Critical or High findings.
 - **Rust data engine swarm slice:**
     - Added ABS and Stats NZ provider modules with provider metadata, endpoint URL builders, async HTTP status handling, and row-level dataset parsing.
     - Added a provider registry for loading active providers from the CLI and library code.
