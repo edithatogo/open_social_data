@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0.0",
+  "purpose": "RIOPA public-only acquisition candidates for issues 36 and 37",
+  "policy": "discovery-only-until-raw-packet-and-rights-receipt-exist",
+  "sources": [
+    {
+      "id": "nzta-amds-network-model",
+      "issue": 37,
+      "authority": "NZ Transport Agency Waka Kotahi",
+      "landing_page": "https://www.nzta.govt.nz/partners/data-and-tools/asset-management-data-standard/amds-network-model",
+      "service_status": "candidate",
+      "archive_status": "not-archived",
+      "expected_modes": ["walking", "cycling", "micro-mobility", "car", "bus", "freight", "rail", "ferry"],
+      "rights_status": "requires-capture-of-published-terms",
+      "non_claim": "A public landing page is not a content-addressed network snapshot or proof of route completeness."
+    },
+    {
+      "id": "metro-christchurch-static-gtfs",
+      "issue": 37,
+      "authority": "Environment Canterbury / Metro Christchurch",
+      "landing_page": "https://www.ecan.govt.nz/your-region/your-environment/our-responsibilities/transport/public-transport/public-transport-data/",
+      "payload_url": "https://apis.metroinfo.co.nz/rti/gtfs/v1/gtfs.zip",
+      "service_status": "candidate",
+      "archive_status": "not-archived",
+      "rights_status": "requires-capture-of-feed-terms",
+      "non_claim": "This regional feed must not be represented as a national timetable."
+    },
+    {
+      "id": "auckland-transport-static-gtfs",
+      "issue": 37,
+      "authority": "Auckland Transport",
+      "landing_page": "https://at.govt.nz/about-us/at-data-sources/general-transit-feed-specification",
+      "service_status": "candidate",
+      "archive_status": "not-archived",
+      "rights_status": "requires-capture-of-feed-terms",
+      "non_claim": "Auckland coverage is regional and does not establish national timetable completeness."
+    },
+    {
+      "id": "osm-food-retail-nz",
+      "issue": 36,
+      "authority": "OpenStreetMap contributors",
+      "landing_page": "https://download.geofabrik.de/australia-oceania/new-zealand.html",
+      "service_status": "candidate",
+      "archive_status": "not-archived",
+      "rights_status": "ODbL-terms-and-attribution-receipt-required",
+      "non_claim": "OSM assertions are source-specific observations, not an authoritative or complete retailer register."
+    },
+    {
+      "id": "auckland-food-premises-register",
+      "issue": 36,
+      "authority": "Auckland Council",
+      "landing_page": "https://www.aucklandcouncil.govt.nz/licences-regulations/food-safety/Pages/food-businesses.aspx",
+      "service_status": "candidate",
+      "archive_status": "not-archived",
+      "rights_status": "requires-dataset-and-redistribution-receipt",
+      "non_claim": "A council register is geographically bounded and cannot establish national facility coverage."
+    }
+  ]
+}
