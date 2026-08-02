@@ -53,15 +53,24 @@ def validate_service_url(value: str) -> str:
 
 
 def request_bytes(
-    url: str, *, timeout: float, attempts: int = 4
+    url: str,
+    *,
+    timeout: float,
+    attempts: int = 4,
+    form: dict[str, str] | None = None,
 ) -> tuple[bytes, dict[str, Any]]:
+    request_body = urllib.parse.urlencode(form).encode("ascii") if form else None
+    headers = {
+        "Accept": "application/json",
+        "Accept-Encoding": "identity",
+        "User-Agent": USER_AGENT,
+    }
+    if request_body is not None:
+        headers["Content-Type"] = "application/x-www-form-urlencoded"
     request = urllib.request.Request(
         url,
-        headers={
-            "Accept": "application/json",
-            "Accept-Encoding": "identity",
-            "User-Agent": USER_AGENT,
-        },
+        data=request_body,
+        headers=headers,
     )
     last_error: Exception | None = None
     for attempt in range(1, attempts + 1):
@@ -73,6 +82,7 @@ def request_bytes(
                 }
                 receipt = {
                     "url": response.geturl(),
+                    "method": request.get_method(),
                     "status": response.status,
                     "retrieved_at": utc_now(),
                     "headers": {
@@ -81,6 +91,8 @@ def request_bytes(
                         if name in headers
                     },
                 }
+                if request_body is not None:
+                    receipt["request_body_sha256"] = sha256_bytes(request_body)
                 return body, receipt
         except (TimeoutError, urllib.error.URLError, urllib.error.HTTPError) as error:
             last_error = error
@@ -232,20 +244,19 @@ def capture(args: argparse.Namespace) -> Path:
         range(0, len(selected_ids), args.page_size), start=1
     ):
         expected_ids = selected_ids[offset : offset + args.page_size]
-        page_url = arcgis_url(
-            service_url,
-            "/query",
-            {
-                "objectIds": ",".join(str(value) for value in expected_ids),
-                "outFields": "*",
-                "returnGeometry": "true",
-                "returnM": "true",
-                "returnZ": "true",
-                "orderByFields": f"{oid_field} ASC",
-                "f": "json",
-            },
+        page_url = f"{service_url}/query"
+        page_parameters = {
+            "objectIds": ",".join(str(value) for value in expected_ids),
+            "outFields": "*",
+            "returnGeometry": "true",
+            "returnM": "true",
+            "returnZ": "true",
+            "orderByFields": f"{oid_field} ASC",
+            "f": "json",
+        }
+        body, receipt = request_bytes(
+            page_url, timeout=args.timeout, form=page_parameters
         )
-        body, receipt = request_bytes(page_url, timeout=args.timeout)
         payload = parse_arcgis_json(body, f"feature page {page_number}")
         page_ids, page_nulls = validate_page(
             payload,
