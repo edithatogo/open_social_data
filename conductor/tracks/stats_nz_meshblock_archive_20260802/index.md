@@ -3,6 +3,7 @@
 - [Specification](./spec.md)
 - [Implementation plan](./plan.md)
 - [Metadata](./metadata.json)
+- [Agent-panel qualification](./qualification-report.md)
 - GitHub issue: https://github.com/edithatogo/open_social_data/issues/35
 - Hugging Face target: https://huggingface.co/datasets/edithatogo/riopa-public-data-archive
 
@@ -22,6 +23,8 @@
   first and final page digests.
 - RIOPA downstream evidence was merged in
   [riopa-infrastructure PR 170](https://github.com/edithatogo/riopa-infrastructure/pull/170).
+- The 2026-08-03 three-member agent panel independently reproduced packet integrity,
+  provenance and lifecycle evidence and returned **PASS** with no Critical or High findings.
 
 ## Limitations
 
