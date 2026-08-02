@@ -14,6 +14,7 @@
 
 ## Phase 3: Publish and qualify evidence
 
-- [ ] Merge the implementation after hosted checks pass.
-- [ ] Execute the exact-edition hosted capture and verify the Hub packet and receipt.
-- [ ] Record immutable revisions and digests, run agent-panel qualification and archive the track.
+- [x] Merge the implementation after hosted checks pass.
+- [x] Execute the exact-edition hosted capture and verify the Hub packet and receipt.
+- [x] Record immutable revisions and digests in repository evidence.
+- [ ] Run agent-panel qualification and archive the track.
