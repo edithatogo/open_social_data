@@ -26,6 +26,12 @@ def main() -> None:
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
+    try:
+        manifest_sha256 = sha256_file(args.manifest)
+    except OSError as error:
+        raise SystemExit(
+            f"unable to read archive manifest {args.manifest}: {error}"
+        ) from error
     payload = {
         "schema": "open-social-data.hugging-face-receipt.v1",
         "recorded_at": datetime.now(UTC)
@@ -35,7 +41,7 @@ def main() -> None:
         "dataset": args.dataset,
         "packet_revision": args.revision,
         "manifest_path": str(args.manifest),
-        "manifest_sha256": sha256_file(args.manifest),
+        "manifest_sha256": manifest_sha256,
         "github": {
             "repository": os.getenv("GITHUB_REPOSITORY"),
             "revision": os.getenv("GITHUB_SHA"),
@@ -44,10 +50,15 @@ def main() -> None:
         },
         "credentials_recorded": False,
     }
-    args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(
-        json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8"
-    )
+    try:
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        args.output.write_text(
+            json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+        )
+    except OSError as error:
+        raise SystemExit(
+            f"unable to write archive receipt {args.output}: {error}"
+        ) from error
 
 
 if __name__ == "__main__":

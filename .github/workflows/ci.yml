@@ -66,7 +66,16 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions-rust-lang/setup-rust-toolchain@166cdcfd11aee3cb47222f9ddb555ce30ddb9659 # v1
       - run: cargo install cargo-audit --locked
-      - run: cargo audit
+      - name: Verify quick-xml advisories are unreachable
+        run: |
+          if cargo tree --target all --edges all --invert quick-xml 2>/dev/null | grep -q .; then
+            echo "quick-xml unexpectedly entered the resolved dependency graph" >&2
+            exit 1
+          fi
+      - name: Run cargo audit
+        # object_store's inactive cloud feature leaves quick-xml in Cargo.lock even
+        # though it is absent from every target's resolved dependency graph.
+        run: cargo audit --ignore RUSTSEC-2026-0194 --ignore RUSTSEC-2026-0195
 
   license-deny:
     name: License / Policy Deny

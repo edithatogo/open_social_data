@@ -3,9 +3,11 @@ from __future__ import annotations
 import gzip
 import importlib.util
 import json
+import subprocess
+import sys
+import tempfile
 import unittest
 from pathlib import Path
-
 
 ROOT = Path(__file__).resolve().parents[1]
 SPEC = importlib.util.spec_from_file_location(
@@ -65,6 +67,31 @@ class ArcGisArchiveTests(unittest.TestCase):
                 json.dumps({"error": {"code": 400, "message": "bad query"}}).encode(),
                 "fixture",
             )
+
+    def test_receipt_reports_missing_manifest(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            missing = Path(directory) / "missing.json"
+            output = Path(directory) / "receipt.json"
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(ROOT / "scripts/write_hf_archive_receipt.py"),
+                    "--dataset",
+                    "owner/dataset",
+                    "--revision",
+                    "abc123",
+                    "--manifest",
+                    str(missing),
+                    "--output",
+                    str(output),
+                ],
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("unable to read archive manifest", result.stderr)
+            self.assertFalse(output.exists())
 
 
 if __name__ == "__main__":

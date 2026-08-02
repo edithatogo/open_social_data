@@ -100,7 +100,7 @@ def parse_arcgis_json(body: bytes, label: str) -> dict[str, Any]:
     except (UnicodeDecodeError, json.JSONDecodeError) as error:
         raise ValueError(f"{label} is not valid JSON") from error
     if not isinstance(payload, dict):
-        raise ValueError(f"{label} must be a JSON object")
+        raise TypeError(f"{label} must be a JSON object")
     if payload.get("error"):
         raise ValueError(f"{label} returned an ArcGIS error: {payload['error']}")
     return payload
@@ -130,7 +130,7 @@ def object_ids(payload: dict[str, Any], label: str) -> tuple[str, list[int]]:
     field = payload.get("objectIdFieldName")
     values = payload.get("objectIds")
     if not isinstance(field, str) or not isinstance(values, list):
-        raise ValueError(f"{label} lacks objectIdFieldName/objectIds")
+        raise TypeError(f"{label} lacks objectIdFieldName/objectIds")
     ids = [int(value) for value in values]
     if len(ids) != len(set(ids)):
         raise ValueError(f"{label} contains duplicate object IDs")
@@ -153,7 +153,7 @@ def validate_page(
         if not isinstance(feature, dict) or not isinstance(
             feature.get("attributes"), dict
         ):
-            raise ValueError("feature page contains a malformed feature")
+            raise TypeError("feature page contains a malformed feature")
         observed.append(int(feature["attributes"][oid_field]))
         null_geometries += feature.get("geometry") is None
     if observed != expected_ids:
