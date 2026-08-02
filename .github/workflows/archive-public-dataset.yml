@@ -14,6 +14,7 @@ on:
           - metro-christchurch-static-gtfs
           - auckland-transport-static-gtfs
           - osm-new-zealand-food-service
+          - marlborough-food-premise-licences
       max_features:
         description: Zero captures the full frozen inventory; a positive value creates a bounded sample
         required: true
@@ -85,6 +86,14 @@ jobs:
                 --url 'https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/osm-new-zealand-food-service/exports/json' \
                 --terms-url https://c0mm0.com/entry/food-services-new-zealand-osm-data/ \
                 --output "$RUNNER_TEMP/hf-dataset/snapshots/osm-new-zealand-food-service"
+              ;;
+            marlborough-food-premise-licences)
+              test "${{ inputs.max_features }}" = "0"
+              uv run --no-project python scripts/archive_public_url.py \
+                --source-id marlborough-food-premise-licences \
+                --url 'https://gis.marlborough.govt.nz/server/rest/services/OpenData/OpenData2/MapServer/4/query?where=1%3D1&outFields=*&outSR=4326&f=geojson' \
+                --terms-url https://gis.marlborough.govt.nz/server/rest/services/OpenData/OpenData2/MapServer \
+                --output "$RUNNER_TEMP/hf-dataset/snapshots/marlborough-food-premise-licences"
               ;;
             *)
               echo "Unapproved source: ${{ inputs.source }}" >&2

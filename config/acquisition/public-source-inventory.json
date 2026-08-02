@@ -65,6 +65,17 @@
       "archive_status": "not-archived",
       "rights_status": "requires-dataset-and-redistribution-receipt",
       "non_claim": "A council register is geographically bounded and cannot establish national facility coverage."
+    },
+    {
+      "id": "marlborough-food-premise-licences",
+      "issue": 36,
+      "authority": "Marlborough District Council",
+      "landing_page": "https://gis.marlborough.govt.nz/server/rest/services/OpenData/OpenData2/MapServer",
+      "payload_url": "https://gis.marlborough.govt.nz/server/rest/services/OpenData/OpenData2/MapServer/4/query?where=1%3D1&outFields=*&outSR=4326&f=geojson",
+      "service_status": "candidate",
+      "archive_status": "not-archived",
+      "rights_status": "requires-capture-of-service-terms",
+      "non_claim": "A Marlborough register is geographically bounded and cannot establish national facility coverage."
     }
   ]
 }
