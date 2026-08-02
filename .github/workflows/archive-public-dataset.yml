@@ -31,7 +31,6 @@ jobs:
     environment: public-data-archive
     env:
       HF_DATASET_REPO: edithatogo/riopa-public-data-archive
-      HF_TOKEN: ${{ secrets.HF_TOKEN }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
@@ -39,6 +38,8 @@ jobs:
           python-version: "3.13"
           version: "0.11.16"
       - name: Verify publication credential is configured
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: test -n "$HF_TOKEN"
       - name: Run archive contract tests
         run: >-
@@ -72,6 +73,8 @@ jobs:
           cd "$manifest_dir"
           sha256sum --check checksums.sha256
       - name: Upload immutable packet to Hugging Face
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: >-
           uv run --no-project --with huggingface_hub==1.15.0
           python scripts/publish_hf_archive.py upload-folder
@@ -80,6 +83,8 @@ jobs:
           --message "Archive ${{ inputs.source }} from GitHub run $GITHUB_RUN_ID"
       - name: Resolve packet revision
         id: packet
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
           revision="$(uv run --no-project --with huggingface_hub==1.15.0 python scripts/publish_hf_archive.py info --repo "$HF_DATASET_REPO")"
           manifest="$(find "$RUNNER_TEMP/hf-dataset/snapshots" -name manifest.json -print -quit)"
@@ -96,6 +101,8 @@ jobs:
           --manifest "${{ steps.packet.outputs.manifest }}"
           --output "$RUNNER_TEMP/receipt.json"
       - name: Upload hosted receipt
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: >-
           uv run --no-project --with huggingface_hub==1.15.0
           python scripts/publish_hf_archive.py upload-file
@@ -104,6 +111,8 @@ jobs:
           --path "receipts/github/$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT.json"
           --message "Bind GitHub archive run $GITHUB_RUN_ID"
       - name: Record hosted evidence summary
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
           final_revision="$(uv run --no-project --with huggingface_hub==1.15.0 python scripts/publish_hf_archive.py info --repo "$HF_DATASET_REPO")"
           {

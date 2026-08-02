@@ -94,12 +94,12 @@ This file tracks all major tracks for the project. Each track has its own detail
 - [x] Register the provider and document CLI usage.
 - [ ] Complete Cargo quality gates after the local linker is repaired.
 
-## [~] Track 15: Stats NZ Meshblock 2026 hosted archive
-*Link: [./conductor/tracks/stats_nz_meshblock_archive_20260802/](./conductor/tracks/stats_nz_meshblock_archive_20260802/)*
+## [x] Track 15: Stats NZ Meshblock 2026 hosted archive (archived)
+*Link: [./archive/stats_nz_meshblock_archive_20260802/index.md](./archive/stats_nz_meshblock_archive_20260802/index.md)*
 - [x] Implement fail-closed ArcGIS capture and hermetic contract tests.
 - [x] Add GitHub Actions and Hugging Face publication contracts.
 - [x] Execute and verify the full hosted packet, receipt and downstream evidence.
-- [ ] Complete agent-panel qualification and archive the track.
+- [x] Complete agent-panel qualification and archive the track.
 
 ## [~] Track 16: Stats NZ population exact-edition hosted archive
 *Link: [./conductor/tracks/stats_nz_population_archive_20260802/](./conductor/tracks/stats_nz_population_archive_20260802/)*
