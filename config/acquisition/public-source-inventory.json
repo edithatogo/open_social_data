@@ -76,6 +76,17 @@
       "archive_status": "not-archived",
       "rights_status": "requires-capture-of-service-terms",
       "non_claim": "A Marlborough register is geographically bounded and cannot establish national facility coverage."
+    },
+    {
+      "id": "hamilton-food-premise-register",
+      "issue": 36,
+      "authority": "Hamilton City Council",
+      "landing_page": "https://services1.arcgis.com/R6s0QqCMQdwKY6yp/arcgis/rest/services/Food_Premise/FeatureServer",
+      "payload_url": "https://services1.arcgis.com/R6s0QqCMQdwKY6yp/arcgis/rest/services/Food_Premise/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=geojson",
+      "service_status": "candidate",
+      "archive_status": "not-archived",
+      "rights_status": "requires-capture-of-service-terms",
+      "non_claim": "A Hamilton register is geographically bounded and cannot establish national facility coverage."
     }
   ]
 }

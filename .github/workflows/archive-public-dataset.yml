@@ -15,6 +15,7 @@ on:
           - auckland-transport-static-gtfs
           - osm-new-zealand-food-service
           - marlborough-food-premise-licences
+          - hamilton-food-premise-register
       max_features:
         description: Zero captures the full frozen inventory; a positive value creates a bounded sample
         required: true
@@ -94,6 +95,14 @@ jobs:
                 --url 'https://gis.marlborough.govt.nz/server/rest/services/OpenData/OpenData2/MapServer/4/query?where=1%3D1&outFields=*&outSR=4326&f=geojson' \
                 --terms-url https://gis.marlborough.govt.nz/server/rest/services/OpenData/OpenData2/MapServer \
                 --output "$RUNNER_TEMP/hf-dataset/snapshots/marlborough-food-premise-licences"
+              ;;
+            hamilton-food-premise-register)
+              test "${{ inputs.max_features }}" = "0"
+              uv run --no-project python scripts/archive_public_url.py \
+                --source-id hamilton-food-premise-register \
+                --url 'https://services1.arcgis.com/R6s0QqCMQdwKY6yp/arcgis/rest/services/Food_Premise/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=geojson' \
+                --terms-url https://data.hamilton.govt.nz/ \
+                --output "$RUNNER_TEMP/hf-dataset/snapshots/hamilton-food-premise-register"
               ;;
             *)
               echo "Unapproved source: ${{ inputs.source }}" >&2
