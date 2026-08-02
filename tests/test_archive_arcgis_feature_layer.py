@@ -8,6 +8,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
 from unittest import mock
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -17,6 +18,13 @@ SPEC = importlib.util.spec_from_file_location(
 assert SPEC is not None and SPEC.loader is not None
 archive = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(archive)
+
+PUBLISHER_SPEC = importlib.util.spec_from_file_location(
+    "publish_hf_archive", ROOT / "scripts/publish_hf_archive.py"
+)
+assert PUBLISHER_SPEC is not None and PUBLISHER_SPEC.loader is not None
+publisher = importlib.util.module_from_spec(PUBLISHER_SPEC)
+PUBLISHER_SPEC.loader.exec_module(publisher)
 
 
 class ArcGisArchiveTests(unittest.TestCase):
@@ -43,6 +51,21 @@ class ArcGisArchiveTests(unittest.TestCase):
         self.assertEqual(
             receipt["request_body_sha256"], archive.sha256_bytes(request.data)
         )
+
+    def test_hugging_face_revision_must_be_present(self) -> None:
+        api = mock.MagicMock()
+        api.repo_info.return_value = SimpleNamespace(sha="abc123")
+        self.assertEqual(publisher.revision(api, "owner/dataset"), "abc123")
+        api.repo_info.return_value = SimpleNamespace(sha=None)
+        with self.assertRaisesRegex(SystemExit, "did not return a revision"):
+            publisher.revision(api, "owner/dataset")
+
+    def test_hugging_face_token_is_fail_closed(self) -> None:
+        with (
+            mock.patch.dict(publisher.os.environ, {}, clear=True),
+            self.assertRaisesRegex(SystemExit, "HF_TOKEN is not configured"),
+        ):
+            publisher.api_client()
 
     def test_service_url_is_fail_closed(self) -> None:
         valid = "https://services2.arcgis.com/example/ArcGIS/rest/services/Test/FeatureServer/0"
