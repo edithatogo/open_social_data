@@ -52,7 +52,7 @@ All tasks require validation evidence before completion. Commits should be split
 
 ## Phase 7: Review and Close
 
-- [ ] Run Rust checks, tests, docs build, dependency policy checks, and parser quality gates.
-- [ ] Update ROADMAP.md, TODO.md, CHANGELOG.md, and Conductor metadata.
-- [ ] Review whether any optional experimental feature should remain gated or be reverted.
-- [ ] Commit and mark Track 12 complete only after validation evidence is recorded.
+- [x] Run Rust checks, tests, docs build, dependency policy checks, and parser quality gates.
+- [x] Update ROADMAP.md, TODO.md, CHANGELOG.md, and Conductor metadata.
+- [x] Review whether any optional experimental feature should remain gated or be reverted.
+- [x] Commit and mark Track 12 complete only after validation evidence is recorded.

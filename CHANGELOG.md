@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 ### Added
+- Completed Conductor Track 12 review and closeout with local GNU Rust and
+  Astro/Starlight validation evidence, plus hosted CI confirmation for nextest,
+  security, license/policy, coverage, and release guardrails.
 - Added a fail-closed exact-file archive route for the Stats NZ *Subnational
   population estimates: At 30 June 2025 (provisional)* workbook, including
   frozen SHA-256/size checks, XLSX structure and edition validation, GitHub

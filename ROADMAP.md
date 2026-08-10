@@ -121,3 +121,7 @@ Implementation status: Track 10 dataset, guide, example, metadata, Rust CLI vali
 * Optional feature choices are documented with accepted/rejected rationale.
 * CLI completions, man pages, or equivalent generated reference material are available.
 * Parser quality and performance gates protect the core row-level ingestion paths.
+
+Implementation status: Track 12 hardening, documentation, parser-quality tooling,
+release guardrails, and hosted validation are complete. Future dependency updates
+remain subject to Renovate and maintainer review.
