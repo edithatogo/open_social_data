@@ -74,10 +74,10 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ## [x] Track 12: SOTA project hardening and documentation platform (archived)
 *Link: [./conductor/tracks/archived/sota_project_hardening_20260625/](./conductor/tracks/archived/sota_project_hardening_20260625/)*
-- [ ] Add conservative Renovate dependency automation
-- [ ] Scaffold Astro 7/Starlight documentation
-- [ ] Review optional Rust crate features and CLI reference generation
-- [ ] Add CI, security, coverage, parser benchmark/fuzz, SBOM, and release dry-run gates
+- [x] Add conservative Renovate dependency automation
+- [x] Scaffold Astro/Starlight documentation
+- [x] Review optional Rust crate features and CLI reference generation
+- [x] Add CI, security, coverage, parser benchmark/fuzz, SBOM, and release dry-run gates
 
 ---
 
