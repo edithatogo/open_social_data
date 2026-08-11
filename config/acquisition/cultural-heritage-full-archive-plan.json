@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0.0",
+  "policy": "full-preservation-authorized-by-maintainer; public-release-follows-source-rights-and-takedown-state",
+  "canonical_repository": "edithatogo/open_social_data",
+  "redundancy_policy": "Each completed packet must have an authoritative-source receipt, a Hugging Face immutable revision, and an independent Internet Archive item or a recorded exception.",
+  "sources": [
+    {
+      "id": "new-zealand-gazette",
+      "scope": "all published notice metadata and content",
+      "authoritative_source": "https://gazette.govt.nz/",
+      "ingest_path": "DigitalNZ Gazette export or Gazette API",
+      "required_credentials": ["DIGITALNZ_API_KEY or Gazette API key", "Internet Archive upload credentials"],
+      "primary_target": "Hugging Face curated Gazette dataset in this repository",
+      "redundant_target": "Internet Archive item series",
+      "release_rule": "CC BY 3.0 NZ attribution with source exclusions and takedown/redaction reconciliation",
+      "status": "blocked-on-credentials"
+    },
+    {
+      "id": "auckland-museum-online-cenotaph",
+      "scope": "all exposed record metadata, biographies, linked documents, and media representations",
+      "authoritative_source": "https://api.aucklandmuseum.com/",
+      "ingest_path": "Cenotaph search index plus resolvable /id and /id/media resources",
+      "required_credentials": ["Internet Archive upload credentials"],
+      "primary_target": "Hugging Face immutable packets",
+      "redundant_target": "Internet Archive item series",
+      "release_rule": "Full preservation is authorized; public release must retain source rights fields and honour takedown, cultural, privacy, and media-specific restrictions",
+      "rate_limit": "1000 /id or /id/media requests per day; resume from a content-addressed checkpoint",
+      "status": "blocked-on-hosted-campaign-and-Internet-Archive-credentials"
+    },
+    {
+      "id": "papers-past-pre-1945",
+      "scope": "all Papers Past material published before 1945",
+      "authoritative_source": "https://paperspast.natlib.govt.nz/",
+      "ingest_path": "National Library Papers Past open-data bulk distribution, with item/page provenance retained",
+      "required_credentials": ["Internet Archive upload credentials"],
+      "primary_target": "Hugging Face immutable packets",
+      "redundant_target": "Internet Archive item series",
+      "release_rule": "Full preservation is authorized; publish only according to retained item rights, including distinct treatment of third-party and Māori material",
+      "status": "blocked-on-resolving-current-official-bulk-distribution-and-Internet-Archive-credentials"
+    }
+  ]
+}
