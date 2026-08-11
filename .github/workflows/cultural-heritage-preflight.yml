@@ -1,0 +1,44 @@
+name: Cultural heritage archive preflight
+
+on:
+  workflow_dispatch:
+    inputs:
+      source:
+        description: Governed archive source to validate
+        required: true
+        type: choice
+        options:
+          - new-zealand-gazette
+          - auckland-museum-online-cenotaph
+          - papers-past-pre-1945
+
+permissions:
+  contents: read
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    environment: public-data-archive
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      DIGITALNZ_API_KEY: ${{ secrets.DIGITALNZ_API_KEY }}
+      IA_ACCESS_KEY: ${{ secrets.IA_ACCESS_KEY }}
+      IA_SECRET_KEY: ${{ secrets.IA_SECRET_KEY }}
+      CENOTAPH_INVENTORY_URL: ${{ vars.CENOTAPH_INVENTORY_URL }}
+      PAPERS_PAST_BULK_URL: ${{ vars.PAPERS_PAST_BULK_URL }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          python-version: "3.13"
+          version: "0.11.16"
+      - name: Verify required credentials and endpoint configuration
+        run: >-
+          uv run --no-project python scripts/validate_cultural_heritage_preflight.py
+          --source "${{ inputs.source }}"
+      - name: Record no-op preflight evidence
+        run: |
+          echo "## Cultural heritage archive preflight" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Source: ${{ inputs.source }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Result: credentials and first-party endpoint configuration verified" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Capture and publication: not performed by this workflow" >> "$GITHUB_STEP_SUMMARY"
