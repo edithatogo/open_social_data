@@ -1,0 +1,17 @@
+{
+  "source_agency": "Department of Internal Affairs and DigitalNZ",
+  "source_title": "New Zealand Gazette",
+  "source_url": "https://gazette.govt.nz/",
+  "access_method": "DigitalNZ curated provider for metadata/Parquet; Gazette is the authoritative published-notice source",
+  "licence": "CC BY 3.0 New Zealand for Gazette material, subject to stated exclusions for logos, emblems, trade marks, and site design",
+  "update_cadence": "Continuous on working days",
+  "methodology_url": "https://gazette.govt.nz/copyright",
+  "units": ["published notice", "metadata record"],
+  "codelists": ["notice_type", "publication_date", "primary_collection"],
+  "caveats": [
+    "This pack is the canonical curated Gazette ingestion path; do not create a second Gazette corpus in another repository.",
+    "Archive manifests must retain source URL, retrieval time, content hash, and DIA attribution.",
+    "Use Internet Archive or another independent public repository as a redundancy target only after rights, privacy, takedown, and collection-placement checks."
+  ],
+  "official_metadata_status": "Official Gazette copyright and submission reuse terms verified; source-specific capture remains bounded by provider and privacy controls"
+}

@@ -1,0 +1,17 @@
+{
+  "source_agency": "Auckland War Memorial Museum Tāmaki Paenga Hira",
+  "source_title": "Online Cenotaph Linked Open Data metadata",
+  "source_url": "https://api.aucklandmuseum.com/",
+  "access_method": "Public SPARQL endpoint via the Auckland Museum provider, limited to 100 subject URIs per fetch",
+  "licence": "Current blanket payload reuse licence not verified in this repository; metadata-only capture pending first-party confirmation",
+  "update_cadence": "Provider-managed; no published cadence relied on",
+  "methodology_url": "https://api.aucklandmuseum.com/",
+  "units": ["Cenotaph subject URI", "metadata record"],
+  "codelists": ["rdf:type", "source_url", "capture_scope"],
+  "caveats": [
+    "The provider intentionally excludes biographies, contributor content, attached documents, and media.",
+    "The public API is a triangulation source for DigitalNZ Cenotaph metadata, not proof of payload licence.",
+    "Respect the published API request limits and obtain a current first-party licence before any bulk payload archive."
+  ],
+  "official_metadata_status": "Public no-key linked-data API and SPARQL endpoint verified; rights clearance for bulk payload capture pending"
+}
