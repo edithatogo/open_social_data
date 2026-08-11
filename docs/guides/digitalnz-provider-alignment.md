@@ -45,3 +45,7 @@ when a rights/privacy-reviewed capture is made.
 For Papers Past, capture the pre-1-January-1945 **Crown** subset once item-level
 provenance and cultural review are recorded. Do not treat the date alone as a
 blanket licence for third-party newspaper, photograph, or Māori material.
+
+The maintainer's full-preservation direction, hosted-campaign prerequisites,
+canonical targets, and Internet Archive redundancy requirement are recorded in
+[`config/acquisition/cultural-heritage-full-archive-plan.json`](../../config/acquisition/cultural-heritage-full-archive-plan.json).
