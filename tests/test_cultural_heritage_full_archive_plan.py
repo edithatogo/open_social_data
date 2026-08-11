@@ -31,3 +31,4 @@ def test_full_archive_plan_retains_release_boundaries() -> None:
     evidence = sources["auckland-museum-online-cenotaph"]["inventory_evidence"]
     assert evidence["exact_record_count"] == 271305
     assert evidence["normal_result_window_limit"] == 10000
+    assert evidence["scroll_continuation"].startswith("POST /search/_search/scroll")

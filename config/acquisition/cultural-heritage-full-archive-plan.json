@@ -36,12 +36,13 @@
         "exact_record_count": 271305,
         "normal_result_window_limit": 10000,
         "scroll_start": "POST /search/cenotaph/_search?scroll=1m with an Elasticsearch match_all body",
-        "continuation_status": "The API proxy rejects the standard /_search/scroll route; a proxy-compatible continuation route or export remains required"
+        "scroll_continuation": "POST /search/_search/scroll with scroll and scroll_id JSON fields",
+        "continuation_status": "Verified in browser context; the hosted non-browser client remains blocked by HTTP 403"
       },
-      "status": "blocked-on-scroll-continuation-hosted-client-access-and-internet-archive-credentials",
+      "status": "blocked-on-hosted-client-access-and-internet-archive-credentials",
       "tracking_issue": "https://github.com/edithatogo/open_social_data/issues/51",
       "blockers": [
-        "Auckland Museum must provide a proxy-compatible scroll continuation route or bulk export, and allow hosted archival clients to access it",
+        "Auckland Museum must allow hosted archival clients to access the verified search and scroll routes",
         "Configure Internet Archive upload credentials as repository environment secrets"
       ]
     },
