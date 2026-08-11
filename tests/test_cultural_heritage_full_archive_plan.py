@@ -28,3 +28,6 @@ def test_full_archive_plan_retains_release_boundaries() -> None:
     assert "takedown" in sources["auckland-museum-online-cenotaph"]["release_rule"]
     assert "Māori" in sources["papers-past-pre-1945"]["release_rule"]
     assert "attribution" in sources["new-zealand-gazette"]["release_rule"]
+    evidence = sources["auckland-museum-online-cenotaph"]["inventory_evidence"]
+    assert evidence["exact_record_count"] == 271305
+    assert evidence["normal_result_window_limit"] == 10000
