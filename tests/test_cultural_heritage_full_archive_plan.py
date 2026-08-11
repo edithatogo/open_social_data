@@ -18,6 +18,8 @@ def test_full_archive_plan_covers_requested_collections_without_duplicate_canoni
     }
     assert all(source["redundant_target"] == "Internet Archive item series" for source in sources.values())
     assert all("status" in source for source in sources.values())
+    assert all(source["tracking_issue"].startswith("https://github.com/edithatogo/open_social_data/issues/") for source in sources.values())
+    assert all(source["blockers"] for source in sources.values())
 
 
 def test_full_archive_plan_retains_release_boundaries() -> None:

@@ -13,7 +13,12 @@
       "primary_target": "Hugging Face curated Gazette dataset in this repository",
       "redundant_target": "Internet Archive item series",
       "release_rule": "CC BY 3.0 NZ attribution with source exclusions and takedown/redaction reconciliation",
-      "status": "blocked-on-credentials"
+      "status": "blocked-on-source-and-preservation-credentials",
+      "tracking_issue": "https://github.com/edithatogo/open_social_data/issues/50",
+      "blockers": [
+        "Configure DIGITALNZ_API_KEY or an approved Gazette API credential as a repository environment secret",
+        "Configure Internet Archive upload credentials as repository environment secrets"
+      ]
     },
     {
       "id": "auckland-museum-online-cenotaph",
@@ -25,7 +30,12 @@
       "redundant_target": "Internet Archive item series",
       "release_rule": "Full preservation is authorized; public release must retain source rights fields and honour takedown, cultural, privacy, and media-specific restrictions",
       "rate_limit": "1000 /id or /id/media requests per day; resume from a content-addressed checkpoint",
-      "status": "blocked-on-hosted-campaign-and-Internet-Archive-credentials"
+      "status": "blocked-on-stable-paginated-inventory-and-internet-archive-credentials",
+      "tracking_issue": "https://github.com/edithatogo/open_social_data/issues/51",
+      "blockers": [
+        "Auckland Museum must provide or enable a stable paginated/cursor inventory route, export, or client allowlisting",
+        "Configure Internet Archive upload credentials as repository environment secrets"
+      ]
     },
     {
       "id": "papers-past-pre-1945",
@@ -36,7 +46,12 @@
       "primary_target": "Hugging Face immutable packets",
       "redundant_target": "Internet Archive item series",
       "release_rule": "Full preservation is authorized; publish only according to retained item rights, including distinct treatment of third-party and Māori material",
-      "status": "blocked-on-resolving-current-official-bulk-distribution-and-Internet-Archive-credentials"
+      "status": "blocked-on-current-official-bulk-distribution-and-internet-archive-credentials",
+      "tracking_issue": "https://github.com/edithatogo/open_social_data/issues/52",
+      "blockers": [
+        "Record the current official National Library Papers Past bulk-distribution URL and item/page provenance format",
+        "Configure Internet Archive upload credentials as repository environment secrets"
+      ]
     }
   ]
 }
