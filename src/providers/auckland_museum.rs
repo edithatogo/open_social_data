@@ -6,7 +6,6 @@
 //! level.
 
 use async_trait::async_trait;
-use polars::prelude::*;
 use reqwest::header::{
     ACCEPT, CONTENT_TYPE, ETAG, HeaderMap, HeaderValue, LAST_MODIFIED, USER_AGENT,
 };
