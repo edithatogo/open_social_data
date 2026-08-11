@@ -30,10 +30,18 @@
       "redundant_target": "Internet Archive item series",
       "release_rule": "Full preservation is authorized; public release must retain source rights fields and honour takedown, cultural, privacy, and media-specific restrictions",
       "rate_limit": "1000 /id or /id/media requests per day; resume from a content-addressed checkpoint",
-      "status": "blocked-on-stable-paginated-inventory-and-internet-archive-credentials",
+      "inventory_evidence": {
+        "observed_on": "2026-08-11",
+        "search_index": "cenotaph",
+        "exact_record_count": 271305,
+        "normal_result_window_limit": 10000,
+        "scroll_start": "POST /search/cenotaph/_search?scroll=1m with an Elasticsearch match_all body",
+        "continuation_status": "The API proxy rejects the standard /_search/scroll route; a proxy-compatible continuation route or export remains required"
+      },
+      "status": "blocked-on-scroll-continuation-hosted-client-access-and-internet-archive-credentials",
       "tracking_issue": "https://github.com/edithatogo/open_social_data/issues/51",
       "blockers": [
-        "Auckland Museum must provide or enable a stable paginated/cursor inventory route, export, or client allowlisting",
+        "Auckland Museum must provide a proxy-compatible scroll continuation route or bulk export, and allow hosted archival clients to access it",
         "Configure Internet Archive upload credentials as repository environment secrets"
       ]
     },
