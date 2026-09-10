@@ -1,0 +1,25 @@
+{
+  "schema_version":"1.0.0","dataset_id":"international_youth_suicide","source_id":"pediatricsuicides-international","issue":66,
+  "architecture":"index -> metadata -> Bronze -> Silver -> Gold -> Platinum; decision products consume qualified layers",
+  "canonical_index":"config/acquisition/public-source-inventory.json",
+  "dataset_pack":"datasets/pediatricsuicides/international_youth_suicide",
+  "local_data_root":".open-social-data/youth-suicide",
+  "layers":{
+    "bronze":{"status":"blocked","packet_count":0,"reason":"Exact export assets, terms and bytes not acquired.","contract":"Immutable source-native payload, retrieval receipt, source/version identity, SHA-256 and separate rights evidence."},
+    "silver":{"status":"blocked","reason":"No qualified Bronze packet or verified upstream schema.","contract":"Canonical observations with source lineage, compatible age/geography/time definitions, units and explicit missingness."},
+    "gold":{"status":"blocked","reason":"No qualified Silver observations.","contract":"Curated non-overlapping analysis cohorts, coverage/reconciliation reports and prespecified study-input panels."},
+    "platinum":{"status":"blocked","reason":"No qualified Gold product.","contract":"Rebuildable catalogue/semantic/serving projections; no fifth layer and no authoritative data stored only in a graph."}
+  },
+  "empirical_rows_ingested":0,
+  "promotion_requirements":{
+    "bronze":["verified_rights_receipt","verified_payload_url","retrieval_receipt","payload_sha256"],
+    "silver":["bronze_pass","observed_header_mapping","age_geography_time_checks","missingness_and_suppression_checks"],
+    "gold":["silver_pass","overlap_and_shared_source_audit","analysis_protocol","denominator_validation"],
+    "platinum":["gold_pass","rebuild_recipe","source_lineage","serving_privacy_review"]
+  },
+  "publication":{"enabled":false,"registry":"edithatogo/dataset-estate-registry","archive":"edithatogo/riopa-public-data-archive","registry_submission_status":"draft_not_submitted","new_repository":false,"requirements":["Complete current catalogue reconciliation","Source-specific redistribution evidence","Exact revision and packet identity","Scoped authorised write route","Post-upload byte/hash verification"]},
+  "consumers":{"atlas-health-policy-anz":"ANZ policy-source provenance only; no duplicated global mortality store","vop_poc_nz":"Study-specific protocols, parameters, CEA/DCEA/BIA and perspective outputs","voiage":"Qualified net-benefit draws and parameter bindings; no mortality archive in core library","microcosting_healthworkforce":"Qualified workforce costing logic/inputs, not silently reused historical prices"},
+  "observation_contract_status":"proposed_not_upstream_schema",
+  "observation_fields":["source_id","source_revision","source_row_id","jurisdiction_id","jurisdiction_version","period_start","period_end","time_basis","age_min_inclusive","age_max_exclusive","sex_source_label","cause_definition","deaths","exposure","exposure_unit","value_status","coverage_status","upstream_packet_sha256"],
+  "forbidden_promotions":["URLs treated as archived bytes","Unverified licence treated as permission","Missing or suppressed counts filled with zero","Age interpolation without a separately labelled model","Summing overlapping jurisdictions or age bands","Treating multiple extracts from the same register as independent observations"]
+}
