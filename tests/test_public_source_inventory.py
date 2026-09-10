@@ -10,7 +10,8 @@ def test_inventory_is_fail_closed_until_archived() -> None:
     payload = json.loads(INVENTORY.read_text(encoding="utf-8"))
     assert payload["policy"] == "discovery-only-until-raw-packet-and-rights-receipt-exist"
     sources = payload["sources"]
-    assert {source["issue"] for source in sources} == {36, 37}
+    assert {source["issue"] for source in sources} >= {36, 37, 66}
+    assert len({source["id"] for source in sources}) == len(sources)
     assert all(source["archive_status"] == "not-archived" for source in sources)
     assert all("non_claim" in source for source in sources)
 
@@ -32,3 +33,15 @@ def test_issue_36_has_independent_food_retail_families() -> None:
         "osm-food-retail-nz",
         "auckland-food-premises-register",
     }
+
+
+def test_issue_66_indexes_sources_without_claiming_payloads() -> None:
+    payload = json.loads(INVENTORY.read_text(encoding="utf-8"))
+    sources = [source for source in payload["sources"] if source["issue"] == 66]
+    assert {source["id"] for source in sources} == {
+        "pediatricsuicides-international", "who-mortality-database",
+        "abs-suicide-mortality", "aihw-suicide-self-harm", "oecd-taxben", "worldbank-wdi",
+    }
+    assert all(source["service_status"] == "candidate" for source in sources)
+    assert all(source["rights_status"] for source in sources)
+    assert all("payload_url" not in source for source in sources)
