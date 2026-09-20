@@ -23,7 +23,7 @@ clap_complete = "4.5.53"
 clap-markdown = "0.1.5"
 colored = "3.0.0"
 indicatif = "0.18.3"
-polars = { version = "0.54", features = ["parquet", "dtype-time", "dtype-date"] }
+polars = { version = "0.55", features = ["parquet", "dtype-time", "dtype-date"] }
 reqwest = { version = "0.13.4", default-features = false, features = ["json", "form", "gzip", "native-tls-no-alpn"] }
 rusqlite = { version = "0.40.1", features = ["bundled", "backup", "limits"] }
 serde = { version = "1.0.228", features = ["derive"] }
@@ -31,7 +31,7 @@ serde_json = "1.0.150"
 thiserror = "2.0.18"
 tokio = { version = "1.52.3", features = ["full"] }
 [dev-dependencies]
-criterion = { version = "0.6", features = ["html_reports"] }
+criterion = { version = "0.8", features = ["html_reports"] }
 
 [[bench]]
 name = "parser_benchmarks"
