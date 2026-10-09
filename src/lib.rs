@@ -34,6 +34,7 @@ pub mod quality;
 pub mod registry;
 pub mod sqlite_catalog;
 pub mod traits;
+pub mod utils;
 
 // Re-export core types for convenience
 pub use catalog::*;
@@ -48,3 +49,4 @@ pub use quality::*;
 pub use registry::*;
 pub use sqlite_catalog::*;
 pub use traits::*;
+pub(crate) use utils::*;
