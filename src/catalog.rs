@@ -1,11 +1,11 @@
-﻿//! JSON-backed local dataset catalog.
+//! JSON-backed local dataset catalog.
 //!
 //! Tracks metadata about fetched datasets including ETags, quality status,
 //! output paths, and modification timestamps. Supports atomic saves and
 //! search operations.
 
 use std::collections::BTreeMap;
-use std::fs::{self, File};
+use std::fs::File;
 use std::io::{BufReader, BufWriter};
 use std::path::{Path, PathBuf};
 
@@ -103,24 +103,11 @@ impl LocalCatalog {
     }
 
     pub fn save_atomic(&self, path: impl AsRef<Path>) -> Result<()> {
-        let path = path.as_ref();
-        if let Some(parent) = path.parent() {
-            fs::create_dir_all(parent)?;
-        }
-
-        let tmp_path = tmp_path_for(path);
-        if tmp_path.exists() {
-            fs::remove_file(&tmp_path)?;
-        }
-
-        let writer = BufWriter::new(File::create(&tmp_path)?);
-        serde_json::to_writer_pretty(writer, self)?;
-
-        if path.exists() {
-            fs::remove_file(path)?;
-        }
-        fs::rename(tmp_path, path)?;
-        Ok(())
+        crate::utils::atomic_write(path, "catalog.json", |tmp_path| {
+            let writer = BufWriter::new(File::create(tmp_path)?);
+            serde_json::to_writer_pretty(writer, self)?;
+            Ok(())
+        })
     }
 
     pub fn upsert(&mut self, dataset: CachedDataset) {
@@ -252,15 +239,6 @@ impl CachedDataset {
 
 pub fn dataset_key(provider: &str, dataset_id: &str) -> String {
     format!("{}:{}", provider.trim(), dataset_id.trim())
-}
-
-fn tmp_path_for(path: &Path) -> PathBuf {
-    let mut name = path
-        .file_name()
-        .map(|file_name| file_name.to_os_string())
-        .unwrap_or_else(|| "catalog.json".into());
-    name.push(".tmp");
-    path.with_file_name(name)
 }
 
 #[cfg(test)]
