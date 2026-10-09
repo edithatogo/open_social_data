@@ -262,4 +262,40 @@ mod tests {
             std::process::id()
         ))
     }
+
+    #[test]
+    fn error_summary_formats_errors_correctly() {
+        let empty_report = CatalogSyncReport::default();
+        assert_eq!(empty_report.error_summary(), "");
+
+        let single_error_report = CatalogSyncReport {
+            errors: vec![CatalogSyncError {
+                provider: "provider_a".to_string(),
+                message: "network timeout".to_string(),
+            }],
+            ..Default::default()
+        };
+        assert_eq!(
+            single_error_report.error_summary(),
+            "provider_a: network timeout"
+        );
+
+        let multi_error_report = CatalogSyncReport {
+            errors: vec![
+                CatalogSyncError {
+                    provider: "provider_a".to_string(),
+                    message: "network timeout".to_string(),
+                },
+                CatalogSyncError {
+                    provider: "provider_b".to_string(),
+                    message: "access denied".to_string(),
+                },
+            ],
+            ..Default::default()
+        };
+        assert_eq!(
+            multi_error_report.error_summary(),
+            "provider_a: network timeout; provider_b: access denied"
+        );
+    }
 }
