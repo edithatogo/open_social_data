@@ -52,7 +52,7 @@ def top_units(df: pd.DataFrame, limit: int = 12) -> pd.DataFrame:
 def table_html(frame: pd.DataFrame) -> str:
     header = "".join(f"<th>{escape(str(column))}</th>" for column in frame.columns)
     rows = []
-    for _, row in frame.iterrows():
+    for row in frame.itertuples(index=False, name=None):
         cells = "".join(f"<td>{escape(str(value))}</td>" for value in row)
         rows.append(f"<tr>{cells}</tr>")
     return f"<table><thead><tr>{header}</tr></thead><tbody>{''.join(rows)}</tbody></table>"
@@ -63,7 +63,7 @@ def main() -> None:
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     categories = category_summary(df)
     units = top_units(df)
-    generated = pd.Timestamp.utcnow().strftime("%Y-%m-%d %H:%M UTC")
+    generated = pd.Timestamp.now('UTC').strftime("%Y-%m-%d %H:%M UTC")
     html = f"""<!doctype html>
 <html lang="en">
 <head>
