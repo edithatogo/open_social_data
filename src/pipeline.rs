@@ -194,6 +194,31 @@ mod tests {
         validate_schema(&frame, &expected).unwrap();
     }
 
+
+    #[test]
+    fn expected_column_instantiation() {
+        let col = ExpectedColumn::new("age", DataType::Int32);
+        assert_eq!(col.name, "age");
+        assert_eq!(col.dtype, DataType::Int32);
+
+        let string_name = String::from("salary");
+        let col2 = ExpectedColumn::new(string_name, DataType::Float64);
+        assert_eq!(col2.name, "salary");
+        assert_eq!(col2.dtype, DataType::Float64);
+    }
+
+    #[test]
+    fn expected_column_equality() {
+        let col1 = ExpectedColumn::new("id", DataType::Int64);
+        let col2 = ExpectedColumn::new("id", DataType::Int64);
+        let col3 = ExpectedColumn::new("name", DataType::Int64);
+        let col4 = ExpectedColumn::new("id", DataType::String);
+
+        assert_eq!(col1, col2);
+        assert_ne!(col1, col3);
+        assert_ne!(col1, col4);
+    }
+
     #[test]
     fn rejects_missing_column() {
         let frame = DataFrame::new(1, vec![Series::new("id".into(), &[1_i64]).into()]).unwrap();
