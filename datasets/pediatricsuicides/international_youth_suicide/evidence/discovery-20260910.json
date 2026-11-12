@@ -1,0 +1,8 @@
+{
+  "artifact_class":"generated-discovery-receipt-not-raw-source","observed_on":"2026-09-10","index_issue":66,
+  "source_url":"https://pediatricsuicides.ca/","landing_page":"readable","download_page":"retrieval_error","download_page_url":"https://pediatricsuicides.ca/download/",
+  "terms":"not_retrieved","payload":"not_retrieved","payload_sha256":null,"observed_csv_headers":null,"observed_row_count":null,
+  "publisher_claims":{"jurisdictions":139,"overall_year_span":[1952,2025],"verification":"landing-page claim only; not complete series coverage"},
+  "attempts":[{"channel":"web","target":"https://pediatricsuicides.ca/download/","result":"internal_error; no HTTP status supplied by tool"},{"channel":"container git","target":"https://github.com/edithatogo/open_social_data.git","result":"DNS resolution failed; connector reads/writes used instead"}],
+  "non_claims":["No CSV files or terms have been byte-captured.","No inferred SHA, release pin or licence.","No claims based on inaccessible tweet or unverified download-page row totals."]
+}

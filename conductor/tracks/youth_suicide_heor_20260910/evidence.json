@@ -1,0 +1,14 @@
+{
+  "schema_version":"1.0.0","date":"2026-09-10","scope":"focused offline checks in a reconstructed overlay, not a full clone or full-repository CI",
+  "environment":{"python":"3.13.5","new_dependencies":0,"rust_checks":"not_run_locally"},
+  "checks":[
+    {"command":"python -m unittest discover -s tests -p 'test_archive_youth_suicide.py' -v","result":"pass","tests":19},
+    {"command":"python datasets/pediatricsuicides/international_youth_suicide/scripts/access.py check","result":"pass"},
+    {"command":"python -m compileall -q datasets/pediatricsuicides/international_youth_suicide/scripts tests","result":"pass"}
+  ],
+  "tested_code_git_blob_sha":{"datasets/pediatricsuicides/international_youth_suicide/scripts/access.py":"95fbfcfadb5ef965e853fb2afd8528aa87f67aa8","tests/test_archive_youth_suicide.py":"f6163a785f60939b3bdf34c84532438dd1574ef3"},
+  "existing_validator_blob_sha_verified":{"scripts/validate_source_metadata.py":"518f4e318dad84ed2621c58c314f7e644554d138","scripts/validate_dataset_packs.py":"2aad4a13703244f2b44b469b318368844658a88d"},
+  "tested_register_canonical_json_sha256":"6e8e7df116aeb7bc0ac4fcf7ae398ff910c597cb4570ad8854260561863888dd",
+  "canonical_json_method":"UTF-8 json.dumps(sort_keys=True, separators=(',', ':'), ensure_ascii=False), no terminal newline",
+  "not_claimed":["Hosted CI pass","Full Rust or estate validation","Live network acquisition success","Verified upstream licence or schema","Actual economic results","HF publication"]
+}

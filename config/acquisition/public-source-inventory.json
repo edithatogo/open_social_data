@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "purpose": "RIOPA public-only acquisition candidates for issues 36 and 37",
+  "purpose": "RIOPA public-source acquisition candidates with issue-level provenance",
   "policy": "discovery-only-until-raw-packet-and-rights-receipt-exist",
   "sources": [
     {
@@ -87,6 +87,68 @@
       "archive_status": "not-archived",
       "rights_status": "requires-capture-of-service-terms",
       "non_claim": "A Hamilton register is geographically bounded and cannot establish national facility coverage."
+    },
+    {
+      "id": "pediatricsuicides-international",
+      "issue": 66,
+      "authority": "Tyler R. Black; original national and international statistical sources",
+      "landing_page": "https://pediatricsuicides.ca/",
+      "discovery_page": "https://pediatricsuicides.ca/download/",
+      "dataset_pack": "datasets/pediatricsuicides/international_youth_suicide",
+      "service_status": "candidate",
+      "archive_status": "not-archived",
+      "rights_status": "unverified-compilation-and-underlying-source-terms",
+      "non_claim": "Landing-page inspection does not establish CSV acquisition, licence permission, a validated schema, complete jurisdiction coverage or causal evidence."
+    },
+    {
+      "id": "who-mortality-database",
+      "issue": 66,
+      "authority": "World Health Organization; reporting national authorities",
+      "landing_page": "https://www.who.int/data/data-collection-tools/who-mortality-database",
+      "service_status": "candidate",
+      "archive_status": "not-archived",
+      "rights_status": "published-noncommercial-condition-requires-purpose-and-redistribution-review",
+      "non_claim": "These may be the same underlying deaths as the curated source, not an independent replication. Preserve reporting coverage and coding differences."
+    },
+    {
+      "id": "abs-suicide-mortality",
+      "issue": 66,
+      "authority": "Australian Bureau of Statistics",
+      "landing_page": "https://www.abs.gov.au/statistics/health/causes-death/intentional-self-harm-suicide-deaths/latest-release",
+      "service_status": "candidate",
+      "archive_status": "not-archived",
+      "rights_status": "requires-release-specific-terms-and-attribution-receipt",
+      "non_claim": "A latest-release URL is mutable; pin actual release, revisions, age bands, geography and denominator before use."
+    },
+    {
+      "id": "aihw-suicide-self-harm",
+      "issue": 66,
+      "authority": "Australian Institute of Health and Welfare",
+      "landing_page": "https://www.aihw.gov.au/suicide-self-harm-monitoring/resources",
+      "service_status": "candidate",
+      "archive_status": "not-archived",
+      "rights_status": "requires-table-specific-terms-and-suppression-review",
+      "non_claim": "Deaths, hospital episodes and ambulance attendances are different outcomes and must not be summed as unique people."
+    },
+    {
+      "id": "oecd-taxben",
+      "issue": 66,
+      "authority": "Organisation for Economic Co-operation and Development",
+      "landing_page": "https://www.oecd.org/en/data/tools/oecd-calculator-of-taxes-and-benefits.html",
+      "service_status": "candidate",
+      "archive_status": "not-archived",
+      "rights_status": "requires-indicator-model-and-policy-document-terms-review",
+      "non_claim": "Simulated statutory entitlements are not observed household disposable income or programme uptake."
+    },
+    {
+      "id": "worldbank-wdi",
+      "issue": 66,
+      "authority": "World Bank and original indicator producers",
+      "landing_page": "https://datacatalog.worldbank.org/search/dataset/0037712/world-development-indicators",
+      "service_status": "candidate",
+      "archive_status": "not-archived",
+      "rights_status": "catalogue-reports-CC-BY-4.0-indicator-specific-receipt-still-required",
+      "non_claim": "A country-year indicator does not measure individual exposure; retain original producer, revision, modelled status and indicator-specific exceptions."
     }
   ]
 }
