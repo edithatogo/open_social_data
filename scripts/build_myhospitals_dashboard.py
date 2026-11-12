@@ -38,7 +38,7 @@ def category_summary(df: pd.DataFrame) -> pd.DataFrame:
 
 def top_units(df: pd.DataFrame, limit: int = 12) -> pd.DataFrame:
     columns = ["measure_category_code", "reporting_unit_name"]
-    if not all(column in df.columns for column in columns):
+    if not set(columns).issubset(df.columns):
         return pd.DataFrame(columns=columns + ["rows"])
     return (
         df.groupby(columns, dropna=False)
@@ -63,7 +63,7 @@ def main() -> None:
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     categories = category_summary(df)
     units = top_units(df)
-    generated = pd.Timestamp.utcnow().strftime("%Y-%m-%d %H:%M UTC")
+    generated = pd.Timestamp.now('UTC').strftime("%Y-%m-%d %H:%M UTC")
     html = f"""<!doctype html>
 <html lang="en">
 <head>
