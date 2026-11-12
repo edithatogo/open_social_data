@@ -243,6 +243,12 @@ mod tests {
         );
     }
 
+    #[test]
+    fn build_http_client_succeeds() {
+        let client_result = build_http_client();
+        assert!(client_result.is_ok(), "build_http_client should successfully construct a reqwest::Client");
+    }
+
     #[tokio::test]
     async fn run_provider_safely_catches_panic() {
         // Panic with &str
