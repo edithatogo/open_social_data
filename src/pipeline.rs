@@ -4,7 +4,7 @@
 //! from raw data, [`validate_schema`] for runtime schema checks, and
 //! [`write_parquet_atomic`] for crash-safe Parquet file writes.
 
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 use std::fs::{self, File};
 use std::path::{Path, PathBuf};
 
@@ -34,6 +34,7 @@ impl RawRecord {
 pub struct RecordBatchBuilder {
     records: Vec<RawRecord>,
     schema_keys: Vec<String>,
+    schema_keys_set: HashSet<String>,
 }
 
 impl RecordBatchBuilder {
@@ -41,6 +42,7 @@ impl RecordBatchBuilder {
         Self {
             records: Vec::new(),
             schema_keys: Vec::new(),
+            schema_keys_set: HashSet::new(),
         }
     }
 
@@ -48,7 +50,8 @@ impl RecordBatchBuilder {
         let mut keys = record.fields.keys().collect::<Vec<_>>();
         keys.sort();
         for key in keys {
-            if !self.schema_keys.contains(key) {
+            if !self.schema_keys_set.contains(key) {
+                self.schema_keys_set.insert(key.clone());
                 self.schema_keys.push(key.clone());
             }
         }
