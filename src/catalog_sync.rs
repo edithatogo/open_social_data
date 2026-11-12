@@ -262,4 +262,20 @@ mod tests {
             std::process::id()
         ))
     }
+
+    #[test]
+    fn test_report_has_errors_when_empty() {
+        let report = CatalogSyncReport::default();
+        assert!(!report.has_errors());
+    }
+
+    #[test]
+    fn test_report_has_errors_when_not_empty() {
+        let mut report = CatalogSyncReport::default();
+        report.errors.push(CatalogSyncError {
+            provider: "test".to_string(),
+            message: "test error".to_string(),
+        });
+        assert!(report.has_errors());
+    }
 }
