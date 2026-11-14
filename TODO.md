@@ -107,6 +107,7 @@ This file tracks specific, actionable tasks for the Open Social Datasets project
     *   [X] Further AIHW MyHospitals measure categories recorded as future optional dataset expansion in `docs/external_future_followups.md`.
 
 ### Documentation Refinement
+*   [X] Add `CITATION.cff` with repository citation metadata.
 *   [X] Flesh out `CONTRIBUTING.MD` with detailed guidelines.
 *   [X] Develop `CODE_OF_CONDUCT.MD`.
 
