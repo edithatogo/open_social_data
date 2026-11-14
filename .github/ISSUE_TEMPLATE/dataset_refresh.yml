@@ -7,7 +7,7 @@ body:
     id: dataset
     attributes:
       label: Dataset pack
-      description: Example: datasets/aihw/myhospitals
+      description: "Example: datasets/aihw/myhospitals"
     validations:
       required: true
   - type: input
