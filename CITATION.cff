@@ -1,0 +1,6 @@
+cff-version: 1.2.0
+message: If you use this repository, please cite it using the metadata in this file.
+title: Open Social Datasets Initiative
+authors:
+- name: Open Social Datasets Initiative project
+repository-code: https://github.com/edithatogo/open_social_data

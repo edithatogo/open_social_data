@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Corrected YAML quoting so the dataset refresh issue form can load in GitHub.
 
 ### Added
+- Added `CITATION.cff` with citation metadata for the repository.
 - Completed Conductor Track 12 review and closeout with local GNU Rust and
   Astro/Starlight validation evidence, plus hosted CI confirmation for nextest,
   security, license/policy, coverage, and release guardrails.
