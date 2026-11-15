@@ -108,6 +108,7 @@ This file tracks specific, actionable tasks for the Open Social Datasets project
 
 ### Documentation Refinement
 *   [X] Add `CITATION.cff` with repository citation metadata.
+*   [X] Restore the dataset refresh issue form with valid YAML quoting.
 *   [X] Flesh out `CONTRIBUTING.MD` with detailed guidelines.
 *   [X] Develop `CODE_OF_CONDUCT.MD`.
 

@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
+
+### Fixed
+- Corrected YAML quoting so the dataset refresh issue form can load in GitHub.
+
 ### Added
 - Added `CITATION.cff` with citation metadata for the repository.
 - Completed Conductor Track 12 review and closeout with local GNU Rust and
