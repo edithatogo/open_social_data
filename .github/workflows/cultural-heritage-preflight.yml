@@ -27,6 +27,11 @@ jobs:
       CENOTAPH_INVENTORY_URL: ${{ vars.CENOTAPH_INVENTORY_URL }}
       PAPERS_PAST_BULK_URL: ${{ vars.PAPERS_PAST_BULK_URL }}
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
         with:
