@@ -1,0 +1,27 @@
+{
+  "source_agency": "Tyler R. Black (curator); original national and international statistical authorities",
+  "source_title": "International pediatric suicide rates",
+  "source_url": "https://pediatricsuicides.ca/",
+  "access_method": "Download-page discovery; source-native export acquisition is gated pending exact URLs, terms and schema verification",
+  "licence": "UNVERIFIED: compilation and underlying-source rights are separate; repository code licence does not license source data",
+  "update_cadence": "Curator-maintained; do not assume a fixed schedule or immutable version label",
+  "methodology_url": "https://pediatricsuicides.ca/",
+  "units": ["Proposed: deaths (integer count)", "Proposed: population exposure (unit must be verified)", "Proposed: rates per 100,000 for compatible age/population/time definitions"],
+  "codelists": ["Upstream jurisdiction identifiers: not yet captured", "Upstream age bands: not yet captured", "Cause-of-death code sets and version: source-specific, not yet captured"],
+  "caveats": [
+    "Aggregate mortality is not individual-level risk or treatment-effect evidence.",
+    "The root reports 139 jurisdictions across 1952–2025; these are publisher claims, not audited file coverage.",
+    "Age bands, reporting coverage, certification and registration practices differ.",
+    "Missing, suppressed, unavailable and zero observations must remain distinct.",
+    "The school-days analysis uses a different age scope from international series.",
+    "A shared national source is not independent evidence when accessed through WHO and the curated project."
+  ],
+  "official_metadata_status": "landing-page-inspected-2026-09-10; exports, notes, licence and headers not retrieved",
+  "source_id": "pediatricsuicides-international",
+  "dataset_id": "international_youth_suicide",
+  "index_path": "config/acquisition/public-source-inventory.json",
+  "issue": 66,
+  "upstream_attribution": {"creator": "Black, T. R.", "year": 2026, "title": "International pediatric suicide rates", "url": "https://pediatricsuicides.ca/", "doi_status": "landing-page identifier requires independent resolution; not pinned as a verified release"},
+  "rights": {"local_acquisition_approved": false, "public_redistribution_approved": false, "terms_snapshot": null, "rights_receipt": null},
+  "artifact_class": "generated-source-metadata-not-source-data"
+}

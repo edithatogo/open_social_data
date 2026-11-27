@@ -23,14 +23,12 @@ This file tracks all major tracks for the project. Each track has its own detail
 ## [x] Track 4: Command-Line Interface (CLI) application development (archived)
 *Link: [./conductor/tracks/archived/cli_tool_20260615/](./conductor/tracks/archived/cli_tool_20260615/)*
 - `list`, `status`, `fetch`, `catalog list/search/sync` subcommands via clap
-- Progress bars with indicatif
 - Integration tests at `tests/cli_integration.rs`
 
 ## [x] Track 5: Ingestion optimization and pipeline hardening (archived)
 *Link: [./conductor/tracks/archived/hardening_opt_20260615/](./conductor/tracks/archived/hardening_opt_20260615/)*
 - Retry policy with exponential backoff
 - Circuit breaker pattern
-- `run_provider_safely` for panic isolation
 - Pre-configured HTTP client with timeouts
 
 ## [x] Track 6: Data quality assertions and delta updates (archived)
@@ -107,3 +105,10 @@ This file tracks all major tracks for the project. Each track has its own detail
 - [x] Implement and merge the fail-closed GitHub Actions acquisition route.
 - [x] Publish and verify the immutable Hugging Face packet and hosted receipt.
 - [ ] Complete agent-panel qualification and archive the track.
+
+## [~] Track 17: Youth-suicide HEOR source integration
+*Link: [tracks/youth_suicide_heor_20260910/index.md](tracks/youth_suicide_heor_20260910/index.md)*
+- [x] Extend existing source index, source metadata and research/data dependency register (#66).
+- [x] Add guarded shared-archiver access and focused offline contract tests.
+- [ ] Capture source-specific rights and raw exports, then qualify Bronze through Platinum.
+- [ ] Qualify economic consumers and existing HF catalogue/archive publication.

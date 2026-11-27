@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0.0",
+  "source_id": "pediatricsuicides-international",
+  "approved_for_acquisition": false,
+  "public_redistribution_approved": false,
+  "licence": "UNVERIFIED",
+  "approval_basis": "",
+  "reviewed_by": "",
+  "reviewed_on": "",
+  "payload_url": "",
+  "terms_url": "",
+  "terms_path": "terms-evidence.txt",
+  "terms_sha256": "",
+  "non_claim": "Denied template only; replace with independently assessed, source-specific evidence."
+}
